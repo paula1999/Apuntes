@@ -559,6 +559,64 @@ Sean $\Vert$ · $\Vert$ y $\Vert$ · $\Vert _*$ dos normas, entonces la converge
 Todas las normas en un espacio normado finito dimensional son equivalentes.
 \end{nth}
 
+\begin{nprop}
+Sea $\mathbb{R}^N$ un espacio normado finito dimensional y consideremos la norma $\Vert$·$\Vert _\infty$ en este espacio, entonces:
+\[ \lim_{n \rightarrow \infty}x_n = x_0 \Leftrightarrow \lim_{n \geq 1}(x_n)_j = (x_0)_j \qquad \forall j\in \lbrace 1,...,N \rbrace \]
+\end{nprop}
+
+La anterior proposición también se puede aplicar para cualquier norma de $\mathbb{R}^N$ y de $\mathbb{R}^{M \times N}$.
+
+\begin{ejer}
+Comprueba que la norma del máximo en C([0,1]) no es equivalente a la norma $\Vert$·$\Vert _1$ definida para cada f $\in$ C([0,1]) como
+\[ \Vert f \Vert _1 := \int_0^1 \vert f(x) \vert dx \]
+(Indicación: para cada n $\geq$ 2, considera la función $f_n$ cuya gráfica es la poligonal que une los puntos (0,0), (1/n,1), (2/n,0), (1,0)).
+\end{ejer}
+
+\begin{sol}
+\end{sol}
+
+\begin{nprop}
+Sean M, N $\in$ $\mathbb{N}$ y consideremos sendas normas en $\mathbb{R}^N$ y $\mathbb{R}^M$, que sin lugar a ambigüedad notaremos indeferentemente como $\Vert$·$\Vert$. Entonces la aplicación que notaremos igualmente como $\Vert$·$\Vert$ define una norma en $\mathbb{R}^{M \times N}$:
+\[ \Vert A \Vert := sup \lbrace \Vert Ax \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
+\end{nprop}
+
+\begin{proof}
+\end{proof}
+
+\begin{ndef}
+Se define la norma \textbf{inducida} en $\mathbb{R}^{M \times N}$ como:
+\[ \Vert A \Vert := sup \; \lbrace \Vert Ax \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
+\end{ndef}
+
+\begin{nprop}
+Con la notación de la proposición anterior, si $A \in \mathbb{R}^{M \times N}$ entonces
+\[ \Vert A \Vert := sup \; \lbrace \frac{\Vert Ax \Vert}{\Vert x \Vert } : x \in \mathbb{R}^N \wedge x \neq 0 \rbrace \]
+En particular,
+\[ \Vert Ax \Vert \leq \Vert A \Vert \Vert x \Vert \]
+\end{nprop}
+
+\begin{proof}
+\end{proof}
+
+\begin{nprop}
+Consideremos la norma $\Vert$·$\Vert _1$ en $\mathbb{R}^N$ y en $\mathbb{R}^M$, entonces la norma $\Vert$·$\Vert _1$ inducida en $\mathbb{R}^{M \times N}$ es
+\[ \Vert A \Vert _1 = max \; \lbrace \sum_{i=1}^M \vert a_{ij} \vert : j = 1,...,N \rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
+\end{nprop}
+
+\begin{proof}
+Probaremos primero que $ \Vert A \Vert _\infty \geq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace $\\
+Sea sign(a) := $\left\{ \begin{array}{lcc}
+-1 & si & a < 0 \\
+1 & si & a \geq 0
+\end{array}
+\right.$ $\qquad$ $\forall a \in \mathbb{R}$\\
+Tenemos que
+\[ \left\Vert \left[ sign(a_{11}),...,sign(a_{1N}) \right] ^T \right\Vert _\infty = 1 \qquad \Rightarrow \qquad \Vert A \Vert _\infty \geq \left\Vert A \left[ sign(a_{11}),...,sign(a_{1N}) \right] ^T \right\Vert _\infty \geq \sum_{j=1}^N \vert a_{1j} \vert \]
+Hacemos lo mismo con $\left[ sign(a_{i1}),...,sign(a_{iN}) \right] ^T \qquad \forall i = 2,...,M$ y obtenemos que
+\[ \Vert A \Vert _\infty \geq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace \]
+Ahora probaremos que $ \Vert A \Vert _\infty \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace $\\
+\end{proof}
+
 \subsection{Problemas bien planteados. Estabilidad}
 
 
