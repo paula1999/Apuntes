@@ -612,10 +612,115 @@ Sea sign(a) := $\left\{ \begin{array}{lcc}
 \right.$ $\qquad$ $\forall a \in \mathbb{R}$\\
 Tenemos que
 \[ \left\Vert \left[ sign(a_{11}),...,sign(a_{1N}) \right] ^T \right\Vert _\infty = 1 \qquad \Rightarrow \qquad \Vert A \Vert _\infty \geq \left\Vert A \left[ sign(a_{11}),...,sign(a_{1N}) \right] ^T \right\Vert _\infty \geq \sum_{j=1}^N \vert a_{1j} \vert \]
-Hacemos lo mismo con $\left[ sign(a_{i1}),...,sign(a_{iN}) \right] ^T \qquad \forall i = 2,...,M$ y obtenemos que
+Hacemos lo mismo con $\left[ sign(a_{i1}),...,sign(a_{iN}) \right] ^T \; \forall i = 2,...,M$ y obtenemos que
 \[ \Vert A \Vert _\infty \geq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace \]
 Ahora probaremos que $ \Vert A \Vert _\infty \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace $\\
+Sea x $\in \mathbb{R}^N$ tal que $\Vert x \Vert _\infty = 1$, entonces:
+\[ \Vert Ax \Vert _\infty = \left\Vert 
+\begin{bmatrix} 
+a_{11} &  \cdots & a_{1N} \\
+\vdots & & \vdots 
+\\ a_{M1} & \cdots & a_{MN} \\ \end{bmatrix} 
+\begin{bmatrix}
+x_1 \\
+\vdots \\
+x_N \\
+\end{bmatrix}
+\right\Vert _\infty = \left\Vert 
+\begin{bmatrix}
+\sum_{j=1}^N a_{1j}x_j & ,\ldots , & \sum_{j=1}^N a_{Mj}x_j 
+\end{bmatrix} ^T
+\right\Vert _\infty = max \; \left\lbrace \vert \sum_{j=1}^N a_{ij}x_j \vert : i = 1,...,M \right\rbrace \leq \] 
+\[ \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert \vert x_j \vert : i = 1,...,M \right\rbrace \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace \] 
 \end{proof}
+
+\begin{nprop}
+Consideremos la norma $\Vert$·$\Vert _\infty$ en $\mathbb{R}^N$ y en $\mathbb{R}^M$, entonces la norma $\Vert$·$\Vert _\infty$ inducida en $\mathbb{R}^{M \times N}$ es
+\[ \Vert A \Vert _\infty = max \; \lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,N \rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
+\end{nprop}
+
+Por lo que si ya hemos calculado alguna de estas dos últimas normas, podemos saber la otra sin tener que volver a calcular el máximo, es decir, la relación entre ambas viene en la siguiente proposición.
+
+\begin{nprop}
+$\Vert A \Vert _1 = \Vert A^T \Vert _\infty \qquad \forall A \in \mathbb{R}^{M \times N}$
+\end{nprop}
+
+Hay que tener en cuenta que $\Vert$ · $\Vert _2$ no induce en $\mathbb{R}^{M \times N}$ Frobenius.\\
+
+Además, para las matrices $\textbf{cuadradas}$ tenemos la siguiente definición.
+
+\begin{ndef}
+Sea $A \in \mathbb{R}^{N \times N}$, denotaremos como $\textbf{radio espectral de A}$ a:
+\[ \rho (A) := max \; \left\lbrace \vert \lambda \vert : \lambda \in \mathbb{C} \wedge det(A - \lambda I) = 0 \right\rbrace \]
+\end{ndef}
+
+La siguiente proposición muestra una manera más fácil de calcular la norma euclídea de un vector de $\mathbb{R}^N$
+
+\begin{nprop}
+$\Vert x \Vert _2 = \sqrt{x^Tx} \qquad \forall x \in \mathbb{R}^N$
+\end{nprop}
+
+\begin{ndef}
+Sea A $\in \mathbb{R}^{N \times N}$, diremos que A es $\textbf{semidefinida positiva} \Leftrightarrow x^TAx \geq 0 \qquad \forall x \in \mathbb{R}^N $
+\end{ndef}
+
+Las matrices semidefinidas positivas tienen la siguiente propiedad.
+
+\begin{nprop}
+Sea A $\in \mathbb{R}^{N \times N}$ semidefinida positiva. Si $\lambda$ es un valor propio de A $\Rightarrow \lambda \geq 0$.
+\end{nprop}
+
+\begin{proof}
+\end{proof}
+
+\begin{nprop}
+Sea P $\in \mathbb{R}^{N \times N}$ una matriz ortogonal, entonces
+\[ \left\lbrace x \in \mathbb{R}^N : \Vert x \Vert _2 = 1 \right\rbrace = \left\lbrace P^Tx : x \in \mathbb{R}^N \wedge \Vert x \Vert _2 = 1 \right\rbrace \]
+\end{nprop}
+
+\begin{proof}
+\end{proof}
+
+\begin{nprop}
+Si $\lambda _1,..., \lambda _N \geq 0 \Rightarrow sup \; \left\lbrace \sqrt{\sum_{i=1}^N \lambda _iy_i^2} : y \in \mathbb{R}^N \wedge \Vert y \Vert _2 = 1 \right\rbrace = \sqrt{max \; \lambda _i : i = 1,...,N} $
+\end{nprop}
+
+\begin{proof}
+\end{proof}
+
+Una manera más sencilla de calcular la norma de una matriz es la siguiente.
+
+\begin{nprop}
+Sea A $\in \mathbb{R}^{M \times N} \Rightarrow \Vert A \Vert _2 = \sqrt{\rho (A^TA)} $
+\end{nprop}
+
+\begin{proof}
+\end{proof}
+
+\begin{ndef}
+Una norma en $\mathbb{R}^{N \times N}$ se dice $\textbf{matricial}$ cuando
+\[ \Vert AB \Vert \leq \Vert A \Vert \Vert B \Vert \qquad \forall A,B \in \mathbb{R}^{N \times N} \]
+\end{ndef}
+
+Hay que tener en cuenta de que no toda norma en $\mathbb{R}^{N \times N}$ es matricial, por ejemplo:\\
+Vamos a utilizar la siguiente norma\\
+$\Vert A \Vert := max \; \lbrace \vert a{ij} \vert : i, j = 1,...,N \rbrace \qquad \forall A \in \mathbb{R}^{N \times N}$ \\
+Sean A = B = $\begin{bmatrix}
+1 & 1 \\
+1 & 1 \\
+\end{bmatrix}$\\
+Luego tenemos que
+$2 = \Vert AB \Vert > \Vert A \Vert \Vert B \Vert = 1$\\
+Por lo que esta norma no es matricial.\\
+
+\begin{nprop}
+Toda norma en $\mathbb{R}^{N \times N}$ inducida por una norma en $\mathbb{R}^N$ es matricial.
+\end{nprop}
+
+\begin{nth}
+$\lim_{n \rightarrow \infty} A^n = 0 \; \Leftrightarrow \; \rho (A) < 1 \qquad \forall A \in \mathbb{R}^{N \times N} $
+\end{nth}
+
 
 \subsection{Problemas bien planteados. Estabilidad}
 
