@@ -450,7 +450,7 @@ Si usamos las normas en los problemas numéricos, sabremos si los problemas est�
 Sea E un espacio vectorial real, diremos que una aplicacion $\Vert$·$\Vert$: E $\rightarrow$ $\mathbb{R}$ es una $\textbf{norma}$ en E si verifica las siguientes propiedades:\\
 i) Sea x $\in$ E $\Rightarrow$ $\Vert$·$\Vert$ $\geq$ 0.\\ 
 Además, $\Vert$x$\Vert$ = 0 $\Leftrightarrow$ x = 0\\
-ii) Sean x,y $\in$ E $\Rightarrow$ $\Vert$x + y$\Vert$ $\leq$ $\Vert$x$\Vert$ + $\Vert$y$\Vert$ (desigualdad triangular)\\
+ii) Sean x,y $\in$ E $\Rightarrow$ $\Vert$x + y$\Vert$ $\leq$ $\Vert$x$\Vert$ + $\Vert$y$\Vert$ $\quad$ (desigualdad triangular)\\
 iii) Sean x $\in$ E, $\lambda$ $\in$ $\mathbb{R}$ $\Rightarrow$ $\Vert$ $\lambda$x $\Vert$ = $\vert$ $\lambda$ $\vert$ $\Vert$x$\Vert$\\
 \end{ndef}
 
@@ -461,7 +461,7 @@ Sea E un espacio vectorial real. Si este espacio admite una norma, entonces E se
 Aunque trabajaremos en $\mathbb{R}$, en $\mathbb{C}$ es lo mismo.\\
 
 Veamos la interpretación geométrica de la desigualdad triangular, usando la norma euclídea $\mathbb{R}^2$ o $\mathbb{R}^3$.\\
-%Insertar figura desigualdadtriangular
+\includegraphics[scale=0.2]{media/desigualdadtriangular.png}
 
 Las siguientes normas son las que vamos a utilizar.
 
@@ -484,18 +484,24 @@ Sea E = $\mathbb{R}^{M \times N}$ y A $\in$ $\mathbb{R}^{M \times N}$, entonces:
 \[ \Vert A \Vert _F := \sqrt{\sum_{i=1}^{M} \sum_{j=1}^{N} a_{ij}^2} \]
 \end{ndef}
 
+$\textit{Aclaración:}$\\
+$\textit{Si estamos en un espacio vectorial real C([a,b]), esto significa que este espacio está compuesto por todas las funciones}\\
+\textit{continuas en el intervalo cerrado [a,b].}$\\
+$\textit{Si el espacio es $C^k$([a,b]), significa que está formado por las funciones de clase k, es decir, funciones derivables hasta}\\
+\textit{orden k y esas derivadas son continuas.}$
+
 \begin{ndef}
 $\textbf{Norma del máximo}$\\
 Sea E = C([a,b]) y f $\in$ C([a,b]), entonces:
-\[ \Vert f \Vert _\infty := max\lbrace \vert f(x) \vert : a \leq x \leq b \rbrace \]
+\[ \Vert f \Vert _\infty := max \; \left\lbrace \vert f(x) \vert : a \leq x \leq b \right\rbrace \]
 \end{ndef}
 
 \begin{ndef}
 Sean E = $C^k$([a,b]), k $\in$ $\mathbb{N}$ y f $\in$ $C^k$([a,b]) entonces:
-\[ \Vert f \Vert _k := max\lbrace \Vert f^{(j)} \Vert : j = 0,...,k \rbrace \]
+\[ \Vert f \Vert _k := max \; \left\lbrace \Vert f^{(j)} \Vert : j = 0,...,k \right\rbrace \]
 \end{ndef}
 
-Ahora que ya tenemos definidas las normas, podemos calcular el error cometido al aproximar.
+Ahora que ya tenemos definidas las normas, podemos calcular el error cometido al aproximar los vectores.
 
 \begin{ndef}
 $\textbf{Error absoluto}$\\
@@ -509,6 +515,8 @@ Sea E un espacio normado, x $\in$ E y x* $\in$ una aproximación de x, entonces 
 \[  \frac {\Vert x^* - x \Vert}{ \Vert x \Vert} \]
 \end{ndef}
 
+Veamos una aplicación de esto.
+
 \begin{ejer}
 Calcula los errores absolutos y relativos de\\
 i) E = $\mathbb{R}$, x = 1/4, x* = 0.23\\
@@ -519,7 +527,7 @@ iii) E = C([0,$\pi$/2]), f(t) = sen(t), f*(t) = t
 \begin{sol} $\newline$
 i) error absoluto: $\vert x^* - x \vert = \vert 0.23 - 1/4 \vert = 0.02 $\\
 error relativo: $\frac{\vert x^* - x \vert}{\vert x \vert} = \frac{\vert 0.23 - 1/4 \vert}{\vert 1/4 \vert} = 0.08$\\
-ii) error absoluto: $\Vert x^* - x \Vert _\infty = \Vert (0.19,2.2,0.9) - (1/5,2,1) \Vert _\infty = \Vert (-0.01,0.2,-0.1) \Vert _\infty = max \lbrace 0.01,0.2,0.1\rbrace = 0.2 $\\
+ii) error absoluto: $\Vert x^* - x \Vert _\infty = \Vert (0.19,2.2,0.9) - (1/5,2,1) \Vert _\infty = \Vert (-0.01,0.2,-0.1) \Vert _\infty = max \lbrace 0.01,0.2,0.1\rbrace =$\\ = 0.2 \\
 error relativo: $\frac{\Vert x^* - x \Vert _\infty}{\Vert x \Vert _\infty} = \frac{\Vert (-0.01,0.2,-0.1) \Vert _\infty}{\Vert (1/5,2,1) \Vert _\infty} = \frac{0.2}{2} = 0.1 $\\
 iii) error absoluto: $\Vert f^* - f \Vert _\infty = \Vert t - sen(t) \Vert _\infty = \frac{\pi}{2} - 1$\\
 error relativo: $\frac{\Vert f^* - f \Vert _\infty}{\Vert f \Vert _\infty} = \frac{\pi}{2} - 1 $
@@ -559,10 +567,22 @@ Sean $\Vert$ · $\Vert$ y $\Vert$ · $\Vert _*$ dos normas, entonces la converge
 Todas las normas en un espacio normado finito dimensional son equivalentes.
 \end{nth}
 
+Para calcular el límite de la norma del máximo, calculamos el límite de cada coordenada.
+
 \begin{nprop}
 Sea $\mathbb{R}^N$ un espacio normado finito dimensional y consideremos la norma $\Vert$·$\Vert _\infty$ en este espacio, entonces:
 \[ \lim_{n \rightarrow \infty}x_n = x_0 \Leftrightarrow \lim_{n \geq 1}(x_n)_j = (x_0)_j \qquad \forall j\in \lbrace 1,...,N \rbrace \]
 \end{nprop}
+
+\begin{proof}
+\[ \lim_{n \rightarrow \infty} x_n = x_0 \quad \Leftrightarrow \quad \lim_{n \rightarrow \infty} \Vert x_n - x_0 \Vert _\infty = 0 \quad \Leftrightarrow \quad 0 < max \; \lbrace \vert (x_n - x_0)_j \vert : j = 1,...,N \rbrace = 0 \quad \rightarrow \quad \lim_{n \geq 1}(x_n)_j = (x_0)_j \]
+\end{proof}
+
+Un ejemplo de aplicación de esta proposición es el siguiente.
+
+\begin{ejemplo}
+$\lim_{n \geq 1} \left( \left( 1 + \frac{1}{n} \right) ^n , \frac{(-1)^n}{n^2} \right) = (e,0)$
+\end{ejemplo}
 
 La anterior proposición también se puede aplicar para cualquier norma de $\mathbb{R}^N$ y de $\mathbb{R}^{M \times N}$.
 
@@ -573,37 +593,43 @@ Comprueba que la norma del máximo en C([0,1]) no es equivalente a la norma $\Ve
 \end{ejer}
 
 \begin{sol}
+Tenemos que\\
+\[ E = C([0,1]) \]
+\[ \Vert f \Vert _\infty = max \left\lbrace \vert f(x) \vert : 0 \leq x \leq 1 \right\rbrace \]
+\[ \Vert f \Vert _1 := \int_0^1 \vert f(x) \vert dx \]
+Luego\\
+$\Vert f_n \Vert _\infty = 1$ y $\Vert f_n \Vert _1 = 1/n$ (que coincide con el área).\\
+Si fueran equivalentes, entonces
+\[ \exists \alpha , \beta > 0 f \in E \Rightarrow \alpha \Vert f_n \Vert _1 \leq \Vert f_n \Vert _\infty \leq \beta \Vert f_n \Vert _1 \]
+Lo cual es una contradicción, porque n $\geq$ 1 $\Rightarrow \Vert f_n \Vert _\infty \leq \beta \Vert f_n \Vert _1 \Leftrightarrow 1 \leq \frac{\beta}{n} \Leftrightarrow n \leq \beta$ $\;$ y n no está acotada.\\
+Por lo que no son equivalentes.
 \end{sol}
 
 \begin{nprop}
 Sean M, N $\in$ $\mathbb{N}$ y consideremos sendas normas en $\mathbb{R}^N$ y $\mathbb{R}^M$, que sin lugar a ambigüedad notaremos indeferentemente como $\Vert$·$\Vert$. Entonces la aplicación que notaremos igualmente como $\Vert$·$\Vert$ define una norma en $\mathbb{R}^{M \times N}$:
-\[ \Vert A \Vert := sup \lbrace \Vert Ax \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
+\[ \Vert A \Vert := sup \; \left\lbrace \Vert Ax \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \right\rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
 \end{nprop}
-
-\begin{proof}
-\end{proof}
 
 \begin{ndef}
 Se define la norma \textbf{inducida} en $\mathbb{R}^{M \times N}$ como:
-\[ \Vert A \Vert := sup \; \lbrace \Vert Ax \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
+\[ \Vert A \Vert := sup \; \left\lbrace \Vert Ax \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \right\rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
 \end{ndef}
 
 \begin{nprop}
 Con la notación de la proposición anterior, si $A \in \mathbb{R}^{M \times N}$ entonces
-\[ \Vert A \Vert := sup \; \lbrace \frac{\Vert Ax \Vert}{\Vert x \Vert } : x \in \mathbb{R}^N \wedge x \neq 0 \rbrace \]
+\[ \Vert A \Vert := sup \; \left\lbrace \frac{\Vert Ax \Vert}{\Vert x \Vert } : x \in \mathbb{R}^N \wedge x \neq 0 \right\rbrace \]
 En particular,
 \[ \Vert Ax \Vert \leq \Vert A \Vert \Vert x \Vert \]
 \end{nprop}
 
-\begin{proof}
-\end{proof}
-
 \begin{nprop}
 Consideremos la norma $\Vert$·$\Vert _1$ en $\mathbb{R}^N$ y en $\mathbb{R}^M$, entonces la norma $\Vert$·$\Vert _1$ inducida en $\mathbb{R}^{M \times N}$ es
-\[ \Vert A \Vert _1 = max \; \lbrace \sum_{i=1}^M \vert a_{ij} \vert : j = 1,...,N \rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
+\[ \Vert A \Vert _1 = max \; \left\lbrace \sum_{i=1}^M \vert a_{ij} \vert : j = 1,...,N \right\rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
 \end{nprop}
 
-\begin{proof}
+Es decir, es el máximo de las sumas de los valores absolutos de cada $\textbf{columna}$.
+
+\begin{proof} Vamos a demostrar que es $\geq$ y $\leq$, luego se dará la igualdad.\\
 Probaremos primero que $ \Vert A \Vert _\infty \geq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace $\\
 Sea sign(a) := $\left\{ \begin{array}{lcc}
 -1 & si & a < 0 \\
@@ -630,14 +656,15 @@ x_N \\
 \begin{bmatrix}
 \sum_{j=1}^N a_{1j}x_j & ,\ldots , & \sum_{j=1}^N a_{Mj}x_j 
 \end{bmatrix} ^T
-\right\Vert _\infty = max \; \left\lbrace \vert \sum_{j=1}^N a_{ij}x_j \vert : i = 1,...,M \right\rbrace \leq \] 
-\[ \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert \vert x_j \vert : i = 1,...,M \right\rbrace \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace \] 
+\right\Vert _\infty = \] \[= max \; \left\lbrace \vert \sum_{j=1}^N a_{ij}x_j \vert : i = 1,...,M \right\rbrace \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert \vert x_j \vert : i = 1,...,M \right\rbrace \leq \] \[ \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace \] 
 \end{proof}
 
 \begin{nprop}
 Consideremos la norma $\Vert$·$\Vert _\infty$ en $\mathbb{R}^N$ y en $\mathbb{R}^M$, entonces la norma $\Vert$·$\Vert _\infty$ inducida en $\mathbb{R}^{M \times N}$ es
-\[ \Vert A \Vert _\infty = max \; \lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,N \rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
+\[ \Vert A \Vert _\infty = max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,N \right\rbrace \qquad \forall A \in \mathbb{R}^{M \times N} \]
 \end{nprop}
+
+Es decir, es el máximo de las sumas de los valores absolutos de cada $\textbf{fila}$.\\
 
 Por lo que si ya hemos calculado alguna de estas dos últimas normas, podemos saber la otra sin tener que volver a calcular el máximo, es decir, la relación entre ambas viene en la siguiente proposición.
 
@@ -654,7 +681,7 @@ Sea $A \in \mathbb{R}^{N \times N}$, denotaremos como $\textbf{radio espectral d
 \[ \rho (A) := max \; \left\lbrace \vert \lambda \vert : \lambda \in \mathbb{C} \wedge det(A - \lambda I) = 0 \right\rbrace \]
 \end{ndef}
 
-La siguiente proposición muestra una manera más fácil de calcular la norma euclídea de un vector de $\mathbb{R}^N$
+La siguiente proposición muestra una manera más fácil de calcular la norma euclídea de un vector de $\mathbb{R}^N$, que es calculando la suma de las coordenadas al cuadrado.
 
 \begin{nprop}
 $\Vert x \Vert _2 = \sqrt{x^Tx} \qquad \forall x \in \mathbb{R}^N$
@@ -671,6 +698,10 @@ Sea A $\in \mathbb{R}^{N \times N}$ semidefinida positiva. Si $\lambda$ es un va
 \end{nprop}
 
 \begin{proof}
+Como $\lambda$ es valor propio de A $\Rightarrow \exists x \in \mathbb{R}^N : x \neq 0 \wedge Ax = \lambda x$\\
+Luego\\
+\[ 0 \leq x^TAx = x^T \lambda x = \lambda x^Tx = \lambda \Vert x \Vert _2^2 \]
+Como x $\neq$ 0 $\Rightarrow 0 \leq \lambda$
 \end{proof}
 
 \begin{nprop}
@@ -679,6 +710,12 @@ Sea P $\in \mathbb{R}^{N \times N}$ una matriz ortogonal, entonces
 \end{nprop}
 
 \begin{proof}
+Vamos a demostrar la doble inclusión, lo que dará la igualdad.\\
+$\textbf{¿ $\supseteq$ ?}$\\
+Sea $x \in \mathbb{R}^N : \Vert x \Vert _2 = 1 \; \Rightarrow \;$ ¿ $\Vert P^Tx \Vert _2 = 1 $ ?
+\[ \Vert P^Tx \Vert _2 = \sqrt{x^TPP^Tx} = \sqrt{x^Tx} = \Vert x \Vert _2 = 1 \]
+$\textbf{¿ $\subseteq$ ?}$\\
+\[ 1 = \Vert x \Vert _2 = \sqrt{x^Tx} = \sqrt{x^TIx} = \sqrt{x^TPP^Tx} = \Vert P^Tx \Vert _2 \]
 \end{proof}
 
 \begin{nprop}
@@ -693,9 +730,6 @@ Una manera más sencilla de calcular la norma de una matriz es la siguiente.
 \begin{nprop}
 Sea A $\in \mathbb{R}^{M \times N} \Rightarrow \Vert A \Vert _2 = \sqrt{\rho (A^TA)} $
 \end{nprop}
-
-\begin{proof}
-\end{proof}
 
 \begin{ndef}
 Una norma en $\mathbb{R}^{N \times N}$ se dice $\textbf{matricial}$ cuando
@@ -717,9 +751,38 @@ Por lo que esta norma no es matricial.\\
 Toda norma en $\mathbb{R}^{N \times N}$ inducida por una norma en $\mathbb{R}^N$ es matricial.
 \end{nprop}
 
+\begin{proof}
+Sea $\Vert$ · $\Vert$ una norma en $\mathbb{R}^{N \times N}$ inducida por una norma en $\mathbb{R}^N$, entonces
+\[ \Vert A \Vert := sup \; \left\lbrace \Vert Ax \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \right\rbrace \]
+Sabemos que la norma es inducida, luego se cumple que
+\[ \Vert Ax \Vert \leq \Vert A \Vert \Vert x \Vert \qquad \forall x \in \mathbb{R}^N \]
+Tenemos que probar que $\Vert AB \Vert \leq \Vert A \Vert \Vert B \Vert$\\
+\[ \Vert AB \Vert = sup \; \left\lbrace \Vert ABx \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \right\rbrace \leq sup \; \left\lbrace \Vert A \Vert \Vert Bx \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \right\rbrace \leq \] \[ \leq sup \; \left\lbrace \Vert A \Vert \Vert B \Vert \Vert x \Vert : x \in \mathbb{R}^N \wedge \Vert x \Vert = 1 \right\rbrace = \Vert A \Vert \Vert B \Vert \]
+\end{proof}
+
 \begin{nth}
 $\lim_{n \rightarrow \infty} A^n = 0 \; \Leftrightarrow \; \rho (A) < 1 \qquad \forall A \in \mathbb{R}^{N \times N} $
 \end{nth}
+
+Este teorema nos deja dos importantes consecuencias.
+
+\begin{ncor}
+Sea A $\in \mathbb{R}^{N \times N}$ una matriz triangular, entonces
+\[ \lim_{n \rightarrow \infty} A^n = 0 \quad \Leftrightarrow \quad max \; \lbrace \vert a_{ii} \vert < 1 : i = 1,...,N \rbrace \]
+\end{ncor}
+
+\begin{proof}
+\end{proof}
+
+\begin{ncor}
+Sean N $\geq$ 1, A $\in \mathbb{R}^{N \times N}$ y $\Vert$ · $\Vert$ una norma matricial en $\mathbb{R}^{N \times N}$ tal que $\Vert$A$\Vert$ < 1, entonces $\rho$(A) < 1
+\end{ncor}
+
+Hay que tener en cuenta que no se cumple la implicación contraria, por ejemplo:\\
+Sea A = $\begin{bmatrix}
+0.5 & 500 \\
+0 & 0.5 \\
+\end{bmatrix}$ $\Rightarrow \rho (A) = 0.5 < 1$ pero $\Vert A \Vert _\infty = 500.5 \geq 1$
 
 
 \subsection{Problemas bien planteados. Estabilidad}
