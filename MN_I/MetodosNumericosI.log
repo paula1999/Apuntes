@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.6.27)  30 JUN 2018 19:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2018.6.27)  22 JUL 2018 19:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -732,11 +732,11 @@ s
 )
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 105.
+less on input line 113.
 
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 108.
+less on input line 116.
 
 (/usr/share/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2016/03/21 v2.10.2 Sectioning titles
@@ -1034,75 +1034,75 @@ Package zref Info: New property: mdf@pagevalue on input line 895.
 \c@ejemplo=\count287
 \c@ejer=\count288
 LaTeX Font Info:    Try loading font information for T1+zpltlf on input line 34
-0.
+8.
 
 (/usr/share/texmf-dist/tex/latex/newpx/t1zpltlf.fd
 File: t1zpltlf.fd 2015/01/17 v1.0 font definition file for T1/zpl/tlf
 )
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 340.
+(Font)              scaled to size 10.0pt on input line 348.
  (./MetodosNumericosI.aux
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
 )
 \openout1 = `MetodosNumericosI.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/npxmi/m/it on input line 340.
+LaTeX Font Info:    Checking defaults for OML/npxmi/m/it on input line 348.
 LaTeX Font Info:    Try loading font information for OML+npxmi on input line 34
-0.
+8.
 
 (/usr/share/texmf-dist/tex/latex/newpx/omlnpxmi.fd
 File: omlnpxmi.fd 2013/03/21 Fontinst v1.933 font definitions for OML/npxmi.
 )
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 340.
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 340.
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 340.
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 340.
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for U/npxexa/m/n on input line 340.
-LaTeX Font Info:    Try loading font information for U+npxexa on input line 340
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 348.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 348.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 348.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 348.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for U/npxexa/m/n on input line 348.
+LaTeX Font Info:    Try loading font information for U+npxexa on input line 348
 .
 
 (/usr/share/texmf-dist/tex/latex/newpx/unpxexa.fd
 File: unpxexa.fd 2013/03/24 Fontinst v1.933 font definitions for U/npxexa.
 )
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 340.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 340.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 348.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 348.
 
 
 (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for LMS/npxsy/m/n on input line 340.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for LMS/npxsy/m/n on input line 348.
 LaTeX Font Info:    Try loading font information for LMS+npxsy on input line 34
-0.
+8.
 
 (/usr/share/texmf-dist/tex/latex/newpx/lmsnpxsy.fd
 File: lmsnpxsy.fd 2016/08/13 Fontinst v1.933 font definitions for LMS/npxsy.
 )
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for LMX/npxexx/m/n on input line 340.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for LMX/npxexx/m/n on input line 348.
 LaTeX Font Info:    Try loading font information for LMX+npxexx on input line 3
-40.
+48.
 
 (/usr/share/texmf-dist/tex/latex/newpx/lmxnpxexx.fd
 File: lmxnpxexx.fd 2016/08/13 Fontinst v1.933 font definitions for LMX/npxexx.
 )
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 340.
-LaTeX Font Info:    ... okay on input line 340.
-LaTeX Info: Redefining \. on input line 340.
-LaTeX Info: Redefining \% on input line 340.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 348.
+LaTeX Font Info:    ... okay on input line 348.
+LaTeX Info: Redefining \. on input line 348.
+LaTeX Info: Redefining \% on input line 348.
 \c@mv@tabular=\count289
 \c@mv@boldtabular=\count290
 Package mathastext Info: current meaning of amsmath \resetMathstrut@ saved on i
-nput line 340.
+nput line 348.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1139,7 +1139,7 @@ nput line 340.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 \AtBeginShipoutBox=\box52
-Package hyperref Info: Link coloring OFF on input line 340.
+Package hyperref Info: Link coloring OFF on input line 348.
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -1148,9 +1148,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count291
 )
-LaTeX Info: Redefining \ref on input line 340.
-LaTeX Info: Redefining \pageref on input line 340.
-LaTeX Info: Redefining \nameref on input line 340.
+LaTeX Info: Redefining \ref on input line 348.
+LaTeX Info: Redefining \pageref on input line 348.
+LaTeX Info: Redefining \nameref on input line 348.
 
 (./MetodosNumericosI.out) (./MetodosNumericosI.out)
 \@outlinefile=\write3
@@ -1189,61 +1189,61 @@ e
 ))
 \GPT@outputbox=\box54
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 50.0pt on input line 355.
+(Font)              scaled to size 50.0pt on input line 363.
 LaTeX Font Info:    Try loading font information for T1+FiraSans-OsF on input l
-ine 355.
+ine 363.
 
 (/usr/share/texmf-dist/tex/latex/fira/T1FiraSans-OsF.fd
 File: T1FiraSans-OsF.fd 2018/01/09 (autoinst) Font definitions for T1/FiraSans-
 OsF.
 )
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/m/n' will be
-(Font)              scaled to size 50.0pt on input line 355.
+(Font)              scaled to size 50.0pt on input line 363.
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/b/n' will be
-(Font)              scaled to size 50.0pt on input line 355.
+(Font)              scaled to size 50.0pt on input line 363.
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 367.
+(Font)              scaled to size 10.0pt on input line 375.
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 367.
+(Font)              scaled to size 12.0pt on input line 375.
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 367.
-LaTeX Font Info:    Try loading font information for T1+npxtt on input line 367
+(Font)              scaled to size 14.4pt on input line 375.
+LaTeX Font Info:    Try loading font information for T1+npxtt on input line 375
 .
 
 (/usr/share/texmf-dist/tex/latex/newpx/t1npxtt.fd
 File: t1npxtt.fd 2000/12/14 v1.0
 )
 LaTeX Font Info:    Font shape `T1/npxtt/m/n' will be
-(Font)              scaled to size 12.0pt on input line 367.
+(Font)              scaled to size 12.0pt on input line 375.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-<by-nc-sa.pdf, id=60, 121.45375pt x 43.16125pt>
+<by-nc-sa.pdf, id=52, 121.45375pt x 43.16125pt>
 File: by-nc-sa.pdf Graphic file (type pdf)
 <use by-nc-sa.pdf>
-Package pdftex.def Info: by-nc-sa.pdf  used on input line 389.
+Package pdftex.def Info: by-nc-sa.pdf  used on input line 397.
 (pdftex.def)             Requested size: 121.45343pt x 43.16113pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.395 \begin{titlepage}
+l.403 \begin{titlepage}
                         [1 <./by-nc-sa.pdf>]pdfTeX warning (ext4): destination 
 with the same identifier (name{page.1}) has been already used, duplicate ignore
 d
 <to be read again> 
                    \relax 
-l.417 \end{titlepage}
+l.425 \end{titlepage}
                       [1]
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 14.4pt on input line 424.
+(Font)              scaled to size 14.4pt on input line 432.
 LaTeX Font Info:    Font shape `T1/zpltlf/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/zpltlf/b/n' tried instead on input line 424.
+(Font)              Font shape `T1/zpltlf/b/n' tried instead on input line 432.
 
 LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
-(Font)              scaled to size 14.4pt on input line 424.
+(Font)              scaled to size 14.4pt on input line 432.
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 424.
+(Font)              scaled to size 14.4pt on input line 432.
  (./MetodosNumericosI.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
@@ -1307,147 +1307,141 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.425 \newpage
+l.433 \newpage
                [1]
 LaTeX Font Info:    Font shape `T1/zpltlf/m/n' will be
-(Font)              scaled to size 24.88pt on input line 431.
+(Font)              scaled to size 24.88pt on input line 439.
 LaTeX Font Info:    Font shape `T1/zpltlf/bx/n' in size <24.88> not available
-(Font)              Font shape `T1/zpltlf/b/n' tried instead on input line 431.
+(Font)              Font shape `T1/zpltlf/b/n' tried instead on input line 439.
 
 LaTeX Font Info:    Font shape `T1/zpltlf/b/n' will be
-(Font)              scaled to size 24.88pt on input line 431.
+(Font)              scaled to size 24.88pt on input line 439.
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/b/n' will be
-(Font)              scaled to size 24.88pt on input line 431.
+(Font)              scaled to size 24.88pt on input line 439.
 
-Underfull \hbox (badness 10000) in paragraph at lines 447--448
-
- []
-
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 449.
-LaTeX Font Info:    Font shape `T1/FiraSans-OsF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 450.
-LaTeX Font Info:    Try loading font information for TS1+zpltlf on input line 4
-50.
-(/usr/share/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
-File: ts1zpltlf.fd 2015/01/18 v1.0 fd file for TS1/zpltlf
-)
-LaTeX Font Info:    Font shape `TS1/zpltlf/m/n' will be
-(Font)              scaled to size 10.0pt on input line 450.
-
-Underfull \hbox (badness 10000) in paragraph at lines 450--455
+Underfull \hbox (badness 10000) in paragraph at lines 455--456
 
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 457.
+LaTeX Font Info:    Font shape `T1/FiraSans-OsF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 457.
+LaTeX Font Info:    Try loading font information for TS1+zpltlf on input line 4
+58.
+(/usr/share/texmf-dist/tex/latex/newpx/ts1zpltlf.fd
+File: ts1zpltlf.fd 2015/01/18 v1.0 fd file for TS1/zpltlf
+)
+LaTeX Font Info:    Font shape `TS1/zpltlf/m/n' will be
+(Font)              scaled to size 10.0pt on input line 458.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 467.
 
-Underfull \hbox (badness 10000) in paragraph at lines 461--462
+Underfull \hbox (badness 10000) in paragraph at lines 471--472
 
  []
 
-<media/desigualdadtriangular.png, id=87, 612.2875pt x 494.84875pt>
-File: media/desigualdadtriangular.png Graphic file (type png)
-<use media/desigualdadtriangular.png>
-Package pdftex.def Info: media/desigualdadtriangular.png  used on input line 46
-4.
-(pdftex.def)             Requested size: 122.45532pt x 98.96799pt.
-LaTeX Info: Redefining \. on input line 465.
-LaTeX Info: Redefining \% on input line 465.
+LaTeX Info: Redefining \. on input line 472.
+LaTeX Info: Redefining \% on input line 472.
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/m/sl' in size <10> not availabl
 e
 (Font)              Font shape `T1/FiraSans-OsF/m/it' tried instead on input li
-ne 465.
+ne 472.
 LaTeX Font Info:    Font shape `T1/FiraSans-OsF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 465.
+(Font)              scaled to size 10.0pt on input line 472.
 [2]
+<media/desigualdadtriangular.png, id=92, 612.2875pt x 494.84875pt>
+File: media/desigualdadtriangular.png Graphic file (type png)
+<use media/desigualdadtriangular.png>
+Package pdftex.def Info: media/desigualdadtriangular.png  used on input line 47
+4.
+(pdftex.def)             Requested size: 122.45532pt x 98.96799pt.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 468.
+(mdframed)              on input line 478.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 475.
+(mdframed)              on input line 484.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 481.
+(mdframed)              on input line 489.
 
-Overfull \hbox (8.47566pt too wide) in paragraph at lines 487--492
+Overfull \hbox (8.47566pt too wide) in paragraph at lines 494--499
 [][] 
  []
 
 
-Overfull \hbox (2.95772pt too wide) in paragraph at lines 487--492
+Overfull \hbox (2.95772pt too wide) in paragraph at lines 494--499
 [][] 
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 493.
+(mdframed)              on input line 500.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 499.
-LaTeX Info: Redefining \. on input line 502.
-LaTeX Info: Redefining \% on input line 502.
-LaTeX Info: Redefining \. on input line 502.
-LaTeX Info: Redefining \% on input line 502.
+(mdframed)              on input line 505.
+LaTeX Info: Redefining \. on input line 508.
+LaTeX Info: Redefining \% on input line 508.
+LaTeX Info: Redefining \. on input line 508.
+LaTeX Info: Redefining \% on input line 508.
 [3 <./media/desigualdadtriangular.png>]
-Package mdframed Info: Not enough space on this page on input line 502.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 506.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 512.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 520.
+(mdframed)              on input line 517.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 527.
+(mdframed)              on input line 524.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 533.
 
-Overfull \hbox (4.65958pt too wide) in paragraph at lines 527--534
-\T1/zpltlf/m/n/10 ii) error ab-so-lu-to: $\LMS/npxsy/m/n/10 k\T1/zpltlf/m/it/10
- x[] \T1/zpltlf/m/n/10 ^^U \T1/zpltlf/m/it/10 x\LMS/npxsy/m/n/10 k[] \T1/zpltlf
-/m/n/10 = \LMS/npxsy/m/n/10 k\T1/zpltlf/m/n/10 (0.19, 2.2, 0.9) ^^U (1/5, 2, 1)
-\LMS/npxsy/m/n/10 k[] \T1/zpltlf/m/n/10 = \LMS/npxsy/m/n/10 k\T1/zpltlf/m/n/10 
-(^^U0.01, 0.2, ^^U0.1)\LMS/npxsy/m/n/10 k[] \T1/zpltlf/m/n/10 = \T1/zpltlf/m/it
-/10 max\T1/zpltlf/m/n/10 {0.01, 0.2, 0.1} =$ 
+Underfull \hbox (badness 10000) in paragraph at lines 533--534
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 537--539
+
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 536.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 541.
-LaTeX Info: Redefining \. on input line 546.
-LaTeX Info: Redefining \% on input line 546.
-LaTeX Info: Redefining \. on input line 546.
-LaTeX Info: Redefining \% on input line 546.
+(mdframed)              on input line 544.
+LaTeX Info: Redefining \. on input line 547.
+LaTeX Info: Redefining \% on input line 547.
+LaTeX Info: Redefining \. on input line 547.
+LaTeX Info: Redefining \% on input line 547.
 [4]
-Package mdframed Info: Not enough space on this page on input line 546.
+Package mdframed Info: Not enough space on this page on input line 547.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 548.
+(mdframed)              on input line 549.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 553.
+(mdframed)              on input line 556.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 557.
+(mdframed)              on input line 561.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 562.
+(mdframed)              on input line 565.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 566.
+(mdframed)              on input line 570.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 572.
+(mdframed)              on input line 574.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 580.
 
-Overfull \hbox (9.1182pt too wide) detected at line 578
+Overfull \hbox (9.1182pt too wide) detected at line 586
 [] \T1/zpltlf/m/it/10 x[] \T1/zpltlf/m/n/10 = \T1/zpltlf/m/it/10 x[]  \LMS/npxs
 y/m/n/10 ,  [] k\T1/zpltlf/m/it/10 x[] \T1/zpltlf/m/n/10 ^^U \T1/zpltlf/m/it/10
  x[]\LMS/npxsy/m/n/10 k[] \T1/zpltlf/m/n/10 = 0  \LMS/npxsy/m/n/10 ,  \T1/zpltl
@@ -1458,61 +1452,51 @@ f/m/it/10 j \T1/zpltlf/m/n/10 = 1, ..., \T1/zpltlf/m/it/10 N\T1/zpltlf/m/n/10 }
 f/m/n/10 )[] = (\T1/zpltlf/m/it/10 x[]\T1/zpltlf/m/n/10 )[]
  []
 
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 583.
-LaTeX Info: Redefining \. on input line 585.
-LaTeX Info: Redefining \% on input line 585.
-LaTeX Info: Redefining \. on input line 585.
-LaTeX Info: Redefining \% on input line 585.
+LaTeX Info: Redefining \. on input line 586.
+LaTeX Info: Redefining \% on input line 586.
+LaTeX Info: Redefining \. on input line 586.
+LaTeX Info: Redefining \% on input line 586.
 [5]
-Package mdframed Info: Not enough space on this page on input line 585.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 589.
+(mdframed)              on input line 591.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 595.
+(mdframed)              on input line 597.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 603.
 
-Underfull \hbox (badness 10000) in paragraph at lines 596--597
+Underfull \hbox (badness 10000) in paragraph at lines 604--605
 
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 608.
+(mdframed)              on input line 616.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 613.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 618.
-LaTeX Info: Redefining \. on input line 623.
-LaTeX Info: Redefining \% on input line 623.
-LaTeX Info: Redefining \. on input line 623.
-LaTeX Info: Redefining \% on input line 623.
+(mdframed)              on input line 621.
+LaTeX Info: Redefining \. on input line 624.
+LaTeX Info: Redefining \% on input line 624.
+LaTeX Info: Redefining \. on input line 624.
+LaTeX Info: Redefining \% on input line 624.
 [6]
+Package mdframed Info: Not enough space on this page on input line 624.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 625.
+(mdframed)              on input line 626.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 662.
-Package mdframed Info: Not enough space on this page on input line 665.
-LaTeX Info: Redefining \. on input line 665.
-LaTeX Info: Redefining \% on input line 665.
-LaTeX Info: Redefining \. on input line 665.
-LaTeX Info: Redefining \% on input line 665.
+(mdframed)              on input line 633.
+LaTeX Info: Redefining \. on input line 667.
+LaTeX Info: Redefining \% on input line 667.
+LaTeX Info: Redefining \. on input line 667.
+LaTeX Info: Redefining \% on input line 667.
  [7]
-Package mdframed Info: Not enough space on this page on input line 665.
-
-Underfull \hbox (badness 10000) in paragraph at lines 667--668
-
- []
-
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 671.
+(mdframed)              on input line 670.
 
 Underfull \hbox (badness 10000) in paragraph at lines 675--676
 
@@ -1521,133 +1505,113 @@ Underfull \hbox (badness 10000) in paragraph at lines 675--676
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 679.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 686.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 690.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 696.
 
-Underfull \hbox (badness 10000) in paragraph at lines 701--703
+Underfull \hbox (badness 10000) in paragraph at lines 683--684
 
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 707.
-LaTeX Info: Redefining \. on input line 710.
-LaTeX Info: Redefining \% on input line 710.
-LaTeX Info: Redefining \. on input line 710.
-LaTeX Info: Redefining \% on input line 710.
+(mdframed)              on input line 687.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 694.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 698.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 704.
+
+Underfull \hbox (badness 10000) in paragraph at lines 709--711
+
+ []
+
+LaTeX Info: Redefining \. on input line 711.
+LaTeX Info: Redefining \% on input line 711.
+LaTeX Info: Redefining \. on input line 711.
+LaTeX Info: Redefining \% on input line 711.
 [8]
-Package mdframed Info: Not enough space on this page on input line 710.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 715.
 
-Underfull \hbox (badness 10000) in paragraph at lines 716--718
+Underfull \hbox (badness 10000) in paragraph at lines 724--726
 
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 721.
+(mdframed)              on input line 729.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 730.
+(mdframed)              on input line 738.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 734.
+(mdframed)              on input line 742.
 
-Underfull \hbox (badness 10000) in paragraph at lines 739--749
+Underfull \hbox (badness 10000) in paragraph at lines 747--757
 
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 750.
-LaTeX Info: Redefining \. on input line 758.
-LaTeX Info: Redefining \% on input line 758.
-LaTeX Info: Redefining \. on input line 758.
-LaTeX Info: Redefining \% on input line 758.
+(mdframed)              on input line 758.
+Package mdframed Info: Not enough space on this page on input line 760.
+LaTeX Info: Redefining \. on input line 760.
+LaTeX Info: Redefining \% on input line 760.
+LaTeX Info: Redefining \. on input line 760.
+LaTeX Info: Redefining \% on input line 760.
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 758--760
+Package mdframed Info: Not enough space on this page on input line 760.
+
+Underfull \hbox (badness 10000) in paragraph at lines 766--768
 
  []
 
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 763.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 769.
+(mdframed)              on input line 771.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 777.
-LaTeX Info: Redefining \. on input line 812.
-LaTeX Info: Redefining \% on input line 812.
-LaTeX Info: Redefining \. on input line 812.
-LaTeX Info: Redefining \% on input line 812.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 785.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 801.
+LaTeX Info: Redefining \. on input line 804.
+LaTeX Info: Redefining \% on input line 804.
+LaTeX Info: Redefining \. on input line 804.
+LaTeX Info: Redefining \% on input line 804.
 [10]
+Package mdframed Info: Not enough space on this page on input line 804.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 806.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 816.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
 (mdframed)              on input line 821.
-LaTeX Info: Redefining \. on input line 825.
-LaTeX Info: Redefining \% on input line 825.
-LaTeX Info: Redefining \. on input line 825.
-LaTeX Info: Redefining \% on input line 825.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 825.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 850.
+LaTeX Info: Redefining \. on input line 850.
+LaTeX Info: Redefining \% on input line 850.
  [11]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 831.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 837.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 841.
-LaTeX Font Info:    Try loading font information for T1+zplsups on input line 8
-45.
- (/usr/share/texmf-dist/tex/latex/newpx/t1zplsups.fd
-File: t1zplsups.fd 2015/01/17 v1.0
-)
-LaTeX Font Info:    Font shape `T1/zplsups/m/n' will be
-(Font)              scaled to size 10.0pt on input line 845.
-LaTeX Font Info:    Font shape `T1/zplsups/m/n' will be
-(Font)              scaled to size 8.0pt on input line 847.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 849.
-LaTeX Info: Redefining \. on input line 851.
-LaTeX Info: Redefining \% on input line 851.
-LaTeX Info: Redefining \. on input line 851.
-LaTeX Info: Redefining \% on input line 851.
- [12]
-Package mdframed Info: Not enough space on this page on input line 851.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 853.
-LaTeX Info: Redefining \. on input line 868.
-LaTeX Info: Redefining \% on input line 868.
-LaTeX Info: Redefining \. on input line 868.
-LaTeX Info: Redefining \% on input line 868.
- [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 878.
-LaTeX Info: Redefining \. on input line 878.
-LaTeX Info: Redefining \% on input line 878.
-LaTeX Info: Redefining \. on input line 878.
-LaTeX Info: Redefining \% on input line 878.
-
-[14]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 878.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 850.
  (./MetodosNumericosI.aux
 LaTeX Info: Redefining \. on input line 21.
 LaTeX Info: Redefining \% on input line 21.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 878.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 878.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 850.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 850.
 Package rerunfilecheck Info: File `MetodosNumericosI.out' has not changed.
-(rerunfilecheck)             Checksum: 43EC9FCE0E997632B617AEC26E21639D;950.
+(rerunfilecheck)             Checksum: 65C24810019DB8DA86D1BBD5B2CB1068;837.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1655,32 +1619,31 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 20960 strings out of 492649
- 355089 string characters out of 6135778
- 449730 words of memory out of 5000000
- 24485 multiletter control sequences out of 15000+600000
- 769293 words of font info for 147 fonts, out of 8000000 for 9000
+ 20933 strings out of 492649
+ 354480 string characters out of 6135778
+ 449770 words of memory out of 5000000
+ 24457 multiletter control sequences out of 15000+600000
+ 766787 words of font info for 145 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,13n,68p,10406b,641s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf-dist/fonts/enc/dvips/newpx/ecsups.enc}{/usr/share/texmf-dis
-t/fonts/enc/dvips/fira/fir_7gpamp.enc}{/usr/share/texmf-dist/fonts/enc/dvips/te
-x-gyre/q-ts1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}</
-usr/share/texmf-dist/fonts/type1/public/fira/FiraSans-Bold.pfb></usr/share/texm
-f-dist/fonts/type1/public/fira/FiraSans-Italic.pfb></usr/share/texmf-dist/fonts
-/type1/public/fira/FiraSans-Regular.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/newtx/ntxsyralt.pfb></usr/share/texmf-dist/fonts/type1/public/newpx/pxsys.pf
-b></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb></usr/share/texmf
--dist/fonts/type1/public/pxfonts/rpxmi.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/txfonts/t1xtt.pfb></usr/share/texmf-dist/fonts/type1/public/newtx/txexs.p
-fb></usr/share/texmf-dist/fonts/type1/public/txfonts/txsya.pfb></usr/share/texm
-f-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/share/texmf-dist/fonts/type1/
-public/txfonts/txsyc.pfb></usr/share/texmf-dist/fonts/type1/public/newpx/zplb.p
-fb></usr/share/texmf-dist/fonts/type1/public/newpx/zplr.pfb></usr/share/texmf-d
-ist/fonts/type1/public/newpx/zplri.pfb>
-Output written on MetodosNumericosI.pdf (17 pages, 471164 bytes).
+ 39i,13n,68p,10406b,704s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/fira/fir_7gpamp.enc}{/usr/share/texmf-
+dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/
+newtx/ntx-ec-tlf.enc}</usr/share/texmf-dist/fonts/type1/public/fira/FiraSans-Bo
+ld.pfb></usr/share/texmf-dist/fonts/type1/public/fira/FiraSans-Italic.pfb></usr
+/share/texmf-dist/fonts/type1/public/fira/FiraSans-Regular.pfb></usr/share/texm
+f-dist/fonts/type1/public/newtx/ntxsyralt.pfb></usr/share/texmf-dist/fonts/type
+1/public/newpx/pxsys.pfb></usr/share/texmf-dist/fonts/type1/public/tex-gyre/qpl
+r.pfb></usr/share/texmf-dist/fonts/type1/public/pxfonts/rpxmi.pfb></usr/share/t
+exmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></usr/share/texmf-dist/fonts/typ
+e1/public/newtx/txexs.pfb></usr/share/texmf-dist/fonts/type1/public/txfonts/txs
+ya.pfb></usr/share/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></usr/share/
+texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></usr/share/texmf-dist/fonts/ty
+pe1/public/newpx/zplb.pfb></usr/share/texmf-dist/fonts/type1/public/newpx/zplr.
+pfb></usr/share/texmf-dist/fonts/type1/public/newpx/zplri.pfb>
+Output written on MetodosNumericosI.pdf (14 pages, 462489 bytes).
 PDF statistics:
- 272 PDF objects out of 1000 (max. 8388607)
- 232 compressed objects within 3 object streams
- 71 named destinations out of 1000 (max. 500000)
- 107 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 258 PDF objects out of 1000 (max. 8388607)
+ 221 compressed objects within 3 object streams
+ 76 named destinations out of 1000 (max. 500000)
+ 91 words of extra memory for PDF output out of 10000 (max. 10000000)
 
