@@ -463,7 +463,7 @@ Para calcular el condicionamiento en funciones de varias variables, usamos lo si
 \[ C(f,x_0) := \left\Vert \frac{\partial f}{\partial x} (x_0) \right\Vert \]
 
 \begin{ndef}
-Si en un problema la resolvente s de clase $C^1$ e $y_0 \in Y$, el $\textbf{condicionamiento relativo o absoluto}$ del problema son los de su resolvente en dicho punto.
+Si en un problema la resolvente s de clase $C^1$ e $y_0 \in Y$, el $\textbf{condicionamiento relativo}$ o $\textbf{absoluto}$ del problema son los de su resolvente en dicho punto.
 \end{ndef}
 
 \begin{nota}
@@ -479,14 +479,137 @@ Veamos si está bien condicionado.\\ Para ello calculamos el condicionamiento re
 Como $c(g,y_0) \in (0,1) \Rightarrow$ está bien condicionado.
 \end{ejemplo}
 
+\begin{ejemplo}
+Sea $A \in \mathbb{R}^{N \times N}$ regular e $y \in \mathbb{R}$, encuentra $x \in \mathbb{R}^N$ : f(x) = y.\\
+Sea f(x) = Ax, como A es regular, es unisolvente el problema, luego tiene resolvente $g : \mathbb{R}^N \rightarrow \mathbb{R}^N$, $g(y) := A^{-1}y, \; \; \forall y \in \mathbb{R}^N$\\
+Además, el problema es estable en todo $y_0 \in \mathbb{R}^N$, ya que:
+\[ \Vert g(y) - g(y_0) \Vert _\infty \leq \Vert A^{-1} \Vert _\infty \Vert y - y_0 \Vert _\infty \]
+Ahora calcularemos el condicionamiento relativo.
+\[ c(g, y_0) = \frac{\Vert \frac{\partial g}{\partial y} (y_0) \Vert \Vert y_0 \Vert }{\Vert g(y_0)} = \frac{\Vert A^{-1} \Vert \Vert y_0 \Vert }{\Vert A^{-1} y_0 \Vert } = \frac{\Vert A^{-1} \Vert \Vert y_0 \Vert }{\Vert x_0 \Vert } \] 
+Luego $Ax_0 = y_0$
+\end{ejemplo}
+
+Si $\Vert A^{-1} \Vert$ es grande, $x_0$ e $y_0$ son del mismo orden, entonces el condicionamiento será grande. Observémoslo en el siguiente ejemplo.
+
+\begin{ejemplo}
+Sea $A = \begin{bmatrix}
+1 & 1 \\
+1 & 0.999 \\
+\end{bmatrix}$,
+un dato $y_0 = \begin{bmatrix}
+2 \\
+1.999 \\
+\end{bmatrix}$
+y su solución $x_0 = \begin{bmatrix}
+1 \\
+1 \\
+\end{bmatrix}$\\
+
+Veamos que hay un mal condicionamiento, ya que el condicionamiento es demasiado grande en comparación con el resto. Para ello, calculamos antes la inversa de la matriz A y la norma del máximo de esta, de la solución $x_0$ y del dato $y_0$.
+
+\[ A^{-1} = \begin{bmatrix}
+-999 & 1000 \\
+1000 & -1000 \\
+\end{bmatrix} \]
+\[ \Vert A^{-1} \Vert _\infty = 2000, \; \; \Vert x_0 \Vert _\infty = 1, \; \; \Vert y_0 \Vert _\infty = 2 \]
+Luego el condicionamiento se calculará con la expresión obtenida anteriormente usando la norma infinito.
+\[ c(g, y_0) = \frac{\Vert A^{-1} \Vert _\infty \Vert y_0 \Vert _\infty }{\Vert x_0 \Vert _\infty } = 4000 \]
+Como hemos dicho, es un condicionamiento demasiado grande y nos preguntamos ¿cuál es el problema? Pues que al calcular las soluciones de otros datos próximos al inicial, las soluciones obtenidas no son próximas a la solución inicial. Comprobémoslo.\\
+Sea y un dato próximo a $y_0$, por ejemplo $y = \begin{bmatrix}
+2 \\
+1.998 \\
+\end{bmatrix}$.
+Es próximo, ya que $\Vert y - y_0 \Vert _\infty = 0.001$.\\
+Su solución es $x = A^{-1}y = \begin{bmatrix}
+0 \\
+2 \\
+\end{bmatrix}$. No es próxima a la solución inicial, ya que $\Vert x - x_0 \Vert _\infty = 1$\\
+La interpretación geométrica de este resultado es: las columnas de A forman base de $\mathbb{R}^{2 \times 2}$, calculamos las coordenadas de y en $y_0$ en dicha base. Un pequeño cambio entre y e $y_0$ genera un cambio grande de coordenadas por ser los vectores de la base casi paralelos.
+\end{ejemplo}
+
+Ahora nos planteamos la siguiente pregunta: ¿está globalmente acotado el condicionamiento relativo de un sistema de cuaciones lineales? La respuesta es afirmativa y nos da una idea de cómo de estable es.\\
+
+La siguiente definición será útil para calcular el condicionamiento de una matriz cuando la norma es inducida.
+
+\begin{ndef}
+Si $\Vert \cdot \Vert$ denota la norma matricial en $\mathbb{R}^{N \times N}$ inducida por una norma en $\mathbb{R}^N$, que notaremos igualmente como $\Vert \cdot \Vert$, entonces definimos el $\textbf{condicionamiento}$ c(A) de una matriz regular A $\in \mathbb{R}^{N \times N}$ como
+\[ c(A) := \Vert A^{-1} \Vert \Vert A \Vert \]
+\end{ndef}
+
+Además,
+\[ sup \; \left\lbrace c(g, y_0) : y_0 \neq 0 \right\rbrace = sup \; \left\lbrace \frac{\Vert A^{-1} \Vert \Vert y_0 \Vert}{\Vert A^{-1}y_0 \Vert} : y_0 \neq 0 \right\rbrace = sup \; \left\lbrace \frac{\Vert A^{-1} \Vert \Vert Ax_0 \Vert}{\Vert x_0 \Vert} : x_0 \neq 0 \right\rbrace = \Vert A^{-1} \Vert \Vert A \Vert \]
+
+Lo que nos lleva a que si tenemos un mal condicionamiento del sistema, el condicionamiento de la matriz de coeficientes es grande, y viceversa.\\
+También tenemos que $c(A) \geq 1$.\\
+Si retomamos el ejemplo anterior, usando la norma del máximo en $\mathbb{R}^2$ y la correspondiente norma matricial inducida, obtenemos que c(A) = 4000.
 
 \subsection{Algoritmos. Algoritmo PageRank de Google}
 
+\begin{ndef}[Algoritmo]
+Procedimiento que describe de forma precisa, y siempre mediante un número finito de operaciones aritméticas y lógicas elementales, la resolución de un problema.
+\end{ndef}
+
+El algoritmo recoge las instrucciones que permiten al ejecutor del mismo resolver completamente el problema. El ejecutor suele ser un ordenador y, de hecho, en la mayoría de los casos, no puede ser una persona.
+
+\begin{ndef}[Análisis Numérico]
+Se ocupa de diseñar algoritmos que permitan la resolución efectiva de problemas bien planteados y que involucran números reales.
+\end{ndef}
+
+\begin{ndef}[Complejidad de un algoritmo]
+Medida del tiempo de ejecución y que suele expresarse en términos de un parámetro asociado al problema.
+\end{ndef}
+
+Al desarrollar y analizar un algoritmo obtenemos precisión, estabilidad y efectos de la representación finita de los números reales.
+
+El Algoritmo PageRank de Google mide la relevancia de las páginas web (dominios...) con enlaces en común. Por lo que aquí nuestro problema es calcular la relevancia de una página (P), teniendo en cuenta el número de enlaces de otras páginas a (P) y la importancia de las páginas que establecen enlace con (P).
+
+Nuestro modelo es:\\
+Denotaremos al conjunto (finito) de páginas web como 1, 2, ..., $x_N$.\\
+Denotaremos a las páginas como 1, 2, ..., i.\\
+La relevancia de la página i se representa por $x_i \geq 0$.\\
+La página i será más importante que la página j si $x_i > x_j$.
+
+\begin{ejemplo}
+%Insertar imagen
+La relevancia de cada página será la suma de los cocientes entre la relevancia de la página que entra y los enlaces que salen de esta.
+\[ x_1 = \frac{x_3}{3}, \; \; x_2 = \frac{x_1}{3} + \frac{x_3}{3} + \frac{x_4}{2}, \; \; x_3 = \frac{x_1}{3} + \frac{x_1}{3} + \frac{x_4}{2}, \; \; x_4 = \frac{x_1}{3} + x_2 + \frac{x_3}{3} \]
+
+Por lo que siempre obtendremos un sistema compatible indeterminado con un parámetro.\\
+
+Si tomamos $x_4$ como parámetro y le asignamos el valor 10, tenemos lo siguiente:
+\[ x_1 = 1.875, \; \; x_2 = 7.5, \; \; x_3 = 5.625, \; \; x_4 = 10 \]
+\end{ejemplo}
 
 \section{Errores de redondeo. Iteradores}
-
+Las principales fuentes de error suelen ser equivocarse al elegir el modelo de un problema, la medida de los datos experimentales, error al truncar o al redondear y consecuentemente, al operar, se produce una propagación del error.
 
 \subsection{Sistema posicional y números máquina}
+Los ordenadores trabajan con un subconjunto finito de números reales, los $\textbf{números máquina}$, subconjunto que depende de las especificaciones del ordenador.\\
+
+$\textbf{SISTEMAS POSICIONALES DE NUMERACIÓN}$\\
+Sea $b \in \mathbb{N}$ la base binaria o decimal, según el estándar ISO/IEC/IEEE60559:2011 del IEEE (Institute of Electrical and Electronic Engineers, www.ieee.org). Sea $s \in$ {0,1} el signo, N,M $\in \mathbb{N} \cup$ {0} y sea $x_k$ la cifra en la posición k tal que $0 \leq x_k < b, \; \; \forall k = -M, ..., N$.\\
+La $\textbf{representación posicional}$ de un número real es:
+\[ x = (-1)^s \sum_{n=-M}^N x_nb^n \]
+\[ x_b := (-1)^s \cdot (x_N...x_1x_0.x_{-1}x_{-2}...x_{-M})_b \]
+Además, denominaremos al punto entre $x_0$ y $x_{-1}$ como $\textbf{punto binario}$ o $\textbf{punto decimal}$.
+
+\begin{ejemplo}
+Sea $x_{10} = x = 101.11$, su representación posicional es x = 1·$10^2$ + 1·$10^0$ + 1·$10^{-1}$ + 1·$10^{-2}$.\\
+Sea $y_2 = (101.11)_2$, su representación posicional es y = 1·$2^2$ + 1·$2^0$ + 1·$2^{-1}$ + 1·$2^{-2}$.
+\end{ejemplo}
+
+Variando $M, N \in \mathbb{N} \cup \lbrace 0 \rbrace $ tenemos un subconjunto denso de $\mathbb{R}$. Además, la serie geométrica de razón menor que 1 converge. Se puede extender a infinito:
+\[ x = (-1)^s \sum_{- \infty}^N x_nb^n \]
+\[ x_b := (-1)^s \cdot (x_N...x_1x_0.x_{-1}x_{-2}...)_b \]
+
+El siguiente ejemplo aprenderemos representar en forma posicional infinita a partir de otra infinita.
+
+\begin{ejemplo}
+\[ (0.\stackrel{\large \frown}{001}) _2 = \sum_{n=1}^{\infty} \left( 2^{-3} \right) ^n = \frac{1}{7} = \stackrel{\Large \frown}{0.142857} \]
+Para calcular la convergencia de esta serie, como la razón es menor que 1, hemos usado lo siguiente:
+\[ \alpha \neq 1, \; n > k \geq 0 \; \; \Rightarrow \sum_{j=k}^n \alpha ^j = \frac{\alpha ^k - \alpha ^{n+1}}{1 - \alpha} \]
+En particular, si \[ \vert \alpha \vert < 1 \; \; \Rightarrow  \sum_{j=k}^\infty \alpha ^k = \frac{\alpha ^k}{1 - \alpha} \]
+\end{ejemplo}
 
 
 \subsection{Redondeo en sistemas de punto flotante y su aritmética}
