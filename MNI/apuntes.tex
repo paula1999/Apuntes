@@ -612,11 +612,99 @@ En particular, si \[ \vert \alpha \vert < 1 \; \; \Rightarrow  \sum_{j=k}^\infty
 \end{ejemplo}
 
 
+$\textbf{NÚMEROS MÁQUINA}$
+
+Estos números los utiliza el ordenador. Denotamos a la base como b y a las posiciones de memoria como N.
+
+\begin{ndef}[Representación con punto fijo]
+Sea $k \in \mathbb{N}$ fijo, N - k -1 dígitos enteros, k dígitos tras el punto $a_n$ tal que $0 \leq a_n \leq b - 1$. Entonces las N posiciones de memoria son: N = signo + cifras significativas = 1 + N - 1. La representación con punto fijo es la siguiente:
+\[ (-1)^s b^{-k} \cdot \sum_{n=0}^{N-2}a_nb^n \; \sim \; (-1)^s \cdot (a_{N-2}...a_k.a_{k-1}...a_0)_b \]
+\end{ndef}
+
+\begin{ndef}[Representación con número flotante]
+Sea $t \in \mathbb{N}$ el número máximo de dígitos o cifras significativas $a_n$ tales que $0 \leq a_n \leq b - 1$, sea m = $a_1...a_t$ la mantisa tal que $0 \leq m \leq b^t - 1$, sea e $\in \mathbb{Z}$ el exponente, tal que $L \leq e \leq U$ donde L, U $\in \mathbb{Z}$, $L \leq U$. Entonces las N posiciones de memoria son N = signo + cifras significativas + dígitos del exponente = 1 + t + N - t - 1. La representación con punto flotante es:
+\[ (-1)^sb^e \cdot \sum_{n=1}^t a_nb^{-n} \; \sim \; (-1)^s \cdot (0.a_1...a_t) \cdot b^e = (-1)^s \cdot m \cdot b^{e-t} \]
+\end{ndef}
+
+\begin{ejemplo}
+Sea x = -3.4567 y la base b = 10, vamos a representarlo de las dos maneras.
+	\begin{nlist}
+	\item Representación con punto fijo con k = 4 y N = 6. Luego $x = (-1) \cdot 10^{-4} \cdot (3 \cdot 10^4 + 4 \cdot 10^3 + 5 \cdot 10^2 + 6 \cdot 10 + 7 \cdot 10^0)·$ = (-1)(3.4567)
+	\item Representación con punto flotante con t = 6 y e = 2. Luego $x = (-1) \cdot 10^2 \cdot (0 \cdot 10^{-1} + 3 \cdot 10^{-2} + 4 \cdot 10^{-3} + 5 \cdot 10^{-4} + 6 \cdot 10^{-5} + 7 \cdot 10^{-6}) = (-1)(0.034567) \cdot 10^2$
+	\end{nlist}
+\end{ejemplo}
+
+Usualmente hay dos representaciones de punto flotante: la precisión simple y la doble.\\
+Si un número no está normalizado, es decir, la cifra significativa principal $a_1$ no es 0, entonces ese número tendrá varias representaciones. Veámoslo en el siguiente ejemplo. 
+
+\begin{ejemplo}
+Sean b = 2, t = 3, L = 1, U = 3 y punto flotante para x = 1, entonces:
+\[ (0.100) \cdot 2^1 = (0.010) \cdot 2^2 = (0.001) \cdot 2^3 \]
+\end{ejemplo}
+
+Para evitar este problema, usaremos la representación normalizada que viene definida a continuación.
+
+\begin{ndef}[Notación del sistema normalizado de punto flotante]
+\[ \mathbb{F} (b,t,L,U) := \lbrace 0 \rbrace \cup \left\lbrace (-1)^sb^e \sum_{n=1}^t a_nb^{-n} : s = 0,1, a_1 \neq 0, 0 \leq a_1,...,a_t \leq b - 1, L \leq e \leq U \right\rbrace \]
+\end{ndef}
+
+\begin{nprop}
+Sean t $\in \mathbb{N}$, L, U $\in \mathbb{Z}$ con L $\leq$ U y x $\in \mathbb{F} (b,t,L,U)$. Entonces:
+	\begin{nlist}
+	\item -x $\in \mathbb{F} (b,t,L,U)$.
+	\item $b^{L-1} \leq \vert x \vert \leq b^U(1 - b^{-t})$.
+	\item card$( \mathbb{F} (b,t,L,U)) = 2(b-1)b^{t-1}(U-L+1)+1$.
+	\end{nlist}
+\end{nprop}
+
+Veamos un importante ejemplo en el que se representan todos los números positivos de un sistema de punto flotante normalizado.
+
+\begin{ejemplo}
+Sea $\mathbb{F} (2,4,-1,1)$, entonces los números estrictamente positivos de ese sistema de punto flotante son:
+\[ (0.1111) \cdot 2 = \frac{15}{8}, \; \; \; \; (0.1110) \cdot 2 = \frac{7}{4}, \; \; \; \; (0.1101) \cdot 2 = \frac{13}{8}, \; \; \; \; (0.1100) \cdot 2 = \frac{3}{2} \]
+\[ (0.1011) \cdot 2 = \frac{11}{8}, \; \; \; \; (0.1010) \cdot 2 = \frac{5}{4}, \; \; \; \; (0.1001) \cdot 2 = \frac{9}{8}, \; \; \; \; (0.1000) \cdot 2 = 1 \]
+\[ (0.1111) \cdot 2^0 = \frac{15}{16}, \; \; \; \; (0.1110) \cdot 2^0 = \frac{7}{8}, \; \; \; \; (0.1101) \cdot 2^0 = \frac{13}{16}, \; \; \; \; (0.1100) \cdot 2^0 = \frac{3}{4} \]
+\[ (0.1011) \cdot 2^0 = \frac{11}{16}, \; \; \; \; (0.1010) \cdot 2^0 = \frac{5}{8}, \; \; \; \; (0.1001) \cdot 2^0 = \frac{9}{16}, \; \; \; \; (0.1000) \cdot 2^0 = \frac{1}{2} \]
+\[ (0.1111) \cdot 2^{-1} = \frac{15}{32}, \; \; \; \; (0.1110) \cdot 2^{-1} = \frac{7}{16}, \; \; \; \; (0.1101) \cdot 2^{-1} = \frac{13}{32}, \; \; \; \; (0.1100) \cdot 2^{-1} = \frac{3}{8} \]
+\[ (0.1011) \cdot 2^{-1} = \frac{11}{32}, \; \; \; \; (0.1010) \cdot 2^{-1} = \frac{5}{16}, \; \; \; \; (0.1001) \cdot 2^{-1} = \frac{9}{32}, \; \; \; \; (0.1000) \cdot 2^{-1} = \frac{1}{4} \]
+Además, podemos calcular lo siguiente:\\
+Número de elementos de $\mathbb{F}$(2,4,-1,1) (positivos, negativos y cero):
+\[ 2(b-1)b^{t-1}(U-L+1) + 1 = 49 \]
+Valores mínimo y máximo (positivos):
+\[ b^{L-1} = \frac{1}{4}, \; \; b^U(1-b^{-t}) = \frac{15}{8} \]
+\end{ejemplo}
+
+El sistema $\mathbb{F}$(b,t,L,U) no se distribuye uniformemente, aunque sí por bloques.
+
+\begin{ndef}[Épsilon máquina]
+Para un sistema de punto flotante $\mathbb{F}$ (b,t,L,U) con $L \leq 1 \leq U$, el $\textbf{épsilon máquina}$, que se escribe como $\varepsilon _M$, es la distancia entre el menor número de $\mathbb{F}$ (b,t,L,U) mayor que 1 y la propia unidad, es decir,
+\[ \varepsilon _M := b^{1-t} \]
+\end{ndef}
+
+Como $L \leq 1 \leq U \Rightarrow 1 \in \mathbb{F} (b,t,L,U)$ 
+
 \subsection{Redondeo en sistemas de punto flotante y su aritmética}
+En este apartado vamos a trabajar sobre el contexto de los números máquina representados en el sistema de punto flotante $\mathbb{F}$(b,t,L,U). Primero, tengamos en cuenta lo siguiente:
+	\begin{nlist}
+	\item $\mathbb{F}$(b,t,L,U) $\neq \mathbb{R}$.
+	\item El resultado de operar con dos números de $\mathbb{F}$ (b,t,L,U) no queda dentro de dicho sistema necesariamente, por ejemplo:
+	\[ \frac{1}{4}, \frac{9}{32} \in \mathbb{F} (2,4,-1,1), \; \; pero \; \frac{1}{4} + \frac{9}{32} = \frac{17}{32} \notin \mathbb{F} (2,4,-1,1) \]
+	\end{nlist}
 
+\begin{ndef}[Truncatura]
+Fijado un sistema de punto flotante concreto $\mathbb{F}$(b,t,L,U) (al que no se hará referencia si no hay lugar a ambigüedad) si x $\in \mathbb{R}$ es el número real 
+\[ x =(-1)^sb^e \sum_{n=1}^{\infty} a_nb^{-n} \]
+entonces su $\textbf{truncatura}$ (en dicho sistema) es un número de $\mathbb{F}$(b,t,L,U)
+\[ tr(x) := (-1)^s \cdot (0.a_1...a_t) \cdot b^e \]
+\end{ndef}
 
-\subsection{Iteradores}
-
+\begin{ejemplo}
+Sea el sistema de punto flotante $\mathbb{F}$(2,4,-1,1) y el número real x = 1.6875, calcularemos su truncatura. Primero lo pasaremos a la base indicada:
+\[ 1.6875 = (0.11011) \cdot 2 \]
+Ahora calculamos la truncatura:
+\[ tr(1.6875) = (0.1101) \cdot 2 = \frac{13}{8} = 1.625 \]
+Es decir, hemos quitado la última cifra, ya que en el número había 5 cifras y según el sistema, el número de cifras es 4. Por último lo hemos pasado a base decimal.
+\end{ejemplo}
 
 \part{Tema2}
 
