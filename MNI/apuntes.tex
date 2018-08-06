@@ -661,12 +661,15 @@ Veamos un importante ejemplo en el que se representan todos los números positiv
 
 \begin{ejemplo}
 Sea $\mathbb{F} (2,4,-1,1)$, entonces los números estrictamente positivos de ese sistema de punto flotante son:
-\[ (0.1111) \cdot 2 = \frac{15}{8}, \; \; \; \; (0.1110) \cdot 2 = \frac{7}{4}, \; \; \; \; (0.1101) \cdot 2 = \frac{13}{8}, \; \; \; \; (0.1100) \cdot 2 = \frac{3}{2} \]
-\[ (0.1011) \cdot 2 = \frac{11}{8}, \; \; \; \; (0.1010) \cdot 2 = \frac{5}{4}, \; \; \; \; (0.1001) \cdot 2 = \frac{9}{8}, \; \; \; \; (0.1000) \cdot 2 = 1 \]
-\[ (0.1111) \cdot 2^0 = \frac{15}{16}, \; \; \; \; (0.1110) \cdot 2^0 = \frac{7}{8}, \; \; \; \; (0.1101) \cdot 2^0 = \frac{13}{16}, \; \; \; \; (0.1100) \cdot 2^0 = \frac{3}{4} \]
-\[ (0.1011) \cdot 2^0 = \frac{11}{16}, \; \; \; \; (0.1010) \cdot 2^0 = \frac{5}{8}, \; \; \; \; (0.1001) \cdot 2^0 = \frac{9}{16}, \; \; \; \; (0.1000) \cdot 2^0 = \frac{1}{2} \]
-\[ (0.1111) \cdot 2^{-1} = \frac{15}{32}, \; \; \; \; (0.1110) \cdot 2^{-1} = \frac{7}{16}, \; \; \; \; (0.1101) \cdot 2^{-1} = \frac{13}{32}, \; \; \; \; (0.1100) \cdot 2^{-1} = \frac{3}{8} \]
-\[ (0.1011) \cdot 2^{-1} = \frac{11}{32}, \; \; \; \; (0.1010) \cdot 2^{-1} = \frac{5}{16}, \; \; \; \; (0.1001) \cdot 2^{-1} = \frac{9}{32}, \; \; \; \; (0.1000) \cdot 2^{-1} = \frac{1}{4} \]
+
+\[ \begin{array}{llll}
+(0.1111) \cdot 2 = \frac{15}{8} & (0.1110) \cdot 2 = \frac{7}{4} & (0.1101) \cdot 2 = \frac{13}{8} & (0.1100) \cdot 2 = \frac{3}{2} \\
+\\ (0.1011) \cdot 2 = \frac{11}{8} & (0.1010) \cdot 2 = \frac{5}{4} & (0.1001) \cdot 2 = \frac{9}{8} & (0.1000) \cdot 2 = 1 \\
+\\ (0.1111) \cdot 2^0 = \frac{15}{16} & (0.1110) \cdot 2^0 = \frac{7}{8} & (0.1101) \cdot 2^0 = \frac{13}{16} & (0.1100) \cdot 2^0 = \frac{3}{4}\\
+\\ (0.1011) \cdot 2^0 = \frac{11}{16} & (0.1010) \cdot 2^0 = \frac{5}{8} & (0.1001) \cdot 2^0 = \frac{9}{16} & (0.1000) \cdot 2^0 = \frac{1}{2}\\
+\\ (0.1111) \cdot 2^{-1} = \frac{15}{32} & (0.1110) \cdot 2^{-1} = \frac{7}{16} & (0.1101) \cdot 2^{-1} = \frac{13}{32} & (0.1100) \cdot 2^{-1} = \frac{3}{8}\\
+\\ (0.1011) \cdot 2^{-1} = \frac{11}{32} & (0.1010) \cdot 2^{-1} = \frac{5}{16} & (0.1001) \cdot 2^{-1} = \frac{9}{32} & (0.1000) \cdot 2^{-1} = \frac{1}{4}
+\end{array} \]
 Además, podemos calcular lo siguiente:\\
 Número de elementos de $\mathbb{F}$(2,4,-1,1) (positivos, negativos y cero):
 \[ 2(b-1)b^{t-1}(U-L+1) + 1 = 49 \]
@@ -706,6 +709,197 @@ Ahora calculamos la truncatura:
 Es decir, hemos quitado la última cifra, ya que en el número había 5 cifras y según el sistema, el número de cifras es 4. Por último lo hemos pasado a base decimal.
 \end{ejemplo}
 
-\part{Tema2}
+\begin{ndef}
+Para un sistema de punto flotante  $\mathbb{F}$(b,t,L,U), el $\textbf{redondeo}$ del número real
+\[ x = (-1)^sb^e \sum_{n=1}^{\infty} a_nb^{-n} \]
+es el número de $\mathbb{F}$(b,t,L,U)
+\[ rd(x) = tr \left( x + (-1)^s \frac{b}{2} \frac{b^e}{b^{t+1}} \right) \]
+\end{ndef}
+
+El redondeo se puede calcular de otra manera.
+
+\begin{nprop}
+Para un sistema de punto flotante  $\mathbb{F}$(b,t,L,U), el $\textbf{redondeo}$ del número real
+\[ x = (-1)^sb^e \sum_{n=1}^{\infty} a_nb^{-n} \]
+es el número de $\mathbb{F}$(b,t,L,U)
+\[ rd(x) := (-1)^s \cdot (0.a_1...a_{t-1}r_t) \cdot b^e \]
+donde
+\[ r_t := \left\{ \begin{array}{lcc}
+a_t & si & a_{t+1} < \frac{b}{2}\\
+\\ a_t +1 & si & a_{t+1} \geq \frac{b}{2}
+\end{array} 
+\right. \]
+\end{nprop}
+
+\begin{ejemplo}
+Sea el sistema de punto flotante  $\mathbb{F}$(2,4,-1,1) y el número real 1.6875, vamos a calcular su redondeo.
+	Como la base es 2, vamos a pasarlo a esa base: $1.6875 = (0.11011) \cdot 2$
+	Para redondearlo, lo podemos hacer de dos formas.
+	\begin{nlist}
+	\item Directamente con 5ª cifra tras el punto (t = 4):
+	\[ rd(1.6875) = (0.1110) \cdot 2 = \frac{7}{4} = 1.75 \]
+	\item Con la definición:
+	\[ rd(1.6875) = tr \left( x +(-1)^0 \frac{2}{2} \frac{2}{b^5} \right) = tr ((0.11011) \cdot 2 + (0.00001) \cdot 2) = tr((0.11100) \cdot 2) = (0.1110) \cdot 2 = 1.75 \]
+	\end{nlist}
+\end{ejemplo}
+
+Los errores de redondeo o truncatura están acotados, se muestran en la siguiente propiedad.
+
+\begin{nprop}
+Consideremos el sistema de punto flotante $\mathbb{F}(b,t,L,U)$, con $L \leq e \leq U$ y sea $x = (-1)^sb^e \sum_{n=1}^{\infty} a_nb^{-n} \; \in \mathbb{R}$. Entonces:
+	\begin{nlist}
+	\item $ \vert x - tr(x) \vert \leq b^{e-t} $
+	\item $ \frac{ \vert x - tr(x) \vert }{ \vert x \vert } \leq \varepsilon _M $
+	\item $ \vert x - rd(x) \vert \leq \frac{1}{2} b^{e-t}$
+	\item $ \frac{\vert x - rd(x) \vert }{\vert x \vert } \leq \frac{\varepsilon _M}{2} $
+	\end{nlist}
+\end{nprop}
+
+\begin{proof}
+$\newline$
+	\begin{nlist}
+	\item 
+	\[ \vert x - tr(x) \vert = b^e \left\vert \sum_{n=t+1}^{\infty} a_nb^{-n} \right\vert \leq b^e(b-1) \sum_{n=t+1}^{\infty} b^{-n} = b^{e-t} \]
+	La primera igualdad se da, ya que al restar x y tr(x) el factor común es $b^e$ y se eliminan los términos del 1 hasta la t. En la segunda desigualdad hemos acotado por la cifra más grande. Finalmente, hemos calculado la suma.
+	\item Usando (i) y que $a_1 \geq 1$ tenemos que 
+	\[ \frac{\vert x - tr(x) \vert}{\vert x \vert} \leq \frac{b^{e-t}}{b^e \sum_{n=1}^{\infty} a_nb^{-n}} \leq \frac{b^{e-t}}{b^e \frac{1}{b}} = b^{1-t} = \varepsilon _M \]
+	\item 
+	\[ \vert x - rd(x) \vert = b^e \vert (0.a_1...a_ta_{t+1}...) - (0.a_1...r_t) \vert \]
+	 ¿$ \vert (0.a_1...a_ta_{t+1}...) - (0.a_1...r_t) \vert \leq \frac{b^{-t}}{2}$ ?
+		\item[•] Si $a_{t+1} < \frac{b}{2} \; y \; a_t = r_t$:
+		\[ \vert (0.a_1...a_ta_{t+1}...) - (0.a_1...r_t) \vert = (0.0...0a_{t+1}...) \leq (0.0...0 \frac{b}{2}) = \frac{b^{-t}}{2} \]
+		\item[•] Si $a_{t+1} \geq \frac{b}{2} \; y \; a_t + 1 = r_t$:
+		\[ vert (0.a_1...a_ta_{t+1}...) - (0.a_1...r_t) \vert = \frac{1}{b^t} - \left( \frac{a_{t+1}}{b^{t+1}} + ... \right) \leq \frac{1}{b^t} - \frac{b}{2b^{t+1}} = \frac{b^{-t}}{2} \]
+	\item \[ a_1 \geq 1 \Rightarrow \vert x \vert \geq b^eb^{-1} \Rightarrow _{(iii)} \frac{\vert x - rd(x) \vert }{\vert x \vert} \leq \frac{\frac{1}{2}b^{e-t}}{b^eb^{-1}} = \frac{1}{2}b^{1-t} = \frac{\varepsilon _M}{2} \]
+	\end{nlist}	
+\end{proof}
+
+\begin{ndef}
+La cota que aparece en el error relativo del redondeo recibe el nombre de $\textbf{precisión máquina}$ (o $\textbf{unidad de redondeo}$) y se denota por u, es decir,
+\[ u := \frac{1}{2}b^{1-t} = \frac{1}{2} \varepsilon _M \]
+\end{ndef}
+
+\begin{ncor}
+Dados $\mathbb{F} (b,t,L,U)$ y $x \in \mathbb{R}$, con $b^{L-1} \leq \vert x \vert \leq b^U(1 - b^{-t})$, se tiene que
+\[ rd(x) = (1 + \mu )x \]
+para cierto $\mu \in \mathbb{R}$ tal que $\vert \mu \vert \leq u$
+\end{ncor}
+
+\begin{proof}
+\[ \vert x - rd(x) \vert \leq u \vert x \vert \; \Leftrightarrow \; x - \vert x \vert u \leq rd(x) \leq x + \vert x \vert u \]
+esto es,
+\[ rd(x) = x +\kappa \vert x \vert u \]
+con $\vert \kappa \vert \leq 1$, es decir,
+\[ rd(x) = (1 + \mu )x \]
+para cierto $\mu \in \mathbb{R}$ tal que $\vert \mu \vert \leq u$
+\end{proof}
+
+Las operaciones con números máquina en $\mathbb{F} (b,t,L,U)$ no son necesariamente internas.
+
+\begin{ndef}
+Sea $ \bullet : \mathbb{R} \times \mathbb{R} \rightarrow \mathbb{R}$ una operación, definimos la $\textbf{operación máquina}$ como
+\[ \bullet _M : \mathbb{F} (b,t,L,U) \times \mathbb{F} (b,t,L,U) \rightarrow \mathbb{F} (b,t,L,U) \]
+\[ \bullet _M (x,y) := rd(x \bullet y), \; \; (x,y \in \mathbb{F} (b,t,L,U)) \]
+\end{ndef}
+
+\begin{ncor}
+\[ x,y \in \mathbb{F} (b,t,L,U) \Rightarrow \bullet _M (x,y) = (1 + \mu ) x \bullet y \]
+para cierto $\mu \in \mathbb{R}$ tal que $\vert \mu \vert \leq u$
+\end{ncor}
+
+Aunque una única operación genere un error pequeño, una sucesión finita de operaciones es susceptible de producir la llamada $\textbf{propagación del error}$, que puede ser considerable. Veámoslo en el siguiente ejemplo.
+
+\begin{ejemplo}
+Sea la sucesión $x_n := \int_0^1 x^ne^x dx$, vamos a integrar por partes para obtener una expresión más sencilla.
+\[ \int_0^1 x^ne^x dx = x^ne^x ]_0^1 - n \int_0^1 x^{n-1}e^x dx = e - n \int_0^1 x^{n-1}e^x dx \]
+Por lo que $x_n = e - nx_{n-1}$.\\
+Si $x \in [0,1] \Rightarrow x^ne^x \leq x^{n-1}e^x$.\\
+Tenemos que la sucesión $\lbrace x_n \rbrace _{n \geq 0}$ es decreciente y positiva, luego converge a un número $\ell$. Calculamos ese número:
+\[ x_{n-1} = \frac{e - x_n}{n} \Rightarrow \ell = 0 \]
+Redondeando en el sistema de punto flotante b = 10 y t = 7 obtenemos que:
+\[ x_{15} = (0.1604004) \]
+\[ x_0 = (0.1718281828) \cdot 10 \]
+\[ x_{15} = (0.6004419078) \cdot 10^3 \]
+Lo que produce una propagación del error.\\
+Ahora vamos a calcular el condicionamiento de una sucesión de funciones directamente relacionadas con la sucesión $\lbrace x_n \rbrace _{n \geq 0}$. Primero tenemos que calcular usando la recurrencia $x_n$, siendo $x_n = f_n (x_0)$ donde $f_n : \mathbb{R} \rightarrow \mathbb{R}$
+\[ x_1 = e - x_0 \]
+\[ x_2 = e - 2(e - x_0) = -e + 2x_0 \]
+\[ x_3 = e - 3(-e + 2x_0) = 4e - 6x_0 \]
+Por inducción, para $n \geq 1$:
+\[ (-1)^n(n!x_0 - \alpha _n e) \]
+con $\alpha _n \in \mathbb{N}$ independiente de $x_0$ (es un valor irrelevante para calcular el condicionamiento).\\
+Tenemos que:
+\[ x_n = f_n (x_0) \]
+\[ f_n (x) = (-1)^n(n!x - \alpha _ne), \; \; (x \in \mathbb{R}) \]
+Ahora ya podemos calcular el condicionamiento de $f_n$ en $x_0$:
+\[ c(f_n,x_0) = \frac{n!x_0}{x_n} \geq \frac{n!x_0}{x_0} = n! \]
+\end{ejemplo}
+
+A continuación vamos a estudiar las operaciones aritméticas elementales y los errores debidos que se producen en estas debidos a truncaturas, redondeos o a cualquier otra circunstancia.\\
+Sea x el dato, $\mu _x$ el error relativo para x y (1 + $\mu _x$)x su valor aproximado.
+	\begin{nlist}
+	\item Suma (igual para la resta).\\
+	Sean los datos $x, y \in \mathbb{R}$ tales que $x + y \neq 0$ y sus valores aproximados (1 + $\mu _x$)x, (1 + $\mu _y$)y, entonces el error cometido al realizar la operación suma es:
+	\[ (1 + \mu _x)x + (1 + \mu _y)y = x + y + \mu _xx + \mu _yy = (x+y) \left( 1 + \frac{\mu _xx + \mu _yy}{x+y} \right) = (x+y) \left( 1 + \frac{x}{x+y} \mu _x + \frac{y}{x+y} \mu _y \right)  \]
+	Luego
+	\[ \mu _{x+y} = \frac{x}{x+y} \mu _x + \frac{y}{x+y} \mu _y \]
+	Además, si x e y tienen el mismo signo se puede controlar el error relativo:
+	\[ \vert \mu _{x+y} \vert \leq \vert \mu _x \vert + \vert \mu _y \vert \]
+	Aunque si x e y tienen signos opuestos, $\mu _{x+y}$ puede dispararse si $x + y \approx 0$, generándose un error relativo enorme, conocido como $\textbf{error de cancelación}$. 
+	\item Multiplicación.\\
+	Los errores relativos de x e y son pequeños.
+	\[ (1 + \mu _x)x \cdot (1 + \mu _y)y = (1 + \mu _x + \mu _y + \mu _x \mu _y)xy \approx (1 + \mu _x + \mu _y)xy \]
+	Luego
+	\[ \mu _{xy} \approx \mu _x + \mu _y \]
+	\item División.\\
+	Los errores relativos de x e y son pequeños, siendo $y \neq 0$.
+	\[ \frac{(1 + \mu _x)x}{(1 + \mu _y)y} = \frac{x}{y}(1 + \mu _x)(1 - \mu _y + \mu _y^2 - \mu _y^3 + \cdots) \approx \frac{x}{y}(1 + \mu _x - \mu _y) \]
+	Por lo que
+	\[ \mu _{x/y} \approx \mu _x - \mu _y \]
+	\end{nlist}	
+	
+	
+\part{Tema 2. Resolución numérica de sistemas de ecuaciones lineales}
+En este tema vamos a hacer un tratamiento numérico de los sistemas de ecuaciones lineales. Vamos a usar dos métodos:
+	\begin{nlist}
+	\item Métodos directos: Gauss, versiones y factorizaciones.
+	\item Métodos iterativos: Jacobi y Gauss-Seidel.
+	\end{nlist}
+
+	\section{Métodos directos: Gauss y versiones, factorización de matrices}
+	Si tenemos un sistema $N \times N$ unisolvente, con N grande, la regla de Cramer es ineficiente, ya que tenemos un gran número de operaciones elementales. La regla de Cramer hace N + 1 determinantes + N divisiones, lo cual lleva a
+\[ (N+1)(N!N-1)+N = (N+1)!N-1 \; \; operaciones \]
+		\subsection{Sistemas triangulares}
+		Sean la matriz $U \in \mathbb{R}^{N \times N}$ $\textbf{triangular superior}$ con elementos diagonales no nulos, el vector de incógnitas $x \in \mathbb{R}^N$ y el vector de términos independientes b, tenemos el siguiente sistema triangular: $\textbf{Ux = b}$. Este sistema se resuelve por $\textbf{sustitución hacia atrás}$ y el algoritmo para resolverlo es:
+		\[ x_i = \frac{1}{u_{ii}} \left( b_i - \sum _{j=i+1}^N u_{ij}x_j \right), \; \; con \; \; i = N,...,1 \]
+		Sea la matriz $L \in \mathbb{R}^{N \times N}$  $\textbf{triangular inferior}$ con elementos diagonales no nulos, el vector de incógnitas $x \in \mathbb{R}^N$ y el vector de términos independientes b, tenemos el siguiente sistema triangular: $\textbf{Lx = b}$. Este sistema se resuelve por $\textbf{sustitución hacia adelante}$ y el algoritmo para resolverlo es:
+		\[ x_i = \frac{1}{l_{ii}} \left( b_i - \sum _{j=1}^{i-1} l_{ij}x_j \right), \; \; con \; \; i = 1,...,N \]
+		
+		\subsection{Métodos de Gauss y Gauss-Jordan. Pivotaje}
+		\begin{nlist}
+		\item $\textbf{Método de Gauss}$\\
+		Si tenemos un sistema Ax = b unisolvente, con el método de Gauss obtenemos otro sistema $\textbf{Ux = c}$ equivalente con U triangular superior, que ya hemos visto como se resuelve.\\
+		Los datos son $N \geq 1, A \in \mathbb{R}^{N \times N}, b \in \mathbb{R}^N$.\\
+		Sea $A^{(1)}$ := A. Suponemos que $a_{kk}^{(k)} \neq 0 \; con \; k = 1,...,N$ (en caso contrario hemos terminado y no es posible llegar a un sistema triangular equivalente). Definimos recursivamente los multiplicadores:
+		\[ m_{ik} := \frac{a_{ik}^{(k)}}{a_{kk}^{(k)}}, \; \; con \; \; i = k+1,...,N \]
+e
+\[ a_{ij}^{(k+1)} := a_{ij}^{(k)} - m_{ik}a{kj}^{(k)}, \; \; con \; \; i = k+1,...,N; \; j = k,...,N \]
+\[ b_i^{(k+1)} := b_i^{(k)} - m_{ik}a_{kj}^{(k)}, \; \; con \; \; i = k+1,...,N \]
+Por lo que obtenemos un sistema triangular superior equivalente que se resuelve por sustitución hacia atrás:
+\[ Ux = c \]
+donde $U := A^{(N)}$, $c := b^{(N)}$.
+		
+		\item $\textbf{Método de Gauss-Jordan}$
+		
+		
+		\end{nlist}
+		
+		\subsection{Métodos de factorización}
+		
+	\section{Métodos iterativos: métodos de Jacobi y Gauss-Seidel}
+		\subsection{Métodos iterativos: convergencia y consistencia}
+		\subsection{Generación de métodos iterativos. Jacobi y Gauss-Seidel}
+	\section{Análisis de error}
+	
 
 
