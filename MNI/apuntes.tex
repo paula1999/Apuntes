@@ -888,13 +888,260 @@ e
 Por lo que obtenemos un sistema triangular superior equivalente que se resuelve por sustitución hacia atrás:
 \[ Ux = c \]
 donde $U := A^{(N)}$, $c := b^{(N)}$.
+			\begin{ejemplo}
+			Sean
+			\[ A := 
+			\begin{bmatrix}
+			1 & 1 & 3 \\
+			0.1 & 1 & 1 \\
+			1 & 2 & 0 \\
+			\end{bmatrix}, \; \;
+			b :=
+			\begin{bmatrix}
+			5 \\
+			2.1 \\
+			3 \\
+			\end{bmatrix} \]
+			Entonces vamos a calcular el sistema triangular superior equivalente.
+			Tenemos que
+			\[ A^{(1)} = A, \; \; b^{(1)} = b \]
+			
+			\[ A^{(2)} =
+			\begin{bmatrix}
+			1 & 1 & 3 \\
+			0 & 0.9 & 0.7 \\
+			0 & 1 & -3 \\
+			\end{bmatrix} \; ,
+			\; \; \;
+			b^{(2)} =
+			\begin{bmatrix}
+			5 \\
+			1.6 \\
+			-2 \\
+			\end{bmatrix} \]
+			
+			\[ A^{(3)} =
+			\begin{bmatrix}
+			1 & 1 & 3 \\
+			0 & 0.9 & 0.7 \\
+			0 & 0 & -3.7 \\ 
+			\end{bmatrix} \; ,
+			\; \; \;
+			b^{(3)} =
+			\begin{bmatrix}
+			5 \\
+			1.6 \\
+			-3.7 \\
+			\end{bmatrix} \] %Falta 7 factorial en -3.7
+			Ahora resolvemos por sustitución hacia atrás y tenemos que
+			\[ x_1 = x_2 = x_3 = 1 \]
+			\end{ejemplo}
+			
+			\begin{nprop}
+			Sean $A \in \mathbb{R}^{N \times N}$ una matriz cuadradad y $b \in \mathbb{R}^N$, entonces son equivalentes:
+				\begin{nlist}
+				\item El correspondiente método de Gauss puede completarse hasta el paso N-ésimo.
+				\item Para cada k = 1,..., N la k-ésima submatriz principal de A
+				\[ A_k =
+				\begin{bmatrix}
+				a_{11} & a_{12} & \cdots & a_{1k} \\
+				a_{21} & a_{22} & \cdots & a_{2k} \\
+				\vdots & \vdots & & \vdots \\
+				a_{k1} & a_{k2} & \cdots & a_{kk} \\
+				\end{bmatrix} \]
+				es regular.
+				\end{nlist}
+			\end{nprop}
+			
+			Los errores de redondeo afectan al método de Gauss. Además, evitaremos dividir por coeficientes relativamente pequeños y también evitaremos que algún $a_{kk}^{(k)}$ del método de Gauss sea nulo.
+		\item $\textbf{Método de Gauss con pivotaje}$ (o pivotaje parcial), variante adaptativa de Gauss.\\
+		En este método se modifica el paso k, por lo que antes de definir los multiplicadores $m_{ik}$, la matriz $A^{(k+1)}$ y el vector $b^{(k+1)}$, intercambiaremos de posición si es necesario dos de las filas k,...,N de la matriz $A^{(k)}$ de forma que el elemento del vector que tiene mayor valor absoluto sea $a_{kk}^{(k)}$.
+		\[
+		\begin{bmatrix}
+		a_{kk}^{(k)} \\
+		\vdots \\
+		a_{Nk}^{(k)} \\
+		\end{bmatrix}
+		\; \; \rightsquigarrow \; \;
+		\begin{bmatrix}
+		a_{11}^{(1)} & a_{12}^{(1)} & \cdots & \cdots & \cdots & \cdots & a_{1N}^{(1)} \\
+		0 & a_{22}^{(2)} & \cdots & \cdots & \cdots & \cdots & a_{2N}^{(2)} \\
+		\vdots & & \ddots & & & & \vdots \\
+		0 & \cdots & \cdots & 0 & a_{kk}^{(k)} & \cdots & a_{kN}^{(k)} \\
+		\vdots & & & \vdots & \vdots & & \vdots \\
+		0 & \cdots & \cdots & 0 & a_{Nk}^{(k)} & \cdots & a_{NN}^{(k)}\\
+		\end{bmatrix}
+		\]
+		Finalmente, el sistema equivalente al de partida se resuelve por sustitución hacia atrás.
+			\begin{nota}
+			El método de Gauss con pivotaje tiene sentido hasta el último paso N-ésimo $\Leftrightarrow$ la matriz de coeficientes A es regular (el sistema es compatible determinado).
+			\end{nota}
+			
+			\begin{nota}
+			Otra variante adaptativa del método de Gauss, $\textbf{pivotaje total o completo}$, no solo
+reordena las filas k,..., N de $A^{(k)}$, sino también las columnas k,..., N de forma
+que el elemento de la submatriz de dicha matriz correspondiente a las
+mencionadas filas y columnas tenga a $a_{kk}^{(k)}$ como el elemento de mayor valor absoluto. Sin embargo, requiere un mayor número de operaciones.
+			\end{nota}
 		
-		\item $\textbf{Método de Gauss-Jordan}$
-		
-		
+		\item $\textbf{Método de Gauss-Jordan}$.\\
+		Para terminar con las variantes del método de Gauss, mencionemos el llamado $\textbf{método}$ $\textbf{de}$ $\textbf{Gauss-Jordan}$, que consiste en hacer ceros no solo debajo de $a_{kk}^{(k)}$ sino
+también por encima, con el mismo tipo de fórmula. Sin embargo, su coste en operaciones aritméticas es superior.
 		\end{nlist}
 		
 		\subsection{Métodos de factorización}
+		Los métodos de factorización se usan cuando tenmos sistemas con la misma matriz de coeficientes, para resolverlos más rápido.
+		
+			\begin{ndef}[Factorización LU]
+			Sea Ax = b un sistema compatible determinado, sea L una matriz triangular inferior y U una matriz triangular superior, entonces:
+			\[ \textbf{A = LU} \]
+			\end{ndef}
+
+		Como A = LU $\Rightarrow$ LUx = b. Por lo que para resolver este sistema, se siguen los siguientes paso:
+		
+			\begin{nlist}
+			\item Calculamos las matrices L y U.
+			\item Sea $\textbf{y := Ux}$, entonces tenemos que resolver y de $\textbf{Ly = b}$ por sustitución hacia delante.
+			\item Por último, resolvemos x de $\textbf{Ux = y}$ por sustitución hacia atrás.
+			\end{nlist}
+			
+			\begin{ejemplo}
+			Sean
+			\[ A = \begin{bmatrix}
+			1 & 3 & -1 \\
+			2 & 8 & 4 \\
+			-1 & 3 & 4 \\
+			\end{bmatrix} 
+			\; , \; \;
+			b = \begin{bmatrix}
+			-1 \\
+			2 \\
+			0 \\
+			\end{bmatrix}
+			\]
+			Primero calculamos las matrices L y U. Como A = LU, entonces:
+			\[ L = \begin{bmatrix}
+			1 & 0 & 0 \\
+			2 & 1 & 0 \\
+			-1 & 3 & 1 \\
+			\end{bmatrix}
+			\; , \; \;
+			U = \begin{bmatrix}
+			1 & 3 & -1 \\
+			0 & 2 & 6 \\
+			0 & 0 & -15 \\
+			\end{bmatrix}
+			\]
+			Ahora tenemos que resolver el sistema Ly = b.
+			\[ \begin{bmatrix}
+			1 & 0 & 0 \\
+			2 & 1 & 0 \\
+			-1 & 3 & 1 \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			y_1 \\
+			y_2 \\
+			y_3 \\
+			\end{bmatrix}
+			\; = \;
+			\begin{bmatrix}
+			-1 \\
+			2 \\
+			0 \\
+			\end{bmatrix}
+			\]
+			Lo resolvemos por sustitución hacia adelante y obtenemos que $y_1 = -1, \; y_2 = 4, \; y_3 = -13$.\\
+			Ahora resolvemos el sistema Ux = y.
+			\[ 
+			\begin{bmatrix}
+			1 & 3 & -1 \\
+			0 & 2 & 6 \\
+			0 & 0 & -15 \\
+			\end{bmatrix}
+			\begin{bmatrix}
+			x_1 \\
+			x_2 \\
+			x_3 \\
+			\end{bmatrix}
+			\; = \;
+			\begin{bmatrix}
+			-1 \\
+			4 \\
+			-13 \\
+			\end{bmatrix}
+			\]
+			Lo resolvemos por sustitución hacia atrás y obtenemos que $x_1 = \frac{5}{3}, \; x_2 = \frac{-3}{5}, \; x_3 = \frac{13}{15}$. Que es la solución del sistema inicial Ax = b.
+			\end{ejemplo}
+		Tenemos que tener en cuenta que no siempre podemos obtener una factorización tipo LU para una matriz regular. Solo se podrá si $a_{11} = l_{11}u_{11} \neq 0$.
+			\begin{nprop}
+			Sean $N \geq 1$, $A \in \mathbb{R}^{N \times N}$, $b \in \mathbb{R}^N$ y supongamos que aplicando el método de Gauss al sistema Ax = b se obtiene una matriz triangular superior $A^{(N)}$ y un vector $b^{(N)}$ de forma que el sistema $A^{(N)}x = b^{(N)}$ es equivalente al de partida. Entonces
+			\[ A = LU,\]
+			siendo
+			\[ U = A^{(N)} \]
+			\[ L = \begin{bmatrix}
+			1 & 0 & 0 & \cdots & 0 \\
+			m_{21} & 1 & 0 & \cdots & 0 \\
+			m_{31} & m_{32} & 1 & \cdots & 0 \\
+			\vdots &  \vdots & \vdots & \ddots & \vdots \\
+			m_{N1} & m_{N2} & m_{N3} & \cdots & 1 \\
+			\end{bmatrix}, \]
+			donde los coeficientes de la parte inferior de L son los multiplicadores del método de Gauss definidos recursivamente.
+			\end{nprop}			
+			
+			\begin{nth}
+			Sea $A \in \mathbb{R}^{N \times N}$ una matriz regular. Entonces equivalen
+				\begin{nlist}
+				\item Para cualquier $b \in \mathbb{R}^N$, el método de Gauss para el correspondiente sistema de ecuaciones lineales puede completarse hasta el paso N-ésimo.
+				\item A admite una factorización LU.
+				\item Las N submatrices principales de A son regulares.
+				\end{nlist}
+			\end{nth}
+			
+			\begin{nth}
+			Sea A una matriz regular, entonces:
+				\begin{nlist}
+				\item El método de Gauss con pivotaje es factible, para cualquier sistema de ecuaciones lineales que tenga a A por matriz de coeficientes.
+				\item Salvo la eventual permutación de algunas de sus filas, A admite una factorización LU.
+				\end{nlist}
+			\end{nth}
+			
+			\begin{ndef}[Factorización de Doolittle]
+			En el sistema LUx = b, los coeficientes de la diagonal de L son 1, es decir
+			\[ l_{11} = \cdots = l_{NN} = 1 \]
+			\end{ndef}
+			
+			A la hora de programar la factorización de Doolittle, el algoritmo es:\\
+			Sea i = 1,...,N, entonces
+			\[ u_{ij} = a_{ij} - \sum_{k=1}^{i-1} l_{ik}u_{kj}, \; \; con \; j = i,...,N \]
+			Y supuesto que $u_{ii} \neq 0$
+			\[ l_{ji} = \frac{1}{u_{ii}} \left( a_{ji} - \sum_{k=1}^{i-1} l_{jk}u_{ki} \right), \; \; con \; j = i+1,...,N \]			
+			
+			\begin{ndef}[Factorización de Crout]
+			En el sistema LUx = b, los coeficientes de la diagonal de U son 1, es decir
+			\[ u_{11} = \cdots = u_{NN} = 1 \]
+			\end{ndef}
+			
+			\begin{ndef}[Matriz definida positiva]
+			Sea $A \in \mathbb{R}^{N \times N}$, se dice que es $\textbf{definida positiva}$ si
+			\[ x^TAx > 0, \; \; \; \forall x \in \mathbb{R}^N \backslash \lbrace 0 \rbrace \]
+			\end{ndef}
+			
+			La factorización LU en matrices simétricas definidas positivas es válida siempre. Además, $L = U^T$.
+			
+			\begin{ndef}[Factorización tipo Cholesky]
+			Sea $A \in \mathbb{R}^{N \times N}$ una matriz simétrica y definida positiva. Entonces existe una única matriz triangular superior $U \in \mathbb{R}^{N \times N}$ con coeficientes positivos en su diagonal principal y de forma que
+			\[ A = U^TU \]
+			\end{ndef}
+			
+			A la hora de programar la factorización tipo Cholesky, el algoritmo es:\\
+			Para todo j = 1,...,N
+			\[ i = 1,...,j-1 \; \Rightarrow \; u_{ij} = \frac{1}{u_{ii}} \left( a_{ij} - \sum_{k=1}^{i-1} u_{ki}u_{kj} \right) \]
+			\[ u_{jj} = \sqrt{a_{jj} - \sum_{k=1}^{j-1}u_{kj}^2} \]
+			Además, se eliminan los elementos de debajo de la diagonal principal, ya que hay simetría.
+			
+			\begin{nprop}
+			Una matriz cuadrada A es simétrica y definida positiva si, y solo si, admite una factorización tipo Cholesky.
+			\end{nprop}
 		
 	\section{Métodos iterativos: métodos de Jacobi y Gauss-Seidel}
 		\subsection{Métodos iterativos: convergencia y consistencia}
