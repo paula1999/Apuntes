@@ -1249,7 +1249,495 @@ que es consistente con el sistema
 \[ (I-B)A^{-1}b = (I-M^{-1}N)A^{-1}b = (M^{-1}M-M^{-1}N)A^{-1}b = M^{-1}(M-N)A^{-1}b = M^{-1}b = c \]
 
 
+\begin{ncor}
+Sean $A, M, N \in \mathbb{R}^{N \times N}$ con A y M regulares de forma que $\textbf{A = M - N}$ y sean $b, x_0 \in \mathbb{R}^N$. Consideremos el sistema $$Ax = b$$ y el método iterativo
+\[ \left\{ \begin{array}{c}
+x_0 \; dado \\
+n \geq 1 \Rightarrow x_n = M^{-1}Nx_{n-1} + M^{-1}b
+\end{array}
+\right. \]
+Entonces el método iterativo converge a la solución del sistema, cualquiera sea $x_0 \in \mathbb{R}^N \Leftrightarrow \rho (M^{-1}N) < 1$.
+\end{ncor}
+
+En resumen, todo método iterativo convergente es de esta forma:
+
+\begin{nprop}
+Sean $A, B \in \mathbb{R}^{N \times N}$, con A regular, sean $b, c \in \mathbb{R}^N$ y consideremos el sistema de ecuaciones lineales $$Ax = b$$ y el método iterativo
+\[ \left\{ \begin{array}{c}
+x_0 \; dado \\
+n \geq 1 \Rightarrow x_n = Bx_{n-1} + c
+\end{array}
+\right. \]
+que supondremos que converge hacia la solución del sistema para cualquier estimación inicial $x_0 \in \mathbb{R}^N$. Entonces existe una descomposición de la matriz de coeficientes
+\[ \textbf{A = M - N} \]
+con $M, N \in \mathbb{R}^{N \times N}$ y M regular, tales que
+\[ \textbf{B = M}^{-1} \textbf{N} \; \; c = \textbf{B = M}^{-1} \textbf{b} \]
+\end{nprop}
+
+Por lo que tenemos el siguiente método iterativo
+
+\[ \left\{ \begin{array}{c}
+x_0 \; dado \\
+n \geq 1 \Rightarrow x_n = M^{-1}Nx_{n-1} + M^{-1}b
+\end{array}
+\right. \]
+con M regular y A = M - N.
+
+Aunque es un poco complejo calcular la inversa de M y luego multiplicarla por otra matriz, por lo que trabajaremos sobre otro método iterativo equivalente, que consiste en multiplicar por M a ambos lados de la igualdad:
+
+\[ \left\{ \begin{array}{c}
+x_0 \; dado \\
+n \geq 1 \Rightarrow Mx_n = Nx_{n-1} + b
+\end{array}
+\right. \]
+
+Para que converja, tenemos que calcular igualmente si $\rho (M^{-1}N) < 1$. Además, la iteración $x_n$ es la solución del sistema resoluble sin un alto coste operativo, ya que M es triangular.
+\[ Mx_n = Nx_{n-1} + b \]
+
+Ahora vamos a poner en práctica estos conceptos. Los métodos iterativos más populares son: $\textbf{Jacobi}$ y $\textbf{Gauss-Seidel}$. Definamos primero algunas matrices a partir de la matriz de coeficientes A.
+
+Sea $A \in \mathbb{R}^{N \times N}$ regular, definimos las matrices diagonales y triangulares:
+
+\[ D := \begin{bmatrix}
+a_{11} & 0 & \cdots & 0 \\
+0 & a_{22} & \cdots & 0 \\
+\vdots & \vdots & & \vdots \\
+0 & 0 & \cdots & a_{NN} \\
+\end{bmatrix} \]
+
+\[ E := \begin{bmatrix}
+0 & 0 & 0 & \cdots & 0 \\
+-a_{21} & 0 & 0 & \cdots & 0 \\
+-a_{31} & -a_{32} & 0 & \cdots & 0 \\
+\vdots & \vdots & \vdots & & \vdots \\
+-a_{N1} & -a_{N2} & -a_{N3} & \cdots & 0 \\
+\end{bmatrix} \]
+
+\[ F := \begin{bmatrix}
+0 & \cdots & -a_{12} & -a_{1 \; N-1} & -a_{1N} \\
+\vdots & & \vdots & \vdots & \vdots \\
+0 & \cdots & 0 & -a_{N-2 \; N-1} & -a_{N-2 \; N} \\
+0 & \cdots & 0 & 0 & -a_{N-1 \; N} \\
+0 & \cdots & 0 & 0 & 0 \\
+\end{bmatrix} \]
+
+Observemos que la matriz A verifica la hipótesis adicional: $a_{11}a_{22}...a_{NN} \neq 0$.
+
+Bajo esta notación definimos los siguientes métodos iterativos.
+
+\begin{ndef}[Método de Jacobi]
+\[ A = M - N \; \; con \; \; \textbf{M := D} \; y \; \textbf{N := E + F} \]
+Por lo que tenemos que
+\[ \left\{ \begin{array}{c}
+x_0 \; dado \\
+n \geq 1 \Rightarrow Dx_n = (E+F)x_{n-1} + b
+\end{array}
+\right. \]
+Expresado en coordenadas:
+\[
+x_0 = \left[ x_{01},...,x_{0N} \right] ^T
+\]
+\[
+i = 1,...,N \Rightarrow x_{ni} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1 \wedge j \neq i}^N a_{ij}x_{n-1 \; j} \right)
+\]
+
+\end{ndef}
+
+\begin{ndef}[Método de Gauss-Seidel]
+\[ A = M - N \; \; con \; \; \textbf{M := D - E} \; y \; \textbf{N := F} \]
+Por lo que tenemos que
+\[ \left\{ \begin{array}{c}
+x_0 \; dado \\
+n \geq 1 \Rightarrow (D-E)x_n = Fx_{n-1} + b
+\end{array}
+\right. \]
+Expresado en coordenadas:
+\[
+x_0 = \left[ x_{01},...,x_{0N} \right] ^T
+\]
+\[
+i = 1,...,N \Rightarrow x_{ni} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1}^{i-1} a_{ij}x_{nj} - \sum_{j=i+1}^N a_{ij}x_{n-1 \; j} \right)
+\]
+\end{ndef}
+
+La similitud que tienen estos métodos es, que descritos a partir del esquema obtenido al despejar en Ax = b $x_1$ de la primera ecuación, $x_2$ de la segunda y así hasta $x_N$ de la N-ésima
+
+\[ \left\{ \begin{array}{c}
+x_1 = \frac{1}{a_{11}} (b_1 - a_{12}x_2 - a_{13}x_3 - \cdots - a_{1N}x_N) \\
+x_2 = \frac{1}{a_{22}} (b_2 - a_{21}x_1 - a_{23}x_3 - \cdots - a_{2N}x_N) \\
+\vdots \\
+x_N = \frac{1}{a_{NN}} (b_N - a_{N1}x_1 - a_{N2}x_2 - \cdots - a_{N \; N-1}{N-1})
+\end{array}
+\right. \]
+En el método de Jacobi: a la derecha las coordenadas de una iteración para obtener a la izquierda la siguiente.
+
+Gauss-Seidel: a la derecha las coordenadas de una iteración y las que se acaban de hallar de la siguiente más arriba para determinar las de la siguiente a la izquierda.
+
+La diferencia es que en Jacobi el vector de cada iteración se calcula a partir del anterior, y en cambio, en Gauss-Seidel, el vector en cada iteración usa las coordenadas que ya se han calculado en la iteración actual.
+
+Ahora nos preguntamos: ¿es el método de Gauss-Seidel más eficiente que el método de Jacobi? Aunque esto no se cumple siempre, veámoslo en un ejemplo.
+
+\begin{ejemplo}
+Tenemos el siguiente sistema de ecuaciones
+\[ \begin{bmatrix}
+2 & 1 & 3 \\
+-1 & 3 & 2 \\
+1 & 4 & 5 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+\end{bmatrix} 
+\; = \;
+\begin{bmatrix}
+9 \\
+-1 \\
+11 \\
+\end{bmatrix}
+\]
+Por lo que su solución es $x_1 = 1$, $x_2 = -2$, $x_3 = 3$.
+
+Usemos los métodos de Jacobi y Gauss-Seidel para ver si convergen a esta solución. Supongamos una estimación inicial $x_0 = \left[ 0,0,0 \right] ^T$
+
+Despejamos $x_i$ de la ecuación i-ésima (i = 1,2,3) y obtenemos que
+\[ \left\{ \begin{array}{c}
+x_1 = 4.5 - 0.5x_2 - 1.5x_3 \\
+x_2 = - \frac{1}{3} + \frac{1}{3} x_1 - \frac{2}{3} x_3 \\
+x_3 = \frac{11}{6} - \frac{1}{6} x_1 - \frac{3}{2} x_2
+\end{array}
+\right. \]
+
+Eso se hace para ambos métodos, pero en el siguiente paso ya distinguimos cada método.
+	\begin{nlist}
+	\item[•] Jacobi:\\
+	el algoritmo parte de $x_0$ y para cada $n \geq 1$
+	\[ \left\{ \begin{array}{c}
+	x_{n1} = 4.5 - 0.5x_{n-1 \; 2} - 1.5x_{n-1 \; 3} \\
+	x_{n2} = - \frac{1}{3} + \frac{1}{3} x_{n-1 \; 1} - \frac{2}{3} x_{n-1 \; 3} \\
+	x_{n3} = \frac{11}{6} - \frac{1}{6} x_{n-1 \; 1} - \frac{3}{2} x_{n-1 \; 2}
+	\end{array}
+	\right. \]
+	obteniendo (truncando):
+	\[
+	\left\{ \begin{array}{lll}
+	x_{01} = 0 & x_{02} = 0 & x_{03} = 0 \\
+	x_{11} = 4.5 & x_{12} = -0.333 & x_{13} = 1.833 \\
+	\cdots & \cdots & \cdots \\
+	x_{20 \; 1} = 1.308 & x_{20 \; 2} = -1.67 & x_{20 \; 3} = 2.702
+	\end{array}
+	\right.
+	\]	
+	\item[•] Gauss-Seidel:\\
+	con la estimación inicial $x_0$, para todo $n \geq 1$ tenemos que
+	\[ \left\{ \begin{array}{c}
+	x_{n1} = 4.5 - 0.5x_{n-1 \; 2} - 1.5x_{n-1 \; 3} \\
+	x_{n2} = - \frac{1}{3} + \frac{1}{3} x_{n1} - \frac{2}{3} x_{n-1 \; 3} \\
+	x_{n3} = \frac{11}{6} - \frac{1}{6} x_{n1} - \frac{3}{2} x_{n2}
+	\end{array}
+	\right. \]
+	con lo que se generan (truncando) los datos numéricos
+	\[
+	\left\{ \begin{array}{lll}
+	x_{01} = 0 & x_{02} = 0 & x_{03} = 0 \\
+	x_{11} = 4.5 & x_{12} = 1.166 & x_{13} = 0.305 \\
+	\cdots & \cdots & \cdots \\
+	x_{20 \; 1} = 1.035 & x_{20 \; 2} = -1.961 & x_{20 \; 3} = 2.968
+	\end{array}
+	\right.
+	\]	
+	\end{nlist}
+Por lo que en este sistema Gauss-Seidel es más eficiente, pero no en general.
+\end{ejemplo}
+
+Hay que tener en cuenta que la velocidad de convergencia de Jacobi es independiente de la de Gauss-Seidel, y viceversa. Estudiemos cada una.
+
+\begin{nprop}
+Cuando menor sea $\rho (M^{-1}N)$, mejor será la convergencia de la sucesión de iteradores hacia la solución del sistema.
+\end{nprop}
+
+\begin{ejemplo}
+Tenemos dos matrices
+\[
+A_1 = \begin{bmatrix}
+4 & 1 & 1 \\
+2 & -9 & 0 \\
+0 & -8 & -6 \\
+\end{bmatrix}
+\; , \; \;
+A_2 = \begin{bmatrix}
+7 & 6 & 9 \\
+4 & 5 & -4 \\
+-7 & -3 & 8 \\
+\end{bmatrix}
+\; , \; \;
+A_3 = \begin{bmatrix}
+3 & 0 & 4 \\
+7 & 1 & 2 \\
+-1 & 1 & 9 \\
+\end{bmatrix}
+\]
+	\begin{nlist}
+	\item[•] $A_1$:
+	\[ \rho _{Jacobi} := \rho (D^{-1}(E+F)) = 0.444 \]
+	\[ \rho _{Gauss-Seidel} := \rho ((D-E)^{-1}F) = 0.019 \]
+	En este caso, Gauss-Seidel es más eficiente.
+	\item[•] $A_2$:
+	\[ \rho _{Jacobi} := \rho (D^{-1}(E+F)) = 0.641 \]
+	\[ \rho _{Gauss-Seidel} := \rho ((D-E)^{-1}F) = 0.775 \]
+	En este caso, Jacobi es más eficiente.
+	\item[•] $A_3$:
+	\[ \rho _{Jacobi} := \rho (D^{-1}(E+F)) = 1.037 \]
+	\[ \rho _{Gauss-Seidel} := \rho ((D-E)^{-1}F) = 0.963 \]
+	En este caso, Jacobi no converge, ya que $\rho _{Jacobi} \geq 1$. Solo converge Gauss-Seidel.
+	\end{nlist}
+\end{ejemplo}
+
+\begin{ndef}[Diagonalmente estrictamente dominante]
+Sea la matriz $A \in \mathbb{R}^{N \times N}$, diremos que A es diagonalmente estrictamente dominante si
+\[ i = 1,...,N \Rightarrow \sum_{j=1 \wedge j \neq i}^N \vert a_{ij} \vert \; < \vert a_{ii} \vert \]
+\end{ndef}
+
+Los métodos de Jacobi y de Gauss-Seidel convergen para cualquier sistema de ecuaciones lineales que tenga a A por matriz de coeficientes a su solución, cualquiera sea la elección de la estimación inicial.
+
+\begin{nprop}
+Sea $A \in \mathbb{R}^{N \times N}$ una matriz diagonalmente estrictamente dominante. Entonces los métodos de Jacobi y de Gauss–Seidel, para todo sistema de ecuaciones lineales que tenga como matriz de coeficientes A, convergen hacia su solución, independientemente de la estimación inicial que se fije.
+\end{nprop}
+
+El recíproco falso: basta considerar cualquier sistema en el que la matriz de
+coeficientes sea la matriz $A_1 (o A_2)$ del penúltimo ejemplo.
+
+\begin{nota}
+Tenemos que tener en cuenta lo siguiente:
+	\begin{nlist}
+	\item[•] Si se aplica al sistema de partida una transformación elemental tan simple como intercambiar de posición dos ecuaciones y se usa el mismo método iterativo con los dos sistemas, uno puede converger y otro no. La idea es que este tipo de transformación elemental no solo puede modificar claramente el hecho de que la matriz de coeficientes sea diagonalmente estrictamente dominante (que es una condición suficiente para la convergencia de Jacobi y Gauss–Seidel) sino que además puede cambiar el radio espectral.
+	\item[•] El número de operaciones que hay que realizar para pasar de una iteración a la siguiente en los métodos de Jacobi y Gauss–Seidel es de $N^2$ para un sistema de N ecuaciones y N incógnitas. Por tanto, si N es grande, requiere en principio menos operaciones que los directos. Además, y a diferencia de estos últimos, aprovecha la estructura de la matriz de coeficientes cuando es dispersa, tal y como ocurre con los sistemas que surgen en problemas de análisis de estructuras o de elementos finitos.
+	\end{nlist}
+\end{nota}
+
 \section{Análisis de error}
+Ahora vamos a estudiar el error cometido al resolver mediante un método numérico un sistema de ecuaciones lineales unisolvente y con igual número de ecuaciones e incógnitas; el error relativo cometido al resolver de forma aproximada un sistema; errores derivados del método usado, o los debidos al redondeo, propagación...; y el error relativo controlado en función únicamente del vector de términos independientes y de la solución aproximada.
+
+\begin{nprop}
+Sea $A \in \mathbb{R}^{N \times N}$ una matriz regular y $x, u, b \in \mathbb{R}^N$ con $\Vert x \Vert \Vert b \Vert \neq 0$ y de forma que $Ax = b$. Entonces para cualquier norma en $\mathbb{R}^N$ se cumplen las desigualdades:
+\[
+\frac{1}{c(A)} \frac{\Vert Au-b \Vert } {\Vert b \Vert } 
+\leq
+\frac{\Vert x-u \Vert }{\Vert x \Vert }
+\leq
+c(A) \frac{\Vert Au-b \Vert } {\Vert b \Vert },
+\]
+donde c(A) es el condicionamiento de la matriz A relativo a la norma matricial inducida por $\Vert \cdot \Vert$.
+\end{nprop}
+	\begin{proof}
+	Primera desigualdad:
+	\[ \Vert Au - b \Vert \leq \Vert A \Vert \Vert x-u \Vert \]
+	\[ \Vert x \Vert \leq \Vert A^{-1} \Vert \Vert b \Vert \]
+	Entonces
+	\[ \Vert Au-b \Vert \Vert x \Vert \leq c(A) \Vert x-u \Vert \Vert b \Vert \]
+	Segunda desigualdad (razonamiento similar, tomando v=Au):
+	\[
+	\frac{\Vert x-u \Vert }{\Vert x \Vert } = \frac{\Vert A^{-1}b-A^{-1}v \Vert }{\Vert x \Vert }
+	\leq
+	\frac{\Vert A^{-1} \Vert \Vert b-v \Vert }{\Vert x \Vert }
+	\leq
+	\Vert A \Vert \Vert A^{-1} \Vert \frac{\Vert b-v \Vert }{\Vert b \Vert }
+	=
+	c(A) \frac{\Vert Au-b \Vert }{\Vert b \Vert }
+	\]
+	\end{proof}
 	
+La interpretación de estas desigualdades es que x es la solución del sistema Ax = b y $u$ es la solución aproximada.
+
+La estimación del error relativo de la solución en función del condicionamiento de A y el error relativo generado al tomar Au por b es Au - b, que recibe el nombre de $\textbf{residuo}$, que en general no es nulo.
+
+\begin{nprop}
+Sean $N \geq 1$, $A, B \in \mathbb{R}^{N \times N}$ con A regular, $b,c \in \mathbb{R}^N$ y supongamos que el método iterativo
+\[ \left\{ \begin{array}{l}
+x_0 \; dado \\
+n \geq 1 \Rightarrow x_n = Bx_{n-1} + c
+\end{array}
+\right. \]
+converge a la solución del sistema Ax = b, cualquiera sea $x_0 \in \mathbb{R}^N$. Si además $\Vert \cdot \Vert$ es una norma en $\mathbb{R}^N$ con norma matricial inducida en $\mathbb{R}^{N \times N}$ denotada de igual forma, tal que $\Vert B \Vert < 1$, entonces, para todo $n \geq 1$ se tiene:
+	\begin{nlist}
+	\item $\Vert x_n - x \Vert \leq \frac{\Vert B \Vert ^n}{1 - \Vert B \Vert} \Vert x_1 - x_0$
+	\item $\Vert x_n - x \Vert \leq \Vert B \Vert \Vert x_{n-1} - x \Vert$
+	\item $\Vert x_n - x \Vert \leq \frac{\Vert B \Vert}{1 - \Vert B \Vert} \Vert x_n - x_{n-1} \Vert$
+	\end{nlist}
+\end{nprop}
+
+	\begin{proof}
+	$\newline$
+	$\textbf{¿(i)?}$\\
+	Supongamos $n \geq 1$, entonces
+	\[ \Vert x_{n+1} - x_n \Vert = \Vert Bx_n - Bx_{n-1} \Vert \leq \Vert B \Vert \Vert x_n - x_{n-1} \Vert \]
+	inductivamente tenemos que
+	\[ \Vert x_{n+1} - x_n \Vert \leq \Vert B \Vert ^n \Vert x_1 - x_0 \Vert \]
+	Sea $m \geq n \geq 1$, entonces
+	\[ \Vert x_n - x_m \Vert \leq \sum_{j=0}^{m-n-1} \Vert x_{j+n+1} - x_{j+n} \Vert \leq \sum_{j=0}^{m-n-1} \Vert B \Vert ^{j+n} \Vert x_1 - x_0 \Vert \leq \frac{\Vert B \Vert ^n}{1- \Vert B \Vert} \Vert x_1 - x_0 \Vert \]
+	Por último, tomamos límite en $m \rightarrow \infty$.\\
+	$\textbf{¿(ii)?}$\\
+	Supongamos $n \geq 1$, entonces
+	\[ \Vert x_n - x \Vert = \Vert Bx_{n-1} + c - Bx - c \Vert \leq \Vert B \Vert \Vert x_{n-1} - x \Vert\]
+	$\textbf{¿(iii)?}$\\
+	Supongamos $n \geq 1$ y usando la desigualdad triangular tenemos que
+	\[ \Vert x_{n-1} - x \Vert = \Vert x_{n-1} - x + x_n - x_n \Vert \leq \Vert x_{n-1} - x_n \Vert + \Vert x_n - x \Vert \]
+	Usando (ii)
+	\[ \Vert x_n - x \Vert \leq \Vert B \Vert \Vert x_n - x_{n-1} \Vert + \Vert B \Vert \Vert x_n - x \Vert \]
+	Hemos obtenido la estimación pedida (falta reorganizar).
+	\end{proof}
+
+\begin{nota}
+$\newline$
+	 \begin{nlist}
+	 \item[•] Las acotaciones (i) y (ii) dan una estimación del error absoluto, aunque hay una diferencia importante entre ambas: la primera no necesita conocer la solución exacta x.
+	 \item[•] La estimación del error absoluto (iii) no solo se obtiene sin necesidad de conocer x sino que además constituye un criterio de parada cuando se programa el método numérico y se alcanza una tolerancia dada.
+	 \end{nlist}
+\end{nota}
+
+\part{Tema 3. Interpolación}
+En este tema vamos a aprender a calcular el polinomio que pasa por unas coordenadas dadas.
+
+\section{Interpolación polinómica: Lagrange y Newton. Error de interpolación}
+Sean las coordenadas $(x_0,y_0), (x_1,y_1),...,(x_N,y_N) \in \mathbb{R}^2 : x_i \neq x_j \; \; con \; i,j = 0,1,...N$, entonces existe una única función polinómica de grado menor o igual que N $p : \mathbb{R} \longrightarrow \mathbb{R}$ tal que $p(x_i) = y_i$ con i = 0,1,...N.\\
+El problema que tenemos que resolver en este tema es determinar explícitamente el polinomio de interpolación $p \in \mathbb{P} _N$.\\
+Para calcular p debemos calcular una base de $\mathbb{P} _N$ y sus propiedades. Veamos dos formas diferentes de hacerlo.
+
+\subsection{Polinomio de interpolación tipo Lagrange}
+\begin{nth}
+Sean las coordenadas $(x_0,y_0), (x_1,y_1),...,(x_N,y_N) \in \mathbb{R}^2$, entonces
+\[ \exists ! p \in \mathbb{P} _N : p(x_i) = y_j : x_i \neq x_j \; \; con \; i,j = 0,1,...N \; \; \Rightarrow p(x) = \sum_{i=0}^N y_il_i(x) \; \; con \; \; l_i(x) = \prod_{j=0 \wedge j \neq i}^N \frac{x-x_j}{x_i-x_j} \]
+donde $\lbrace l_0(x), l_1(x),...,l_N(x) \rbrace$ es la base, dependiente de los $x_i$'s. Primero calculamos la base y luego el polinomio p(x).
+\end{nth}
+
+La fórmula anterior se conoce como $\textbf{forma de Lagrange del polinomio de
+interpolación}$ y las funciones base $\textbf{polinomios de Lagrange o característicos}$.
+
+\begin{ejemplo}
+Sea $f: \mathbb{R} \longrightarrow \mathbb{R}$, $f(x) = e^x ( \forall x \in \mathbb{R} )$. Vamos a dar tres valores a la función para calcular el polinomio de Lagrange. Por ejemplo, en los puntos de abscisas -1, 0, 1:
+\[ (x_0, y_0) = (-1,e^{-1}), \; (x_1,y_1) = (0,1), \; (x_2,y_2) = (1,e) \]
+Ahora calculamos la base
+\[ l_0(x) = \prod_{j=0 \wedge j \neq 0}^2 \frac{x-x_j}{x_0-x_j} = \frac{x^2}{2} - \frac{x}{2} \]
+\[ l_1(x) = 1 - x^2 \]
+\[ l_2(x) = \frac{x^2}{2} + \frac{x}{2} \]
+Por último, calculamos el polinomio  de interpolación p(x):
+\[ p(x) = \sum _{i=0}^2 e^{x_i}l_i(x) = \left( \frac{e}{2} + \frac{1}{2e} - 1 \right) x^2 + \left( \frac{e}{2} - \frac{1}{2e} \right) x + 1 \]
+Dibujándolo, en trazo discontinuo es p(x) y en trazo continuo es f(x), observamos que pasa por las coordenadas dadas.
+
+\[ \includegraphics[scale=0.3]{media/interplagrange.png} \]
+\end{ejemplo}
+
+\subsection{Forma de Newton del polinomio de interpolación}
+\begin{nth}
+Sean las coordenadas $(x_0,y_0), (x_1,y_1),...,(x_N,y_N) \in \mathbb{R}^2$, entonces
+\[ \exists ! p \in \mathbb{P} _N : p(x_i) = y_j : x_i \neq x_j \; \; con \; i,j = 0,1,...N \; \; \Rightarrow p(x) = \sum_{i=0}^N f \left[ x_0,...,x_i \right] \omega _i(x) \]
+con
+\[ f \left[ x_0,...,x_i \right] = \frac{f \left[ x_1,...,x_i \right] - f \left[ x_0,...,x_{i-1} \right] }{x_i - x_0} \; \; con \; 1 \leq i \leq N\] 
+y
+\[ \omega _i(x) = \prod _{j=0}^{i-1} (x-x_j) \]
+\end{nth}
+La expresión anterior es la conocida como $\textbf{forma de Newton del polinomio de
+interpolación}$ y las funciones base $\textbf{polinomios nodales}$.
+
+Otra forma de calcular $f \left[ x_0,...,x_N \right]$ sería viéndolo como una "matriz", en la que solo nos fijaremos en la diagonal:
+
+\[
+\left. \begin{array}{c}
+x_0 \\
+x_1 \\
+x_2 \\
+\vdots \\
+x_N
+\end{array} \right| 
+\begin{array}{ccccc}
+f \left[ x_0 \right] & & & & \\
+f \left[ x_1 \right] & f \left[ x_0,x_1 \right] & & & \\
+f \left[ x_2 \right] & f \left[ x_1;x_2 \right] & f \left[ x_0,x_1,x_2 \right] & & \\
+\vdots & \vdots & \vdots & \ddots & \\
+f \left[ x_N \right] & f \left[ x_{N-1},x_n \right] & f \left[ x_{N-2},x_{N-1},x_n \right] & \cdots & f \left[ x_0,...,x_N \right] 
+\end{array}
+\]
+donde $f \left[ x_0 \right] = f(x_0)$ y $\omega _0(x) = 1$.
+
+\begin{ejemplo}
+Dados los datos $(x_0,y_0)=(0.5,1), \; (x_1,y_1)=(1,0.2), \; (x_2,y_2)=(-0.25,1), \; (x_3,y_3)=(-0.5,0.2), \; (x_4,y_4)=(0.2,1/3)$, vamos a calcular las diferencias divididas.
+\[
+\left. \begin{array}{c}
+0.5 \\
+1 \\
+-0.25 \\
+-0.5 \\
+0.2
+\end{array} \right| 
+\begin{array}{ccccc}
+1 & & & & \\
+0.2 & -1.6 & & & \\
+1 & -0.64 & -1.28 & & \\
+0.2 & 3.2 & -2.56 & 1.28 & \\
+\frac{1}{3} & \frac{4}{21} & \frac{-1264}{189} & \frac{4876}{945} & \frac{-36664}{2835} 
+\end{array}
+\]
+Algunas cuentas que hemos hecho para calcularlo son:
+\[ f \left[ x_0,x_1 \right] = \frac{f \left[ x_1 \right] - f \left[ x_0 \right]}{x_1-x_0} = \frac{0.2-1}{1-0.5} = -1.6 \]
+\[ f \left[ x_0,x_1,x_2 \right] = \frac{f \left[ x_1,x_2 \right] - f \left[ x_0,x_1 \right]}{x_2-x_0} = \frac{-0.64-(-1.6)}{-0.25-0.5} = -1.28 \]
+\end{ejemplo}
+
+\subsection{Error de interpolación. Convergencia y estabilidad. Polinomios de Chebyshev}
+Primero, vamos a establecer la notación de algunos conceptos.
+
+Sean $x_0,x_1,...,x_N \in \left[ a,b \right]$, una función $f \in$ C([a,b]) y su polinomio de interpolación $I_N^f \in \mathbb{P} _N$ tal que $I_N$ : C([a,b]) $\longrightarrow \mathbb{P} _N$ bien definida (unicidad polinomio interpolación). Además, tiene la propiedad de proyección, ya que $I_N^2 = I_N$.
+
+\begin{ndef}
+Definimos al $\textbf{error de interpolación} E_N^f(x)$ como
+\[ E_N^f(x) := f(x) - I_N^f(x) \]
+\end{ndef}
+
+\begin{ndef}
+\[ \Vert I_N \Vert _\infty := sup \; \left\lbrace \Vert I_N^f \Vert _\infty : f \in C( \left[ a,b \right] ), \Vert f \Vert _\infty = 1 \right\rbrace \]
+\end{ndef}
+
+\begin{nprop}
+\[ \Vert I_N \Vert _\infty = up \; \left\lbrace \frac{\Vert I_N^f \Vert _\infty}{\Vert f \Vert _\infty} : f \in C( \left[ a,b \right] ), f \neq 0 \right\rbrace \]
+\end{nprop}
+
+\begin{ndef}[Función de Lebesgue]
+Definimos la $\textbf{función de Lebesgue}$ como
+\[ \lambda _N(x) := \sum_{i=0}^N \vert l_i(x) \vert \]
+siendo {$l_0,...,l_N$} la base de los polinomios de Lagrange.
+\end{ndef}
+
+\begin{ndef}[Constante de Lebesgue]
+Definimos la $\textbf{constante de Lebesgue}$ como
+\[ \Lambda _N := \Vert \lambda _N \Vert _\infty \]
+\end{ndef}
+
+\begin{nprop}
+\[ \Vert I_N \Vert _\infty = \Lambda _N \]
+\end{nprop}
+
+\begin{ncor}
+Sea f $\in$ C([a,b]), entonces
+\[ \Vert E_N^f \Vert _\infty \leq (1+\Lambda _N) \; inf \; \left\lbrace \Vert f-p \Vert _\infty : p \in \mathbb{P} _N \right\rbrace \]
+\end{ncor}
+
+\begin{nth}[Teorema de aproximación uniforme de Weierstrass]
+\[ \lim_{N\rightarrow \infty} inf \; \left\lbrace \Vert f-p \Vert _\infty : p \in \mathbb{P} _N \right\rbrace = 0 \]
+\end{nth}
+
+Como $\lim _{N\rightarrow \infty} \Lambda _N = \infty$, no podemos asegurar cnvergencia uniforme, es decir, no podemos asegurar que $\lim_{N\rightarrow \infty} \Vert E_N^f \Vert _\infty = 0$.
+
+Podemos ver si es estable segun $\Lambda _N$, que solo depende de los nodos y nos sirve para medir el condicionamiento.
+
+\begin{nprop}
+Sean los nodos $x_0,x_1,...,x_N$, los datos $(x_0,f(x_0)), (x_1,f(x_1)),...,(x_N,f(x_N))$ y los datos perturbados $(x_0,g(x_0)),(x_1,g(x_1)),...,(x_N,g(x_N))$. Entonces
+\[ \Vert I_N^f - I_N^g \Vert _\infty = max \; \left\lbrace \left\vert \sum_{i=0}^N (f(x_i)-g(x_i))l_i(x) \right\vert : x \in \left[ a,b \right] \right\rbrace \leq \Lambda _N max \; \left\lbrace \vert f(x_i)-g(x_i) : i=0,1,...,N \right\rbrace \]
+\end{nprop}
 
 
+\subsection{Otros problemas de interpolación: Hermite y caso general}
+
+\section{Interpolación mediante funciones splines}
+
+\subsection{Funciones splines lineales}
+
+\subsection{Funciones splines cúbicas}
