@@ -1733,11 +1733,213 @@ Sean los nodos $x_0,x_1,...,x_N$, los datos $(x_0,f(x_0)), (x_1,f(x_1)),...,(x_N
 \[ \Vert I_N^f - I_N^g \Vert _\infty = max \; \left\lbrace \left\vert \sum_{i=0}^N (f(x_i)-g(x_i))l_i(x) \right\vert : x \in \left[ a,b \right] \right\rbrace \leq \Lambda _N max \; \left\lbrace \vert f(x_i)-g(x_i) : i=0,1,...,N \right\rbrace \]
 \end{nprop}
 
+\begin{ejemplo}
+Sea $f : \left[ -1,1 \right] \longrightarrow \mathbb{R}$, $f(x) := e^x$. Elegimos 21 nodos uniformemente distribuidos en [-1,1], por ejemplo
+\[ i=0,1,...,20 \Rightarrow x_i := -1 + \frac{2i}{20} \]
+Los datos que obtenemos son $(x_i,f(x_i))$ y los datos perturbados son $(x_i,g(x_i))$ con $g(x_i)=f(x_i+(-1)^i10^{-4})$.
+
+Tenemos que $max \; \left\lbrace \vert f(x_i)-g(x_i) : i=0,...,20 \right\rbrace = 2.7184 \cdot 10^{-4}$
+
+Pero $\Vert I_{20}f-I_{20}g \Vert _\infty = 1.1964$
+
+Por lo que hay mal condicionamiento $\Lambda _{20} = 10986.7058$.
+\[ \Vert I_{20}f-I_{20}g \Vert _\infty \leq \Lambda _{20} max \; \left\lbrace \vert f(x_i)-g(x_i) : i=0,...,20 \right\rbrace \]
+\[ 1.1964 \leq 10986.7958 \cdot 0.2718 \cdot 10^{-3} = 2.9862 \]
+\end{ejemplo}
+
+\begin{nprop}
+Sean $x_0,x_1,...,x_N$ números reales distintos, sea $x \in \mathbb{R}$ y sean $a:=min \; \left\lbrace x,x_0,x_1,...,x_N \right\rbrace$ y $b:=max \; \left\lbrace x,x_0,x_1,...,x_N \right\rbrace$. Supongamos además que $f \in C^{N+1}$([a,b]). Entonces existe $\xi \in$ ]a,b[ tal que
+\[ E_N^{f(x)}=\frac{f^{N+1)}( \xi )}{(N+1)!} \omega _{N+1}(x), \]
+donde $omega _{N+1}(x)$ es el polinomio nodal de grado N+1.
+\end{nprop}
+
+\[ f(x) = I_Nf(x) + \frac{f^{N+1)}( \xi )}{(N+1)!} \omega _{N+1}(x) \]
+
+Es análoga a la fórmula de Taylor:
+
+\begin{ncor}
+Bajo las condiciones de la proposición anterior
+\[ \Vert E_N^f \Vert _\infty \leq \frac{\Vert f^{N+1)} \Vert _\infty }{(N+1)!} (b-a)^{N+1} \]
+\end{ncor}
+
+La convergencia es uniforme: $f \in C^{\infty}$([a,b])
+\[ \lim_{N \rightarrow \infty} \frac{\Vert f^{N+1)} \Vert _\infty }{(N+1)!} (b-a)^{N+1} = 0 \; \Rightarrow \; \lim_{N \rightarrow \infty} \Vert E_N^f \Vert _\infty = 0 \]
+
+La elección de los nodos influye en el error de interpolación. En general, aun siendo mejorable, para nodos equidistantes tenemos que
+\[ \Vert E_N^f \Vert _\infty \leq \frac{\Vert f^{N+1)} \Vert _\infty}{(N+1)!}h^{N+1} \]
+error de interpolación de orden $O \left( h^{N+1} \right)$.
+
+[-1,1], [a,b] $\leftrightsquigarrow$ [-1,1] isomorfismo afín. Sea $\theta \in \mathbb{R}$, $N \geq 1$
+\[ cos(N+1) \theta + cos(N-1) \theta = 2cos \theta cos N\theta \]
+\[\Downarrow\]
+\[ cos(N+1) \theta = 2cos \theta cos N\theta - cos(N-1) \theta \]
+\[ \Downarrow \]
+\[ \exists T_N \in \mathbb{P}_N : T_N (cos \theta ) = cos N\theta \]
+\[ cos : \left[ 0,\pi \right] \longleftrightarrow \left[ -1,1 \right] biyección \]
+\[ x = cos \theta \]
+\[ cos (N+1) \theta = 2 cos \theta cos N\theta - cos(N-1) \theta \]
+y
+\[ T_N(cos \theta ) = cos N\theta \]
+
+\[
+\left| 
+\begin{array}{c}
+T_0(x)=1 \\
+T_1(x)=x \\
+i=0,1,2,... \Rightarrow T_{i+2}(x)=2xT_{i+1}(x)-T_i(x) \\
+\end{array}
+\right.
+\]
+donde $T_i$ es el $\textbf{polinomio de Chebyshev}$ de grado i. Sus propiedades importantes son:
+
+\begin{nlist}
+\item[•] $T_N \in \mathbb{P}_N$ con N ceros reales, todos en [-1,1] y coeficiente líder $2^{N-1}$.
+\item[•] $T_N \in C$([-1,1]), $\Vert T_N \Vert _\infty$ = 1.
+\end{nlist}
+
+Los $\textbf{nodos de Chebyshev}$ son:
+\[
+\left| 
+\begin{array}{c}
+T_N \in \mathbb{P}_N \\
+T_N(cos \theta ) = cos(N \theta ) \\
+cos(N\theta ) = 0 \\
+\end{array}
+\right.
+x_i^{(N)} = cos \frac{2i+1}{2N}\pi \; , \; \; (i=0,...,N-1) los N ceros de T_N
+\]
+
+\begin{nth}
+Sea $N \geq 1$ y sea $p \in \mathbb{P} _N$ un polinomio con coeficiente líder 1. Entonces
+\[ max \; \left\lbrace \vert p(x) \vert : x \in \left[ -1,1 \right] \right\rbrace \geq \frac{1}{2^{N-1}} \]
+\end{nth}
+
+Con los nodos de Chebyshev tenemos que
+\[ \Vert E_N^f \Vert _\infty \leq \frac{\Vert f^{N+1)} \Vert _\infty}{(N+1)!} \frac{1}{2^N} \]
 
 \subsection{Otros problemas de interpolación: Hermite y caso general}
+Sean los nodos distintos $x_0,x_1,...,x_N \in$ [a,b], los órdenes de derivación $m_0,m_1,...,m_N \geq 0$ y la función $f \in C^M$([a,b]), $M:= max \left\lbrace m_i : i=0,...,N \right\rbrace$. El $\textbf{problema de interpolación de Hermite}$ consiste en encontrar $p \in \mathbb{P}$ de grado mínimo K con
+\[ i=0,1,...,N \Rightarrow \left[ j=0,1,...,m_i \Rightarrow p^{j)}(x_i) = f^{j)}(x_i) \right] \]
+
+\[ p \in \mathbb{P} _K : p^{j)}(x_i) = f^{j)}(x_i) \Leftrightarrow L(p) = f^{j)}(x_i) \]
+con $L : \mathbb{P} _K \longrightarrow \mathbb{R}$ forma lineal
+\[ p \mapsto L(p) := p^{j)}(x_i) \]
+
+El $\textbf{problema general de interpolación}$ consiste en, sea E espacio vectorial real de dimensión N, $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales, $d_1,...,d_N \in \mathbb{R}$, encontrar un único $p \in E : \left[  i=1,...,N \Rightarrow L_i(p) = d_i \right] $
+
+\begin{nprop}
+Sea E un espacio vectorial (real) de dimensión $N \geq 1$, sean $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales y sea {$p_1,...,p_N$} una base de E. Entonces, el problema general de interpolación admite una única solución, cualesquiera sean $d_1,...,d_N \in \mathbb{R}$, si, y solo si,
+\[ det \left[ L_i(p_j) \right] _{i,j=1}^N \neq 0 \]
+\end{nprop}
+
+$\left[ L_i(p_j) \right] _{i,j=1}^N$ es la matriz de coeficientes de un sistema cuadrado.
+
+Unisolvencia para cualesquiera $d_1,...,d_N \Leftrightarrow$ unisolvencia para $d_1 = \cdots = d_N = 0$.
+
+A partir de ahora, vamos a enfocar el problema con Lagrange.
+
+Sea E espacio vectorial real de dimensión N, $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales, $d_1,...,d_N \in \mathbb{R}$, el problema general de interpolación consiste ne encontrar un único $p \in E : \left[  i=1,...,N \Rightarrow L_i(p) = d_i \right]$
+
+Sea {$l_1,...,l_N$} base de E de Lagrange
+\[ i,j = 1,...,N \Rightarrow L_i(l_j) = \delta _{ij} \Rightarrow p:= \sum_{i=1}^N d_il_i \]
+que es la solución del problema general de interpolación. La dificultad está en determinar la base de Lagrange, que siempre existe. Veamos los distintos casos que existen.
+
+\begin{nlist}
+\item $(x_0,y_0,d_0),(x_1,y_1,d_1),...,(x_N,y_N,d_N) \in \mathbb{R}^3 : i,j=0,1,...,N \Rightarrow x_i \neq x_j $
+\[ E := \mathbb{P}_{2N+1}, \; \; \left\lbrace 1,x,...,x^{2N+1} \right\rbrace \; base \]
+\[ i = 0,1,...,N \Rightarrow L_{2i}(p) := p(x_i), \; \; L_{2i+1}(p) = p'(x_i) \]
+\[ encontrar \; un \; unico \; p \in E : \left[ i = 0,1,...,N \Rightarrow p(x_i)=y_i, \; p'(x_i) = d_i \right] \]
+\[ det \left[ L_i(p_j) \right] _{i,j=0}^{2N+1} \neq 0 \]
+\[ p(x_0) = p'(x_0) = 0 \Rightarrow p(x)=(x-x_0)^2q_0(x), \; para \; cierto \; q_0 \in \mathbb{P}_{2N-1} \]
+
+\[ \exists \alpha \in \mathbb{R}: p(x) = \alpha \prod_{i=0}^{N+1}(x-x_i)^2 \]
+Como $p \in \mathbb{P}_{2N+1}$, entonces p=0. Hay unisolvencia.
+
+La base de Lagrange nos lleva a los polinomios de Hermite {$h_0(x),h_1(x),...,h_{2N+1}(x)$}.
+Sea i=0,1,...,N, entonces
+\[ h_{2i}(x)=(1-2(x-x_i)l'_i(x_i))l_i^2(x) \]
+\[ h_{2i+1}(x) = (x-x_i)l_i(x)^2 \]
+{$l_0(x),l_1(x),...,l_N(x)$} polinomios de Lagrange
+\[ i=0,1,...,N \Rightarrow l_i(x) = \prod_{j=0 \bigwedge j\neq i}^N \frac{x-x_j}{x_i-x_j}\]
+La solución es
+\[p(x) = \sum_{i=0}^N (y_ih_{2i}(x) + d_id_{2i+1}(x)) \]
+
+	\begin{ejemplo}
+	Sean los nodos $x_0=-1, x_1=-0.5, x_2=0, x_3=0.5, x_4=1$, sean los valores $y_0=1, y_1=2, y_2=0, y_3=-2, y_4=-1$ y sean las derivadas $d_0=0, d_1=1, d_2=-1, d_3=1, d_4=0$. Entonces
+	\[ p(x) = -x - \frac{833}{18}x^3 + \frac{385}{2}x^5 - \frac{740}{3}x^7 + \frac{904}{9}x^9 \]
+	\end{ejemplo}
+
+\item $(x_0,d_0,d_1,...,d_N) \in \mathbb{R}^{N+2}$
+\[ E:= \mathbb{P}_N, \; \left\lbrace 1,x,...,x^N \right\rbrace \; base \]
+\[ i=0,1,...,N \Rightarrow L_i(p) := p^{i)}(x_0) \]
+El problema es encontrar un único $p \in E : \left[ i=0,1,...,N \Rightarrow p^{i)}(x_0) = d_i \right] $
+\[ det \left[ L_i(p_j) \right] _{i,j=0}^N = det \left[
+\begin{array}{ccccc}
+1 & x_0 & x_0^2 & \cdots & x_0^N \\
+0 & 1 & 2x_0 & \cdots & Nx_0^{N-1} \\
+0 & 0 & 2 & \cdots & N(N-1)x_0^{N-2} \\
+\vdots & \vdots & \vdots & & \vdots \\
+0 & 0 & 0 & \cdots & N!
+\end{array}
+\right] \neq 0 \]
+Hay unisolvencia.
+
+Con la base de Lagrange obtenemos los polinomios de Taylor {$t_0(x),t_1(x),...,t_N(x)$}
+\[i=0,1,...,N \Rightarrow t_i(x) = \frac{(x-x_0)^i}{i!} \]
+Solución:
+\[ p(x) = \sum_{i=0}^N \frac{d_i}{i!}(x-x_0)^i \]
+$d_i \leftrightsquigarrow f^{i)}(x_0)$ polinomio de Taylor.
+
+\end{nlist}
 
 \section{Interpolación mediante funciones splines}
+Para mejorar la precisión tenemos que hacer una partición del intervalo [a,b] y que el grado polinomial sea bajo. Sea P una $\textbf{partición}$ de [a,b] tal que P={$a=x_0 < x_1 < \cdots < x_N = b$}.
 
+\begin{ndef}[Espacio de funciones splines]
+Dados un intervalo [a,b] y una partición P del mismo, el $\textbf{espacio de funciones splines}$ de clase k y grado m viene dado por
+\[ \mathbb{S}_m^k(P) := \left\lbrace s \in C^k ( \left[ a,b \right] ) : i=0,1,...,N-1 \Rightarrow s_{\vert \left[ x_i, x_{i+1} \right]} \in \mathbb{P} _m \right\rbrace \]
+\end{ndef}
+
+Tenemos que $\mathbb{S}_m^m = \mathbb{P}_m \; y \; k<m$.
+
+Empecemos en el espacio vectorial $\mathbb{S}_1^0(P)$. Tenemos que dim$\mathbb{S}_1^0(P)$=2N-(N-1)=N+1 y la base usual es {$B_0(x),B_1(x),...,B_N(x)$}.
+
+La siguiente definición es muy importante.
+
+\begin{ndef}[Base usual]
+Sean a<b y sea P={$a=x_0<x_1<\cdots < x_N=b$} una partición del intervalo [a,b]. La $\textbf{base usual}$ del espacio $\mathbb{S}_1^0(P)$ viene dada por
+\[ i=0,1,...,N \Rightarrow B_i(x) := \left\lbrace
+\begin{array}{ll}
+\frac{x-x_{i-1}}{x_i-x_{i-1}}, & si \; x \in \left[ x_{i-1},x_i \right] \\
+\frac{x_{i+1}-x}{x_{i+1}-x_i}, & si \; x \in \left[ x_i,x_{i+1} \right] \\
+0, & fuera \\
+\end{array}
+\right.
+\]
+\end{ndef}
+
+Dados un intervalo [a,b], una partición P={$a=x_0<x_1<\cdots < x_N=b$} y una función $f:$ [a,b] $\longrightarrow \mathbb{R}$, se considera el $\textbf{problema de interpolación en}$ $\mathbb{S}_1^0(P)$
+
+\[encontrar \; s \in \mathbb{S}_1^0(P) : \left[ i=0,1,...,N \Rightarrow s(x_i) = f(x_i) \right] \]
+
+La estructura del problema de interpolación general es claramente unisolvente. Con la base de Lagrange tenemos {$B_0(x), B_1(x),...,B_N(x)$}. La solución, notando s=$S_N^1f$
+\[ S_N^1f(x) = \sum_{i=0}^N f(x_i)B_i(x) \]
+
+\begin{ndef}[Error de interpolación]
+\[ E_N^{f(x)} = f(x) - S_N^1f(x) \]
+\end{ndef}
+
+Sea $f \in C^2$([a,b])
+\[ i=0,1,...,N-1, \; x \in \left[ x_i,x_{i+1} \right] \Rightarrow \vert f(x) - S_N^1f(x) \vert \leq \frac{\Vert f'' \Vert _\infty}{8}(x_{i+1}-x_i)^2 \]
+\[ \Downarrow \]
+\[ \Vert f-S_N^1f \Vert _\infty \leq \frac{\Vert f'' \Vert _\infty}{8} \left( max \; \left\lbrace (x_{i+1}-x_i):i=0,...,N-1 \right\rbrace \right) ^2 \]
+
+Hemos probado:
+
+\begin{nprop}
+Con la notación anterior, si $f \in C^2$([a,b]), entonces
+\[ \lim_{N\rightarrow \infty} max \; \left\lbrace (x_{i+1}-x_i):i=0,...,N-1 \right\rbrace = 0 \qquad \Rightarrow \qquad \lim_{N \rightarrow \infty} \Vert f - S_N^1f \Vert _\infty = 0 \]
+\end{nprop}
 \subsection{Funciones splines lineales}
 
 \subsection{Funciones splines cúbicas}
