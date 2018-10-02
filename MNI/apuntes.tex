@@ -1901,6 +1901,7 @@ Dados un intervalo [a,b] y una partición P del mismo, el $\textbf{espacio de fu
 
 Tenemos que $\mathbb{S}_m^m = \mathbb{P}_m \; y \; k<m$.
 
+\subsection{Funciones splines lineales}
 Empecemos en el espacio vectorial $\mathbb{S}_1^0(P)$. Tenemos que dim$\mathbb{S}_1^0(P)$=2N-(N-1)=N+1 y la base usual es {$B_0(x),B_1(x),...,B_N(x)$}.
 
 La siguiente definición es muy importante.
@@ -1939,6 +1940,143 @@ Hemos probado:
 Con la notación anterior, si $f \in C^2$([a,b]), entonces
 \[ \lim_{N\rightarrow \infty} max \; \left\lbrace (x_{i+1}-x_i):i=0,...,N-1 \right\rbrace = 0 \qquad \Rightarrow \qquad \lim_{N \rightarrow \infty} \Vert f - S_N^1f \Vert _\infty = 0 \]
 \end{nprop}
-\subsection{Funciones splines lineales}
+
+\begin{nprop}
+Sea $f \in C$([a,b]), sea P={$a=x_0 < x_1 < \cdots < x_N = b$} y sea $S_N^1f$ el único elemento de $\mathbb{S}_1^0(P)$ que interpola a f en los nodos de P, i.e.,
+\[ i=0,1,...,N \Rightarrow S_N^1f(x_i)=f(x_i) \]
+Entonces:
+	\begin{nlist}
+	\item Si $i=0,1,...,N-1$ y $x \in \left[ x_i,x_{i+1} \right]$, entonces
+	\[ S_N^1f(x) \leq max \; \left\lbrace f(x_i),f(x_{i+1}) \right\rbrace \]
+	\item $\Vert S_N^1f \Vert _\infty \leq \Vert f \Vert _\infty $
+	\item $\Vert f - S_N^1f \Vert _\infty \leq 2 \cdot inf \; \left\lbrace \Vert f-s \Vert _\infty : s \in \mathbb{S}_1^0(P) \right\rbrace$
+	\end{nlist}
+\end{nprop}
 
 \subsection{Funciones splines cúbicas}
+Ahora trabajaremos con el espacio $\mathbb{S}_3^2(P)$. Tenemos que dim$\mathbb{S}_3^2(P)$ = 4N-3(N-1)=N+3.
+
+\begin{ndef}[Funciones splines cúbicas naturales]
+\[ i=0,1,...,N \Rightarrow s(x_i) = f(x_i) \]
+2 condiciones adicionales: s''(a) = 0 = s''(b).
+\end{ndef}
+
+La construcción de las funciones splines cúbicas naturales es directa en cada subintervalo [$x_{i-1},x_i$]. Por comodidad expositiva, los puntos son distribuidos uniformemente en [a,b], esto es:
+\[ h= \frac{b-a}{N}, \; \; i=0,1,...,N \quad \Rightarrow \quad x_i=a+ih \]
+
+Vamos a establecer la notación:
+\[ s:= S_N^2f \]
+\[ s_i := S_N^2 f_{\vert \left[ x_i, x_{i+1} \right]} \quad i=0,1,...,N-1 \]
+\[ y_i:=s(x_i), \qquad d_i:=s'(x_i) \quad c_i:=s''(x_i) \qquad i=0,1,...,N \]
+Tenemos, para i=1,...,N:
+
+Primero calculamos los $c_i's$, que son solución del sistema:
+\[ \begin{bmatrix}
+2 & 0 & 0 & 0 & 0 & \cdots & 0 \\
+\frac{1}{2} & 2 & \frac{1}{2} & 0 & 0 & \cdots & 0 \\
+0 & \frac{1}{2} & 2 & \frac{1}{2} & 0 & \cdots & 0 \\
+\vdots & & \vdots & \vdots & \vdots & & \vdots \\
+0 & & \cdots & 0 & \frac{1}{2} & 2 & \frac{1}{2} \\
+0 & & \cdots & 0 & 0 & 0 & 2 
+\end{bmatrix} \]
+
+Luego calculamos:
+\[ \alpha _{i-1} = \frac{y_i - y_{i-1}}{h} - \frac{h}{6} (c_i-c_{i-1}) \]
+\[ \beta _{i-1} = y_{i-1} - c_{i-1} \frac{h^2}{6} \]
+
+Por último:
+
+\[ x \in \left[ x_{i-1},x_i \right] \Rightarrow s_{i-1}(x) = c_{i-1} \frac{(x_i-x)^3}{6h}+c_i \frac{(x-x_{i-1})^3}{6h} + \alpha _{i-1} (x-x_{i-1}) + \beta _{i-1} \]
+
+Ahora vamos a estudiar el $\textbf{error de interpolación}$.
+
+\begin{nprop}
+Con la notación anterior, si $f \in C^4$([a,b]) entonces
+\[ j=0,1,2,3 \; \; \Rightarrow \; \; \Vert f^{j)} - S_N^2f^{j)} \Vert _\infty \leq K_jh^{4-j} \Vert f^{4)} \Vert _\infty \]
+donde $K_0=\frac{5}{384}$, $K_1 = \frac{1}{24}$, $K_2 = \frac{3}{8}$ y $K_4 = 1$.
+\end{nprop}
+
+Por último, estudiaremos el $\textbf{principio de mínima energía}$.
+
+\begin{nprop}
+Sean P={$a=x_0 < x_1 < \cdots < x_N = b$}, f:[a,b]$\longrightarrow \mathbb{R}$ y $g \in C^2$([a,b]) de forma que
+\[ g(x_i) = f(x_i), \qquad i =0,1,...,N \]
+Si además $s$ es la función spline cúbica natural que satisface la misma condición de interpolación, entonces
+\[ \int_a^b s''(x)^2dx \leq \int_a^b g''(x)^2 dx \]
+dándose la igualdad si, y solo si, g = s.
+\end{nprop}
+
+\part{Tema 4. Aproximación}
+Al tener unos datos experimentales, la aproximación sirve para hacer previsiones y ajustes.
+
+\section{Aproximación por mínimos cuadrados discreta y continua}
+
+\subsection{Principio del mínimo}
+Sea la función $f: \mathbb{R} \longrightarrow \mathbb{R}$, $f(x)=\frac{1}{2}ax^2-bx$, con a > 0. Es una parábola, por lo que alcanza su valor mínimo en $x = \frac{b}{a}$ y tenemos que $f(b/a) = - \frac{1}{2a}b^2$.
+
+Esto se puede extender a $\mathbb{R}^N$. El número a pasa a ser una matriz simétrica y definida positiva $A \in \mathbb{R}^{N \times N}$, el número b pasa a ser el vector $b \in \mathbb{R}^N$. Por lo que tenemos que:
+\[ f: \mathbb{R}^N \longrightarrow \mathbb{R}, \; f(x) = \frac{1}{2}x^TAx-b^Tx \]
+
+\begin{nth}[Principio del mínimo]
+Si $A \in \mathbb{R}^{N \times N}$ es una matriz simétrica y definida positiva, $b \in \mathbb{R}^N$ y $f: \mathbb{R}^N \longrightarrow \mathbb{R}$ es la función cuadrática definida en cada $x \in \mathbb{R}^N$ como
+\[ f(x) = \frac{1}{2}x^TAx-b^Tx \]
+entonces f alcanza su mínimo en un único vector, la solución del sistema Ax=b, y su valor mínimo es
+\[ - \frac{1}{2}b^TA^{-1}b \]
+\end{nth}
+
+\begin{proof}
+Como A es definida positiva, entonces A es regular:
+\[ Ax=0 \Rightarrow x^TAx=0 \Rightarrow x=0 \]
+$A^{-1}b$ es solución de Ax=b.
+
+Sea $x:=A^{-1}b$, $y \in \mathbb{R}^N$. Como A es simétrica:
+
+	\begin{equation*}
+		\begin{split}
+		f(y) - f(x) & = \frac{1}{2} y^TAy - b^Ty - \frac{1}{2}x^TAx + b^Tx \\
+		& = \frac{1}{2}y^TAy  x^TAy - \frac{1}{2}x^TAx + x^TAx \\
+		& = \frac{1}{2}y^TAy + \frac{1}{2}x^TAx - x^TAy \\
+		& = \frac{1}{2}(y-x)^TA(y-x)
+		\end{split}
+	\end{equation*}
+	
+Como A es definida positiva, f alcanza su mínimo en $y=x=A^{-1}b$:
+\[ f(A^{-1}b) = -\frac{1}{2}b^TA^{-1}b \]
+	
+\end{proof}
+
+\begin{nprop}
+	\begin{nlist}
+	\item[•] A simétrica y definida positiva $\Leftrightarrow$ A admite factorización LU Cholesky. $\qquad (A \in \mathbb{R}^{N \times N})$
+	
+	\item[•] Condición suficiente:
+	
+	A regular $\Rightarrow$ $A^TA$ simétrica y definida positiva. $\qquad (A \in \mathbb{R}^{N \times N})$
+	
+	\item[•] $A \in \mathbb{R}^{M \times N}$. Condición suficiente (más general):
+	
+	rango(A) = N $\Leftrightarrow$ columnas de A son linealmente independientes $\Rightarrow$ $A^TA$ es simétrica y definida positiva.
+	
+	(y $N \leq M$).
+	
+	\item[•] Condición suficiente (aún más general): $C \in \mathbb{R}^{M \times M}$ simétrica y definida positiva, $A \in \mathbb{R}^{M \times N}$:
+	
+	rango (A) = N $\Leftrightarrow$ columnas de A linealmente independientes $\Rightarrow$ $A^TCA$ simétrica y definida positiva.
+	
+	(y $N \leq M$).
+	
+	\end{nlist}
+\end{nprop}
+
+\subsection{Aproximación por mínimos cuadrados discreta}
+Ahora vamos a estudiar una aplicación del principio del mínimo, vamos a ver cuál es la $\textbf{mejor aproximación euclídea en dimensión finita.}$
+
+Sea S un subespacio vectorial de $\mathbb{R}^M$, %$\left\lbrace \begin{vmatrix}
+%a_{11} \\
+%\vdots \\
+%a_{M1}
+%\end{vmatrix}
+
+%\right\rbrace$
+
+\subsection{Aproximación por mínimos cuadrados general: caso continuo}
