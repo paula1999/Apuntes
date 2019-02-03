@@ -1,11 +1,11 @@
-\part{Tema 1. Introducción a los problemas del Análisis Numérico}
+\part{Tema 1. Introducción a los problemas del análisis Numérico}
 
 \section{Introducción a los métodos numéricos: algoritmo}
 Comenzaremos con un ejemplo de recurrencia en el que observaremos que al redondear el primer valor, se acumula el error y los siguientes valores se desbordan.\\
 Sea n $\geq$ 1 y la recurrencia $x_{n}$:=$\int_{0}^{1} x^{n}e^{x}dx$.\\
 Si resolvemos la integral para n = 0, tenemos que $x_{0}$ = e - 1\\
 Y para n $\in$ $\mathbb{N}$, tenemos que $x_{n}$ = e - n$x_{n-1}$\\
-Por lo que esta sucesión, $\lbrace x_{n} \rbrace_{n\geq1}$ $\subset$ $\mathbb{R_{+}}$, es decreciente y tiende a 0, es decir, $ \lim_{n \to \infty} x_{n} = 0 $ \\
+Por lo que esta sucesión, $\lbrace x_{n} \rbrace_{n\geq1}$ $\subset$ $\mathbb{R_{+}}$, es decreciente y tiende a 0, es decir, $lim_{n \to \infty} x_{n} = 0 $ \\
 Veamos que si redondeamos $x_{0}$ se acumula el error.\\
 Si n = 12 tenemos que $x_{12}$ = 0.1951\\
 Redondeando $x_{0}$ = 1.7183 e iterando según este valor hasta n = 12, obtenemos que $x_{12}$ = 8704.39\\
@@ -16,7 +16,7 @@ Concluimos que el redondeo, a veces, conlleva errores muy grandes.
 Si usamos las normas en los problemas numéricos, sabremos si los problemas están bien planteados, los errores cometidos, la convergencia...
 
 \begin{ndef}[Norma] 
-Sea E un espacio vectorial real, diremos que una aplicacion $\Vert$·$\Vert$: E $\rightarrow$ $\mathbb{R}$ es una $\textbf{norma}$ en E si verifica las siguientes propiedades:
+Sea E un espacio vectorial real, diremos que una aplicación $\Vert$·$\Vert$: E $\rightarrow$ $\mathbb{R}$ es una $\textbf{norma}$ en E si verifica las siguientes propiedades:
 	\begin{nlist}
 	\item Sea x $\in$ E $\Rightarrow$ $\Vert$·$\Vert$ $\geq$ 0.\\
 	Además, $\Vert$x$\Vert$ = 0 $\Leftrightarrow$ x = 0
@@ -29,8 +29,8 @@ Sea E un espacio vectorial real, diremos que una aplicacion $\Vert$·$\Vert$: E 
 Sea E un espacio vectorial real. Si este espacio admite una norma, entonces E se llama $\textbf{espacio normado}$.
 \end{ndef}
 
-Aunque trabajaremos en $\mathbb{R}$, en $\mathbb{C}$ es lo mismo.\\
-Veamos la interpretación geométrica de la desigualdad triangular, usando la norma euclídea $\mathbb{R}^2$ o $\mathbb{R}^3$.\\ 
+Trabajaremos en $\mathbb{R}$, aunque en $\mathbb{C}$ es lo mismo.\\
+Veamos la interpretación geométrica de la desigualdad triangular, usando la norma euclídea en $\mathbb{R}^2$ o $\mathbb{R}^3$.\\ 
 \includegraphics[scale=0.2]{media/desigualdadtriangular.png}
 
 Las siguientes normas son las que vamos a utilizar.
@@ -70,12 +70,12 @@ Sean E = $C^k$([a,b]), k $\in$ $\mathbb{N}$ y f $\in$ $C^k$([a,b]) entonces:
 Ahora que ya tenemos definidas las normas, podemos calcular el error cometido al aproximar los vectores.
 
 \begin{ndef}[Error absoluto]
-Sea E un espacio normado, x $\in$ E y x* $\in$ una aproximación de x, entonces la siguiente operación calcula el error absoluto:
+Sea E un espacio normado, x $\in$ E y x* $\in$ E una aproximación de x, entonces la siguiente operación calcula el error absoluto:
 \[ \Vert x^* - x \Vert \]
 \end{ndef}
 
 \begin{ndef}[Error relativo]
-Sea E un espacio normado, x $\in$ E y x* $\in$ una aproximación de x, entonces la siguiente operación calcula el error relativo:
+Sea E un espacio normado, x $\in$ E y x* $\in$ E una aproximación de x, entonces la siguiente operación calcula el error relativo:
 \[  \frac {\Vert x^* - x \Vert}{ \Vert x \Vert} \]
 \end{ndef}
 
@@ -91,13 +91,14 @@ Calcula los errores absolutos y relativos de:
 \end{ejer}
 
 \begin{sol}
+$ $
 	\begin{nlist}
-	\item error absoluto: $\vert x^* - x \vert = \vert 0.23 - 1/4 \vert = 0.02 $\\
-	error relativo: $\frac{\vert x^* - x \vert}{\vert x \vert} = \frac{\vert 0.23 - 1/4 \vert}{\vert 1/4 \vert} = 0.08$
-	\item error absoluto: $\Vert x^* - x \Vert _\infty = \Vert (0.19,2.2,0.9) - (1/5,2,1) \Vert _\infty = \Vert (-0.01,0.2,-0.1) \Vert _\infty =$\\ $= max \lbrace 0.01,0.2,0.1\rbrace = 0.2 $\\
-	error relativo: $\frac{\Vert x^* - x \Vert _\infty}{\Vert x \Vert _\infty} = \frac{\Vert (-0.01,0.2,-0.1) \Vert _\infty}{\Vert (1/5,2,1) \Vert _\infty} = \frac{0.2}{2} = 0.1 $\\
-	\item error absoluto: $\Vert f^* - f \Vert _\infty = \Vert t - sen(t) \Vert _\infty = \frac{\pi}{2} - 1$\\
-	error relativo: $\frac{\Vert f^* - f \Vert _\infty}{\Vert f \Vert _\infty} = \frac{\pi}{2} - 1 $
+	\item error absoluto: $$\vert x^* - x \vert = \vert 0.23 - 1/4 \vert = 0.02 $$\\
+	error relativo: $$\frac{\vert x^* - x \vert}{\vert x \vert} = \frac{\vert 0.23 - 1/4 \vert}{\vert 1/4 \vert} = 0.08$$
+	\item error absoluto: $$\Vert x^* - x \Vert _\infty = \Vert (0.19,2.2,0.9) - (1/5,2,1) \Vert _\infty = \Vert (-0.01,0.2,-0.1) \Vert _\infty = max \lbrace 0.01,0.2,0.1\rbrace = 0.2 $$\\
+	error relativo: $$\frac{\Vert x^* - x \Vert _\infty}{\Vert x \Vert _\infty} = \frac{\Vert (-0.01,0.2,-0.1) \Vert _\infty}{\Vert (1/5,2,1) \Vert _\infty} = \frac{0.2}{2} = 0.1 $$\\
+	\item error absoluto: $$\Vert f^* - f \Vert _\infty = \Vert t - sen(t) \Vert _\infty = \frac{\pi}{2} - 1$$\\
+	error relativo: $$\frac{\Vert f^* - f \Vert _\infty}{\Vert f \Vert _\infty} = \frac{\pi}{2} - 1 $$
 	\end{nlist}
 \end{sol}
 
@@ -110,7 +111,7 @@ Se define la $\textbf{distancia}$ entre dos vectores x,y $\in$ E como
 Se dice que $\lbrace x_n \rbrace _{n \geq 1}$ en E $\textbf{converge}$ a $x_0$ $\in$ E sii
 \[ \forall \varepsilon > 0 \Rightarrow \left[ \exists n_0 \in \mathbb{N} : n \geq n_0 \Rightarrow \Vert x_n - x_0 \Vert < \varepsilon \right] \]
 es decir,
-\[ \lim_{n \rightarrow \infty} x_n = x_0  \Leftrightarrow \lim_{n \rightarrow \infty} \Vert x_n - x_0 \Vert = 0 \]
+\[ lim_{n \rightarrow \infty} x_n = x_0  \Leftrightarrow lim_{n \rightarrow \infty} \Vert x_n - x_0 \Vert = 0 \]
 \end{ndef}
 
 \begin{ndef}
@@ -122,7 +123,7 @@ Sean X, Y subconjuntos no vacíos de sendos espacios normados y sea f: X $\right
 Sea x $\in \mathbb{R}^N \Rightarrow \Vert x \Vert _\infty \leq \Vert x \Vert _1 \leq N\Vert x \Vert _\infty $ 
 \end{nprop}
 
-\begin{ndef}
+\begin{ndef}[Normas equivalentes]
 Sean $\Vert$ · $\Vert$ y $\Vert$ · $\Vert _*$ dos normas, se dice que son $\textbf{equivalentes}$ si $\exists c_1, c_2 > 0$ tales que
 \[ \forall x \in E \Rightarrow c_1\Vert x \Vert \leq \Vert x \Vert _* \leq c_2\Vert x \Vert \] 
 \end{ndef}
@@ -135,21 +136,20 @@ Sean $\Vert$ · $\Vert$ y $\Vert$ · $\Vert _*$ dos normas, entonces la converge
 Todas las normas en un espacio normado finito dimensional son equivalentes.
 \end{nth}
 
-Observemos que para calcular el límite de la norma del máximo, tenemos que calcular el límite de cada coordenada.
+Observemos que para calcular el límite de la norma del máximo tenemos que calcular el límite de cada coordenada.
 
 \begin{nprop}
 Sea $\mathbb{R}^N$ un espacio normado finito dimensional y consideremos la norma $\Vert$·$\Vert _\infty$ en este espacio, entonces:
-\[ \lim_{n \rightarrow \infty}x_n = x_0 \Leftrightarrow \lim_{n \geq 1}(x_n)_j = (x_0)_j \qquad \forall j\in \lbrace 1,...,N \rbrace \]
+\[ lim_{n \rightarrow \infty}x_n = x_0 \Leftrightarrow lim_{n \geq 1}(x_n)_j = (x_0)_j \qquad \forall j\in \lbrace 1,...,N \rbrace \]
 \end{nprop}
 
 \begin{proof}
-\[ \lim_{n \rightarrow \infty} x_n = x_0 \quad \Leftrightarrow \quad \lim_{n \rightarrow \infty} \Vert x_n - x_0 \Vert _\infty = 0 \quad \Leftrightarrow \quad 0 < max \; \lbrace \vert (x_n - x_0)_j \vert : j = 1,...,N \rbrace = 0 \quad \rightarrow \quad \lim_{n \geq 1}(x_n)_j = (x_0)_j \]
+\[ lim_{n \rightarrow \infty} x_n = x_0 \; \Leftrightarrow \; lim_{n \rightarrow \infty} \Vert x_n - x_0 \Vert _\infty = 0 \; \Leftrightarrow \; 0 < max \; \lbrace \vert (x_n - x_0)_j \vert : j = 1,...,N \rbrace = 0 \; \Leftrightarrow \; lim_{n \geq 1}(x_n)_j = (x_0)_j \]
 \end{proof}
 
-Un ejemplo de aplicación de esta proposición es el siguiente.
-
 \begin{ejemplo}
-$\lim_{n \geq 1} \left( \left( 1 + \frac{1}{n} \right) ^n , \frac{(-1)^n}{n^2} \right) = (e,0)$
+Aplicación de la anterior proposición:
+$$lim_{n \rightarrow \infty} \left( \left( 1 + \frac{1}{n} \right) ^n , \frac{(-1)^n}{n^2} \right) = (e,0)$$
 \end{ejemplo}
 
 La anterior proposición también se puede aplicar para cualquier norma de $\mathbb{R}^N$ y de $\mathbb{R}^{M \times N}$.
@@ -169,7 +169,7 @@ Luego\\
 $\Vert f_n \Vert _\infty = 1$ y $\Vert f_n \Vert _1 = 1/n$ (que coincide con el área).\\
 Si fueran equivalentes, entonces
 \[ \exists \alpha , \beta > 0 f \in E \Rightarrow \alpha \Vert f_n \Vert _1 \leq \Vert f_n \Vert _\infty \leq \beta \Vert f_n \Vert _1 \]
-Lo cual es una contradicción, porque n $\geq$ 1 $\Rightarrow \Vert f_n \Vert _\infty \leq \beta \Vert f_n \Vert _1 \Leftrightarrow 1 \leq \frac{\beta}{n} \Leftrightarrow n \leq \beta$ $\;$ y n no está acotada.\\
+Lo cual es una contradicción, pues si n $\geq$ 1 $\Rightarrow \Vert f_n \Vert _\infty \leq \beta \Vert f_n \Vert _1 \Leftrightarrow 1 \leq \frac{\beta}{n} \Leftrightarrow n \leq \beta$ $\;$ y n no está acotada.\\
 Por lo que no son equivalentes.
 \end{sol}
 
@@ -197,8 +197,8 @@ Consideremos la norma $\Vert$·$\Vert _1$ en $\mathbb{R}^N$ y en $\mathbb{R}^M$,
 
 Es decir, es el máximo de las sumas de los valores absolutos de cada $\textbf{columna}$.
 
-\begin{proof} Vamos a demostrar que es $\geq$ y $\leq$, luego se dará la igualdad.\\
-Probaremos primero que $ \Vert A \Vert _\infty \geq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace $\\
+\begin{proof} Vamos a demostrar que se da la doble desigualdad, luego se dará la igualdad.\\
+Probaremos primero que $$ \Vert A \Vert _\infty \geq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace $$\\
 Sea sign(a) := $\left\{ \begin{array}{lcc}
 -1 & si & a < 0 \\
 1 & si & a \geq 0
@@ -208,7 +208,7 @@ Tenemos que
 \[ \left\Vert \left[ sign(a_{11}),...,sign(a_{1N}) \right] ^T \right\Vert _\infty = 1 \qquad \Rightarrow \qquad \Vert A \Vert _\infty \geq \left\Vert A \left[ sign(a_{11}),...,sign(a_{1N}) \right] ^T \right\Vert _\infty \geq \sum_{j=1}^N \vert a_{1j} \vert \]
 Hacemos lo mismo con $\left[ sign(a_{i1}),...,sign(a_{iN}) \right] ^T \; \forall i = 2,...,M$ y obtenemos que
 \[ \Vert A \Vert _\infty \geq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace \]
-Ahora probaremos que $ \Vert A \Vert _\infty \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace $\\
+Ahora probaremos que $$ \Vert A \Vert _\infty \leq max \; \left\lbrace \sum_{j=1}^N \vert a_{ij} \vert : i = 1,...,M \right\rbrace $$\\
 Sea x $\in \mathbb{R}^N$ tal que $\Vert x \Vert _\infty = 1$, entonces:
 \[ \Vert Ax \Vert _\infty = \left\Vert 
 \begin{bmatrix} 
@@ -255,8 +255,8 @@ La siguiente proposición muestra una manera más fácil de calcular la norma eu
 $\Vert x \Vert _2 = \sqrt{x^Tx} \qquad \forall x \in \mathbb{R}^N$
 \end{nprop}
 
-\begin{ndef}
-Sea A $\in \mathbb{R}^{N \times N}$, diremos que A es $\textbf{semidefinida positiva} \Leftrightarrow x^TAx \geq 0 \qquad \forall x \in \mathbb{R}^N $
+\begin{ndef}[Matriz semidefinida positiva]
+Diremos que A $\in \mathbb{R}^{N \times N}$ es $\textbf{semidefinida positiva}$ $ \Leftrightarrow x^TAx \geq 0 \qquad \forall x \in \mathbb{R}^N $
 \end{ndef}
 
 Las matrices semidefinidas positivas tienen la siguiente propiedad.
@@ -266,10 +266,10 @@ Sea A $\in \mathbb{R}^{N \times N}$ semidefinida positiva. Si $\lambda$ es un va
 \end{nprop}
 
 \begin{proof}
-Como $\lambda$ es valor propio de A $\Rightarrow \exists x \in \mathbb{R}^N : x \neq 0 \wedge Ax = \lambda x$\\
+Como $\lambda$ es valor propio de A, entonces $ \exists x \in \mathbb{R}^N : x \neq 0 \wedge Ax = \lambda x$\\
 Luego\\
 \[ 0 \leq x^TAx = x^T \lambda x = \lambda x^Tx = \lambda \Vert x \Vert _2^2 \]
-Como x $\neq$ 0 $\Rightarrow 0 \leq \lambda$
+Como x $\neq$ 0, entonces $ 0 \leq \lambda$
 \end{proof}
 
 \begin{nprop}
@@ -291,6 +291,7 @@ Si $\lambda _1,..., \lambda _N \geq 0 \Rightarrow sup \; \left\lbrace \sqrt{\sum
 \end{nprop}
 
 \begin{proof}
+FALTA.
 \end{proof}
 
 Una manera más sencilla de calcular la norma de una matriz es la siguiente.
@@ -306,13 +307,12 @@ Una norma en $\mathbb{R}^{N \times N}$ se dice $\textbf{matricial}$ cuando
 
 Hay que tener en cuenta de que no toda norma en $\mathbb{R}^{N \times N}$ es matricial, por ejemplo:\\
 Vamos a utilizar la siguiente norma\\
-$\Vert A \Vert := max \; \lbrace \vert a{ij} \vert : i, j = 1,...,N \rbrace \qquad \forall A \in \mathbb{R}^{N \times N}$ \\
-Sean A = B = $\begin{bmatrix}
+$$\Vert A \Vert := max \; \lbrace \vert a{ij} \vert : i, j = 1,...,N \rbrace \qquad \forall A \in \mathbb{R}^{N \times N}$$ \\
+Sean $$A = B = \begin{bmatrix}
 1 & 1 \\
 1 & 1 \\
-\end{bmatrix}$\\
-Luego tenemos que
-$2 = \Vert AB \Vert > \Vert A \Vert \Vert B \Vert = 1$\\
+\end{bmatrix}$$\\
+Luego $$2 = \Vert AB \Vert > \Vert A \Vert \Vert B \Vert = 1$$\\
 Por lo que esta norma no es matricial.\\
 
 \begin{nprop}
@@ -329,17 +329,18 @@ Tenemos que probar que $\Vert AB \Vert \leq \Vert A \Vert \Vert B \Vert$\\
 \end{proof}
 
 \begin{nth}
-$\lim_{n \rightarrow \infty} A^n = 0 \; \Leftrightarrow \; \rho (A) < 1 \qquad \forall A \in \mathbb{R}^{N \times N} $
+$lim_{n \rightarrow \infty} A^n = 0 \; \Leftrightarrow \; \rho (A) < 1 \qquad \forall A \in \mathbb{R}^{N \times N} $
 \end{nth}
 
 Este teorema nos deja dos importantes consecuencias.
 
 \begin{ncor}
 Sea A $\in \mathbb{R}^{N \times N}$ una matriz triangular, entonces
-\[ \lim_{n \rightarrow \infty} A^n = 0 \quad \Leftrightarrow \quad max \; \lbrace \vert a_{ii} \vert < 1 : i = 1,...,N \rbrace \]
+\[ lim_{n \rightarrow \infty} A^n = 0 \quad \Leftrightarrow \quad max \; \lbrace \vert a_{ii} \vert < 1 : i = 1,...,N \rbrace \]
 \end{ncor}
 
 \begin{proof}
+FALTA.
 \end{proof}
 
 \begin{ncor}
@@ -347,10 +348,11 @@ Sean N $\geq$ 1, A $\in \mathbb{R}^{N \times N}$ y $\Vert$ · $\Vert$ una norma 
 \end{ncor}
 
 Hay que tener en cuenta que no se cumple la implicación contraria, por ejemplo:\\
-Sea A = $\begin{bmatrix}
+Sea $$A = \begin{bmatrix}
 0.5 & 500 \\
 0 & 0.5 \\
-\end{bmatrix}$ $\Rightarrow \rho (A) = 0.5 < 1$ pero $\Vert A \Vert _\infty = 500.5 \geq 1$
+\end{bmatrix} \; \Rightarrow \; \rho (A) = 0.5 < 1$$
+pero $$\Vert A \Vert _\infty = 500.5 \geq 1$$
 
 
 \subsection{Problemas bien planteados. Estabilidad}
@@ -359,11 +361,11 @@ Sean X e Y subconjuntos no vacíos de sendos espacios normados reales, f: X $\ri
 Denotaremos a $x_0$ como la solución que resuelve el problema determinado por f y a $y_0$ los datos, es decir, son números. Si tenemos un conjunto finito de números, usaremos el vector de $\mathbb{R}^N$ o matriz, y si tenemos infinitos datos, usaremos una función.
 
 \begin{ejemplo}
-Sean $A \in \mathbb{R}^{M \times N}$ y $y \in \mathbb{R}^M$. Determinar una solución del sistema de ecuaciones lineales cuya matriz de coeficientes sea A y su vector de términos independientes sea y\\
-$X = \mathbb{R}^N$, $Y = \mathbb{R}^M$, f(x) = Ax = y
+Sean $A \in \mathbb{R}^{M \times N}$ e $y \in \mathbb{R}^M$. Determinar una solución del sistema de ecuaciones lineales cuya matriz de coeficientes sea $A$ y su vector de términos independientes sea $y$
+$$X = \mathbb{R}^N, \quad Y = \mathbb{R}^M, \quad f(x) = Ax = y$$
 \end{ejemplo}
 
-\begin{ndef}
+\begin{ndef}[Problema bien planteado]
 Un problema está $\textbf{bien planteado}$ cuando es $\textbf{unisolvente}$ y $\textbf{estable}$:
 	\begin{nlist}
 	\item $\exists ! x_0 \in X : f(x_0) = y_0$.
@@ -371,9 +373,9 @@ Un problema está $\textbf{bien planteado}$ cuando es $\textbf{unisolvente}$ y $
 	\end{nlist}
 \end{ndef}
 
-En el siguiente ejemplo veremos un problema mal planteado.
-
 \begin{ejemplo}
+Veamos un problema mal planteado.
+
 Sean X := $\mathbb{R}$, Y := $\mathbb{R}_+ \;$ y $\; f(x) := \vert x \vert , \; \forall x \in X$\\
 Observamos que este problema no es unisolvente, ya que si $y_0$ = 1 (lo mismo vale $\forall y_0 > 0$) tenemos que f(-1) = 1 = f(1)
 \end{ejemplo}
@@ -384,56 +386,56 @@ Denotaremos a la función g como la $\textbf{resolvente}$ de f si g es la invers
 
 \begin{ejemplo}
 Sean X := $\mathbb{R}$, Y := $\mathbb{R}_+ \;$ y $\; f(x) := e^x , \; \forall x \in X$\\
-Entonces este problema es unisolvente, luego tiene resolvente: g(y) = log y, para todo y $\in$ Y.
+Entonces este problema es unisolvente, luego tiene resolvente: $g(y) = log(y)$, $\forall y_0 \in Y$.
 \end{ejemplo}
 
 Podemos ver la estabilidad de un problema intuitivamente, es decir, a pequeñas perturbaciones de los datos $y_0$ corresponden pequeñas perturbaciones de la solución $x_0$.
 
 \begin{ejemplo}
-Consideremos el problema X := [-1,1] =: Y, $\;$
-$
+Consideremos el problema siendo X := [-1,1] =: Y y la función
+$$
 f(x) := \left\{ \begin{array}{lcc}
 x & si & -1 < x < 1 \\
 \\ -x & si & x = \pm 1
 \end{array}
 \right.
-$.\\
-Entonces este problema es unisolvente, ya que la función f :  [-1,1] $\rightarrow$ [-1,1] es biyectiva y g = f.\\
+$$.\\
+Entonces este problema es unisolvente, ya que la función $f :  [-1,1] \rightarrow [-1,1]$ es biyectiva y $g = f$.\\
 Pero para que esté bien planteado, tiene que ser, además, estable. Veamos que no es estable, ya que a pequeñas perturbaciones del dato $y_0$ = -1 (lo mismo con $y_0$ = 1) no corresponden pequeñas perturbaciones de $x_0$ = 1.\\
 Sea $y_n := -1 + \frac{1}{n} \rightarrow y_0 = -1$, entonces $g(y_n) = -1 + \frac{1}{n} \rightarrow -1$, ya que $y_n = g(y_n)$.\\
 Luego $\vert -1 - x_0 \vert = 2$, es decir, las perturbaciones de $x_0$ son muy grandes.
 \end{ejemplo}
 
-Ahora nos planteamos la siguiente cuestión: ¿La estabilidad del problema y la continuidad de la resolvente g tienen algo que ver? Veamos en el siguiente ejemplo que no siempre es así.
+Ahora nos planteamos la siguiente cuestión: ¿La estabilidad del problema y la continuidad de la resolvente $g$ tienen algo que ver? Veamos en el siguiente ejemplo que no siempre es así.
 
 \begin{ejemplo}
-Consideremos el problema $f : \mathbb{R}_+ \rightarrow \mathbb{R}_+, f(x) := \left( \frac{x}{10} \right) ^10 \; \forall x \geq 0$.\\
-Tenemos que este problema es unisolvente y su resolvente es $g : \mathbb{R}_+ \rightarrow \mathbb{R}_+, g(y) = 10y^{\frac{1}{10}} \; \forall y \geq 0$.\\
-Tenemos que g es continua, luego pequeños cambios de los datos $y \in \mathbb{R}_+$ nos llevan a cambios cercanos de las correspondientes soluciones $x \in \mathbb{R}_+$ pero no controlados, se aproximan a una velocidad diferente. Vamos a comprobarlo.\\
-Tenemos que $y_0 = 0 = x_0$. Sea y un dato próximo a $y_0$, por ejemplo y = $10^{-10}$. Entonces la solución correspondiente es $x = g(y) = 10y^{\frac{1}{10}} = 10 \cdot \left( 10^{-10} \right) ^{\frac{1}{10}} = \frac{10}{10} = 1$. Por lo que tenemos lo siguiente:\\
-$\vert y - y_0 \vert = 10^{-10}$, $\vert x - x_0 \vert = 1$.\\
-Es decir, el número $10^{-10}$ indica la velocidad con la que se mueven los datos y, en comparacion con el número 1, que indica que los datos x se mueven mucho más rápido, lo que nos lleva a que, aunque g sea continua, la velocidad de aproximación es diferente, luego no hay estabilidad.
+Consideremos el problema siendo la función $$f : \mathbb{R}_+ \rightarrow \mathbb{R}_+$$ $$f(x) := \left( \frac{x}{10} \right) ^{10} \; \forall x \geq 0$$\\
+Tenemos que este problema es unisolvente y su resolvente es $$g : \mathbb{R}_+ \rightarrow \mathbb{R}_+$$ $$g(y) = 10y^{\frac{1}{10}} \; \forall y \geq 0$$\\
+Tenemos que $g$ es continua, luego pequeños cambios de los datos $y \in \mathbb{R}_+$ nos llevan a cambios cercanos de las correspondientes soluciones $x \in \mathbb{R}_+$ pero no controlados, se aproximan a una velocidad diferente. Vamos a comprobarlo.\\
+Tenemos que $y_0 = 0 = x_0$. Sea $y$ un dato próximo a $y_0$, por ejemplo $y = 10^{-10}$. Entonces la solución correspondiente es $$x = g(y) = 10y^{\frac{1}{10}} = 10 \cdot \left( 10^{-10} \right) ^{\frac{1}{10}} = \frac{10}{10} = 1$$ Por lo que tenemos lo siguiente:\\
+$$\vert y - y_0 \vert = 10^{-10}$$ $$\vert x - x_0 \vert = 1$$\\
+Es decir, el número $10^{-10}$ indica la velocidad con la que se mueven los datos $y$, en comparación con el número 1, que indica que los datos $x$ se mueven mucho más rápido, lo que nos lleva a que, aunque $g$ sea continua, la velocidad de aproximación es diferente, luego no hay estabilidad.
 \end{ejemplo}
 
 Luego podríamos decir que la estabilidad es una condición que fuerce un control de los valores de las soluciones en función de los datos, de forma que pequeñas perturbaciones de $y_0$ generen perturbaciones pequeñas y controladas de $x_0$.
 
-\begin{ndef}
+\begin{ndef}[Aplicación estable]
 Sean X e Y subconjuntos no vacíos de sendos espacios normados, $g : Y \rightarrow X$ una aplicación e $y_0 \in Y$. Diremos que g es $\textbf{estable}$ en $y_0$ cuando
  \[ \exists \delta , M > 0 : sup \; \left\lbrace \frac{ \Vert g(y) - g(y_0) \Vert }{ \Vert y - y_0 \Vert } : y \in Y \wedge 0 < \Vert y - y_0 \Vert < \delta \right\rbrace < M \]
 y que g es $\textbf{estable}$ si lo es en todos y cada uno de los elementos de Y.
 \end{ndef}
 
-\begin{ndef}
+\begin{ndef}[Problema estable]
 Un problema es $\textbf{estable en $y_0 \in$ Y}$ si su resolvente $g : Y \rightarrow X$ lo es en dicho punto, y es $\textbf{estable}$ si lo es en cualquier dato de Y.
 \end{ndef}
 
 Habrá mejor comportamiento cuanto más pequeño sea M.
 
 \begin{nprop}
-g es estable en $y_0 \Rightarrow$ g es continua en $y_0$ 
+$g$ es estable en $y_0 \Rightarrow$ $g$ es continua en $y_0$ 
 \end{nprop}
 
-Veamos que la implicación $\nLeftarrow$ se cumple al tomar la resolvente del ejemplo anterior en 0, o si se quiere, la función raíz cuadrada en 0.\\
+La implicación $\Leftarrow$ se cumple al tomar la resolvente del ejemplo anterior en 0, o si se quiere, la función raíz cuadrada en 0.\\
 
 \begin{nprop}
 Toda función real de variable real de clase $C^1$ es estable.
@@ -448,11 +450,11 @@ Si $x_0f(x_0) = 0$, entonces los errores absolutos cerca de $f(x_0)$ e $x_0$ es:
 
 De forma precisa:
 
-\begin{ndef}
-Dada una función $f \in C^1(\mathbb{R})$ y un punto $x_0 \in \mathbb{R}$, el $\textbf{condicionamiento relativo}$ de f en $x_0$ viene dado por
-\[ c(f, x_0) := \left\vert \frac{f'(x_0)x_0}{f(x_0)} \right\vert \]
-siempre que $x_0f(x_0) \neq 0$.\\
-En caso contrario, el $\textbf{condicionamiento absoluto}$ de f en $x_0$ es
+\begin{ndef}[Condicionamiento de una aplicación]
+Dada una función $\;f \in C^1(\mathbb{R})$ y un punto $x_0 \in \mathbb{R}$, entonces el $\textbf{condicionamiento relativo}$ de f en $x_0$ viene dado por
+\[ c(f, x_0) := \left\vert \frac{f'(x_0)\cdot x_0}{f(x_0)} \right\vert \]
+siempre que $x_0\cdot f(x_0) \neq 0$.\\
+Además, el $\textbf{condicionamiento absoluto}$ de f en $x_0$ es
 \[ C(f, x_0) := \vert f'(x_0) \vert \]
 \end{ndef}
 
@@ -461,7 +463,7 @@ Para calcular el condicionamiento en funciones de varias variables, usamos lo si
 \[ c(f,x_0) := \frac{\left\Vert \frac{\partial f}{\partial x} (x_0) \right\Vert \Vert x_0 \Vert}{\Vert f(x_0) \Vert} \]
 \[ C(f,x_0) := \left\Vert \frac{\partial f}{\partial x} (x_0) \right\Vert \]
 
-\begin{ndef}
+\begin{ndef}[Condicionamiento de un problema]
 Si en un problema la resolvente s de clase $C^1$ e $y_0 \in Y$, el $\textbf{condicionamiento relativo}$ o $\textbf{absoluto}$ del problema son los de su resolvente en dicho punto.
 \end{ndef}
 
@@ -470,17 +472,19 @@ Aunque se trata de un concepto bastante ambiguo, suele decirse que una aplicaci�
 \end{nota}
 
 \begin{ejemplo}
-Sea $f : (0,1) \rightarrow (0, \pi / 2), \; f(x) := arcsen(x)$.\\
-Veamos si está bien planteado.\\
-La resolvente es $g : (0, \pi / 2) \rightarrow (0,1), \; g(y) := sen(y)$. Luego está bien planteado.\\
+Sea $$f : (0,1) \rightarrow (0, \pi / 2)$$ $$f(x) := arcsen(x)$$
+Veamos si está bien planteado.
+
+La resolvente es $$g : (0, \pi / 2) \rightarrow (0,1)$$ $$g(y) := sen(y)$$
+Luego está bien planteado.\\
 Veamos si está bien condicionado.\\ Para ello calculamos el condicionamiento relativo en $y_0 \in (0, \pi / 2)$.\\
 \[ c(g,y_0) = \frac{\vert g'(y_0)y_0 \vert }{\vert g(y_0) \vert} = y_0 \frac{cos(y_0)}{sen(y_0)} \]
-Como $c(g,y_0) \in (0,1) \Rightarrow$ está bien condicionado.
+Como $c(g,y_0) \in (0,1)$, entonces está bien condicionado.
 \end{ejemplo}
 
 \begin{ejemplo}
-Sea $A \in \mathbb{R}^{N \times N}$ regular e $y \in \mathbb{R}$, encuentra $x \in \mathbb{R}^N$ : f(x) = y.\\
-Sea f(x) = Ax, como A es regular, es unisolvente el problema, luego tiene resolvente $g : \mathbb{R}^N \rightarrow \mathbb{R}^N$, $g(y) := A^{-1}y, \; \; \forall y \in \mathbb{R}^N$\\
+Sea $A \in \mathbb{R}^{N \times N}$ regular e $y \in \mathbb{R}$, vamos a encontrar $x \in \mathbb{R}^N$ tal que $f(x) = y$\\
+Sea $f(x) = Ax$. Como $A$ es regular, es unisolvente el problema, luego tiene resolvente $$g : \mathbb{R}^N \rightarrow \mathbb{R}^N$$ $$g(y) := A^{-1}y$$
 Además, el problema es estable en todo $y_0 \in \mathbb{R}^N$, ya que:
 \[ \Vert g(y) - g(y_0) \Vert _\infty \leq \Vert A^{-1} \Vert _\infty \Vert y - y_0 \Vert _\infty \]
 Ahora calcularemos el condicionamiento relativo.
@@ -504,7 +508,7 @@ y su solución $x_0 = \begin{bmatrix}
 1 \\
 \end{bmatrix}$\\
 
-Veamos que hay un mal condicionamiento, ya que el condicionamiento es demasiado grande en comparación con el resto. Para ello, calculamos antes la inversa de la matriz A y la norma del máximo de esta, de la solución $x_0$ y del dato $y_0$.
+Veamos que hay un mal condicionamiento, ya que el condicionamiento es demasiado grande en comparación con el resto. Para ello, calculamos antes la inversa de la matriz $A$ y la norma del máximo de esta, de la solución $x_0$ y del dato $y_0$.
 
 \[ A^{-1} = \begin{bmatrix}
 -999 & 1000 \\
@@ -523,14 +527,14 @@ Su solución es $x = A^{-1}y = \begin{bmatrix}
 0 \\
 2 \\
 \end{bmatrix}$. No es próxima a la solución inicial, ya que $\Vert x - x_0 \Vert _\infty = 1$\\
-La interpretación geométrica de este resultado es: las columnas de A forman base de $\mathbb{R}^{2 \times 2}$, calculamos las coordenadas de y en $y_0$ en dicha base. Un pequeño cambio entre y e $y_0$ genera un cambio grande de coordenadas por ser los vectores de la base casi paralelos.
+La interpretación geométrica de este resultado es: las columnas de $A$ forman base de $\mathbb{R}^{2 \times 2}$, calculamos las coordenadas de y en $y_0$ en dicha base. Un pequeño cambio entre y e $y_0$ genera un cambio grande de coordenadas por ser los vectores de la base casi paralelos.
 \end{ejemplo}
 
 Ahora nos planteamos la siguiente pregunta: ¿está globalmente acotado el condicionamiento relativo de un sistema de cuaciones lineales? La respuesta es afirmativa y nos da una idea de cómo de estable es.\\
 
 La siguiente definición será útil para calcular el condicionamiento de una matriz cuando la norma es inducida.
 
-\begin{ndef}
+\begin{ndef}[Condicionamiento de una matriz regular]
 Si $\Vert \cdot \Vert$ denota la norma matricial en $\mathbb{R}^{N \times N}$ inducida por una norma en $\mathbb{R}^N$, que notaremos igualmente como $\Vert \cdot \Vert$, entonces definimos el $\textbf{condicionamiento}$ c(A) de una matriz regular A $\in \mathbb{R}^{N \times N}$ como
 \[ c(A) := \Vert A^{-1} \Vert \Vert A \Vert \]
 \end{ndef}
@@ -755,7 +759,7 @@ Consideremos el sistema de punto flotante $\mathbb{F}(b,t,L,U)$, con $L \leq e \
 \end{nprop}
 
 \begin{proof}
-$\newline$
+$ $
 	\begin{nlist}
 	\item 
 	\[ \vert x - tr(x) \vert = b^e \left\vert \sum_{n=t+1}^{\infty} a_nb^{-n} \right\vert \leq b^e(b-1) \sum_{n=t+1}^{\infty} b^{-n} = b^{e-t} \]
@@ -773,8 +777,8 @@ $\newline$
 	\end{nlist}	
 \end{proof}
 
-\begin{ndef}
-La cota que aparece en el error relativo del redondeo recibe el nombre de $\textbf{precisión máquina}$ (o $\textbf{unidad de redondeo}$) y se denota por u, es decir,
+\begin{ndef}[Precisión máquina]
+La cota que aparece en el error relativo del redondeo recibe el nombre de $\textbf{precisión máquina}$ (o $\textbf{unidad de redondeo}$) y se denota por $u$, es decir,
 \[ u := \frac{1}{2}b^{1-t} = \frac{1}{2} \varepsilon _M \]
 \end{ndef}
 
@@ -835,10 +839,10 @@ Ahora ya podemos calcular el condicionamiento de $f_n$ en $x_0$:
 \end{ejemplo}
 
 A continuación vamos a estudiar las operaciones aritméticas elementales y los errores debidos que se producen en estas debidos a truncaturas, redondeos o a cualquier otra circunstancia.\\
-Sea x el dato, $\mu _x$ el error relativo para x y (1 + $\mu _x$)x su valor aproximado.
+Sea x el dato, $\mu _x$ el error relativo para $x$ y $(1 + \mu _x)x$ su valor aproximado.
 	\begin{nlist}
 	\item Suma (igual para la resta).\\
-	Sean los datos $x, y \in \mathbb{R}$ tales que $x + y \neq 0$ y sus valores aproximados (1 + $\mu _x$)x, (1 + $\mu _y$)y, entonces el error cometido al realizar la operación suma es:
+	Sean los datos $x, y \in \mathbb{R}$ tales que $x + y \neq 0$ y sus valores aproximados $(1 + \mu _x)x$, $(1 + \mu _y)y$, entonces el error cometido al realizar la operación suma es:
 	\[ (1 + \mu _x)x + (1 + \mu _y)y = x + y + \mu _xx + \mu _yy = (x+y) \left( 1 + \frac{\mu _xx + \mu _yy}{x+y} \right) = (x+y) \left( 1 + \frac{x}{x+y} \mu _x + \frac{y}{x+y} \mu _y \right)  \]
 	Luego
 	\[ \mu _{x+y} = \frac{x}{x+y} \mu _x + \frac{y}{x+y} \mu _y \]
@@ -846,18 +850,20 @@ Sea x el dato, $\mu _x$ el error relativo para x y (1 + $\mu _x$)x su valor apro
 	\[ \vert \mu _{x+y} \vert \leq \vert \mu _x \vert + \vert \mu _y \vert \]
 	Aunque si x e y tienen signos opuestos, $\mu _{x+y}$ puede dispararse si $x + y \approx 0$, generándose un error relativo enorme, conocido como $\textbf{error de cancelación}$. 
 	\item Multiplicación.\\
-	Los errores relativos de x e y son pequeños.
+	Los errores relativos de $x$ e $y$ son pequeños.
 	\[ (1 + \mu _x)x \cdot (1 + \mu _y)y = (1 + \mu _x + \mu _y + \mu _x \mu _y)xy \approx (1 + \mu _x + \mu _y)xy \]
 	Luego
 	\[ \mu _{xy} \approx \mu _x + \mu _y \]
 	\item División.\\
-	Los errores relativos de x e y son pequeños, siendo $y \neq 0$.
+	Los errores relativos de $x$ e $y$ son pequeños, siendo $y \neq 0$.
 	\[ \frac{(1 + \mu _x)x}{(1 + \mu _y)y} = \frac{x}{y}(1 + \mu _x)(1 - \mu _y + \mu _y^2 - \mu _y^3 + \cdots) \approx \frac{x}{y}(1 + \mu _x - \mu _y) \]
 	Por lo que
 	\[ \mu _{x/y} \approx \mu _x - \mu _y \]
 	\end{nlist}	
 	
-	
+
+$\pagebreak$
+
 \part{Tema 2. Resolución numérica de sistemas de ecuaciones lineales}
 En este tema vamos a hacer un tratamiento numérico de los sistemas de ecuaciones lineales. Vamos a usar dos métodos:
 	\begin{nlist}
@@ -867,22 +873,21 @@ En este tema vamos a hacer un tratamiento numérico de los sistemas de ecuacione
 
 \section{Métodos directos: Gauss y versiones, factorización de matrices}
 Si tenemos un sistema $N \times N$ unisolvente, con N grande, la regla de Cramer es ineficiente, ya que tenemos un gran número de operaciones elementales. La regla de Cramer hace N + 1 determinantes + N divisiones, lo cual lleva a
-\[ (N+1)(N!N-1)+N = (N+1)!N-1 \; \; operaciones \]
+\[ (N+1)\cdot (N!\cdot N-1)+N = (N+1)\cdot !N-1 \; \; operaciones \]
 
 \subsection{Sistemas triangulares}
-Sean la matriz $U \in \mathbb{R}^{N \times N}$ $\textbf{triangular superior}$ con elementos diagonales no nulos, el vector de incógnitas $x \in \mathbb{R}^N$ y el vector de términos independientes b, tenemos el siguiente sistema triangular: $\textbf{Ux = b}$. Este sistema se resuelve por $\textbf{sustitución hacia atrás}$ y el algoritmo para resolverlo es:
+Sean la matriz $U \in \mathbb{R}^{N \times N}$ $\textbf{triangular superior}$ con elementos diagonales no nulos, el vector de incógnitas $x \in \mathbb{R}^N$ y el vector de términos independientes $b$, tenemos el siguiente sistema triangular: $\textbf{Ux = b}$. Este sistema se resuelve por $\textbf{sustitución hacia atrás}$ y el algoritmo para resolverlo es:
 \[ x_i = \frac{1}{u_{ii}} \left( b_i - \sum _{j=i+1}^N u_{ij}x_j \right), \; \; con \; \; i = N,...,1 \]
-Sea la matriz $L \in \mathbb{R}^{N \times N}$  $\textbf{triangular inferior}$ con elementos diagonales no nulos, el vector de incógnitas $x \in \mathbb{R}^N$ y el vector de términos independientes b, tenemos el siguiente sistema triangular: $\textbf{Lx = b}$. Este sistema se resuelve por $\textbf{sustitución hacia adelante}$ y el algoritmo para resolverlo es:
+Sea la matriz $L \in \mathbb{R}^{N \times N}$  $\textbf{triangular inferior}$ con elementos diagonales no nulos, el vector de incógnitas $x \in \mathbb{R}^N$ y el vector de términos independientes $b$, tenemos el siguiente sistema triangular: $\textbf{Lx = b}$. Este sistema se resuelve por $\textbf{sustitución hacia adelante}$ y el algoritmo para resolverlo es:
 \[ x_i = \frac{1}{l_{ii}} \left( b_i - \sum _{j=1}^{i-1} l_{ij}x_j \right), \; \; con \; \; i = 1,...,N \]
 		
 \subsection{Métodos de Gauss y Gauss-Jordan. Pivotaje}
 \begin{nlist}
 \item $\textbf{Método de Gauss}$\\
-Si tenemos un sistema Ax = b unisolvente, con el método de Gauss obtenemos otro sistema $\textbf{Ux = c}$ equivalente con U triangular superior, que ya hemos visto como se resuelve.\\
-Los datos son $N \geq 1, A \in \mathbb{R}^{N \times N}, b \in \mathbb{R}^N$.\\
+Si tenemos un sistema $Ax = b$ unisolvente, con el método de Gauss obtenemos otro sistema $\textbf{Ux = c}$ equivalente con $U$ triangular superior, que ya hemos visto como se resuelve.\\
+Los datos son $N \geq 1$, $A \in \mathbb{R}^{N \times N}$, $b \in \mathbb{R}^N$.\\
 Sea $A^{(1)}$ := A. Suponemos que $a_{kk}^{(k)} \neq 0 \; con \; k = 1,...,N$ (en caso contrario hemos terminado y no es posible llegar a un sistema triangular equivalente). Definimos recursivamente los multiplicadores:
 \[ m_{ik} := \frac{a_{ik}^{(k)}}{a_{kk}^{(k)}}, \; \; con \; \; i = k+1,...,N \]
-e
 \[ a_{ij}^{(k+1)} := a_{ij}^{(k)} - m_{ik}a{kj}^{(k)}, \; \; con \; \; i = k+1,...,N; \; j = k,...,N \]
 \[ b_i^{(k+1)} := b_i^{(k)} - m_{ik}a_{kj}^{(k)}, \; \; con \; \; i = k+1,...,N \]
 Por lo que obtenemos un sistema triangular superior equivalente que se resuelve por sustitución hacia atrás:
@@ -938,10 +943,10 @@ donde $U := A^{(N)}$, $c := b^{(N)}$.
 	\end{ejemplo}
 			
 	\begin{nprop}
-	Sean $A \in \mathbb{R}^{N \times N}$ una matriz cuadradad y $b \in \mathbb{R}^N$, entonces son equivalentes:
+	Sean $A \in \mathbb{R}^{N \times N}$ una matriz cuadrada y $b \in \mathbb{R}^N$, entonces son equivalentes:
 		\begin{nlist}
 		\item El correspondiente método de Gauss puede completarse hasta el paso N-ésimo.
-		\item Para cada k = 1,..., N la k-ésima submatriz principal de A
+		\item Para cada $k = 1,..., N$ la k-ésima submatriz principal de $A$
 		\[ A_k =
 		\begin{bmatrix}
 		a_{11} & a_{12} & \cdots & a_{1k} \\
@@ -956,7 +961,7 @@ donde $U := A^{(N)}$, $c := b^{(N)}$.
 Los errores de redondeo afectan al método de Gauss. Además, evitaremos dividir por coeficientes relativamente pequeños y también evitaremos que algún $a_{kk}^{(k)}$ del método de Gauss sea nulo.
 
 \item $\textbf{Método de Gauss con pivotaje}$ (o pivotaje parcial), variante adaptativa de Gauss.\\
-En este método se modifica el paso k, por lo que antes de definir los multiplicadores $m_{ik}$, la matriz $A^{(k+1)}$ y el vector $b^{(k+1)}$, intercambiaremos de posición si es necesario dos de las filas k,...,N de la matriz $A^{(k)}$ de forma que el elemento del vector que tiene mayor valor absoluto sea $a_{kk}^{(k)}$.
+En este método se modifica el paso $k$, por lo que antes de definir los multiplicadores $m_{ik}$, la matriz $A^{(k+1)}$ y el vector $b^{(k+1)}$, intercambiaremos de posición si es necesario dos de las filas $k,...,N$ de la matriz $A^{(k)}$ de forma que el elemento del vector que tiene mayor valor absoluto sea $a_{kk}^{(k)}$.
 \[
 \begin{bmatrix}
 a_{kk}^{(k)} \\
@@ -975,12 +980,12 @@ a_{11}^{(1)} & a_{12}^{(1)} & \cdots & \cdots & \cdots & \cdots & a_{1N}^{(1)} \
 \]
 Finalmente, el sistema equivalente al de partida se resuelve por sustitución hacia atrás.
 	\begin{nota}
-	El método de Gauss con pivotaje tiene sentido hasta el último paso N-ésimo $\Leftrightarrow$ la matriz de coeficientes A es regular (el sistema es compatible determinado).
+	El método de Gauss con pivotaje tiene sentido hasta el último paso N-ésimo $\Leftrightarrow$ la matriz de coeficientes $A$ es regular (el sistema es compatible determinado).
 	\end{nota}
 			
 	\begin{nota}
 	Otra variante adaptativa del método de Gauss, $\textbf{pivotaje total o completo}$, no solo
-reordena las filas k,..., N de $A^{(k)}$, sino también las columnas k,..., N de forma
+reordena las filas $k,..., N$ de $A^{(k)}$, sino también las columnas $k,..., N$ de forma
 que el elemento de la submatriz de dicha matriz correspondiente a las
 mencionadas filas y columnas tenga a $a_{kk}^{(k)}$ como el elemento de mayor valor absoluto. Sin embargo, requiere un mayor número de operaciones.
 	\end{nota}
@@ -991,19 +996,19 @@ también por encima, con el mismo tipo de fórmula. Sin embargo, su coste en ope
 \end{nlist}
 		
 \subsection{Métodos de factorización}
-Los métodos de factorización se usan cuando tenmos sistemas con la misma matriz de coeficientes, para resolverlos más rápido.
+Los métodos de factorización se usan cuando tenemos sistemas con la misma matriz de coeficientes, para resolverlos más rápido.
 		
 \begin{ndef}[Factorización LU]
-Sea Ax = b un sistema compatible determinado, sea L una matriz triangular inferior y U una matriz triangular superior, entonces:
+Sea $Ax = b$ un sistema compatible determinado, $L$ una matriz triangular inferior y $U$ una matriz triangular superior, entonces:
 \[ \textbf{A = LU} \]
 \end{ndef}
 
-Como A = LU $\Rightarrow$ LUx = b. Por lo que para resolver este sistema, se siguen los siguientes paso:
+Como $A = LU$, entonces $LUx = b$. Por lo que para resolver este sistema, se siguen los siguientes pasos:
 		
 \begin{nlist}
-\item Calculamos las matrices L y U.
+\item Calculamos las matrices $L$ y $U$.
 \item Sea $\textbf{y := Ux}$, entonces tenemos que resolver y de $\textbf{Ly = b}$ por sustitución hacia delante.
-\item Por último, resolvemos x de $\textbf{Ux = y}$ por sustitución hacia atrás.
+\item Por último, resolvemos $x$ de $\textbf{Ux = y}$ por sustitución hacia atrás.
 \end{nlist}
 			
 \begin{ejemplo}
@@ -1020,7 +1025,7 @@ b = \begin{bmatrix}
 0 \\
 \end{bmatrix}
 \]
-Primero calculamos las matrices L y U. Como A = LU, entonces:
+Primero calculamos las matrices $L$ y $U$. Como $A = LU$, entonces:
 \[ L = \begin{bmatrix}
 1 & 0 & 0 \\
 2 & 1 & 0 \\
@@ -1033,7 +1038,7 @@ U = \begin{bmatrix}
 0 & 0 & -15 \\
 \end{bmatrix}
 \]
-Ahora tenemos que resolver el sistema Ly = b.
+Ahora tenemos que resolver el sistema $Ly = b$.
 \[ \begin{bmatrix}
 1 & 0 & 0 \\
 2 & 1 & 0 \\
@@ -1052,7 +1057,7 @@ y_3 \\
 \end{bmatrix}
 \]
 Lo resolvemos por sustitución hacia adelante y obtenemos que $y_1 = -1, \; y_2 = 4, \; y_3 = -13$.\\
-Ahora resolvemos el sistema Ux = y.
+Ahora resolvemos el sistema $Ux = y$.
 \[ 
 \begin{bmatrix}
 1 & 3 & -1 \\
@@ -1071,13 +1076,13 @@ x_3 \\
 -13 \\
 \end{bmatrix}
 \]
-Lo resolvemos por sustitución hacia atrás y obtenemos que $x_1 = \frac{5}{3}, \; x_2 = \frac{-3}{5}, \; x_3 = \frac{13}{15}$. Que es la solución del sistema inicial Ax = b.
+Lo resolvemos por sustitución hacia atrás y obtenemos que $x_1 = \frac{5}{3}, \; x_2 = \frac{-3}{5}, \; x_3 = \frac{13}{15}$. Que es la solución del sistema inicial $Ax = b$.
 \end{ejemplo}
 
-Tenemos que tener en cuenta que no siempre podemos obtener una factorización tipo LU para una matriz regular. Solo se podrá si $a_{11} = l_{11}u_{11} \neq 0$.
+Tenemos que tener en cuenta que no siempre podemos obtener una factorización tipo $LU$ para una matriz regular. Solo se podrá si $a_{11} = l_{11}u_{11} \neq 0$.
 
 \begin{nprop}
-Sean $N \geq 1$, $A \in \mathbb{R}^{N \times N}$, $b \in \mathbb{R}^N$ y supongamos que aplicando el método de Gauss al sistema Ax = b se obtiene una matriz triangular superior $A^{(N)}$ y un vector $b^{(N)}$ de forma que el sistema $A^{(N)}x = b^{(N)}$ es equivalente al de partida. Entonces
+Sean $N \geq 1$, $A \in \mathbb{R}^{N \times N}$, $b \in \mathbb{R}^N$ y supongamos que aplicando el método de Gauss al sistema $Ax = b$ se obtiene una matriz triangular superior $A^{(N)}$ y un vector $b^{(N)}$ de forma que el sistema $A^{(N)}x = b^{(N)}$ es equivalente al de partida. Entonces
 \[ A = LU,\]
 siendo
 \[ U = A^{(N)} \]
@@ -1088,39 +1093,39 @@ m_{31} & m_{32} & 1 & \cdots & 0 \\
 \vdots &  \vdots & \vdots & \ddots & \vdots \\
 m_{N1} & m_{N2} & m_{N3} & \cdots & 1 \\
 \end{bmatrix}, \]
-donde los coeficientes de la parte inferior de L son los multiplicadores del método de Gauss definidos recursivamente.
+donde los coeficientes de la parte inferior de $L$ son los multiplicadores del método de Gauss definidos recursivamente.
 \end{nprop}			
 			
 \begin{nth}
 Sea $A \in \mathbb{R}^{N \times N}$ una matriz regular. Entonces equivalen
 	\begin{nlist}
 	\item Para cualquier $b \in \mathbb{R}^N$, el método de Gauss para el correspondiente sistema de ecuaciones lineales puede completarse hasta el paso N-ésimo.
-	\item A admite una factorización LU.
-	\item Las N submatrices principales de A son regulares.
+	\item $A$ admite una factorización $LU$.
+	\item Las N submatrices principales de $A$ son regulares.
 	\end{nlist}
 \end{nth}
 			
 \begin{nth}
-Sea A una matriz regular, entonces:
+Sea $A$ una matriz regular, entonces:
 	\begin{nlist}
-	\item El método de Gauss con pivotaje es factible, para cualquier sistema de ecuaciones lineales que tenga a A por matriz de coeficientes.
-	\item Salvo la eventual permutación de algunas de sus filas, A admite una factorización LU.
+	\item El método de Gauss con pivotaje es factible, para cualquier sistema de ecuaciones lineales que tenga a $A$ por matriz de coeficientes.
+	\item Salvo la eventual permutación de algunas de sus filas, $A$ admite una factorización $LU$.
 	\end{nlist}
 \end{nth}
 			
 \begin{ndef}[Factorización de Doolittle]
-			En el sistema LUx = b, los coeficientes de la diagonal de L son 1, es decir
+			En el sistema $LUx = b$, los coeficientes de la diagonal de $L$ son 1, es decir
 \[ l_{11} = \cdots = l_{NN} = 1 \]
 \end{ndef}
 			
 A la hora de programar la factorización de Doolittle, el algoritmo es:\\
-Sea i = 1,...,N, entonces
+Sea $i = 1,...,N$, entonces
 \[ u_{ij} = a_{ij} - \sum_{k=1}^{i-1} l_{ik}u_{kj}, \; \; con \; j = i,...,N \]
 Y supuesto que $u_{ii} \neq 0$
 \[ l_{ji} = \frac{1}{u_{ii}} \left( a_{ji} - \sum_{k=1}^{i-1} l_{jk}u_{ki} \right), \; \; con \; j = i+1,...,N \]			
 			
 \begin{ndef}[Factorización de Crout]
-En el sistema LUx = b, los coeficientes de la diagonal de U son 1, es decir
+En el sistema $LUx = b$, los coeficientes de la diagonal de $U$ son 1, es decir
 \[ u_{11} = \cdots = u_{NN} = 1 \]
 \end{ndef}
 			
@@ -1129,7 +1134,7 @@ Sea $A \in \mathbb{R}^{N \times N}$, se dice que es $\textbf{definida positiva}$
 \[ x^TAx > 0, \; \; \; \forall x \in \mathbb{R}^N \backslash \lbrace 0 \rbrace \]
 \end{ndef}
 			
-La factorización LU en matrices simétricas definidas positivas es válida siempre. Además, $L = U^T$.
+La factorización $LU$ en matrices simétricas definidas positivas es válida siempre. Además, $L = U^T$.
 			
 \begin{ndef}[Factorización tipo Cholesky]
 Sea $A \in \mathbb{R}^{N \times N}$ una matriz simétrica y definida positiva. Entonces existe una única matriz triangular superior $U \in \mathbb{R}^{N \times N}$ con coeficientes positivos en su diagonal principal y de forma que
@@ -1137,20 +1142,20 @@ Sea $A \in \mathbb{R}^{N \times N}$ una matriz simétrica y definida positiva. E
 \end{ndef}
 			
 A la hora de programar la factorización tipo Cholesky, el algoritmo es:\\
-Para todo j = 1,...,N
+Para todo $j = 1,...,N$
 \[ i = 1,...,j-1 \; \Rightarrow \; u_{ij} = \frac{1}{u_{ii}} \left( a_{ij} - \sum_{k=1}^{i-1} u_{ki}u_{kj} \right) \]
 \[ u_{jj} = \sqrt{a_{jj} - \sum_{k=1}^{j-1}u_{kj}^2} \]
 Además, se eliminan los elementos de debajo de la diagonal principal, ya que hay simetría.
 			
 \begin{nprop}
-Una matriz cuadrada A es simétrica y definida positiva si, y solo si, admite una factorización tipo Cholesky.
+Una matriz cuadrada $A$ es simétrica y definida positiva si, y solo si, admite una factorización tipo Cholesky.
 \end{nprop}
 		
 \section{Métodos iterativos: métodos de Jacobi y Gauss-Seidel}
 Los métodos iterativos nos dan la solución de un sistema de ecuaciones lineales cuadrado y compatible determinado como límite de una sucesión. Cada término de la sucesión se genera de forma recursiva a partir del anterior, los cuales reciben el nombre de iteradores. Además, cuando tenemos sistemas de grandes dimensiones y la matriz de coeficientes es dispersa (número de coeficientes no nulos relativamente pequeño), tenemos problemas prácticos: análisis matricial de estructuras, método de elementos finitos...
 
 \subsection{Métodos iterativos: convergencia y consistencia}
-Sea la matriz $A \in \mathbb{R}^{N \times N}$ regular y un vector $b \in \mathbb{R}^N$, entonces tenemos un sistema de ecuaciones lineales cuadrado y unisolvente Ax = b.
+Sea la matriz $A \in \mathbb{R}^{N \times N}$ regular y un vector $b \in \mathbb{R}^N$, entonces tenemos un sistema de ecuaciones lineales cuadrado y unisolvente $Ax = b$.
 
 \begin{ndef}[Método iterativo]
 Sean $B \in \mathbb{R}^{N \times N}$, $x_0,c \in \mathbb{R}^N$, entonces se define al $\textbf{método iterativo}$ como:
@@ -1162,8 +1167,8 @@ n \geq 1 \Rightarrow x_n = Bx_{n-1}+c
 \end{ndef}
 
 \begin{ndef}[Consistencia]
-Sea x la solución del sistema, entonces
-\[ \lim_{n \rightarrow \infty}x_n = x \]
+Sea $x$ la solución del sistema, entonces
+\[ lim_{n \rightarrow \infty}x_n = x \]
 \[ \Downarrow (u \in \mathbb{R}^N \mapsto Bu + c \in \mathbb{R}^N continua) \]
 \[ \textbf{x = Bx + c} \]
 Entonces se dice que hay $\textbf{consistencia}$ del método con el sistema.
@@ -1197,13 +1202,13 @@ y converge a la solución del sistema cuando, y solo cuando,
 El pseudorrecíproco se da en la siguiente proposición.
 
 \begin{nprop}
-Supongamos que $N \geq 1$, $A,B \in \mathbb{R}^{N \times N}$ con A regular, $x_0,b,c \in \mathbb{R}^N$ y que el método iterativo
+Supongamos que $N \geq 1$, $A,B \in \mathbb{R}^{N \times N}$ con $A$ regular, $x_0,b,c \in \mathbb{R}^N$ y que el método iterativo
 \[ \left\{ \begin{array}{c}
 x_0 \; dado \\
 n \geq 1 \Rightarrow x_n = Bx_{n-1}+c
 \end{array}
 \right. \]
-es consistente con el sistema unisolvente Ax = b. Entonces método iterativo converge a la solución del sistema cualquiera sea $x_0 \in \mathbb{R}^N$ $\Leftrightarrow$ $\rho (B) < 1$.
+es consistente con el sistema unisolvente $Ax = b$. Entonces método iterativo converge a la solución del sistema cualquiera sea $x_0 \in \mathbb{R}^N$ $\Leftrightarrow$ $\rho (B) < 1$.
 \end{nprop}
 
 	\begin{proof}
@@ -1212,29 +1217,29 @@ es consistente con el sistema unisolvente Ax = b. Entonces método iterativo con
 	Resursivamente obtenemos que $x_n - x = B^n (x_0 - x)$. (2)\\
 	¿ $\Rightarrow$ ?\\
 	Basándonos en la relación de recurrencia (2) y la convergencia para todo $x_0 \in \mathbb{R}^N$, tenemos que
-	\[ \lim_{n \rightarrow \infty} B^n(x_0 - x) 0 
+	\[ lim_{n \rightarrow \infty} B^n(x_0 - x) 0 
 	\; \Leftrightarrow \; 
-	\lim_{n \rightarrow \infty} B^n = 0
+	lim_{n \rightarrow \infty} B^n = 0
 	\; \Leftrightarrow \;
 	\rho (B) < 1 \]
 	
 	¿ $\Leftarrow$ ?\\
-	Sea $x_0 \in \mathbb{R}^N$, como $\rho (B) < 1 \Rightarrow \lim_{n \rightarrow \infty} B^n = 0$.\\
+	Sea $x_0 \in \mathbb{R}^N$, como $\rho (B) < 1 \Rightarrow lim_{n \rightarrow \infty} B^n = 0$.\\
 	Usando la relación de recurrencia (2), $\Vert \cdot \Vert$ en $\mathbb{R}^N$ y su matricial inducida en $\mathbb{R}^{N \times N}$, notada de la misma forma, y con n $\geq 1$, entonces
 	\[ \Vert x_n - x \Vert = \Vert B^n(x_0-x) \Vert \leq \Vert B^n \Vert \Vert x_0 - x \Vert \]
-	Por lo que $\lim_{n \rightarrow \infty}x_n = x$
+	Por lo que $lim_{n \rightarrow \infty}x_n = x$
 	\end{proof}
 	
 \begin{nota}
-Como hemos dicho, el método iterativo converge para todo $x_0 \in \mathbb{R}^N$. Aunque esto es falso si el método iterativo es consistente con el sistema y no converge para todo $x_0 \in \mathbb{R}^N$. Por ejemplo, el sistema del ejemplo anterior\\
-b := 0 =: c $\Rightarrow$ consistencia\\
+Como hemos dicho, el método iterativo converge para todo $x_0 \in \mathbb{R}^N$. Aunque esto es falso si el método iterativo es consistente con el sistema y no converge para todo $x_0 \in \mathbb{R}^N$. Por ejemplo, el sistema del ejemplo anterior.\\
+$b := 0 =: c$ $\Rightarrow$ consistencia\\
 Además, hay convergencia solo cuando $c = 2x_0 \Leftrightarrow x_0 = 0$ y $\rho (B) = \rho (-I) = 1$.
 \end{nota}
 
 \subsection{Generación de métodos iterativos. Jacobi y Gauss-Seidel}
 La proposición anterior nos orienta al procedimiento del diseño de métodos iterativos. Por lo que son automáticamente consistentes, ya que elimina el grave problema que surge al comprobar dicha condición: hay que conocer a priori la solución del sistema... ¡que es justo lo que se pretende aproximar!
 
-Sea la matriz $A \in \mathbb{R}^{N \times N}$ regular y el vector $b \in \mathbb{R}^N$, entonces tenemos un sistema unisolvente Ax = b. Sea $\textbf{A =  M - N}$, por lo que M es regular (siempre es posible por ser A regular) y  con N no nula. Tenemos que
+Sea la matriz $A \in \mathbb{R}^{N \times N}$ regular y el vector $b \in \mathbb{R}^N$, entonces tenemos un sistema unisolvente $Ax = b$. Sea $\textbf{A =  M - N}$, por lo que $M$ es regular (siempre es posible por ser $A$ regular) y  con $N$ no nula. Tenemos que
 \[ Ax = b \Leftrightarrow (M-N)x = b \Leftrightarrow x = M^{-1}Nx + M^{-1}b \]
 Por lo que sugiere que $\textbf{B = M} ^{ \textbf{-1} } \textbf{N}$ y $\textbf{c = M} ^{\textbf{-1} } \textbf{b}$, tenemos el siguiente método iterativo
 
@@ -1249,7 +1254,7 @@ que es consistente con el sistema
 
 
 \begin{ncor}
-Sean $A, M, N \in \mathbb{R}^{N \times N}$ con A y M regulares de forma que $\textbf{A = M - N}$ y sean $b, x_0 \in \mathbb{R}^N$. Consideremos el sistema $$Ax = b$$ y el método iterativo
+Sean $A, M, N \in \mathbb{R}^{N \times N}$ con $A$ y $M$ regulares de forma que $\textbf{A = M - N}$ y sean $b, x_0 \in \mathbb{R}^N$. Consideremos el sistema $$Ax = b$$ y el método iterativo
 \[ \left\{ \begin{array}{c}
 x_0 \; dado \\
 n \geq 1 \Rightarrow x_n = M^{-1}Nx_{n-1} + M^{-1}b
@@ -1261,7 +1266,7 @@ Entonces el método iterativo converge a la solución del sistema, cualquiera se
 En resumen, todo método iterativo convergente es de esta forma:
 
 \begin{nprop}
-Sean $A, B \in \mathbb{R}^{N \times N}$, con A regular, sean $b, c \in \mathbb{R}^N$ y consideremos el sistema de ecuaciones lineales $$Ax = b$$ y el método iterativo
+Sean $A, B \in \mathbb{R}^{N \times N}$, con $A$ regular, sean $b, c \in \mathbb{R}^N$ y consideremos el sistema de ecuaciones lineales $$Ax = b$$ y el método iterativo
 \[ \left\{ \begin{array}{c}
 x_0 \; dado \\
 n \geq 1 \Rightarrow x_n = Bx_{n-1} + c
@@ -1269,7 +1274,7 @@ n \geq 1 \Rightarrow x_n = Bx_{n-1} + c
 \right. \]
 que supondremos que converge hacia la solución del sistema para cualquier estimación inicial $x_0 \in \mathbb{R}^N$. Entonces existe una descomposición de la matriz de coeficientes
 \[ \textbf{A = M - N} \]
-con $M, N \in \mathbb{R}^{N \times N}$ y M regular, tales que
+con $M, N \in \mathbb{R}^{N \times N}$ y $M$ regular, tales que
 \[ \textbf{B = M}^{-1} \textbf{N} \; \; c = \textbf{B = M}^{-1} \textbf{b} \]
 \end{nprop}
 
@@ -1280,9 +1285,9 @@ x_0 \; dado \\
 n \geq 1 \Rightarrow x_n = M^{-1}Nx_{n-1} + M^{-1}b
 \end{array}
 \right. \]
-con M regular y A = M - N.
+con $M$ regular y $A = M - N$.
 
-Aunque es un poco complejo calcular la inversa de M y luego multiplicarla por otra matriz, por lo que trabajaremos sobre otro método iterativo equivalente, que consiste en multiplicar por M a ambos lados de la igualdad:
+Aunque es un poco complejo calcular la inversa de $M$ y luego multiplicarla por otra matriz, por lo que trabajaremos sobre otro método iterativo equivalente, que consiste en multiplicar por $M$ a ambos lados de la igualdad:
 
 \[ \left\{ \begin{array}{c}
 x_0 \; dado \\
@@ -1290,10 +1295,10 @@ n \geq 1 \Rightarrow Mx_n = Nx_{n-1} + b
 \end{array}
 \right. \]
 
-Para que converja, tenemos que calcular igualmente si $\rho (M^{-1}N) < 1$. Además, la iteración $x_n$ es la solución del sistema resoluble sin un alto coste operativo, ya que M es triangular.
+Para que converja, tenemos que calcular igualmente si $\rho (M^{-1}N) < 1$. Además, la iteración $x_n$ es la solución del sistema resoluble sin un alto coste operativo, ya que $M$ es triangular.
 \[ Mx_n = Nx_{n-1} + b \]
 
-Ahora vamos a poner en práctica estos conceptos. Los métodos iterativos más populares son: $\textbf{Jacobi}$ y $\textbf{Gauss-Seidel}$. Definamos primero algunas matrices a partir de la matriz de coeficientes A.
+Ahora vamos a poner en práctica estos conceptos. Los métodos iterativos más populares son: $\textbf{Jacobi}$ y $\textbf{Gauss-Seidel}$. Definamos primero algunas matrices a partir de la matriz de coeficientes $A$.
 
 Sea $A \in \mathbb{R}^{N \times N}$ regular, definimos las matrices diagonales y triangulares:
 
@@ -1320,7 +1325,7 @@ a_{11} & 0 & \cdots & 0 \\
 0 & \cdots & 0 & 0 & 0 \\
 \end{bmatrix} \]
 
-Observemos que la matriz A verifica la hipótesis adicional: $a_{11}a_{22}...a_{NN} \neq 0$.
+Observemos que la matriz $A$ verifica la hipótesis adicional: $a_{11}a_{22}...a_{NN} \neq 0$.
 
 Bajo esta notación definimos los siguientes métodos iterativos.
 
@@ -1359,7 +1364,7 @@ i = 1,...,N \Rightarrow x_{ni} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1}^{i-1} 
 \]
 \end{ndef}
 
-La similitud que tienen estos métodos es, que descritos a partir del esquema obtenido al despejar en Ax = b $x_1$ de la primera ecuación, $x_2$ de la segunda y así hasta $x_N$ de la N-ésima
+La similitud que tienen estos métodos es, que descritos a partir del esquema obtenido al despejar en $Ax = b$ $x_1$ de la primera ecuación, $x_2$ de la segunda y así hasta $x_N$ de la N-ésima
 
 \[ \left\{ \begin{array}{c}
 x_1 = \frac{1}{a_{11}} (b_1 - a_{12}x_2 - a_{13}x_3 - \cdots - a_{1N}x_N) \\
@@ -1493,24 +1498,24 @@ A_3 = \begin{bmatrix}
 \end{ejemplo}
 
 \begin{ndef}[Diagonalmente estrictamente dominante]
-Sea la matriz $A \in \mathbb{R}^{N \times N}$, diremos que A es diagonalmente estrictamente dominante si
+Sea la matriz $A \in \mathbb{R}^{N \times N}$, diremos que $A$ es diagonalmente estrictamente dominante si
 \[ i = 1,...,N \Rightarrow \sum_{j=1 \wedge j \neq i}^N \vert a_{ij} \vert \; < \vert a_{ii} \vert \]
 \end{ndef}
 
-Los métodos de Jacobi y de Gauss-Seidel convergen para cualquier sistema de ecuaciones lineales que tenga a A por matriz de coeficientes a su solución, cualquiera sea la elección de la estimación inicial.
+Los métodos de Jacobi y de Gauss-Seidel convergen para cualquier sistema de ecuaciones lineales que tenga a $A$ por matriz de coeficientes a su solución, cualquiera sea la elección de la estimación inicial.
 
 \begin{nprop}
-Sea $A \in \mathbb{R}^{N \times N}$ una matriz diagonalmente estrictamente dominante. Entonces los métodos de Jacobi y de Gauss–Seidel, para todo sistema de ecuaciones lineales que tenga como matriz de coeficientes A, convergen hacia su solución, independientemente de la estimación inicial que se fije.
+Sea $A \in \mathbb{R}^{N \times N}$ una matriz diagonalmente estrictamente dominante. Entonces los métodos de Jacobi y de Gauss–Seidel, para todo sistema de ecuaciones lineales que tenga como matriz de coeficientes $A$, convergen hacia su solución, independientemente de la estimación inicial que se fije.
 \end{nprop}
 
 El recíproco falso: basta considerar cualquier sistema en el que la matriz de
-coeficientes sea la matriz $A_1 (o A_2)$ del penúltimo ejemplo.
+coeficientes sea la matriz $A_1$ (o $A_2$) del penúltimo ejemplo.
 
 \begin{nota}
 Tenemos que tener en cuenta lo siguiente:
 	\begin{nlist}
 	\item[•] Si se aplica al sistema de partida una transformación elemental tan simple como intercambiar de posición dos ecuaciones y se usa el mismo método iterativo con los dos sistemas, uno puede converger y otro no. La idea es que este tipo de transformación elemental no solo puede modificar claramente el hecho de que la matriz de coeficientes sea diagonalmente estrictamente dominante (que es una condición suficiente para la convergencia de Jacobi y Gauss–Seidel) sino que además puede cambiar el radio espectral.
-	\item[•] El número de operaciones que hay que realizar para pasar de una iteración a la siguiente en los métodos de Jacobi y Gauss–Seidel es de $N^2$ para un sistema de N ecuaciones y N incógnitas. Por tanto, si N es grande, requiere en principio menos operaciones que los directos. Además, y a diferencia de estos últimos, aprovecha la estructura de la matriz de coeficientes cuando es dispersa, tal y como ocurre con los sistemas que surgen en problemas de análisis de estructuras o de elementos finitos.
+	\item[•] El número de operaciones que hay que realizar para pasar de una iteración a la siguiente en los métodos de Jacobi y Gauss–Seidel es de $N^2$ para un sistema de $N$ ecuaciones y $N$ incógnitas. Por tanto, si $N$ es grande, requiere en principio menos operaciones que los directos. Además, y a diferencia de estos últimos, aprovecha la estructura de la matriz de coeficientes cuando es dispersa, tal y como ocurre con los sistemas que surgen en problemas de análisis de estructuras o de elementos finitos.
 	\end{nlist}
 \end{nota}
 
@@ -1526,7 +1531,7 @@ Sea $A \in \mathbb{R}^{N \times N}$ una matriz regular y $x, u, b \in \mathbb{R}
 \leq
 c(A) \frac{\Vert Au-b \Vert } {\Vert b \Vert },
 \]
-donde c(A) es el condicionamiento de la matriz A relativo a la norma matricial inducida por $\Vert \cdot \Vert$.
+donde $c(A)$ es el condicionamiento de la matriz $A$ relativo a la norma matricial inducida por $\Vert \cdot \Vert$.
 \end{nprop}
 	\begin{proof}
 	Primera desigualdad:
@@ -1534,7 +1539,7 @@ donde c(A) es el condicionamiento de la matriz A relativo a la norma matricial i
 	\[ \Vert x \Vert \leq \Vert A^{-1} \Vert \Vert b \Vert \]
 	Entonces
 	\[ \Vert Au-b \Vert \Vert x \Vert \leq c(A) \Vert x-u \Vert \Vert b \Vert \]
-	Segunda desigualdad (razonamiento similar, tomando v=Au):
+	Segunda desigualdad (razonamiento similar, tomando $v=Au$):
 	\[
 	\frac{\Vert x-u \Vert }{\Vert x \Vert } = \frac{\Vert A^{-1}b-A^{-1}v \Vert }{\Vert x \Vert }
 	\leq
@@ -1546,18 +1551,18 @@ donde c(A) es el condicionamiento de la matriz A relativo a la norma matricial i
 	\]
 	\end{proof}
 	
-La interpretación de estas desigualdades es que x es la solución del sistema Ax = b y $u$ es la solución aproximada.
+La interpretación de estas desigualdades es que $x$ es la solución del sistema $Ax = b$ y $u$ es la solución aproximada.
 
-La estimación del error relativo de la solución en función del condicionamiento de A y el error relativo generado al tomar Au por b es Au - b, que recibe el nombre de $\textbf{residuo}$, que en general no es nulo.
+La estimación del error relativo de la solución en función del condicionamiento de $A$ y el error relativo generado al tomar $Au$ por $b$ es $Au - b$, que recibe el nombre de $\textbf{residuo}$, que en general no es nulo.
 
 \begin{nprop}
-Sean $N \geq 1$, $A, B \in \mathbb{R}^{N \times N}$ con A regular, $b,c \in \mathbb{R}^N$ y supongamos que el método iterativo
+Sean $N \geq 1$, $A, B \in \mathbb{R}^{N \times N}$ con $A$ regular, $b,c \in \mathbb{R}^N$ y supongamos que el método iterativo
 \[ \left\{ \begin{array}{l}
 x_0 \; dado \\
 n \geq 1 \Rightarrow x_n = Bx_{n-1} + c
 \end{array}
 \right. \]
-converge a la solución del sistema Ax = b, cualquiera sea $x_0 \in \mathbb{R}^N$. Si además $\Vert \cdot \Vert$ es una norma en $\mathbb{R}^N$ con norma matricial inducida en $\mathbb{R}^{N \times N}$ denotada de igual forma, tal que $\Vert B \Vert < 1$, entonces, para todo $n \geq 1$ se tiene:
+converge a la solución del sistema $Ax = b$, cualquiera sea $x_0 \in \mathbb{R}^N$. Si además $\Vert \cdot \Vert$ es una norma en $\mathbb{R}^N$ con norma matricial inducida en $\mathbb{R}^{N \times N}$ denotada de igual forma, tal que $\Vert B \Vert < 1$, entonces, para todo $n \geq 1$ se tiene:
 	\begin{nlist}
 	\item $\Vert x_n - x \Vert \leq \frac{\Vert B \Vert ^n}{1 - \Vert B \Vert} \Vert x_1 - x_0$
 	\item $\Vert x_n - x \Vert \leq \Vert B \Vert \Vert x_{n-1} - x \Vert$
@@ -1587,18 +1592,20 @@ converge a la solución del sistema Ax = b, cualquiera sea $x_0 \in \mathbb{R}^N
 	\end{proof}
 
 \begin{nota}
-$\newline$
+$ $
 	 \begin{nlist}
-	 \item[•] Las acotaciones (i) y (ii) dan una estimación del error absoluto, aunque hay una diferencia importante entre ambas: la primera no necesita conocer la solución exacta x.
-	 \item[•] La estimación del error absoluto (iii) no solo se obtiene sin necesidad de conocer x sino que además constituye un criterio de parada cuando se programa el método numérico y se alcanza una tolerancia dada.
+	 \item[•] Las acotaciones (i) y (ii) dan una estimación del error absoluto, aunque hay una diferencia importante entre ambas: la primera no necesita conocer la solución exacta $x$.
+	 \item[•] La estimación del error absoluto (iii) no solo se obtiene sin necesidad de conocer $x$ sino que además constituye un criterio de parada cuando se programa el método numérico y se alcanza una tolerancia dada.
 	 \end{nlist}
 \end{nota}
+
+\pagebreak
 
 \part{Tema 3. Interpolación}
 En este tema vamos a aprender a calcular el polinomio que pasa por unas coordenadas dadas.
 
 \section{Interpolación polinómica: Lagrange y Newton. Error de interpolación}
-Sean las coordenadas $(x_0,y_0), (x_1,y_1),...,(x_N,y_N) \in \mathbb{R}^2 : x_i \neq x_j \; \; con \; i,j = 0,1,...N$, entonces existe una única función polinómica de grado menor o igual que N $p : \mathbb{R} \longrightarrow \mathbb{R}$ tal que $p(x_i) = y_i$ con i = 0,1,...N.\\
+Sean las coordenadas $(x_0,y_0), (x_1,y_1),...,(x_N,y_N) \in \mathbb{R}^2 : x_i \neq x_j \; \; con \; i,j = 0,1,...N$, entonces existe una única función polinómica de grado menor o igual que $N$ $p : \mathbb{R} \longrightarrow \mathbb{R}$ tal que $p(x_i) = y_i$ con $i = 0,1,...N$.\\
 El problema que tenemos que resolver en este tema es determinar explícitamente el polinomio de interpolación $p \in \mathbb{P} _N$.\\
 Para calcular p debemos calcular una base de $\mathbb{P} _N$ y sus propiedades. Veamos dos formas diferentes de hacerlo.
 
@@ -1606,22 +1613,22 @@ Para calcular p debemos calcular una base de $\mathbb{P} _N$ y sus propiedades. 
 \begin{nth}
 Sean las coordenadas $(x_0,y_0), (x_1,y_1),...,(x_N,y_N) \in \mathbb{R}^2$, entonces
 \[ \exists ! p \in \mathbb{P} _N : p(x_i) = y_j : x_i \neq x_j \; \; con \; i,j = 0,1,...N \; \; \Rightarrow p(x) = \sum_{i=0}^N y_il_i(x) \; \; con \; \; l_i(x) = \prod_{j=0 \wedge j \neq i}^N \frac{x-x_j}{x_i-x_j} \]
-donde $\lbrace l_0(x), l_1(x),...,l_N(x) \rbrace$ es la base, dependiente de los $x_i$'s. Primero calculamos la base y luego el polinomio p(x).
+donde $\lbrace l_0(x), l_1(x),...,l_N(x) \rbrace$ es la base, dependiente de los $x_i$'s. Primero calculamos la base y luego el polinomio $p(x)$.
 \end{nth}
 
 La fórmula anterior se conoce como $\textbf{forma de Lagrange del polinomio de
 interpolación}$ y las funciones base $\textbf{polinomios de Lagrange o característicos}$.
 
 \begin{ejemplo}
-Sea $f: \mathbb{R} \longrightarrow \mathbb{R}$, $f(x) = e^x ( \forall x \in \mathbb{R} )$. Vamos a dar tres valores a la función para calcular el polinomio de Lagrange. Por ejemplo, en los puntos de abscisas -1, 0, 1:
+Sea $f: \mathbb{R} \longrightarrow \mathbb{R}$ tal que $f(x) = e^x ( \forall x \in \mathbb{R} )$. Vamos a dar tres valores a la función para calcular el polinomio de Lagrange. Por ejemplo, en los puntos de abscisas -1, 0, 1:
 \[ (x_0, y_0) = (-1,e^{-1}), \; (x_1,y_1) = (0,1), \; (x_2,y_2) = (1,e) \]
 Ahora calculamos la base
 \[ l_0(x) = \prod_{j=0 \wedge j \neq 0}^2 \frac{x-x_j}{x_0-x_j} = \frac{x^2}{2} - \frac{x}{2} \]
 \[ l_1(x) = 1 - x^2 \]
 \[ l_2(x) = \frac{x^2}{2} + \frac{x}{2} \]
-Por último, calculamos el polinomio  de interpolación p(x):
+Por último, calculamos el polinomio  de interpolación $p(x)$:
 \[ p(x) = \sum _{i=0}^2 e^{x_i}l_i(x) = \left( \frac{e}{2} + \frac{1}{2e} - 1 \right) x^2 + \left( \frac{e}{2} - \frac{1}{2e} \right) x + 1 \]
-Dibujándolo, en trazo discontinuo es p(x) y en trazo continuo es f(x), observamos que pasa por las coordenadas dadas.
+Dibujándolo, en trazo discontinuo es $p(x)$ y en trazo continuo es $f(x)$, observamos que pasa por las coordenadas dadas.
 
 \[ \includegraphics[scale=0.3]{media/interplagrange.png} \]
 \end{ejemplo}
@@ -1686,8 +1693,8 @@ Primero, vamos a establecer la notación de algunos conceptos.
 
 Sean $x_0,x_1,...,x_N \in \left[ a,b \right]$, una función $f \in$ C([a,b]) y su polinomio de interpolación $I_N^f \in \mathbb{P} _N$ tal que $I_N$ : C([a,b]) $\longrightarrow \mathbb{P} _N$ bien definida (unicidad polinomio interpolación). Además, tiene la propiedad de proyección, ya que $I_N^2 = I_N$.
 
-\begin{ndef}
-Definimos al $\textbf{error de interpolación} E_N^f(x)$ como
+\begin{ndef}[Error de interpolación]
+Definimos al $\textbf{error de interpolación}$ $E_N^f(x)$ como
 \[ E_N^f(x) := f(x) - I_N^f(x) \]
 \end{ndef}
 
@@ -1720,22 +1727,22 @@ Sea f $\in$ C([a,b]), entonces
 \end{ncor}
 
 \begin{nth}[Teorema de aproximación uniforme de Weierstrass]
-\[ \lim_{N\rightarrow \infty} inf \; \left\lbrace \Vert f-p \Vert _\infty : p \in \mathbb{P} _N \right\rbrace = 0 \]
+\[ lim_{N\rightarrow \infty} inf \; \left\lbrace \Vert f-p \Vert _\infty : p \in \mathbb{P} _N \right\rbrace = 0 \]
 \end{nth}
 
-Como $\lim _{N\rightarrow \infty} \Lambda _N = \infty$, no podemos asegurar cnvergencia uniforme, es decir, no podemos asegurar que $\lim_{N\rightarrow \infty} \Vert E_N^f \Vert _\infty = 0$.
+Como $lim _{N\rightarrow \infty} \Lambda _N = \infty$, no podemos asegurar cnvergencia uniforme, es decir, no podemos asegurar que $lim_{N\rightarrow \infty} \Vert E_N^f \Vert _\infty = 0$.
 
 Podemos ver si es estable segun $\Lambda _N$, que solo depende de los nodos y nos sirve para medir el condicionamiento.
 
 \begin{nprop}
 Sean los nodos $x_0,x_1,...,x_N$, los datos $(x_0,f(x_0)), (x_1,f(x_1)),...,(x_N,f(x_N))$ y los datos perturbados $(x_0,g(x_0)),(x_1,g(x_1)),...,(x_N,g(x_N))$. Entonces
-\[ \Vert I_N^f - I_N^g \Vert _\infty = max \; \left\lbrace \left\vert \sum_{i=0}^N (f(x_i)-g(x_i))l_i(x) \right\vert : x \in \left[ a,b \right] \right\rbrace \leq \Lambda _N max \; \left\lbrace \vert f(x_i)-g(x_i) : i=0,1,...,N \right\rbrace \]
+\[ \Vert I_N^f - I_N^g \Vert _\infty = max \; \left\lbrace \left\vert \sum_{i=0}^N (f(x_i)-g(x_i))l_i(x) \right\vert : x \in \left[ a,b \right] \right\rbrace \leq \Lambda _N \cdot max \; \left\lbrace \vert f(x_i)-g(x_i) : i=0,1,...,N \right\rbrace \]
 \end{nprop}
 
 \begin{ejemplo}
 Sea $f : \left[ -1,1 \right] \longrightarrow \mathbb{R}$, $f(x) := e^x$. Elegimos 21 nodos uniformemente distribuidos en [-1,1], por ejemplo
 \[ i=0,1,...,20 \Rightarrow x_i := -1 + \frac{2i}{20} \]
-Los datos que obtenemos son $(x_i,f(x_i))$ y los datos perturbados son $(x_i,g(x_i))$ con $g(x_i)=f(x_i+(-1)^i10^{-4})$.
+Los datos que obtenemos son $(x_i,f(x_i))$ y los datos perturbados son $(x_i,g(x_i))$ con $$g(x_i)=f(x_i+(-1)^i10^{-4})$$.
 
 Tenemos que $max \; \left\lbrace \vert f(x_i)-g(x_i) : i=0,...,20 \right\rbrace = 2.7184 \cdot 10^{-4}$
 
@@ -1749,12 +1756,12 @@ Por lo que hay mal condicionamiento $\Lambda _{20} = 10986.7058$.
 \begin{nprop}
 Sean $x_0,x_1,...,x_N$ números reales distintos, sea $x \in \mathbb{R}$ y sean $a:=min \; \left\lbrace x,x_0,x_1,...,x_N \right\rbrace$ y $b:=max \; \left\lbrace x,x_0,x_1,...,x_N \right\rbrace$. Supongamos además que $f \in C^{N+1}$([a,b]). Entonces existe $\xi \in$ ]a,b[ tal que
 \[ E_N^{f(x)}=\frac{f^{N+1)}( \xi )}{(N+1)!} \omega _{N+1}(x), \]
-donde $omega _{N+1}(x)$ es el polinomio nodal de grado N+1.
+donde $omega _{N+1}(x)$ es el polinomio nodal de grado $N+1$.
 \end{nprop}
 
 \[ f(x) = I_Nf(x) + \frac{f^{N+1)}( \xi )}{(N+1)!} \omega _{N+1}(x) \]
 
-Es análoga a la fórmula de Taylor:
+Es análoga a la fórmula de Taylor.
 
 \begin{ncor}
 Bajo las condiciones de la proposición anterior
@@ -1762,7 +1769,7 @@ Bajo las condiciones de la proposición anterior
 \end{ncor}
 
 La convergencia es uniforme: $f \in C^{\infty}$([a,b])
-\[ \lim_{N \rightarrow \infty} \frac{\Vert f^{N+1)} \Vert _\infty }{(N+1)!} (b-a)^{N+1} = 0 \; \Rightarrow \; \lim_{N \rightarrow \infty} \Vert E_N^f \Vert _\infty = 0 \]
+\[ lim_{N \rightarrow \infty} \frac{\Vert f^{N+1)} \Vert _\infty }{(N+1)!} (b-a)^{N+1} = 0 \; \Rightarrow \; lim_{N \rightarrow \infty} \Vert E_N^f \Vert _\infty = 0 \]
 
 La elección de los nodos influye en el error de interpolación. En general, aun siendo mejorable, para nodos equidistantes tenemos que
 \[ \Vert E_N^f \Vert _\infty \leq \frac{\Vert f^{N+1)} \Vert _\infty}{(N+1)!}h^{N+1} \]
@@ -1817,17 +1824,17 @@ Con los nodos de Chebyshev tenemos que
 \[ \Vert E_N^f \Vert _\infty \leq \frac{\Vert f^{N+1)} \Vert _\infty}{(N+1)!} \frac{1}{2^N} \]
 
 \subsection{Otros problemas de interpolación: Hermite y caso general}
-Sean los nodos distintos $x_0,x_1,...,x_N \in$ [a,b], los órdenes de derivación $m_0,m_1,...,m_N \geq 0$ y la función $f \in C^M$([a,b]), $M:= max \left\lbrace m_i : i=0,...,N \right\rbrace$. El $\textbf{problema de interpolación de Hermite}$ consiste en encontrar $p \in \mathbb{P}$ de grado mínimo K con
+Sean los nodos distintos $x_0,x_1,...,x_N \in$ [a,b], los órdenes de derivación $m_0,m_1,...,m_N \geq 0$ y la función $f \in C^M$([a,b]), $M:= max \left\lbrace m_i : i=0,...,N \right\rbrace$. El $\textbf{problema de interpolación de Hermite}$ consiste en encontrar $p \in \mathbb{P}$ de grado mínimo $K$ con
 \[ i=0,1,...,N \Rightarrow \left[ j=0,1,...,m_i \Rightarrow p^{j)}(x_i) = f^{j)}(x_i) \right] \]
 
 \[ p \in \mathbb{P} _K : p^{j)}(x_i) = f^{j)}(x_i) \Leftrightarrow L(p) = f^{j)}(x_i) \]
 con $L : \mathbb{P} _K \longrightarrow \mathbb{R}$ forma lineal
 \[ p \mapsto L(p) := p^{j)}(x_i) \]
 
-El $\textbf{problema general de interpolación}$ consiste en, sea E espacio vectorial real de dimensión N, $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales, $d_1,...,d_N \in \mathbb{R}$, encontrar un único $p \in E : \left[  i=1,...,N \Rightarrow L_i(p) = d_i \right] $
+El $\textbf{problema general de interpolación}$ consiste en, sea $E$ espacio vectorial real de dimensión $N$, $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales, $d_1,...,d_N \in \mathbb{R}$, encontrar un único $p \in E : \left[  i=1,...,N \Rightarrow L_i(p) = d_i \right] $
 
 \begin{nprop}
-Sea E un espacio vectorial (real) de dimensión $N \geq 1$, sean $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales y sea {$p_1,...,p_N$} una base de E. Entonces, el problema general de interpolación admite una única solución, cualesquiera sean $d_1,...,d_N \in \mathbb{R}$, si, y solo si,
+Sea $E$ un espacio vectorial (real) de dimensión $N \geq 1$, sean $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales y sea {$p_1,...,p_N$} una base de $E$. Entonces, el problema general de interpolación admite una única solución, cualesquiera sean $d_1,...,d_N \in \mathbb{R}$, si, y solo si,
 \[ det \left[ L_i(p_j) \right] _{i,j=1}^N \neq 0 \]
 \end{nprop}
 
@@ -1837,9 +1844,9 @@ Unisolvencia para cualesquiera $d_1,...,d_N \Leftrightarrow$ unisolvencia para $
 
 A partir de ahora, vamos a enfocar el problema con Lagrange.
 
-Sea E espacio vectorial real de dimensión N, $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales, $d_1,...,d_N \in \mathbb{R}$, el problema general de interpolación consiste ne encontrar un único $p \in E : \left[  i=1,...,N \Rightarrow L_i(p) = d_i \right]$
+Sea $E$ espacio vectorial real de dimensión $N$, $L_1,...,L_N : E \longrightarrow \mathbb{R}$ formas lineales, $d_1,...,d_N \in \mathbb{R}$, el problema general de interpolación consiste en encontrar un único $p \in E : \left[  i=1,...,N \Rightarrow L_i(p) = d_i \right]$
 
-Sea {$l_1,...,l_N$} base de E de Lagrange
+Sea {$l_1,...,l_N$} base de $E$ de Lagrange
 \[ i,j = 1,...,N \Rightarrow L_i(l_j) = \delta _{ij} \Rightarrow p:= \sum_{i=1}^N d_il_i \]
 que es la solución del problema general de interpolación. La dificultad está en determinar la base de Lagrange, que siempre existe. Veamos los distintos casos que existen.
 
@@ -1852,10 +1859,10 @@ que es la solución del problema general de interpolación. La dificultad está 
 \[ p(x_0) = p'(x_0) = 0 \Rightarrow p(x)=(x-x_0)^2q_0(x), \; para \; cierto \; q_0 \in \mathbb{P}_{2N-1} \]
 
 \[ \exists \alpha \in \mathbb{R}: p(x) = \alpha \prod_{i=0}^{N+1}(x-x_i)^2 \]
-Como $p \in \mathbb{P}_{2N+1}$, entonces p=0. Hay unisolvencia.
+Como $p \in \mathbb{P}_{2N+1}$, entonces $p=0$.Luego hay unisolvencia.
 
 La base de Lagrange nos lleva a los polinomios de Hermite {$h_0(x),h_1(x),...,h_{2N+1}(x)$}.
-Sea i=0,1,...,N, entonces
+Sea $i=0,...,N$, entonces
 \[ h_{2i}(x)=(1-2(x-x_i)l'_i(x_i))l_i^2(x) \]
 \[ h_{2i+1}(x) = (x-x_i)l_i(x)^2 \]
 {$l_0(x),l_1(x),...,l_N(x)$} polinomios de Lagrange
@@ -1892,22 +1899,22 @@ $d_i \leftrightsquigarrow f^{i)}(x_0)$ polinomio de Taylor.
 \end{nlist}
 
 \section{Interpolación mediante funciones splines}
-Para mejorar la precisión tenemos que hacer una partición del intervalo [a,b] y que el grado polinomial sea bajo. Sea P una $\textbf{partición}$ de [a,b] tal que P={$a=x_0 < x_1 < \cdots < x_N = b$}.
+Para mejorar la precisión tenemos que hacer una partición del intervalo [a,b] y que el grado polinomial sea bajo. Sea $P$ una $\textbf{partición}$ de [a,b] tal que $P = \lbrace a=x_0 < x_1 < \cdots < x_N = b\rbrace$.
 
 \begin{ndef}[Espacio de funciones splines]
-Dados un intervalo [a,b] y una partición P del mismo, el $\textbf{espacio de funciones splines}$ de clase k y grado m viene dado por
+Dados un intervalo [a,b] y una partición $P$ del mismo, el $\textbf{espacio de funciones splines}$ de clase $k$ y grado $m$ viene dado por
 \[ \mathbb{S}_m^k(P) := \left\lbrace s \in C^k ( \left[ a,b \right] ) : i=0,1,...,N-1 \Rightarrow s_{\vert \left[ x_i, x_{i+1} \right]} \in \mathbb{P} _m \right\rbrace \]
 \end{ndef}
 
 Tenemos que $\mathbb{S}_m^m = \mathbb{P}_m \; y \; k<m$.
 
 \subsection{Funciones splines lineales}
-Empecemos en el espacio vectorial $\mathbb{S}_1^0(P)$. Tenemos que dim$\mathbb{S}_1^0(P)$=2N-(N-1)=N+1 y la base usual es {$B_0(x),B_1(x),...,B_N(x)$}.
+Empecemos en el espacio vectorial $\mathbb{S}_1^0(P)$. Tenemos que dim$\mathbb{S}_1^0(P) = 2\cdot N-(N-1) = N+1$ y la base usual es {$B_0(x),B_1(x),...,B_N(x)$}.
 
 La siguiente definición es muy importante.
 
 \begin{ndef}[Base usual]
-Sean a<b y sea P={$a=x_0<x_1<\cdots < x_N=b$} una partición del intervalo [a,b]. La $\textbf{base usual}$ del espacio $\mathbb{S}_1^0(P)$ viene dada por
+Sean $a<b$ y sea $P = \lbrace a=x_0 < x_1 < \cdots < x_N = b\rbrace$ una partición del intervalo [a,b]. La $\textbf{base usual}$ del espacio $\mathbb{S}_1^0(P)$ viene dada por
 \[ i=0,1,...,N \Rightarrow B_i(x) := \left\lbrace
 \begin{array}{ll}
 \frac{x-x_{i-1}}{x_i-x_{i-1}}, & si \; x \in \left[ x_{i-1},x_i \right] \\
@@ -1918,7 +1925,7 @@ Sean a<b y sea P={$a=x_0<x_1<\cdots < x_N=b$} una partición del intervalo [a,b]
 \]
 \end{ndef}
 
-Dados un intervalo [a,b], una partición P={$a=x_0<x_1<\cdots < x_N=b$} y una función $f:$ [a,b] $\longrightarrow \mathbb{R}$, se considera el $\textbf{problema de interpolación en}$ $\mathbb{S}_1^0(P)$
+Dados un intervalo [a,b], una partición $P = \lbrace a=x_0 < x_1 < \cdots < x_N = b\rbrace$ y una función $f:$ [a,b] $\longrightarrow \mathbb{R}$, se considera el $\textbf{problema de interpolación en}$ $\mathbb{S}_1^0(P)$
 
 \[encontrar \; s \in \mathbb{S}_1^0(P) : \left[ i=0,1,...,N \Rightarrow s(x_i) = f(x_i) \right] \]
 
@@ -1938,11 +1945,11 @@ Hemos probado:
 
 \begin{nprop}
 Con la notación anterior, si $f \in C^2$([a,b]), entonces
-\[ \lim_{N\rightarrow \infty} max \; \left\lbrace (x_{i+1}-x_i):i=0,...,N-1 \right\rbrace = 0 \qquad \Rightarrow \qquad \lim_{N \rightarrow \infty} \Vert f - S_N^1f \Vert _\infty = 0 \]
+\[ lim_{N\rightarrow \infty} max \; \left\lbrace (x_{i+1}-x_i):i=0,...,N-1 \right\rbrace = 0 \qquad \Rightarrow \qquad lim_{N \rightarrow \infty} \Vert f - S_N^1f \Vert _\infty = 0 \]
 \end{nprop}
 
 \begin{nprop}
-Sea $f \in C$([a,b]), sea P={$a=x_0 < x_1 < \cdots < x_N = b$} y sea $S_N^1f$ el único elemento de $\mathbb{S}_1^0(P)$ que interpola a f en los nodos de P, i.e.,
+Sea $f \in C$([a,b]), sea $P = \lbrace a=x_0 < x_1 < \cdots < x_N = b\rbrace$ y sea $S_N^1f$ el único elemento de $\mathbb{S}_1^0(P)$ que interpola a $f$ en los nodos de $P$, i.e.,
 \[ i=0,1,...,N \Rightarrow S_N^1f(x_i)=f(x_i) \]
 Entonces:
 	\begin{nlist}
@@ -1954,7 +1961,7 @@ Entonces:
 \end{nprop}
 
 \subsection{Funciones splines cúbicas}
-Ahora trabajaremos con el espacio $\mathbb{S}_3^2(P)$. Tenemos que dim$\mathbb{S}_3^2(P)$ = 4N-3(N-1)=N+3.
+Ahora trabajaremos con el espacio $\mathbb{S}_3^2(P)$. Tenemos que dim$\mathbb{S}_3^2(P) = 4N-3(N-1) = N+3$.
 
 \begin{ndef}[Funciones splines cúbicas naturales]
 \[ i=0,1,...,N \Rightarrow s(x_i) = f(x_i) \]
@@ -1968,7 +1975,7 @@ Vamos a establecer la notación:
 \[ s:= S_N^2f \]
 \[ s_i := S_N^2 f_{\vert \left[ x_i, x_{i+1} \right]} \quad i=0,1,...,N-1 \]
 \[ y_i:=s(x_i), \qquad d_i:=s'(x_i) \quad c_i:=s''(x_i) \qquad i=0,1,...,N \]
-Tenemos, para i=1,...,N:
+Tenemos, para $i=1,...,N$:
 
 Primero calculamos los $c_i's$, que son solución del sistema:
 \[ \begin{bmatrix}
@@ -2003,8 +2010,10 @@ Sean P={$a=x_0 < x_1 < \cdots < x_N = b$}, f:[a,b]$\longrightarrow \mathbb{R}$ y
 \[ g(x_i) = f(x_i), \qquad i =0,1,...,N \]
 Si además $s$ es la función spline cúbica natural que satisface la misma condición de interpolación, entonces
 \[ \int_a^b s''(x)^2dx \leq \int_a^b g''(x)^2 dx \]
-dándose la igualdad si, y solo si, g = s.
+dándose la igualdad si, y solo si, $g = s$.
 \end{nprop}
+
+\pagebreak
 
 \part{Tema 4. Aproximación}
 Al tener unos datos experimentales, la aproximación sirve para hacer previsiones y ajustes.
@@ -2012,24 +2021,24 @@ Al tener unos datos experimentales, la aproximación sirve para hacer previsione
 \section{Aproximación por mínimos cuadrados discreta y continua}
 
 \subsection{Principio del mínimo}
-Sea la función $f: \mathbb{R} \longrightarrow \mathbb{R}$, $f(x)=\frac{1}{2}ax^2-bx$, con a > 0. Es una parábola, por lo que alcanza su valor mínimo en $x = \frac{b}{a}$ y tenemos que $f(b/a) = - \frac{1}{2a}b^2$.
+Sea la función $f: \mathbb{R} \longrightarrow \mathbb{R}$ tal que $f(x)=\frac{1}{2}ax^2-bx$, con $a > 0$. Es una parábola, por lo que alcanza su valor mínimo en $x = \frac{b}{a}$ y tenemos que $f(b/a) = - \frac{1}{2a}b^2$.
 
-Esto se puede extender a $\mathbb{R}^N$. El número a pasa a ser una matriz simétrica y definida positiva $A \in \mathbb{R}^{N \times N}$, el número b pasa a ser el vector $b \in \mathbb{R}^N$. Por lo que tenemos que:
+Esto se puede extender a $\mathbb{R}^N$. El número a pasa a ser una matriz simétrica y definida positiva $A \in \mathbb{R}^{N \times N}$, el número $b$ pasa a ser el vector $b \in \mathbb{R}^N$. Por lo que tenemos que:
 \[ f: \mathbb{R}^N \longrightarrow \mathbb{R}, \; f(x) = \frac{1}{2}x^TAx-b^Tx \]
 
 \begin{nth}[Principio del mínimo]
 Si $A \in \mathbb{R}^{N \times N}$ es una matriz simétrica y definida positiva, $b \in \mathbb{R}^N$ y $f: \mathbb{R}^N \longrightarrow \mathbb{R}$ es la función cuadrática definida en cada $x \in \mathbb{R}^N$ como
 \[ f(x) = \frac{1}{2}x^TAx-b^Tx \]
-entonces f alcanza su mínimo en un único vector, la solución del sistema Ax=b, y su valor mínimo es
+entonces $f$ alcanza su mínimo en un único vector, la solución del sistema $Ax=b$, y su valor mínimo es
 \[ - \frac{1}{2}b^TA^{-1}b \]
 \end{nth}
 
 \begin{proof}
-Como A es definida positiva, entonces A es regular:
+Como $A$ es definida positiva, entonces $A$ es regular:
 \[ Ax=0 \Rightarrow x^TAx=0 \Rightarrow x=0 \]
-$A^{-1}b$ es solución de Ax=b.
+$A^{-1}b$ es solución de $Ax=b$.
 
-Sea $x:=A^{-1}b$, $y \in \mathbb{R}^N$. Como A es simétrica:
+Sea $x:=A^{-1}b$, $y \in \mathbb{R}^N$. Como $A$ es simétrica:
 
 	\begin{equation*}
 		\begin{split}
@@ -2040,28 +2049,28 @@ Sea $x:=A^{-1}b$, $y \in \mathbb{R}^N$. Como A es simétrica:
 		\end{split}
 	\end{equation*}
 	
-Como A es definida positiva, f alcanza su mínimo en $y=x=A^{-1}b$:
+Como $A$ es definida positiva, $f$ alcanza su mínimo en $y=x=A^{-1}b$:
 \[ f(A^{-1}b) = -\frac{1}{2}b^TA^{-1}b \]
 	
 \end{proof}
 
 \begin{nprop}
 	\begin{nlist}
-	\item[•] A simétrica y definida positiva $\Leftrightarrow$ A admite factorización LU Cholesky. $\qquad (A \in \mathbb{R}^{N \times N})$
+	\item[•] $A$ simétrica y definida positiva $\Leftrightarrow$ $A$ admite factorización $LU$ Cholesky. $\qquad (A \in \mathbb{R}^{N \times N})$
 	
 	\item[•] Condición suficiente:
 	
-	A regular $\Rightarrow$ $A^TA$ simétrica y definida positiva. $\qquad (A \in \mathbb{R}^{N \times N})$
+	$A$ regular $\Rightarrow$ $A^TA$ simétrica y definida positiva. $\qquad (A \in \mathbb{R}^{N \times N})$
 	
 	\item[•] $A \in \mathbb{R}^{M \times N}$. Condición suficiente (más general):
 	
-	rango(A) = N $\Leftrightarrow$ columnas de A son linealmente independientes $\Rightarrow$ $A^TA$ es simétrica y definida positiva.
+	$rango(A) = N$ $\Leftrightarrow$ columnas de $A$ son linealmente independientes $\Rightarrow$ $A^TA$ es simétrica y definida positiva.
 	
 	(y $N \leq M$).
 	
 	\item[•] Condición suficiente (aún más general): $C \in \mathbb{R}^{M \times M}$ simétrica y definida positiva, $A \in \mathbb{R}^{M \times N}$:
 	
-	rango (A) = N $\Leftrightarrow$ columnas de A linealmente independientes $\Rightarrow$ $A^TCA$ simétrica y definida positiva.
+	$rango (A) = N$ $\Leftrightarrow$ columnas de $A$ linealmente independientes $\Rightarrow$ $A^TCA$ simétrica y definida positiva.
 	
 	(y $N \leq M$).
 	
