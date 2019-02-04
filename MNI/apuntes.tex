@@ -2078,14 +2078,153 @@ Como $A$ es definida positiva, $f$ alcanza su mínimo en $y=x=A^{-1}b$:
 \end{nprop}
 
 \subsection{Aproximación por mínimos cuadrados discreta}
-Ahora vamos a estudiar una aplicación del principio del mínimo, vamos a ver cuál es la $\textbf{mejor aproximación euclídea en dimensión finita.}$
+Ahora vamos a estudiar una aplicación del principio del mínimo, vamos a ver cuál es la mejor aproximación euclídea en $\textbf{ dimensión finita.}$
 
-Sea S un subespacio vectorial de $\mathbb{R}^M$, %$\left\lbrace \begin{vmatrix}
-%a_{11} \\
-%\vdots \\
-%a_{M1}
-%\end{vmatrix}
+Sea $S$ un subespacio vectorial de $\mathbb{R}^M$,
+$$
+\left\lbrace
+\begin{bmatrix}
+a_{11} \\
+\vdots \\
+a_{M1} \\
+\end{bmatrix}
+, \cdots,
+\begin{bmatrix}
+a_{1N} \\
+\vdots \\
+a_{MN} \\
+\end{bmatrix}
+\right\rbrace
+\textsf{base de } S
+$$
 
-%\right\rbrace$
+Luego $rango(A) = N$, $S = \left\lbrace Ax : x \in \mathbb{R}^N \right\rbrace$.
+
+Por lo que si tenemos el vector de soluciones $b \in \mathbb{R}^M$, entonces
+	\begin{nlist}
+		\item $b \in S \Leftrightarrow Ax = b $ compatible
+		\item $b \notin S \Leftrightarrow Ax = b $ incompatible
+	\end{nlist}
+	
+Ahora veamos si existe un vector $Ax \in S$ más próximo, usando la norma euclídea, a $b$.
+
+¿ $\exists x \in \mathbb{R}^N : y \in \mathbb{R}^N \Rightarrow \Vert Ax-b \Vert _2 \leq \Vert Ay-b \Vert _2$ ?
+
+$\Updownarrow$
+
+¿ $\exists x \in \mathbb{R}^N : y \in \mathbb{R}^N \Rightarrow \Vert Ax-b \Vert _2^2 \leq \Vert Ay-b \Vert _2^2$ ?
+
+$\Updownarrow$
+
+¿ $\exists x \in \mathbb{R}^N : y \in \mathbb{R}^N \Rightarrow (Ax-b)^T (Ax-b) \leq (Ay-b)^T(Ay-b) $ ?
+
+$\Updownarrow$
+
+¿ $\exists x \in \mathbb{R}^N : y \in \mathbb{R}^N \Rightarrow x^TA^TAx+b^Tb-2b^TAx \leq y^TA^TAy+b^Tb-2b^TAy $ ?
+
+$\Updownarrow$
+
+¿ $\exists x \in \mathbb{R}^N : y \in \mathbb{R}^N \Rightarrow \frac{1}{2} x^TA^TAx - b^TAx \leq \frac{1}{2} y^TA^TAy - b^TAy $ ?
+
+Por el principio del mínimo, como $A^TA$ es simétrica y definida positiva,
+$$ f(x) = \frac{1}{2}x^TA^TAx-b^TAx$$
+
+Luego es cierto que existen tales vectores y la solución es
+$$A^TAx = A^Tb$$
+Esta solución recibe el nombre de $\textbf{ecuaciones normales}$. Además, $Ax$ es la mejor aproximación de $b$ en $S$ en el sentido de los mínimos cuadrados (discretos, ($\mathbb{R}^M, \Vert \cdot \Vert _"$)).
+
+\begin{ejemplo}
+Sean
+$$S := lin \left\lbrace \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix}, 
+\begin{bmatrix}
+4 \\
+5 \\
+6 \\
+\end{bmatrix},
+\begin{bmatrix}
+7 \\
+8 \\
+9 \\
+\end{bmatrix}
+\right\rbrace
+,
+\;
+b = \begin{bmatrix}
+2 \\
+1 \\
+7.3 \\
+\end{bmatrix}$$
+
+Vamos a calcular la mejor aproximación de $b$ en $S$ usando mínimos cuadrados.
+
+Primero calculamos una base.
+
+$$\left\lbrace \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix}, 
+\begin{bmatrix}
+4 \\
+5 \\
+6 \\
+\end{bmatrix}
+\right\rbrace
+$$
+Luego 
+
+$$A = \begin{bmatrix}
+1 & 4\\
+2 & 5\\
+3 & 6\\
+\end{bmatrix}$$
+
+Las ecuaciones normales son
+
+$$A^TAx = A^Tb \Leftrightarrow \begin{bmatrix}
+14 & 32 \\
+32 & 77 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+25.9 \\
+56.8 \\
+\end{bmatrix}$$
+$$
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+3.2722 \\
+-0.62 \\
+\end{bmatrix}
+$$
+Por lo que
+$$ A \begin{bmatrix}
+3.2722 \\
+-0.62 \\
+\end{bmatrix}
+= 
+\begin{bmatrix}
+0.783 \\
+3.43 \\
+6.083 \\
+\end{bmatrix} \textsf{mejor aproximación de} \begin{bmatrix}
+2 \\
+1 \\
+7.3 \\
+\end{bmatrix} \textsf{en } S$$
+
+\end{ejemplo}
 
 \subsection{Aproximación por mínimos cuadrados general: caso continuo}
