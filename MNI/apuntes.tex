@@ -2227,4 +2227,500 @@ $$ A \begin{bmatrix}
 
 \end{ejemplo}
 
+La mejor aproximación en el sentido de los mínimos cuadrados (discretos) tiene una interpretación geométrica. Sea $S$ un subespacio vectorial de $\mathbb{R}^M$, 
+\[ \left\lbrace \begin{bmatrix}
+a_{11} \\
+\vdots \\
+a_{M1} \\
+\end{bmatrix}
+\; ,\cdots ,
+\begin{bmatrix}
+a_{1N} \\
+\vdots \\
+a_{MN} \\
+\end{bmatrix}
+\right\rbrace 
+\textsf{base de } S \Rightarrow S = \left\lbrace Ax : x \in \mathbb{R}^N \right\rbrace \]
+
+Denotemos por $\langle \cdot , \cdot \rangle$ al producto escalar euclídeo usual en $\mathbb{R}^M$, entonces las ecuaciones normales se pueden expresar usando el producto escalar:
+\[ A^TAx = A^Tb \Leftrightarrow \left\langle \begin{bmatrix}
+a_{1j} \\
+\vdots \\
+a_{Mj} \\
+\end{bmatrix}
+\; , \;
+b-Ax
+\right\rangle = 0 \textsf{, con } j=1,\cdots,N \]
+
+Geométricamente, el vector $b-Ax$ es perpendicular a los vectores de la base de $S$, equivalentemente a todos los de $S$ ($b-Ax \in S^{\bot}$), luego $Ax$ es la $\textbf{proyección ortogonal}$ de $b$ sobre $S$.
+\[ P_S(b) = Ax \]
+
+Cálculo equivalente de x:
+
+\[ b-Ax = b - \sum_{i=1}^N x_i 
+\Rightarrow 
+\left\langle \begin{bmatrix}
+a_{1j} \\
+\vdots \\
+a_{Mj} \\
+\end{bmatrix}
+\; , \;
+b-\sum_{i=1}^N x_i \begin{bmatrix}
+a_{1i} \\
+\vdots \\
+a_{Mi} \\
+\end{bmatrix}
+\right\rangle = 0 \textsf{, con } j=1,\cdots,N \]
+
+\begin{ejer}
+Demuestra que si un vector es ortogonal a los de una base de un subespacio vectorial $S$ de $\mathbb{R}^M$, entonces lo es a todos los vectores de $S$.
+\end{ejer}
+
+\begin{ejemplo}
+Sean
+$$S := lin \left\lbrace \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix}, 
+\begin{bmatrix}
+4 \\
+5 \\
+6 \\
+\end{bmatrix},
+\begin{bmatrix}
+7 \\
+8 \\
+9 \\
+\end{bmatrix}
+\right\rbrace
+,
+\;
+b = \begin{bmatrix}
+2 \\
+1 \\
+7.3 \\
+\end{bmatrix}$$
+
+Vamos a calcular la proyección ortogonal de $b$ sobre $S$, $P_S(b)$. Primero, calcularemos una base.
+
+$$\left\lbrace \begin{bmatrix}
+1 \\
+2 \\
+3 \\
+\end{bmatrix} , 
+\begin{bmatrix}
+4 \\
+5 \\
+6 \\
+\end{bmatrix}
+\right\rbrace
+\Rightarrow
+A = \begin{bmatrix}
+1 & 4 \\
+2 & 5 \\
+3 & 6 \\
+\end{bmatrix}$$
+
+Hemos obtenido el siguiente sistema
+
+$$
+\left|
+	\begin{array}{c}
+		\left\langle
+		\begin{bmatrix}
+			1 \\
+			2 \\
+			3 \\
+		\end{bmatrix}
+		,
+		\begin{bmatrix}
+			2 \\
+			1 \\
+			7.3 \\
+		\end{bmatrix}
+		- x_1
+		\begin{bmatrix}
+			1 \\
+			2 \\
+			3 \\
+		\end{bmatrix}
+		- x_2
+		\begin{bmatrix}
+			4 \\
+			5 \\
+			6 \\
+		\end{bmatrix}
+		\right\rangle
+		= 0 \\
+		\\
+
+		\left\langle
+		\begin{bmatrix}
+			1 \\
+			2 \\
+			3 \\
+		\end{bmatrix}
+		,
+		\begin{bmatrix}
+			2 \\
+			1 \\
+			7.3 \\
+		\end{bmatrix}
+		- x_1
+		\begin{bmatrix}
+			1 \\
+			2 \\
+			3 \\
+		\end{bmatrix}
+		- x_2
+		\begin{bmatrix}
+			4 \\
+			5 \\
+			6 \\
+		\end{bmatrix}
+		\right\rangle
+		= 0
+	\end{array}
+\right.
+$$
+
+$$\Updownarrow$$
+$$
+\begin{bmatrix}
+	14 & 32 \\
+	32 & 77 \\
+\end{bmatrix}
+\begin{bmatrix}
+	x_1 \\
+	x_2 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+	25.9 \\
+	56.8 \\
+\end{bmatrix}
+$$
+$$\Updownarrow$$
+$$
+\begin{bmatrix}
+	x_1 \\
+	x_2 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+	3.2722 \\
+	-0.62 \\
+\end{bmatrix} $$
+
+Por lo que la proyección ortogonal de $b$ sobre $S$ es
+
+\[ P_S(b) = 3.2722
+	\begin{bmatrix}
+		1 \\
+		2 \\
+		3 \\
+	\end{bmatrix}
+- 0.62
+	\begin{bmatrix}
+		4 \\
+		5 \\
+		6 \\
+	\end{bmatrix}
+= A \begin{bmatrix}
+	3.2722 \\
+	-0.62 \\
+\end{bmatrix}
+= \begin{bmatrix}
+	0.783 \\
+	3.43 \\
+	6.083 \\
+\end{bmatrix}
+\]
+
+\end{ejemplo}
+
+El siguiente teorema resume todo lo anterior.
+
+\begin{nth}
+Sea $A \in \mathbb{R}^{M \times N}$ con $rango(A) = N$, sea $S$ el subespacio vectorial de $\mathbb{R}^M$ definido como
+\[ S:= \left\lbrace Ax : x \in \mathbb{R}^N \right\rbrace \]
+y sea $b \in \mathbb{R}^M$. Entonces existe un único vector $x \in \mathbb{R}^N$ de forma que
+\[ \Vert Ax-b \Vert _2 = min \left\lbrace Ay-b \Vert _2 : y \in \mathbb{R}^N \right\rbrace \]
+De hecho, el vector $Ax$ (mejor aproximación de $b$ en $S$, proyección ortogonal de $b$ sobre $S$) viene caracterizado por las ecuaciones normales
+\[ A^TAx = A^Tb, \]
+equivalentemente,
+\[ \left\langle \begin{bmatrix}
+a_{1j} \\
+\vdots \\
+a_{Mj} \\
+\end{bmatrix}
+\; , \;
+b-\sum_{i=1}^N x_i \begin{bmatrix}
+a_{1i} \\
+\vdots \\
+a_{Mi} \\
+\end{bmatrix}
+\right\rangle = 0 \textsf{, con } j=1,\cdots,N \]
+\end{nth}
+
+Veamos ahora una aplicación de este teorema: ajuste de datos. Sean los datos ($x_0$, $y_0$), ($x_1$, $y_1$),..., ($x_M$, $y_M$) $\in \mathbb{R}^2$ tales que $x_i \neq x_j \; i,j=0,1,...,M$. Entonces existe una única función polinómica de grado menor o igual que $M$ $p: \mathbb{R} \longrightarrow \mathbb{R}$ tal que
+\[ p(x_i) = y_i, \; i=0,1,...,M \]
+
+\begin{ejemplo}
+Veamos un ejemplo de ajuste de datos mediante una recta o lineal.
+\[ f(x) = ax+b \]
+Tenemos que calcular $a$ y $b$. Para ello, hay que minimizar
+\[ \sum_{i=0}^M (ax_i + b - y_i)^2 
+\; \Leftrightarrow \;
+\left\Vert a \begin{bmatrix}
+x_0 \\
+x_1 \\
+\vdots \\
+x_M\\
+\end{bmatrix}
++ b \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1 \\
+\end{bmatrix}
+- \begin{bmatrix}
+y_0 \\
+y_1 \\
+\vdots \\
+y_M \\
+\end{bmatrix}
+\right\Vert _2^2
+\; \Leftrightarrow \; 
+\left\Vert a \begin{bmatrix}
+x_0 \\
+x_1 \\
+\vdots \\
+x_M\\
+\end{bmatrix}
++ b \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1 \\
+\end{bmatrix}
+- \begin{bmatrix}
+y_0 \\
+y_1 \\
+\vdots \\
+y_M \\
+\end{bmatrix}
+\right\Vert _2
+\]
+Luego
+\[ S:= lin \left\lbrace \begin{bmatrix}
+x_0 \\
+x_1 \\
+\vdots \\
+x_M \\
+\end{bmatrix}
+, \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1 \\
+\end{bmatrix}
+\right\rbrace \]
+Solución $P_S(y)$
+\[ dim(S) = 2 \Rightarrow P_S(y) = ax + b1 \Rightarrow f(x) = ax+b \]
+\end{ejemplo}
+
+\begin{ejemplo}
+Vamos a calcular la recta de ecuación $y = ax+b$ que mejor aproxima, en el sentido de los mínimos cuadrados, los datos (1,1), (2,2), (0, -0.8), (-1,1), (-2,-1.1).
+
+Tenemos que 
+\[ S:= lin \left\lbrace \begin{bmatrix}
+1 \\
+2 \\
+0 \\
+-1 \\
+-2 \\
+\end{bmatrix}
+, \begin{bmatrix}
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+\end{bmatrix}
+\right\rbrace
+, y = \begin{bmatrix}
+1 \\
+2 \\
+-0.8 \\
+1 \\
+-1.1 \\
+\end{bmatrix}, dim (S) = 2 \]
+
+Luego
+
+\[ P_S(y) = a \begin{bmatrix}
+1 \\
+2 \\
+0 \\
+-1 \\
+-2 \\
+\end{bmatrix}
++ b \begin{bmatrix}
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+\end{bmatrix} \]
+
+Por lo que
+\[ a = 0.62, b=0.42 \Rightarrow f(x) = 0.62x + 0.42 \]
+\end{ejemplo}
+
+\begin{ejemplo}
+Veamos un ejemplo de ajuste de datos mediante una parábola o cuadrático.
+\[ f(x) = ax^2 + bx + c \]
+Vamos a calcular $a, b, c$. Para ello, hay que minimizar
+\[ \sum_{i=0}^M (ax_i^2 + bx_i + c - y_i)^2
+\; \Leftrightarrow \;
+\left\Vert a \begin{bmatrix}
+x_0^2 \\
+x_1^2 \\
+\vdots \\
+x_M^2 \\
+\end{bmatrix}
++ b \begin{bmatrix}
+x_0 \\
+x_1 \\
+\vdots \\
+x_M\\
+\end{bmatrix}
++ c \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1 \\
+\end{bmatrix}
+- \begin{bmatrix}
+y_0 \\
+y_1 \\
+\vdots \\
+y_M \\
+\end{bmatrix}
+\right\Vert _2^2
+\; \Leftrightarrow \;
+\left\Vert a \begin{bmatrix}
+x_0^2 \\
+x_1^2 \\
+\vdots \\
+x_M^2 \\
+\end{bmatrix}
++ b \begin{bmatrix}
+x_0 \\
+x_1 \\
+\vdots \\
+x_M\\
+\end{bmatrix}
++ c \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1 \\
+\end{bmatrix}
+- \begin{bmatrix}
+y_0 \\
+y_1 \\
+\vdots \\
+y_M \\
+\end{bmatrix}
+\right\Vert _2 \]
+
+Luego
+\[ S:= lin \left\lbrace \begin{bmatrix}
+x_0^2 \\
+x_1^2 \\
+\vdots \\
+x_M^2 \\
+\end{bmatrix}
+\begin{bmatrix}
+x_0 \\
+x_1 \\
+\vdots \\
+x_M \\
+\end{bmatrix}
+, \begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1 \\
+\end{bmatrix}
+\right\rbrace \]
+Solución $P_S(y)$
+Denotemos por $x^2$ a $[ x_0^2, x_1^2, ..., x_M^2 ]^T$.
+\[ dim(S) = 2 \Rightarrow P_S(y) = ax + b1 \Rightarrow f(x) = ax+b \]
+Como $dim(S) = 3$, entonces
+\[ P_S(y) = ax^2 + bx + c1 \Rightarrow f(x) = ax^2 + bx + c \] 
+\end{ejemplo}
+
+\begin{ejemplo}
+Vamos a determinar la parábola de ecuación $y=ax^2 + bx + c$ que mejor aproxima, en el sentido de los mínimos cuadrados, los datos (1,1), (2,2), (0,-0.8), (-1,1), (-2,-1.1). Tenemos que
+\[ S:= lin \left\lbrace \begin{bmatrix}
+1 \\
+4 \\
+0 \\
+1 \\
+4 \\
+\end{bmatrix}
+, \begin{bmatrix}
+1 \\
+2 \\
+0 \\
+-1 \\
+-2 \\
+\end{bmatrix}
+, \begin{bmatrix}
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+\end{bmatrix}
+\right\rbrace
+, y = \begin{bmatrix}
+1 \\
+2 \\
+-0.8 \\
+1 \\
+-1.1 \\
+\end{bmatrix}, dim (S) = 3 \]
+Luego
+\[ P_S(y) = a \begin{bmatrix}
+1 \\
+4 \\
+0 \\
+1 \\
+4 \\
+\end{bmatrix}
++ b \begin{bmatrix}
+1 \\
+2 \\
+0 \\
+-1 \\
+-2 \\
+\end{bmatrix}
++ c \begin{bmatrix}
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+\end{bmatrix}
+\]
+Por lo que
+\[ a = 0.1, b = 0.62, c = 0.22 \Rightarrow f(x) = 0.1x^2 + 0.62x +0.22 \]
+\end{ejemplo}
+
 \subsection{Aproximación por mínimos cuadrados general: caso continuo}
+Denotaremos al productor escalar usual en $\mathbb{R}^N$ por $\langle \cdot , \cdot \rangle$.
