@@ -1,0 +1,32 @@
+\babel@toc {spanish}{}
+\contentsline {part}{I\hspace {1em}Tema 1. Introducci\IeC {\'o}n a los problemas del an\IeC {\'a}lisis Num\IeC {\'e}rico}{3}{part.1}
+\contentsline {section}{\numberline {1}Introducci\IeC {\'o}n a los m\IeC {\'e}todos num\IeC {\'e}ricos: algoritmo}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1}Espacios normados}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.2}Problemas bien planteados. Estabilidad}{12}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.3}Algoritmos. Algoritmo PageRank de Google}{18}{subsection.1.1.3}
+\contentsline {section}{\numberline {2}Errores de redondeo. Iteradores}{19}{section.1.2}
+\contentsline {subsection}{\numberline {2.1}Sistema posicional y n\IeC {\'u}meros m\IeC {\'a}quina}{19}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {2.2}Redondeo en sistemas de punto flotante y su aritm\IeC {\'e}tica}{22}{subsection.1.2.2}
+\contentsline {part}{II\hspace {1em}Tema 2. Resoluci\IeC {\'o}n num\IeC {\'e}rica de sistemas de ecuaciones lineales}{28}{part.2}
+\contentsline {section}{\numberline {1}M\IeC {\'e}todos directos: Gauss y versiones, factorizaci\IeC {\'o}n de matrices}{28}{section.2.1}
+\contentsline {subsection}{\numberline {1.1}Sistemas triangulares}{28}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {1.2}M\IeC {\'e}todos de Gauss y Gauss-Jordan. Pivotaje}{28}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {1.3}M\IeC {\'e}todos de factorizaci\IeC {\'o}n}{31}{subsection.2.1.3}
+\contentsline {section}{\numberline {2}M\IeC {\'e}todos iterativos: m\IeC {\'e}todos de Jacobi y Gauss-Seidel}{36}{section.2.2}
+\contentsline {subsection}{\numberline {2.1}M\IeC {\'e}todos iterativos: convergencia y consistencia}{37}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2}Generaci\IeC {\'o}n de m\IeC {\'e}todos iterativos. Jacobi y Gauss-Seidel}{38}{subsection.2.2.2}
+\contentsline {section}{\numberline {3}An\IeC {\'a}lisis de error}{44}{section.2.3}
+\contentsline {part}{III\hspace {1em}Tema 3. Interpolaci\IeC {\'o}n}{47}{part.3}
+\contentsline {section}{\numberline {1}Interpolaci\IeC {\'o}n polin\IeC {\'o}mica: Lagrange y Newton. Error de interpolaci\IeC {\'o}n}{47}{section.3.1}
+\contentsline {subsection}{\numberline {1.1}Polinomio de interpolaci\IeC {\'o}n tipo Lagrange}{47}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {1.2}Forma de Newton del polinomio de interpolaci\IeC {\'o}n}{48}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {1.3}Error de interpolaci\IeC {\'o}n. Convergencia y estabilidad. Polinomios de Chebyshev}{49}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {1.4}Otros problemas de interpolaci\IeC {\'o}n: Hermite y caso general}{55}{subsection.3.1.4}
+\contentsline {section}{\numberline {2}Interpolaci\IeC {\'o}n mediante funciones splines}{57}{section.3.2}
+\contentsline {subsection}{\numberline {2.1}Funciones splines lineales}{58}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {2.2}Funciones splines c\IeC {\'u}bicas}{59}{subsection.3.2.2}
+\contentsline {part}{IV\hspace {1em}Tema 4. Aproximaci\IeC {\'o}n}{62}{part.4}
+\contentsline {section}{\numberline {1}Aproximaci\IeC {\'o}n por m\IeC {\'\i }nimos cuadrados discreta y continua}{62}{section.4.1}
+\contentsline {subsection}{\numberline {1.1}Principio del m\IeC {\'\i }nimo}{62}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {1.2}Aproximaci\IeC {\'o}n por m\IeC {\'\i }nimos cuadrados discreta}{63}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {1.3}Aproximaci\IeC {\'o}n por m\IeC {\'\i }nimos cuadrados general: caso continuo}{69}{subsection.4.1.3}
