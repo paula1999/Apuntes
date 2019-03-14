@@ -16,7 +16,7 @@
 - **Paralelismo de tareas** (*task parallelism o TLP-Task Level Par.*). Se encuentra extrayendo la estructura lógica de funciones de una aplicación. Los bloques son funciones y se puede encontrar paralelismo entre las funciones.
 - **Granularidad**. El grano más pequeño (*grano fino*) se asocia al paralelismo entre operaciones o instrucciones, el *grano medio* se asocia a los bloques funcionales lógicos y el *grano grueso* se asocia al paralelismo entre programas.
 
-![](./img/D6.png)
+![](./img/T1/D6.png)
 
 ### 1.3 Dependencias de datos.
 Para que un bloque de código $B_2$ presente dependencia de datos con respecto a $B_1$, deben hacer referencia a una misma posición de memoria M (variable) y $B_1$ aparece en la secuencia de código antes que $B_2$.
@@ -62,7 +62,7 @@ El paralelismo dentro de un **bucle** se puede extraer a nivel de procesos o de 
 El paralelismo entre **operaciones** se puede aprovechar en arquitecturas con paralelismo a nivel de instrucción (ILP) ejecutando en paralelo las instrucciones asociadas a estas operaciones independientes.
 
 <p>
-![](./img/D12.png)
+![](./img/T1/D12.png)
 </p>
 
 
@@ -88,14 +88,14 @@ Para comunicar procesos hay que usar llamadas al SO.
 El paralelismo implícito en el código de una aplicación se puede hacer explícito a nivel de instrucciones, de hebras o de procesos.
 
 <p>
-![](./img/D14.png)
+![](./img/T1/D14.png)
 </p>
 
 ### 1.5 Detección, utilización, implementación y extracción del paralelismo.
 En los procesadores ILP superescalares o segmentados la arquitectura extrae paralelismo. Para ello, eliminan dependencias de datos falsas entre instrucciones y evitan problemas debidos a dependencias de datos, de control y de recursos. La arquitectura extrae paralelismo implícito en las entradas en tiempo de ejecución (dinámicamente). El grado de paralelismo de las instrucciones aprovechado se puede incrementar con ayuda del compilador y del programador. Podemos definir el grado de paralelismo de un conjunto de entradas a un sistema como el máximo número de entradas del conjunto que se puede ejecutar en paralelo. Para los procesadores las entradas son instrucciones. En las arquitecturas ILP VLIW el paralelismo que se va a aprovechar está ya explícito en las entradas. Las instrucciones que se van a ejecutar en paralelo se captan juntas de memoria. El análisis de dependencias entre instrucciones en este caso es estático.
 
 <p>
-![](./img/D16.png)
+![](./img/T1/D16.png)
 </p>
 
 Hay compiladores que extraen el paralelismo de datos implícito a nivel de bucle. Algunos compiladores lo hacen explícito a nivel de hebra, y otros dentro de una instrucción para que se pueda aprovechar en arquitecturas SIMD o vectoriales. El usuario, como programador, puede extraer el paralelismo implícito en un bucle o entre funciones definiendo hebras y/o procesos. La distribución de las tareas independientes entre hebras o entre procesos dependerán de
@@ -131,7 +131,7 @@ Por último, los usuarios del sistema al ejecutar programas están creando proce
 - Comercial. Segmento del mercado: embebidos, servidores gama baja...
 
 <p>
-![](./img/D28.png)
+![](./img/T1/D28.png)
 </p>
 
 - Educación, investigación (también usados por fabricantes y vendedores):
@@ -151,14 +151,14 @@ Por último, los usuarios del sistema al ejecutar programas están creando proce
 #### 2.3.3 Clasificación de computadores externos según segmento del mercado
 $\newline$
 <p>
-![](./img/D30.png)
+![](./img/T1/D30.png)
 </p>
 
 #### 2.3.4 Clasificación de Flynn de arquitecturas (flujo instrucciones / flujo de datos)
 $\newline$
 
 <p>
-![](./img/D32.png)
+![](./img/T1/D32.png)
 </p>
 
 - **Computadores SISD**. Un único flujo de instrucciones (SI) procesa operandos y genera resultados, definiendo un único flujo de datos (SD).
@@ -166,11 +166,11 @@ $\newline$
     Corresponde a los computadores uni-procesador, ya que existe una única unidad de control (UC) que recibe las instrucciones de memoria, las decodifica y genera los códigos que definen la operación correspondiente a cada instrucción que debe realizar la unidad de procesamiento (UP) de datos.
 
 <p>
-![](./img/D33.png)
+![](./img/T1/D33.png)
 </p>
 
 <p>
-![](./img/D33_.png)
+![](./img/T1/D33_.png)
 </p>
 
 - **Computadores SIMD**. Un único flujo de instrucciones (SI) procesa operandos y genera resultados, definiendo varios flujos de datos (MD), dado que cada instrucción codifica realmente varias operaciones iguales, cada una actuando sobre operadores distintos.
@@ -178,15 +178,15 @@ $\newline$
     Los códigos que genera la única unidad de control a partir de cada instrucción actúan sobre varias unidades de procesamiento distintas (UPi). Por lo que se pueden realizar varias operaciones similares simultáneas con operandos distintos. Aprovechan paralelismo de datos.
 
 <p>
-![](./img/D34.png)
+![](./img/T1/D34.png)
 </p>
 
 <p>
-![](./img/D34_.png)
+![](./img/T1/D34_.png)
 </p>
 
 <p>
-![](./img/D35.png)
+![](./img/T1/D35.png)
 </p>
 
 - **Computadores MIMD**. El computador ejecuta varias secuencias o flujos distintos de instrucciones (MI) y cada uno de ellos procesa operandos y genera resultados definiendo un único flujo de instrucciones, de forma que existen varios flujos de datos (MD) uno por cada flujo de instrucciones.
@@ -194,7 +194,7 @@ $\newline$
     Corresponde con multinúcleos, multiprocesadores y multicomputadores. Puede aprovechar paralelismo funcional. Existen varias unidades de control que decodifican las instrucciones correspondientes a distintos programas. Cada uno de estos programas procesa conjuntos de datos diferentes, que definen distintos flujos de datos.
 
 <p>
-![](./img/D36.png)
+![](./img/T1/D36.png)
 </p>
 
 - **Computadores MISD**. Se ejecutan varios flujos distintos de instrucciones (MI) aunque todos actúan sobre el mismo flujo de datos (SD).
@@ -211,7 +211,7 @@ Los sistemas multiprocesadores se han clasificado atendiendo a la organización 
 - **Sistemas con memoria distribuida** (DM) o **multicomputadores**. Son sistemas en los que cada procesador tiene su propio espacio de direcciones particular. El programador necesita conocer dónde están almacenados los datos.
 
 <p>
-![](./img/D39.png)
+![](./img/T1/D39.png)
 </p>
 
 ##### 2.3.5.2 Comparativa SMP (Symmetric MultiProcessor) y multicomputadores.
@@ -234,18 +234,18 @@ Los sistemas multiprocesadores se han clasificado atendiendo a la organización 
 
 ##### 2.3.5.3 Comunicación uno-a-uno en un multiprocesador.
 $\newline$
-Los diferentes procesadores que ejecutan una aplicación pueden requerir sincronizarse en algún moento. Por ejemplo, si el procesador A utiliza un dato que produce le procesador B, A deberá esperar a que B lo genere. En la siguiente imagen vemos la transferencia de datos en un multiprocesador. El proceso que ejecuta la instrucción de carga espera hasta recibir el contenido de la dirección. El proceso que ejecuta la instrucción de almacenamiento puede esperar a que termine para garantizar que se mantiene un orden en los accesos a memoria. Obsérvese que para que la transferencia de datos e realice de forma efectiva habría que sincronizar los procesos fuente y destino.
+Los diferentes procesadores que ejecutan una aplicación pueden requerir sincronizarse en algún momento. Por ejemplo, si el procesador A utiliza un dato que produce le procesador B, A deberá esperar a que B lo genere. En la siguiente imagen vemos la transferencia de datos en un multiprocesador. El proceso que ejecuta la instrucción de carga espera hasta recibir el contenido de la dirección. El proceso que ejecuta la instrucción de almacenamiento puede esperar a que termine para garantizar que se mantiene un orden en los accesos a memoria. Obsérvese que para que la transferencia de datos e realice de forma efectiva habría que sincronizar los procesos fuente y destino.
 
 <p>
-![](./img/D42.png)
+![](./img/T1/D42.png)
 </p>
 
 <p>
-![](./img/D43.png)
+![](./img/T1/D43.png)
 </p>
 
 <p>
-![](./img/D43_.png)
+![](./img/T1/D43_.png)
 </p>
 
 Se debe garantizar que el flujo de control **consumidor** del dato lea la variable compartida (A) cuando el **productor** haya escrito en la variable el dato.
@@ -253,11 +253,11 @@ Se debe garantizar que el flujo de control **consumidor** del dato lea la variab
 En multicomputadores se aprovechan los mecanismos de comunicación para implementar sincronización. Con una función de recepción bloqueante, es decir, que deja al proceso que la ejecuta detenido hasta que se reciba el dato, se puede implementar sincronización. En la siguiente figura podemos ver la transferencia asíncrona (con función *receive* bloqueante) de datos en un multicomputador. EN transferencia asíncrona se requiere almacenamiento intermedio para evitar esperas. El proceso fuente continúa la ejecución en cuanto los datos se copien en un *buffer*. El destino espera en el *receive* bloqueante a que lleguen los datos, en caso de que estos no hayan llegado aún.
 
 <p>
-![](./img/D44.png)
+![](./img/T1/D44.png)
 </p>
 
 <p>
-![](./img/D45.png)
+![](./img/T1/D45.png)
 </p>
 
 ##### 2.3.5.4 Incremento de escalabilidad en multiprocesadores y red de interconexión.
@@ -269,7 +269,7 @@ Como los SMP tienen escasa escalabilidad, se ha intentado incrementar la escalab
 - Distribuir físicamente los módulos de memoria entre los procesadores (pero se sigue compartiendo espacio de direcciones).
 
 <p>
-![](./img/D46.png)
+![](./img/T1/D46.png)
 </p>
 
 ##### 2.3.5.5 Clasificación completa de computadores según el sistema de memoria.
@@ -278,30 +278,30 @@ Como los SMP tienen escasa escalabilidad, se ha intentado incrementar la escalab
         - **SMP**.
     - **NUMA** (*Non-Uniform Memory Access*).
         - **NUMA**. Arquitecturas con acceso a memoria no uniforme sin coherencia de caché entre nodos. No incorporan hardware para evitar problemas por incoherencias entre cachés de distintos nodos. Esto hace que los datos modificables compartidos no se puedan trasladar a caché de nodos remotos; hay que acceder a ellos individualmente a través de la red. Se puede hacer más tolerable la latencia utilizando precaptación (*prefetching*) de memoria y procesamiento multihebra.
-        - **CC-NUMA**. Arquitecturas con acceso a memoria no uniforme y con caché coherente. Tienen hardware para mantenr coherencia entre cachés de distintos nodos, que se encarga de las transferencias de datos compartidos entre nodos. El hardware para mantenimiento de coherencia supone un coste añadido e introduce un retardo que hace que estos sistemas escalen en menor grado que un NUMA.
+        - **CC-NUMA**. Arquitecturas con acceso a memoria no uniforme y con caché coherente. Tienen hardware para mantener coherencia entre cachés de distintos nodos, que se encarga de las transferencias de datos compartidos entre nodos. El hardware para mantenimiento de coherencia supone un coste añadido e introduce un retardo que hace que estos sistemas escalen en menor grado que un NUMA.
         - **COMA**. Arquitecturas con acceso a memoria solo caché. La memoria local de los procesadores se gestiona como caché. El sistema de mantenimiento se encarga de llevar dinámicamente el código y los datos a los nodos donde se necesiten.
 
 <p>
-![](./img/D47.png)
+![](./img/T1/D47.png)
 </p>
 
 ##### 2.3.5.6 Red en sistemas con memoria físicamente distribuida (NI: Network Interface).
 $\newline$
 
 <p>
-![](./img/D48.png)
+![](./img/T1/D48.png)
 </p>
 
 Ejemplo: Red (con conmutador o switch) de barras cruzadas.
 
 <p>
-![](./img/D49.png)
+![](./img/T1/D49.png)
 </p>
 
 Ejemplo: Placa CC-NUMA con red estática
 
 <p>
-![](./img/D50.png)
+![](./img/T1/D50.png)
 </p>
 
 ##### 2.3.6 Flujos de control (propuesta de clasificación de arquitecturas con múltiples flujos de control (o threads o flujos de instrucciones))
@@ -379,7 +379,7 @@ Alternativas para obtener tiempos:
 | SYSTEM_CLOCK()   | Fortran  |  elapsed  | 1 |
 
 <p>
-![](./img/D8n.png)
+![](./img/T1/D8n.png)
 </p>
 
 $$TiempoDeCPU \; (T_{CPU}) = CiclosDelPrograma \cdot T_{CICLO} = \frac{CiclosDelPrograma}{FrecuenciaDeReloj}$$
@@ -408,7 +408,7 @@ Hay procesadores que pueden lanzar para que empiecen a ejecutarse (emitir) varia
 - **IPE**: Instrucciones que pueden emitirse (para empezar su ejecución) cada vez que se produce dicha emisión.
 
 <p>
-![](./img/D68.png)
+![](./img/T1/D68.png)
 </p>
 
 $$T_{CPU} = (Noper/OpInstr) \cdot CPI \cdot T_{CICLO}$$
@@ -421,11 +421,11 @@ Hay procesadores que pueden codificar varias operaciones en una instrucción.
 - **Op_instr**: Número de operaciones que puede codificar una instrucción.
 
 <p>
-![](./img/D70.png)
+![](./img/T1/D70.png)
 </p>
 
 <p>
-![](./img/D71.png)
+![](./img/T1/D71.png)
 </p>
 
 #### 3.2.2 Productividad: MIPS, MFLOPS.
@@ -450,28 +450,28 @@ $$MFLOPS = \frac{OperacionesEnComaFlotante}{T_{CPU} \cdot 10^6}$$
 - Es necesaria una normalización de las instrucciones en coma flotante
 
 <p>
-![](./img/D11n.png)
+![](./img/T1/D11n.png)
 </p>
 
 ### 3.3 Conjunto de programas de prueba (Benchmark).
 
 - Propiedades exigidas a medidas de prestaciones:
-    - Fiabilidad => Representativas, evaluar diferentes componentes del sistema y reproducibles
-    - Permitir comparar diferentes realizaciones de un sistema o diferentes sistemas => Aceptadas por todos los interesados (usuarios, fabricantes, vendedores)
+    - Fiabilidad => Representativas, evaluar diferentes componentes del sistema y reproducibles.
+    - Permitir comparar diferentes realizaciones de un sistema o diferentes sistemas => Aceptadas por todos los interesados (usuarios, fabricantes, vendedores).
 - Interesados:
     - Vendedores y fabricantes de hardware o software.
     - Investigadores de hardware o software.
     - Compradores de hardware o software.
 - Tipos de Benchmarks:
-    - De bajo nivel o microbenchmark
+    - De bajo nivel o microbenchmark.
         - testping-pong, evaluación de las operaciones con enteros o con flotantes.
-    - Kernels
+    - Kernels.
         - resolución de sistemas de ecuaciones, multiplicación de matrices, FFT, descomposición LU.
-    - Sintéticos
+    - Sintéticos.
         - Dhrystone, Whetstone.
     - Programas reales.
         - SPEC CPU2006: enteros (gcc, gzip, perlbmk).
-    - Aplicaciones diseñadas
+    - Aplicaciones diseñadas.
         - Predicción de tiempo, simulación de terremotos.
 
 ### 3.3.1 LINPACK.
@@ -483,7 +483,7 @@ for (i=0; i<N; i++)
 ```
 
 <p>
-![](./img/D84.png)
+![](./img/T1/D84.png)
 </p>
 
 ### 3.4 Ganancia en prestaciones.
@@ -506,7 +506,7 @@ $T_1$: tiempo de ejecución en la máquina base.
 
 $T_P$: tiempo de ejecución en la máquina mejorada.
 
-Si se incrementan las prestaciones de un sistema, el incremento en prestaciones (velocidad) que se consigue en la nueva situación, p , con respecto a la previa (sistema base, b ) se expresa mediante la ganancia en prestaciones o speed-up, S
+Si se incrementan las prestaciones de un sistema, el incremento en prestaciones (velocidad) que se consigue en la nueva situación, p, con respecto a la previa (sistema base, b) se expresa mediante la ganancia en prestaciones o speed-up, S
 
 $$S = \frac{V_p}{V_b} = \frac{T_b}{T_p}$$
 
@@ -523,22 +523,22 @@ $T_b$: tiempo de ejecución en la máquina base.
 $T_P$: tiempo de ejecución en la máquina mejorada.
 
 
-Mejora en un núcleo de procesamiento: segmentación
+Mejora en un núcleo de procesamiento: segmentación.
 
 <p>
-![](./img/D14n.png)
+![](./img/T1/D14n.png)
 </p>
 
-Mejora en un núcleo de procesamiento: operación superescalar
+Mejora en un núcleo de procesamiento: operación superescalar.
 
 <p>
-![](./img/D15n.png)
+![](./img/T1/D15n.png)
 </p>
 
-Mejora en un núcleo de procesamiento: unidades funcionales SIMD
+Mejora en un núcleo de procesamiento: unidades funcionales SIMD.
 
 <p>
-![](./img/D16n.png)
+![](./img/T1/D16n.png)
 </p>
 
 ¿Qué impide que se pueda obtener la ganancia en velocidad pico?
@@ -553,17 +553,17 @@ Mejora en un núcleo de procesamiento: unidades funcionales SIMD
 Riesgos de datos y control:
 
 <p>
-![](./img/D19n.png)
+![](./img/T1/D19n.png)
 </p>
 
 <p>
-![](./img/D20n.png)
+![](./img/T1/D20n.png)
 </p>
 
 Riesgos de datos, control y estructural:
 
 <p>
-![](./img/D21n.png)
+![](./img/T1/D21n.png)
 </p>
 
 #### 3.4.2 Ley de Amdahl.
@@ -613,11 +613,14 @@ Nuevos problemas, respecto a programación secuencial:
 
 Los debe abordar la herramienta de programación o el programador o SO.
 
->Diap6
+<p>
+![](./img/T1/D12.png)
+</p>
 
 #### 4.1.2 Punto de partida.
 
 El punto de partida es:
+
 - partir de una versión secuencial.
 - descripción o definición de la aplicación.
 
@@ -629,15 +632,21 @@ Se apoya en:
 
 - SPMD (*Single-Program Multiple Data*).
 
->Diap 8
+<p>
+![](./img/T2/D8.png)
+</p>
 
 - MPMD (*Multiple-Program Multiple Data*).
 
->Diap 9
+<p>
+![](./img/T2/D9.png)
+</p>
 
 ### 4.2 Herramientas para obtener código paralelo.
 
->Diap 11
+<p>
+![](./img/T2/D11.png)
+</p>
 
 - Las herramientas permiten de forma implícita o explícita (lo hace el programador):
     - Localizar paralelismo o descomponen en tareas independientes (*decomposition*).
@@ -648,41 +657,57 @@ Se apoya en:
 
 Ejemplo: cálculo de PI con OpenMP/C.
 
->Diap 13
+<p>
+![](./img/T2/D13.png)
+</p>
 
 reduction: tiene que sumar todas las variables `sum` y las guarda en `sum`.
 
 
 Ejemplo: cálculo de PI en MPI/C.
 
->Diap 14
+<p>
+![](./img/T2/D14.png)
+</p>
 
 Hemos modificado el bucle `for` para repartir el trabajo entre los procesos.
 
 #### 4.2.1 Comunicaciones colectivas.
 
->Diap15
+<p>
+![](./img/T2/D15.png)
+</p>
 
 
 #### 4.2.2 Comunicación uno-a-todos.
 
->Diap16
+<p>
+![](./img/T2/D16.png)
+</p>
 
 #### 4.2.3 Comunicación todoas-a-uno.
 
->diap17
+<p>
+![](./img/T2/D17.png)
+</p>
 
 #### 4.2.4 Comunicación múltiple uno-a-uno.
 
->diap18
+<p>
+![](./img/T2/D18.png)
+</p>
 
 #### 4.2.5 Comunicación todos-a-todos.
 
->diap19
+<p>
+![](./img/T2/D19.png)
+</p>
 
 #### 4.2.6 Servicios compuestos.
 
->diap20
+<p>
+![](./img/T2/D20.png)
+</p>
 
 En la desviación típica:
 
@@ -690,15 +715,21 @@ $$ s = \sqrt{\frac{\sum_{i=1}^N (x_i-media)^2}{N-1}} $$
 
 Se haría un todo reduce.
 
->diap21
+<p>
+![](./img/T2/D21.png)
+</p>
 
 Ejemplo: comunicación colectiva en OpenMP.
 
->diap 22
+<p>
+![](./img/T2/D22.png)
+</p>
 
 Ejemplo: comunicación en MPI.
 
->diap23
+<p>
+![](./img/T2/D23.png)
+</p>
 
 
 
@@ -708,7 +739,9 @@ Ejemplo: comunicación en MPI.
 - Paso de mensajes: también se puede usar en multiprocesadores.
 - Paralelismo de datos: se corresponde con la arquitectura SIMD.
 
->diap25
+<p>
+![](./img/T2/D25.png)
+</p>
 
 #### 4.3.2 Estilos de programación y herramientas de programación.
 
@@ -740,7 +773,9 @@ Estructuras típicas de procesos/threads en código paralelo:
 
 Tenemos un flujo de instrucciones que se encarga de repartir el trabajo entre esclavos y recolecta resultados. Los esclavos están ejecutando el mismo código. El máster puede hacer un trabajo distinto. Luego combinamos un MPMD con SPMP.
 
->diap 29
+<p>
+![](./img/T2/D29.png)
+</p>
 
 ## Lección 5. Proceso de paralelización.
 
