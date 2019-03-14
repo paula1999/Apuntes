@@ -617,6 +617,7 @@ Los debe abordar la herramienta de programación o el programador o SO.
 ![](./img/T1/D12.png)
 </p>
 
+
 #### 4.1.2 Punto de partida.
 
 El punto de partida es:
