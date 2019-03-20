@@ -612,20 +612,24 @@ Nuevos problemas, respecto a programación secuencial:
 - Sincronización y comunicación.
 
 Los debe abordar la herramienta de programación o el programador o SO.
-
+$\newline$
 <p>
 ![](./img/T1/D12.png)
 </p>
 
+<p>
+<img src="./img/T1/D12.png" alt="drawing" width="200"/>
+</p>
 
 #### 4.1.2 Punto de partida.
-
+$\newline$
 El punto de partida es:
 
 - partir de una versión secuencial.
 - descripción o definición de la aplicación.
 
 Se apoya en:
+
 - Programa paralelo que resuelva un problema parecido.
 - Versiones paralelas u optimizadas de bibliotecas de funciones: BLAS (*Basic Linear Algebra Subroutine*), LAPCK (*Linear Algebra PACKage*)...
 
@@ -778,8 +782,42 @@ Tenemos un flujo de instrucciones que se encarga de repartir el trabajo entre es
 ![](./img/T2/D29.png)
 </p>
 
+#### 4.4.3 Cliente-Servidor.
+
+<p>
+![](./img/T2/D30.png)
+</p>
+
+#### 4.4.4 Descomposición de dominio o descomposición de datos.
+
+<p>
+![](./img/T2/D31.png)
+</p>
+
+Ejemplo: filtrado imagen.
+
+<p>
+![](./img/T2/D32.png)
+</p>
+
+#### 4.4.5 Estructura segmentada o de flujo de datos.
+
+<p>
+![](./img/T2/D33.png)
+</p>
+
+#### 4.4.6 Divide y vencerás o descomposición recursiva.
+
+<p>
+![](./img/T2/D34.png)
+</p>
+
 ## Lección 5. Proceso de paralelización.
 
+### 5.1 Objetivos.
+
+- Programar en paralelo una aplicación sencilla.
+- Distinguir entre asignación estática y dinámica (ventajas e inconvenientes).
 
 ## Lección 6. Evaluación de prestaciones en procesamiento paralelo.
 
