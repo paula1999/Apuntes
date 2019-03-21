@@ -690,11 +690,13 @@ Hemos modificado el bucle `for` para repartir el trabajo entre los procesos.
 ![](./img/T2/D16.png)
 </p>
 
-#### 4.2.3 Comunicación todoas-a-uno.
+#### 4.2.3 Comunicación todos-a-uno.
 
 <p>
 ![](./img/T2/D17.png)
 </p>
+
+En la reducción, lo que envían todos los procesos se reduce a un único valor, aplicando conmutativa y asociativa. En acumulación se aplican los valores tal cual.
 
 #### 4.2.4 Comunicación múltiple uno-a-uno.
 
@@ -790,9 +792,16 @@ Tenemos un flujo de instrucciones que se encarga de repartir el trabajo entre es
 
 #### 4.4.4 Descomposición de dominio o descomposición de datos.
 
+Hay comunicación entre parejas de flujos de instrucciones.
+
+>Se pueden representar con matrices
+
+> Aplicación: inundaciones, software metereológico...
+
 <p>
 ![](./img/T2/D31.png)
 </p>
+
 
 Ejemplo: filtrado imagen.
 
@@ -802,16 +811,35 @@ Ejemplo: filtrado imagen.
 
 #### 4.4.5 Estructura segmentada o de flujo de datos.
 
+Necesitamos que en la aplicacion se aplique a una un flujo de entrada en secuencia una serie de operaciones, una detrás de otra. Ejepmplo: MP3, MP4, multimedia...
+
+En el caso de JPEG, los bloques se dividen en 8x8 bloques y se decodifica en el orden que indiquen las flechas. No puedo aplicar descomposición de dominio porque hay dependencia de bloques.
+
+Podemos paralelizar una sola etapa, cuando se encuentren distintas estructuras en etapas.
+
 <p>
 ![](./img/T2/D33.png)
 </p>
 
 #### 4.4.6 Divide y vencerás o descomposición recursiva.
 
+Tareas en forma de árbol. Aplicación: para resolver un problema cuya solución se puede realizar dividiéndolo en subproblemas.
+
+Los arcos representan flujo de datos. (flechas negras).
+Agrupación/Asignación de tareas a flujos de instrucciones. (flechas negras).
+
+En la imagen, usaríamos 4 flujos de datos como máximo porque el grado de paralelismo es 4. Las flechas naranjas representan la asignación de flujos de instrucciones.
+
 <p>
 ![](./img/T2/D34.png)
 </p>
 
+
+> Ejersisio:  29 marzo
+>>>>calculo de la covarianza:
+descomposicion de dominio.(paralelismo de datos)
+>>>y la ordenación por mezcla implementar en OPENMP paralelizarlo
+tener en cuenta que es divide y venceras.
 ## Lección 5. Proceso de paralelización.
 
 ### 5.1 Objetivos.
@@ -819,7 +847,249 @@ Ejemplo: filtrado imagen.
 - Programar en paralelo una aplicación sencilla.
 - Distinguir entre asignación estática y dinámica (ventajas e inconvenientes).
 
+### 5.2 Proceso de paralelización.
+
+- Descomponer en tareas independientes.
+    - Análisis de dependencia entre funciones.
+    - Análisis de dependencia entre iteraciones de bucles.
+
+    <p>
+    ![](./img/T2/D42.png)
+    </p>
+
+    - Ejemplo de cálculo PI: descomposición en tareas independientes.
+
+    Se puede paralelizar pi fácilmente.
+
+    $$ \pi = 4\int_0^1 frac{1}{1+x^2} = 4 \sum_i base \cdot altura_i , i = 0,1,...$$
+
+    $altura = \frac{1}{1+x^2}$, $x_i = (i+0'5)1/int$
+
+    <p>
+    ![](./img/T2/D43.png)
+    </p>
+
+    En la siguiente imagen,
+
+    <p>
+    ![](./img/T2/D44.png)
+    </p>
+
+- Asignar (planificar+mapear) tareas a procesos y/o threads.
+    - Ejemplo: filtrado de imagen.
+
+    <p>
+    ![](./img/T2/D34.png)
+    </p>
+
+    - Incluimos: agrupación de tareas en procesos/threads (scheduling) y mapeo a procesadores/cores (mapping).
+    - La granularidad de la carga de trabajo (tareas) asignada a los procesos/threads depende de:
+        - número de cores o procesadores o elementos de procesamiento.
+        - tiempo de comunicación/sincronización frente a tiempo de cálculo.
+    - Equilibrado de la carga (tareas = código + datos) o load balancing:
+        - Objetivo: unos procesos/threads no deben hacer esperar a otros.
+    - ¿De qué depende el equilibrado?
+        - La arquitectura:
+            - homogénea frente a la heterogénea.
+            - uniforme frente a no uniforme.
+        - La aplicación/descomposición.
+    - Tipos de asignación:
+        - Estática.
+            - Está determinado qué tarea va a realizar cada procesador o core.
+            - Explícita: programador.
+            - Implícita: herramienta de programación al generar el código ejecutable.
+        - Dinámica (en tiempo de ejecución).
+            - Distintas ejecuciones pueden asignar distintas tareas a un procesador o core.
+            - Explícita: el programador.
+            - Implícita: herramienta de programación al generar el código ejecutable.
+    - Mapeo de procesos/threads a unidades de procesamiento.
+        - Normalmente se deja al SO el mapeo de threads (light process).
+        - Lo puede hacer el entorno o sistema en tiempo de ejecución (runtime system de la herramienta de programación).
+        - El programador puede influir.
+
+    - Ejemplo: filtrado de  imagen.
+
+    <p>
+    ![](./img/T2/D50.png)
+    </p>
+
+    - Códigos filtrado por imagen.
+
+      Descomposición por columnas.
+
+      ```c
+      #include <omp.h>
+      ...
+      omp_set_num_threads(M)
+      #pragma omp parallel private(i) {
+          for (i=0;i<N;i++) {
+              #pragma omp for
+              for (j=0;j<M;j++) {
+                  pS[i,j] = 0,75*p[i,j] + 0,0625*(p[i-1,j]+p[i,j-1]+ p[i+1,j]+ p[i,j+1]);
+              }
+          }
+      }
+      ...```
+
+      Descomposición por filas.
+
+      ```c
+      #include <omp.h>
+      ...
+      omp_set_num_threads(N)
+      #pragma omp parallel private(j) {
+          #pragma omp for
+          for (i=0;i<N;i++) {
+              for (j=0;j<M;j++) {
+                  pS[i,j] = 0,75*p[i,j] + 0,0625*(p[i-1,j]+p[i,j-1]+ p[i+1,j]+ p[i,j+1]);
+              }
+          }
+      }
+      ...
+      ```
+
+      - Ejemplo de asignación estática del paralelismo de tareas y datos con OpenMP.
+
+      <p>
+      ![](./img/T2/D52.png)
+      </p>
+
+      - Asignación estática.
+          - Asignación estática y explícita de las iteraciones de un bucle.
+
+          <p>
+          ![](./img/T2/D53.png)
+          </p>
+
+      - Asignación dinámica.
+          - Asignación dinámica y explícita de las iteraciones de un bucle.
+
+          <p>
+          ![](./img/T2/D54.png)
+          </p>
+
+          - Dinámica e implícita.
+      - Asignación. Ejemplo: multiplicación matriz por vector.
+          <p>
+          ![](./img/T2/D55.png)
+          </p>
+
+- Redactar código paralelo.
+    - Ejemplo: cálculo de PI con OpenMP/C.
+
+      Con la clausula de planificación, estamos haciendo la carga dinámica.
+
+      <p>
+      ![](./img/T2/D58.png)
+      </p>
+
+    - Asignación de tareas a 2 threads estática por turno rotatorio.
+
+      <p>
+      ![](./img/T2/D59.png)
+      </p>
+
+    - Ejemplo: cálculo de PI en MPI/C.
+
+      <p>
+      ![](./img/T2/D60.png)
+      </p>
+
+- Evaluar prestaciones. Para ver la bondad, es decir, para ver si hemos hecho un buen código.
+
+
 ## Lección 6. Evaluación de prestaciones en procesamiento paralelo.
+
+### Objetivos.
+
+- Obtener ganancia y escalabilidad en el contexto de procesamiento paralela
+- Aplicar la ley de Amdahl en el contexto de procesamiento paralela
+- Comparar la ley de Amdahl y ganancia escalable.
+
+### 6.1 Ganancia de prestaciones y escalabilidad.
+
+#### 6.1.1 Evaluación de prestaciones.
+
+- Medidas usuales.
+    - Tiempo de respuesta.
+        - Real (wall-clock time, elapsed time) (/usr/bin/time).
+        - Usuario, sistema, CPU time = user + sys.
+    - Productividad.
+- Escalabilidad.
+- Eficiencia.
+    - Relación prestaciones/prestaciones máximas.
+    - Rendimiento = prestaciones/no_recursos.
+    - Otras: Prestaciones/consumo_potencia, prestaciones/área_ocupada.
+
+#### 6.1.2 Ganancia en prestaciones. Escalabilidad.
+
+Ganancia de prestaciones = $S(p) = \frac{Prestaciones(p)}{Prestaciones{l}} = \frac{T_s}{T_p(p)}$
+
+Ganancia en velocidad (Speedup)
+
+- Ganancia máxima de la eficiencia = 1
+- Ganancia mínima de la eficiencia = 1/p
+
+$$T_p(p) = \frac{T_s}{p} \rightarrow S(p)= T_s / T_p(p) = \frac{T_s}{T_s/p} = p$$
+
+- Sobrecarga (*overhead*):
+    - Comunicación/sincronización.
+    - Crear/terminar procesos/threads.
+    - Cálculos o funciones no presentes en versión secuencial.
+    - Falta de equilibrado.
+
+$$E(p) = \frac{Prest(p)}{PrestMax(p)}=\frac{Prest(p)}{p\cdot Prest(l)}=\frac{S(p)}{p}$$
+
+<p>
+![](./img/T2/D69.png)
+</p>
+
+<p>
+![](./img/T2/D70.png)
+</p>
+
+- Número de procesadores óptimo:
+
+$$S(p) = \frac{T_S}{T_P(p)} = \frac{T_S}{T_C(p)+T_O(p)} = \frac{1}{f+\frac{1-f}{p} + \frac{T_O(p)}{T_S}}$$
+
+$$T_C(p) = O(\frac{1}{p})$$
+
+$$T_O(p) = O(p)$$
+
+```c++
+for (i=0; i<n; i++){
+    //código para i
+}
+```
+
+<p>
+![](./img/T2/D71.png)
+</p>
+
+### 6.2 Ley de Amdahl.
+- Ley de Amdahl: la ganancia en prestaciones utilizando $p$ procesadores está limitada por la fracción de código que no se puede paralelizar.
+
+$$S(p) = \frac{T_S}{T_P(p)} \leq \frac{T_S}{f\cdot T_S + \frac{(1-f)T_S}{p}} = \frac{p}{1+f(p-1)} \rightarrow \frac{1}{f} (p \rightarrow \infty)$$
+
+- S: incremento en velocidad que se consigue al aplicar una mejora. (paralelismo)
+- p: Incremento en velocidad máximo que se puede conseguir si se aplica la mejora todo el tiempo. (número de procesadores)
+- f: fracción de tiempo en el que no se puede aplicar la
+mejora. (fracción de t. no paralelizable)
+
+<p>
+![](./img/T2/D74.png)
+</p>
+
+
+### 6.3 Ganancia escalable.
+
+<p>
+![](./img/T2/D75.png)
+</p>
+
+<p>
+![](./img/T2/D77.png)
+</p>
 
 
 
