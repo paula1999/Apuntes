@@ -588,6 +588,7 @@ Hay que mejorar el caso más frecuente (lo que más se usa)
 
 Ley enunciada por Amdahl en relación con la eficacia de los computadores paralelos: dado que en un programa hay código secuencial que no puede paralelizarse, los procesadores no se podrían utilizar eficazmente.
 
+$\pagebreak$
 
 # Tema 2. Programación paralela
 ## Lección 4. Herramientas, estilos y estructuras en programación paralela.
@@ -604,6 +605,7 @@ Ley enunciada por Amdahl en relación con la eficacia de los computadores parale
 
 #### 4.1.1 Problemas que plantea la programación paralela al programador.
 
+$\newline$
 Nuevos problemas, respecto a programación secuencial:
 
 - División en unidades de cómputo independientes (tareas).
@@ -615,10 +617,6 @@ Los debe abordar la herramienta de programación o el programador o SO.
 $\newline$
 <p>
 ![](./img/T1/D12.png)
-</p>
-
-<p>
-<img src="./img/T1/D12.png" alt="drawing" width="200"/>
 </p>
 
 #### 4.1.2 Punto de partida.
@@ -678,6 +676,7 @@ Ejemplo: cálculo de PI en MPI/C.
 Hemos modificado el bucle `for` para repartir el trabajo entre los procesos.
 
 #### 4.2.1 Comunicaciones colectivas.
+$\newline$
 
 <p>
 ![](./img/T2/D15.png)
@@ -685,12 +684,14 @@ Hemos modificado el bucle `for` para repartir el trabajo entre los procesos.
 
 
 #### 4.2.2 Comunicación uno-a-todos.
+$\newline$
 
 <p>
 ![](./img/T2/D16.png)
 </p>
 
 #### 4.2.3 Comunicación todos-a-uno.
+$\newline$
 
 <p>
 ![](./img/T2/D17.png)
@@ -699,18 +700,23 @@ Hemos modificado el bucle `for` para repartir el trabajo entre los procesos.
 En la reducción, lo que envían todos los procesos se reduce a un único valor, aplicando conmutativa y asociativa. En acumulación se aplican los valores tal cual.
 
 #### 4.2.4 Comunicación múltiple uno-a-uno.
+$\newline$
 
 <p>
 ![](./img/T2/D18.png)
 </p>
 
 #### 4.2.5 Comunicación todos-a-todos.
+$\newline$
 
 <p>
 ![](./img/T2/D19.png)
 </p>
 
+$\pagebreak$
+
 #### 4.2.6 Servicios compuestos.
+$\newline$
 
 <p>
 ![](./img/T2/D20.png)
@@ -784,19 +790,21 @@ Tenemos un flujo de instrucciones que se encarga de repartir el trabajo entre es
 ![](./img/T2/D29.png)
 </p>
 
+
 #### 4.4.3 Cliente-Servidor.
+$\newline$
 
 <p>
 ![](./img/T2/D30.png)
 </p>
 
 #### 4.4.4 Descomposición de dominio o descomposición de datos.
-
+$\newline$
 Hay comunicación entre parejas de flujos de instrucciones.
 
->Se pueden representar con matrices
+- Se pueden representar con matrices
 
-> Aplicación: inundaciones, software metereológico...
+- Aplicación: inundaciones, software metereológico...
 
 <p>
 ![](./img/T2/D31.png)
@@ -809,9 +817,11 @@ Ejemplo: filtrado imagen.
 ![](./img/T2/D32.png)
 </p>
 
-#### 4.4.5 Estructura segmentada o de flujo de datos.
+$\pagebreak$
 
-Necesitamos que en la aplicacion se aplique a una un flujo de entrada en secuencia una serie de operaciones, una detrás de otra. Ejepmplo: MP3, MP4, multimedia...
+#### 4.4.5 Estructura segmentada o de flujo de datos.
+$\newline$
+Necesitamos que en la aplicación se aplique a una un flujo de entrada en secuencia una serie de operaciones, una detrás de otra. Ejemplo: MP3, MP4, multimedia...
 
 En el caso de JPEG, los bloques se dividen en 8x8 bloques y se decodifica en el orden que indiquen las flechas. No puedo aplicar descomposición de dominio porque hay dependencia de bloques.
 
@@ -840,6 +850,7 @@ En la imagen, usaríamos 4 flujos de datos como máximo porque el grado de paral
 descomposicion de dominio.(paralelismo de datos)
 >>>y la ordenación por mezcla implementar en OPENMP paralelizarlo
 tener en cuenta que es divide y venceras.
+
 ## Lección 5. Proceso de paralelización.
 
 ### 5.1 Objetivos.
@@ -917,23 +928,25 @@ tener en cuenta que es divide y venceras.
 
       Descomposición por columnas.
 
-      ```c
-      #include <omp.h>
-      ...
-      omp_set_num_threads(M)
-      #pragma omp parallel private(i) {
+    ```c
+    #include <omp.h>
+    ...
+    omp_set_num_threads(M)
+    #pragma omp parallel private(i) {
           for (i=0;i<N;i++) {
               #pragma omp for
               for (j=0;j<M;j++) {
-                  pS[i,j] = 0,75*p[i,j] + 0,0625*(p[i-1,j]+p[i,j-1]+ p[i+1,j]+ p[i,j+1]);
+                  pS[i,j] = 0,75*p[i,j] + 0,0625*(p[i-1,j]+p[i,j-1]
+                            + p[i+1,j]+ p[i,j+1]);
               }
           }
-      }
-      ...```
+     }
+      ...
+    ```
 
       Descomposición por filas.
 
-      ```c
+    ```c
       #include <omp.h>
       ...
       omp_set_num_threads(N)
@@ -946,7 +959,7 @@ tener en cuenta que es divide y venceras.
           }
       }
       ...
-      ```
+    ```
 
       - Ejemplo de asignación estática del paralelismo de tareas y datos con OpenMP.
 
@@ -1022,7 +1035,7 @@ tener en cuenta que es divide y venceras.
     - Otras: Prestaciones/consumo_potencia, prestaciones/área_ocupada.
 
 #### 6.1.2 Ganancia en prestaciones. Escalabilidad.
-
+$\newline$
 Ganancia de prestaciones = $S(p) = \frac{Prestaciones(p)}{Prestaciones{l}} = \frac{T_s}{T_p(p)}$
 
 Ganancia en velocidad (Speedup)
@@ -1055,12 +1068,6 @@ $$S(p) = \frac{T_S}{T_P(p)} = \frac{T_S}{T_C(p)+T_O(p)} = \frac{1}{f+\frac{1-f}{
 $$T_C(p) = O(\frac{1}{p})$$
 
 $$T_O(p) = O(p)$$
-
-```c++
-for (i=0; i<n; i++){
-    //código para i
-}
-```
 
 <p>
 ![](./img/T2/D71.png)
