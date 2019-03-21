@@ -666,33 +666,28 @@ Ejemplo: cálculo de PI con OpenMP/C.
 
 reduction: tiene que sumar todas las variables `sum` y las guarda en `sum`.
 
+$\pagebreak$
 
-Ejemplo: cálculo de PI en MPI/C.
+Ejemplo: cálculo de PI en MPI/C. (Modificación del bucle `for` para repartir el trabajo entre los procesos)
 
 <p>
 ![](./img/T2/D14.png)
 </p>
 
-Hemos modificado el bucle `for` para repartir el trabajo entre los procesos.
-
 #### 4.2.1 Comunicaciones colectivas.
 $\newline$
-
 <p>
 ![](./img/T2/D15.png)
 </p>
 
-
 #### 4.2.2 Comunicación uno-a-todos.
 $\newline$
-
 <p>
 ![](./img/T2/D16.png)
 </p>
 
 #### 4.2.3 Comunicación todos-a-uno.
 $\newline$
-
 <p>
 ![](./img/T2/D17.png)
 </p>
@@ -701,23 +696,21 @@ En la reducción, lo que envían todos los procesos se reduce a un único valor,
 
 #### 4.2.4 Comunicación múltiple uno-a-uno.
 $\newline$
-
 <p>
 ![](./img/T2/D18.png)
 </p>
 
+$\pagebreak$
+
 #### 4.2.5 Comunicación todos-a-todos.
 $\newline$
-
 <p>
 ![](./img/T2/D19.png)
 </p>
 
-$\pagebreak$
 
 #### 4.2.6 Servicios compuestos.
 $\newline$
-
 <p>
 ![](./img/T2/D20.png)
 </p>
@@ -756,6 +749,8 @@ Ejemplo: comunicación en MPI.
 ![](./img/T2/D25.png)
 </p>
 
+$\pagebreak$
+
 #### 4.3.2 Estilos de programación y herramientas de programación.
 
 - Paso de mensajes (*message passing*).
@@ -781,8 +776,7 @@ Estructuras típicas de procesos/threads en código paralelo:
 - Master-Slave, o granja de tareas.
 
 #### 4.4.2 Master-Slave o granja de tareas.
->Las tareas se representan con un círculo.
->Los arcos representan flujo de datos.
+Las tareas se representan con un círculo y los arcos representan flujo de datos.
 
 Tenemos un flujo de instrucciones que se encarga de repartir el trabajo entre esclavos y recolecta resultados. Los esclavos están ejecutando el mismo código. El máster puede hacer un trabajo distinto. Luego combinamos un MPMD con SPMP.
 
@@ -817,8 +811,6 @@ Ejemplo: filtrado imagen.
 ![](./img/T2/D32.png)
 </p>
 
-$\pagebreak$
-
 #### 4.4.5 Estructura segmentada o de flujo de datos.
 $\newline$
 Necesitamos que en la aplicación se aplique a una un flujo de entrada en secuencia una serie de operaciones, una detrás de otra. Ejemplo: MP3, MP4, multimedia...
@@ -843,13 +835,6 @@ En la imagen, usaríamos 4 flujos de datos como máximo porque el grado de paral
 <p>
 ![](./img/T2/D34.png)
 </p>
-
-
-> Ejersisio:  29 marzo
->>>>calculo de la covarianza:
-descomposicion de dominio.(paralelismo de datos)
->>>y la ordenación por mezcla implementar en OPENMP paralelizarlo
-tener en cuenta que es divide y venceras.
 
 ## Lección 5. Proceso de paralelización.
 
@@ -924,9 +909,12 @@ tener en cuenta que es divide y venceras.
     ![](./img/T2/D50.png)
     </p>
 
-    - Códigos filtrado por imagen.
+$\pagebreak$
 
-      Descomposición por columnas.
+  - Códigos filtrado por imagen.
+
+    Descomposición por columnas.
+
 
     ```c
     #include <omp.h>
@@ -960,6 +948,8 @@ tener en cuenta que es divide y venceras.
       }
       ...
     ```
+    
+    $\pagebreak$
 
       - Ejemplo de asignación estática del paralelismo de tareas y datos con OpenMP.
 
