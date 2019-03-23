@@ -621,10 +621,10 @@ $\newline$
 
 #### 4.1.2 Punto de partida.
 $\newline$
-El punto de partida es:
+Para obtener una versión paralela de una aplicación
 
-- partir de una versión secuencial.
-- descripción o definición de la aplicación.
+- se puede partir de una **versión secuencial** que resuelva el problema y buscar la paralelización sobre este. La versión paralela depende de la descripción del problema que se ha utilizado en la versión secuencial de partida. Ventaja: se puede saber el tiempo de ejecución real de las diferentes funciones o tareas, lo que facilita la distribución equilibrada de la carga de trabajo entre procesadores.
+- se puede partir de la **definición de la aplicación**.
 
 Se apoya en:
 
@@ -633,13 +633,13 @@ Se apoya en:
 
 #### 4.1.3 Modos de programación MIMD.
 
-- SPMD (*Single-Program Multiple Data*).
+- **SPMD** (*Single-Program Multiple Data*): paralelismo de datos. Todos los códigos que se ejecutan en paralelo se obtienen compilando el mismo programa. Cada copia trabaja con un conjunto de datos distintos y se ejecuta en un procesador diferente. Es recomendable en sistemas masivamente paralelos. Se usa en sistemas con memoria distribuida, en multiprocesadores y multicomputadores.
 
 <p>
 ![](./img/T2/D8.png)
 </p>
 
-- MPMD (*Multiple-Program Multiple Data*).
+- **MPMD** (*Multiple-Program Multiple Data*): paralelismo de tareas o funciones. Los códigos que se ejecutan en paralelo se obtienen compilando programas independientes. La aplicación a ejecutar (o el código secuencial inicial) se divide en unidades independientes. Cada unidad trabaja con un conjunto de datos y se asigna a un procesador distinto.
 
 <p>
 ![](./img/T2/D9.png)
@@ -651,9 +651,9 @@ Se apoya en:
 ![](./img/T2/D11.png)
 </p>
 
-- Las herramientas permiten de forma implícita o explícita (lo hace el programador):
+- Las herramientas permiten de forma implícita (lo hace la propia herramienta) o explícita (lo hace el programador):
     - Localizar paralelismo o descomponen en tareas independientes (*decomposition*).
-    - Asignar -as tareas, es decir, la carga de trabajo (código + datos), a procesos/threads (*scheduling*).
+    - Asignar las tareas, es decir, la carga de trabajo (código + datos), a procesos/threads (*scheduling*).
     - Crear y terminar procesos/threads (o enrolar y desenrolar en un grupo).
     - Comunicar y sincronizar procesos/threads.
 - El programador, la herramienta o el SO se encarga de asignar procesos/threads a unidades de procesamiento (*mapping*).
@@ -682,12 +682,24 @@ $\newline$
 
 #### 4.2.2 Comunicación uno-a-todos.
 $\newline$
+
+Un proceso envía y todos los procesos reciben. Hay variantes en las que el proceso que envía no forma parte del grupo y otras en las que reciben todos los del grupo excepto el que envía. Dentro de este grupo están:
+
+- **Difusión**: todos los procesos reciben el mismo mensaje.
+- **Dispersión** (*scatter*): cada proceso receptor recibe un mensaje diferente.
+
 <p>
 ![](./img/T2/D16.png)
 </p>
 
 #### 4.2.3 Comunicación todos-a-uno.
 $\newline$
+
+Todos los procesos en el grupo envían un mensaje a un único proceso:
+
+- **Reducción**: los mensajes enviados por los procesos se combinan en un solo mensaje mediante un operador. La operación de combinación es usualmente conmutativa y asociativa.
+- **Acumulación** (*gather*): los mensajes se reciben de forma concatenad en el receptor (en una estructura vectorial). El orden en la que se concatenan depende del identificador del proceso.
+
 <p>
 ![](./img/T2/D17.png)
 </p>
@@ -696,6 +708,9 @@ En la reducción, lo que envían todos los procesos se reduce a un único valor,
 
 #### 4.2.4 Comunicación múltiple uno-a-uno.
 $\newline$
+
+Hay componentes del grupo que envían (escriben) un único mensaje y componentes que reciben (leen) un único mensaje. Si todos los componentes envían y reciben, se implementa una **permutación**.
+
 <p>
 ![](./img/T2/D18.png)
 </p>
@@ -704,6 +719,12 @@ $\pagebreak$
 
 #### 4.2.5 Comunicación todos-a-todos.
 $\newline$
+
+Todos los procesos del grupo ejecutan una comunicación uno-a-todos. Cada proceso recibe $n$ mensajes, cada uno de un proceso diferente del grupo.
+
+- **Todos difunden**: todos los procesos realizan una difusión. Usualmente las $n$ transferencias recibidas por un proceso se concatenan en función del identificador del proceso que envía, de forma que todos los procesos reciben lo mismo.
+- **Todos dispersan**: los procesadores concatenan diferentes transferencias. En la figura se ilustra la trasposición de una matriz 4x4: el procesador $P_i$ dispersa la fila $i$ ($x_{i0}, x_{i1}, x_{i2}, x_{i3}$), tras la ejecución, el procesador $P_i$ tendrá la columna $i$ ($x_{0i}, x_{1i}, x_{2i}, x_{3i}$).
+
 <p>
 ![](./img/T2/D19.png)
 </p>
@@ -711,6 +732,9 @@ $\newline$
 
 #### 4.2.6 Servicios compuestos.
 $\newline$
+
+- **Todos combinan** o **reducción y extensión**: el resultado de aplicar una reducción se obtiene en todos los procesos porque la reducción se difunde una vez obtenida (reducción y extensión) o porque se realizan tantas reducciones como procesos (todos combinan).
+
 <p>
 ![](./img/T2/D20.png)
 </p>
@@ -720,6 +744,11 @@ En la desviación típica:
 $$ s = \sqrt{\frac{\sum_{i=1}^N (x_i-media)^2}{N-1}} $$
 
 Se haría un todo reduce.
+
+
+- **Recorrido** (*scan*): todos los procesos envían un mensaje, recibiendo cada uno de ellos el resultado de reducir un conjunto de estos mensajes.
+    - **Recorrido prefijo paralelo**: el proceso $P_i$ recibe la reducción de los mensajes $P_0,...,P_i$.
+    - **Recorrido sufijo paralelo**: recibe la reducción de $P_i,...,P_{n-1}$.
 
 <p>
 ![](./img/T2/D21.png)
@@ -753,14 +782,14 @@ $\pagebreak$
 
 #### 4.3.2 Estilos de programación y herramientas de programación.
 
-- Paso de mensajes (*message passing*).
+- **Paso de mensajes** (*message passing*): cada procesador en el sistema tien su espacio de direcciones propio. Los mensajes llevan datos de uno a otro espacio de direcciones y además se pueden aprovechar para sincronizar procesos. Los datos transferidos estarán duplicados en el sistema de memoria.
     - Lenguajes de programación: Ada, Occam.
     - API (Bibliotecas de funciones): MPI, PVM.
-- Variables compartidas (*shared memory, shared variables*).
+- **Variables compartidas** (*shared memory, shared variables*): se supone que los procesadores en el sistema comparten el mismo espacio de direcciones. Luego no necesitan transferir datos explícitamente, implícitamente se realiza la transferencia utilizando instrucciones del procesador de lectura y escritura en memoria. Para sincronizar, el programador utiliza primitivas que ofrece el software que se amparan en primitivas hardware para incrementar prestaciones.
     - Lenguajes de programación: Ada, Java.
     - API (directivas del compilador + funciones): OpenMP.
     - API (Bibliotecas de funciones): POSIX Threads, shmem, Intel TBB.
-- Paralelismo de datos (*data parallelism*).
+- **Paralelismo de datos** (*data parallelism*): las mismas operaciones se ejecutan en paralelo en múltiples unidades de procesamiento de forma que cada unidad aplica la operación a un conjunto de datos distinto. Solo soporta paralelismo a nivel de bucle. La sincronización está implícita. Dispone de construcciones para la distribución de datos entre los elementos de procesamiento.
     - Lenguajes de programación + funciones: HPF (High Performance Fortran), Fortran 95 (forall, operaciones con matrices/vectores), Nvidia CUDA.
     - API (directivas del compilador + funciones - stream processing): OpenACC.
 
@@ -768,6 +797,7 @@ $\pagebreak$
 
 #### 4.4.1 Estructuras típicas de procesos/threads/tareas.
 
+$\newline$
 Estructuras típicas de procesos/threads en código paralelo:
 
 - Descomposición de dominio o descomposición de datos cliente/servidor.
@@ -776,9 +806,15 @@ Estructuras típicas de procesos/threads en código paralelo:
 - Master-Slave, o granja de tareas.
 
 #### 4.4.2 Master-Slave o granja de tareas.
+
+$\newline$
 Las tareas se representan con un círculo y los arcos representan flujo de datos.
 
-Tenemos un flujo de instrucciones que se encarga de repartir el trabajo entre esclavos y recolecta resultados. Los esclavos están ejecutando el mismo código. El máster puede hacer un trabajo distinto. Luego combinamos un MPMD con SPMP.
+Tenemos un flujo de instrucciones que se encarga de repartir el trabajo entre esclavos y recolecta resultados. Los esclavos están ejecutando el mismo código. El máster puede hacer un trabajo distinto. Luego combinamos un MPMD con SPMP. La distribución de tareas entre los esclavos se puede realizar de forma dinámica o estática.
+
+La escalabilidad del programa paralelo va a depender del número de esclavos y del camino de comunicación entre los esclavos y el dueño. Para incrementar la escalabilidad se puede dividir el dueño en múltiples dueños, cada uno con un conjunto diferente de esclavos.
+
+Se puede llegar a esta estructura al paralelizar las iteraciones de un bucle
 
 <p>
 ![](./img/T2/D29.png)
@@ -794,10 +830,12 @@ $\newline$
 
 #### 4.4.4 Descomposición de dominio o descomposición de datos.
 $\newline$
-Hay comunicación entre parejas de flujos de instrucciones.
+
+Es muy utilizada en problemas en los que se opera con grandes estructuras de datos. La estructura de datos de entrada o de salida o ambas se dividen en partes y se derivan las tareas paralelas, que realizan operaciones similares.
+
+Los procesos pueden englobar varias tareas. Los diferentes procesos ejecutan típicamente el mismo código (SPMD), aunque cad uno trabaja sobre un conjunto de datos distintos.Puede haber comunicaciones entre los procesos.
 
 - Se pueden representar con matrices
-
 - Aplicación: inundaciones, software metereológico...
 
 <p>
@@ -813,7 +851,8 @@ Ejemplo: filtrado imagen.
 
 #### 4.4.5 Estructura segmentada o de flujo de datos.
 $\newline$
-Necesitamos que en la aplicación se aplique a una un flujo de entrada en secuencia una serie de operaciones, una detrás de otra. Ejemplo: MP3, MP4, multimedia...
+
+Aparece en problemas en los que se aplica a un flujo de datos en secuencia distintas funciones (paralelismo de tareas). La estructura de los procesos y de las tareas es la de un cauce segmentado. Cada proceso ejecuta por tanto distinto código (MPMD). Necesitamos que en la aplicación se aplique a una un flujo de entrada en secuencia una serie de operaciones, una detrás de otra. Ejemplo: MP3, MP4, multimedia...
 
 En el caso de JPEG, los bloques se dividen en 8x8 bloques y se decodifica en el orden que indiquen las flechas. No puedo aplicar descomposición de dominio porque hay dependencia de bloques.
 
@@ -825,7 +864,9 @@ Podemos paralelizar una sola etapa, cuando se encuentren distintas estructuras e
 
 #### 4.4.6 Divide y vencerás o descomposición recursiva.
 
-Tareas en forma de árbol. Aplicación: para resolver un problema cuya solución se puede realizar dividiéndolo en subproblemas.
+Se utiliza cuando un problema se puede dividir en dos o más subproblemas, de forma que cada uno se puede resolver independientemente, combinandose los resultados para obtener un resultado final.
+
+Las tareas presentan una estructura en forma de árbol. No habrá interacciones entre las tareas que cuelgan del mismo padre. Puede haber paralelismo de tareas y de datos.
 
 Los arcos representan flujo de datos. (flechas negras).
 Agrupación/Asignación de tareas a flujos de instrucciones. (flechas negras).
@@ -845,9 +886,11 @@ En la imagen, usaríamos 4 flujos de datos como máximo porque el grado de paral
 
 ### 5.2 Proceso de paralelización.
 
+Los arcos en el grafo representan flujo de datos y de control, y los vértices, tareas.
+
 - Descomponer en tareas independientes.
-    - Análisis de dependencia entre funciones.
-    - Análisis de dependencia entre iteraciones de bucles.
+    - Análisis de dependencia entre **funciones**.
+    - Análisis de dependencia entre **iteraciones de bucles**.
 
     <p>
     ![](./img/T2/D42.png)
@@ -948,7 +991,7 @@ $\pagebreak$
       }
       ...
     ```
-    
+
     $\pagebreak$
 
       - Ejemplo de asignación estática del paralelismo de tareas y datos con OpenMP.
