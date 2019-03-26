@@ -608,10 +608,10 @@ $\pagebreak$
 $\newline$
 Nuevos problemas, respecto a programación secuencial:
 
-- División en unidades de cómputo independientes (tareas).
-- Agrupación/asignación de tareas o carga de trabajo (códigos, datos) en procesos/threads.
-- Asignación a procesadores/núcleos.
-- Sincronización y comunicación.
+- **División** en unidades de cómputo independientes (tareas).
+- **Agrupación/asignación** de tareas o carga de trabajo (códigos, datos) en procesos/threads.
+- **Asignación** a procesadores/núcleos.
+- **Sincronización y comunicación**.
 
 Los debe abordar la herramienta de programación o el programador o SO.
 $\newline$
@@ -628,22 +628,22 @@ Para obtener una versión paralela de una aplicación
 
 Se apoya en:
 
-- Programa paralelo que resuelva un problema parecido.
-- Versiones paralelas u optimizadas de bibliotecas de funciones: BLAS (*Basic Linear Algebra Subroutine*), LAPCK (*Linear Algebra PACKage*)...
+- **Programa** paralelo que resuelva un problema parecido.
+- **Versiones** paralelas u optimizadas de bibliotecas de funciones: BLAS (*Basic Linear Algebra Subroutine*), LAPCK (*Linear Algebra PACKage*)...
 
 #### 4.1.3 Modos de programación MIMD.
 
 - **SPMD** (*Single-Program Multiple Data*): paralelismo de datos. Todos los códigos que se ejecutan en paralelo se obtienen compilando el mismo programa. Cada copia trabaja con un conjunto de datos distintos y se ejecuta en un procesador diferente. Es recomendable en sistemas masivamente paralelos. Se usa en sistemas con memoria distribuida, en multiprocesadores y multicomputadores.
 
-<p>
-![](./img/T2/D8.png)
-</p>
+    <p>
+    ![](./img/T2/D8.png)
+    </p>
 
 - **MPMD** (*Multiple-Program Multiple Data*): paralelismo de tareas o funciones. Los códigos que se ejecutan en paralelo se obtienen compilando programas independientes. La aplicación a ejecutar (o el código secuencial inicial) se divide en unidades independientes. Cada unidad trabaja con un conjunto de datos y se asigna a un procesador distinto.
 
-<p>
-![](./img/T2/D9.png)
-</p>
+    <p>
+    ![](./img/T2/D9.png)
+    </p>
 
 ### 4.2 Herramientas para obtener código paralelo.
 
@@ -651,12 +651,12 @@ Se apoya en:
 ![](./img/T2/D11.png)
 </p>
 
-- Las herramientas permiten de forma implícita (lo hace la propia herramienta) o explícita (lo hace el programador):
-    - Localizar paralelismo o descomponen en tareas independientes (*decomposition*).
-    - Asignar las tareas, es decir, la carga de trabajo (código + datos), a procesos/threads (*scheduling*).
-    - Crear y terminar procesos/threads (o enrolar y desenrolar en un grupo).
-    - Comunicar y sincronizar procesos/threads.
-- El programador, la herramienta o el SO se encarga de asignar procesos/threads a unidades de procesamiento (*mapping*).
+- Las **herramientas** permiten de forma implícita (lo hace la propia herramienta) o explícita (lo hace el programador):
+    - Localizar **paralelismo** o descomponer en **tareas independientes** (*decomposition*).
+    - Asignar las tareas, es decir, la **carga de trabajo** (código + datos), a procesos/threads (*scheduling*).
+    - **Crear y terminar** procesos/threads (o enrolar y desenrolar en un grupo).
+    - **Comunicar y sincronizar** procesos/threads.
+- El programador, la herramienta o el SO se encarga de **asignar procesos/threads** a unidades de procesamiento (*mapping*).
 
 Ejemplo: cálculo de PI con OpenMP/C.
 
@@ -665,8 +665,6 @@ Ejemplo: cálculo de PI con OpenMP/C.
 </p>
 
 reduction: tiene que sumar todas las variables `sum` y las guarda en `sum`.
-
-$\pagebreak$
 
 Ejemplo: cálculo de PI en MPI/C. (Modificación del bucle `for` para repartir el trabajo entre los procesos)
 
@@ -715,8 +713,6 @@ Hay componentes del grupo que envían (escriben) un único mensaje y componentes
 ![](./img/T2/D18.png)
 </p>
 
-$\pagebreak$
-
 #### 4.2.5 Comunicación todos-a-todos.
 $\newline$
 
@@ -739,12 +735,9 @@ $\newline$
 ![](./img/T2/D20.png)
 </p>
 
-En la desviación típica:
+En la desviación típica se haría un todo reduce:
 
 $$ s = \sqrt{\frac{\sum_{i=1}^N (x_i-media)^2}{N-1}} $$
-
-Se haría un todo reduce.
-
 
 - **Recorrido** (*scan*): todos los procesos envían un mensaje, recibiendo cada uno de ellos el resultado de reducir un conjunto de estos mensajes.
     - **Recorrido prefijo paralelo**: el proceso $P_i$ recibe la reducción de los mensajes $P_0,...,P_i$.
@@ -760,6 +753,8 @@ Ejemplo: comunicación colectiva en OpenMP.
 ![](./img/T2/D22.png)
 </p>
 
+$\pagebreak$
+
 Ejemplo: comunicación en MPI.
 
 <p>
@@ -771,8 +766,8 @@ Ejemplo: comunicación en MPI.
 ### 4.3 Estilos/paradigmas de programación paralela.
 
 #### 4.3.1 Estilos de programación y arquitecturas paralelas.
-- Paso de mensajes: también se puede usar en multiprocesadores.
-- Paralelismo de datos: se corresponde con la arquitectura SIMD.
+- **Paso de mensajes**: también se puede usar en multiprocesadores.
+- **Paralelismo de datos**: se corresponde con la arquitectura SIMD.
 
 <p>
 ![](./img/T2/D25.png)
@@ -830,7 +825,6 @@ $\newline$
 
 #### 4.4.4 Descomposición de dominio o descomposición de datos.
 $\newline$
-
 Es muy utilizada en problemas en los que se opera con grandes estructuras de datos. La estructura de datos de entrada o de salida o ambas se dividen en partes y se derivan las tareas paralelas, que realizan operaciones similares.
 
 Los procesos pueden englobar varias tareas. Los diferentes procesos ejecutan típicamente el mismo código (SPMD), aunque cad uno trabaja sobre un conjunto de datos distintos.Puede haber comunicaciones entre los procesos.
@@ -851,7 +845,6 @@ Ejemplo: filtrado imagen.
 
 #### 4.4.5 Estructura segmentada o de flujo de datos.
 $\newline$
-
 Aparece en problemas en los que se aplica a un flujo de datos en secuencia distintas funciones (paralelismo de tareas). La estructura de los procesos y de las tareas es la de un cauce segmentado. Cada proceso ejecuta por tanto distinto código (MPMD). Necesitamos que en la aplicación se aplique a una un flujo de entrada en secuencia una serie de operaciones, una detrás de otra. Ejemplo: MP3, MP4, multimedia...
 
 En el caso de JPEG, los bloques se dividen en 8x8 bloques y se decodifica en el orden que indiquen las flechas. No puedo aplicar descomposición de dominio porque hay dependencia de bloques.
@@ -863,12 +856,13 @@ Podemos paralelizar una sola etapa, cuando se encuentren distintas estructuras e
 </p>
 
 #### 4.4.6 Divide y vencerás o descomposición recursiva.
-
-Se utiliza cuando un problema se puede dividir en dos o más subproblemas, de forma que cada uno se puede resolver independientemente, combinandose los resultados para obtener un resultado final.
+$\newline$
+Se utiliza cuando un problema se puede dividir en dos o más subproblemas, de forma que cada uno se puede resolver independientemente, combinándose los resultados para obtener un resultado final.
 
 Las tareas presentan una estructura en forma de árbol. No habrá interacciones entre las tareas que cuelgan del mismo padre. Puede haber paralelismo de tareas y de datos.
 
 Los arcos representan flujo de datos. (flechas negras).
+
 Agrupación/Asignación de tareas a flujos de instrucciones. (flechas negras).
 
 En la imagen, usaríamos 4 flujos de datos como máximo porque el grado de paralelismo es 4. Las flechas naranjas representan la asignación de flujos de instrucciones.
@@ -888,9 +882,11 @@ En la imagen, usaríamos 4 flujos de datos como máximo porque el grado de paral
 
 Los arcos en el grafo representan flujo de datos y de control, y los vértices, tareas.
 
-- Descomponer en tareas independientes.
-    - Análisis de dependencia entre **funciones**.
-    - Análisis de dependencia entre **iteraciones de bucles**.
+- **Descomponer en tareas independientes.**
+    - Análisis de dependencia entre **funciones**. Para extraer el paralelismo de tareas, tenemos que analizar las dependencias entre las funciones que pueden ser independientes o pueden hacerse independientes.
+    - Análisis de dependencia entre **iteraciones de bucles**. Analizando las iteraciones de los bucles dentro de una función, podemos encontrar si son o se pueden hacer independientes. Podemos detectar paralelismo de datos. Si hay varios bucles, se puede analizar la dependencia entre ellos para ver si se pueden ejecutar en paralelo las iteraciones de múltiples bucles.
+
+    En la siguiente imagen podemos ver la descomposición en tareas. Una de las funciones consta de dos bucles. Dado el grafo de dependencias entre tareas de la figura, se ha encontrado que son independientes las iteraciones del `for`, cada iteración es una tarea en el grafo. También son independientes las iteraciones de `while`. Además, el grafo muestra que la salida del bucle `for` se usa en `while`, por eso las tareas de ambos ciclos se encuentran en el grafo a distinto nivel.
 
     <p>
     ![](./img/T2/D42.png)
@@ -898,23 +894,19 @@ Los arcos en el grafo representan flujo de datos y de control, y los vértices, 
 
     - Ejemplo de cálculo PI: descomposición en tareas independientes.
 
-    Se puede paralelizar pi fácilmente.
-
-    $$ \pi = 4\int_0^1 frac{1}{1+x^2} = 4 \sum_i base \cdot altura_i , i = 0,1,...$$
-
-    $altura = \frac{1}{1+x^2}$, $x_i = (i+0'5)1/int$
+    Se puede paralelizar pi fácilmente. Como la integral en el intervalo [0,1] de la derivada del arco tangente de $x$ es $\pi /4$:
 
     <p>
     ![](./img/T2/D43.png)
     </p>
 
-    En la siguiente imagen,
+    En la siguiente imagen se calcula $\pi$ con una versión secuencial aproximando el área en cada subintervalo utilizando rectángulos en los que la altura es el valor de la derivada del arco tangente en el punto medio.
 
     <p>
     ![](./img/T2/D44.png)
     </p>
 
-- Asignar (planificar+mapear) tareas a procesos y/o threads.
+- **Asignar (planificar+mapear) tareas a procesos y/o threads**. La asignación a procesos o hebras está ligada con la asignación a procesadores, incluso se puede realizar la asignación asociando los procesos (hebras) a procesadores concretos.
     - Ejemplo: filtrado de imagen.
 
     <p>
@@ -922,22 +914,33 @@ Los arcos en el grafo representan flujo de datos y de control, y los vértices, 
     </p>
 
     - Incluimos: agrupación de tareas en procesos/threads (scheduling) y mapeo a procesadores/cores (mapping).
-    - La granularidad de la carga de trabajo (tareas) asignada a los procesos/threads depende de:
-        - número de cores o procesadores o elementos de procesamiento.
+    - La **granularidad** de la carga de trabajo (tareas) asignada a los procesos/threads depende de:
+        - número de cores o procesadores o elementos de procesamiento, cuanto mayor sea su número, menos tareas se asignarán a cada proceso (hebra).
         - tiempo de comunicación/sincronización frente a tiempo de cálculo.
-    - Equilibrado de la carga (tareas = código + datos) o load balancing:
+    - Para disminuir este tiempo, se pueden asignar más tareas a un proceso (hebra), así se reduce el número de interacciones entre tareas a través de la red.
+    - ¿Utilizar hebras o procesos? Depende de
+        - **Arquitectura**:
+            - Es más eficiente usar hebras en SMP y procesadores multihebra.
+              - En arquitecturas mixtas se usan hebras y procesos, especialmente si el número de procesadores de un SMP es mayor que el número de nodos de un cluster.
+        - **Sistema operativo**: debe ser multihebra.
+        - **Herramientas de programación** para crear hebras y procesos.
+    - Se asignan hebras a las iteraciones de un **bucle** (paralelismo de datos).
+    - Se asignan procesos a **funciones** (paralelismo de tareas).
+    - **Equilibrado de la carga** (tareas = código + datos) o load balancing:
         - Objetivo: unos procesos/threads no deben hacer esperar a otros.
     - ¿De qué depende el equilibrado?
-        - La arquitectura:
+        - La **arquitectura**:
             - homogénea frente a la heterogénea.
             - uniforme frente a no uniforme.
         - La aplicación/descomposición.
     - Tipos de asignación:
-        - Estática.
+        - **Estática.**
             - Está determinado qué tarea va a realizar cada procesador o core.
             - Explícita: programador.
             - Implícita: herramienta de programación al generar el código ejecutable.
-        - Dinámica (en tiempo de ejecución).
+        - **Dinámica** (en tiempo de ejecución).
+            - Permite que acabe una aplicación aunque falle algún procesador.
+            - Consume un tiempo adicional de comunicación y sincronización.
             - Distintas ejecuciones pueden asignar distintas tareas a un procesador o core.
             - Explícita: el programador.
             - Implícita: herramienta de programación al generar el código ejecutable.
@@ -946,24 +949,19 @@ Los arcos en el grafo representan flujo de datos y de control, y los vértices, 
         - Lo puede hacer el entorno o sistema en tiempo de ejecución (runtime system de la herramienta de programación).
         - El programador puede influir.
 
-    - Ejemplo: filtrado de  imagen.
-
-    <p>
-    ![](./img/T2/D50.png)
-    </p>
-
 $\pagebreak$
 
-  - Códigos filtrado por imagen.
+  - **Códigos filtrado por imagen.**
 
-    Descomposición por columnas.
+    Descomposición por **columnas**.
 
 
     ```c
     #include <omp.h>
     ...
     omp_set_num_threads(M)
-    #pragma omp parallel private(i) {
+    #pragma omp parallel private(i)
+    {
           for (i=0;i<N;i++) {
               #pragma omp for
               for (j=0;j<M;j++) {
@@ -975,13 +973,14 @@ $\pagebreak$
       ...
     ```
 
-      Descomposición por filas.
+      Descomposición por **filas**.
 
     ```c
       #include <omp.h>
       ...
       omp_set_num_threads(N)
-      #pragma omp parallel private(j) {
+      #pragma omp parallel private(j)
+      {
           #pragma omp for
           for (i=0;i<N;i++) {
               for (j=0;j<M;j++) {
@@ -991,8 +990,13 @@ $\pagebreak$
       }
       ...
     ```
+$\pagebreak$
 
-    $\pagebreak$
+  - Ejemplo: filtrado de  imagen.
+
+    <p>
+    ![](./img/T2/D50.png)
+    </p>
 
       - Ejemplo de asignación estática del paralelismo de tareas y datos con OpenMP.
 
@@ -1000,27 +1004,45 @@ $\pagebreak$
       ![](./img/T2/D52.png)
       </p>
 
-      - Asignación estática.
+      - **Asignación estática**.
           - Asignación estática y explícita de las iteraciones de un bucle.
+
+          En la siguiente imagen se pueden ver dos alternativas que el programador puede utilizar explícitamente para asignar las iteraciones de un bucle a procesos (hebras) de forma estática. En la asignación turno rotatorio (*round-robin*), iteraciones consecutivas del bucle se asignan a procesos consecutivos (con identificador consecutivo). En el otro ejemplo se asignan iteraciones consecutivas al mismo proceso.
 
           <p>
           ![](./img/T2/D53.png)
           </p>
 
-      - Asignación dinámica.
+      - **Asignación dinámica**.
           - Asignación dinámica y explícita de las iteraciones de un bucle.
+
+          En la siguiente imagen se ve cómo el programador puede implementar explícitamente en el código una asignación dinámica para memoria compartida. Las iteraciones se reparten en orden. La variable `i` es compartida. Los procesos (hebras) consultan la variable `i` para "coger" la siguiente iteración que van a realizar, e incrementan su valor en uno par que el siguiente proceso no coja una iteración ya asignada. Para que una iteración no se ejecute dos veces, se utiliza un cerrojo `k` para excluir la lectura y modificación. Esquema: dueño-esclavo.
 
           <p>
           ![](./img/T2/D54.png)
           </p>
 
-          - Dinámica e implícita.
+          - **Dinámica e implícita.**
+
+          $\pagebreak$
+
       - Asignación. Ejemplo: multiplicación matriz por vector.
           <p>
           ![](./img/T2/D55.png)
           </p>
 
-- Redactar código paralelo.
+- **Redactar código paralelo.**
+    - El código depende de:
+        - Estilo de programación (variables compartidas, paralelismo...).
+        - Modo de programación (SPMD, MPMD...).
+        - Punto de partida.
+        - Herramienta software para el paralelismo.
+        - Estructura.
+    - Se añaden o utilizan en el programa las funciones, directivas o construcciones del lenguaje que hagan falta para:
+        - Crear y terminar procesos (hebras). Si se crean de forma estática, enrolar o desenrolar procesos en el grupo que va a cooperar en el cálculo.
+        - Localizar paralelismo.
+        - Asignar la carga de trabajo.
+        - Comunicar y sincronizar.
     - Ejemplo: cálculo de PI con OpenMP/C.
 
       Con la clausula de planificación, estamos haciendo la carga dinámica.
@@ -1036,6 +1058,10 @@ $\pagebreak$
       </p>
 
     - Ejemplo: cálculo de PI en MPI/C.
+        - `MPI_Init()`: enrola el proceso que lo ejecuta dentro del mundo MPI, es decir, dentro del grupo de procesos denominado MPI_COMM_WORLD.
+        - `MPI_Finalize()`: se debe llamar antes de que un proceso enrolado en MPI acabe su ejecución.
+        - `MPI_Comm_size(MPI_COMM_WORLD, &nproc)`: pregunta a MPI el número de procesos enrolados en el grupo, se devuelve en `nproc`.
+        - `MPI_Comm_rank(MPI_COMM_WORLD, &iproc)`: se devuelve al proceso su identifciador, `iproc`, dentro del grupo.
 
       <p>
       ![](./img/T2/D60.png)
@@ -1056,20 +1082,35 @@ $\pagebreak$
 
 #### 6.1.1 Evaluación de prestaciones.
 
-- Medidas usuales.
+- **Medidas usuales**.
     - Tiempo de respuesta.
         - Real (wall-clock time, elapsed time) (/usr/bin/time).
         - Usuario, sistema, CPU time = user + sys.
     - Productividad.
-- Escalabilidad.
-- Eficiencia.
+- **Escalabilidad**. Evolución del incremento (ganancia) en prestaciones (tiempo de respuesta o productividad) que se consigue en el sistema conforme se añaden recursos.
+- **Eficiencia**.
     - Relación prestaciones/prestaciones máximas.
     - Rendimiento = prestaciones/no_recursos.
     - Otras: Prestaciones/consumo_potencia, prestaciones/área_ocupada.
 
 #### 6.1.2 Ganancia en prestaciones. Escalabilidad.
 $\newline$
-Ganancia de prestaciones = $S(p) = \frac{Prestaciones(p)}{Prestaciones{l}} = \frac{T_s}{T_p(p)}$
+
+Ganancia de prestaciones:
+
+$$S(p) = \frac{Prestaciones(p)}{Prestaciones(1)} = \frac{T_S}{T_P(p)}$$
+
+$$T_p(p) = T_C(p) + T_O(p)$$
+
+$Prestaciones(p)$: prestaciones para la aplicación en el sistema multiprocesador con $p$ procesadores.
+
+$Prestaciones(1)$: prestaciones obtenidas ejecutando la versión secuencial en un sistema uniprocesador.
+
+$T_S$: tiempo de ejecución (respuesta) del programa secuencial. Para obtener $T_S$ se debería escoger el mejor programa secuencial para la aplicación.
+
+$T_P(p)$: tiempo de ejecución del programa paralelo con  $p$ procesadores.
+
+$T_O(p)$: tiempo de penalización.
 
 Ganancia en velocidad (Speedup)
 
@@ -1093,6 +1134,8 @@ $$E(p) = \frac{Prest(p)}{PrestMax(p)}=\frac{Prest(p)}{p\cdot Prest(l)}=\frac{S(p
 <p>
 ![](./img/T2/D70.png)
 </p>
+
+$\pagebreak$
 
 - Número de procesadores óptimo:
 
