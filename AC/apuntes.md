@@ -1174,7 +1174,7 @@ mejora. (fracción de t. no paralelizable)
 ![](./img/T2/D77.png)
 </p>
 
-
+$\pagebreak$
 
 # Bibliografía
 
