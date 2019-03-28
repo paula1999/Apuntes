@@ -1127,6 +1127,8 @@ $$T_p(p) = \frac{T_s}{p} \rightarrow S(p)= T_s / T_p(p) = \frac{T_s}{T_s/p} = p$
 
 $$E(p) = \frac{Prest(p)}{PrestMax(p)}=\frac{Prest(p)}{p\cdot Prest(l)}=\frac{S(p)}{p}$$
 
+En la siguiente imagen, se mantiene constante el tamaño del problema ($T_S$).
+
 <p>
 ![](./img/T2/D69.png)
 </p>
@@ -1154,9 +1156,9 @@ $$T_O(p) = O(p)$$
 
 $$S(p) = \frac{T_S}{T_P(p)} \leq \frac{T_S}{f\cdot T_S + \frac{(1-f)T_S}{p}} = \frac{p}{1+f(p-1)} \rightarrow \frac{1}{f} (p \rightarrow \infty)$$
 
-- S: incremento en velocidad que se consigue al aplicar una mejora. (paralelismo)
-- p: Incremento en velocidad máximo que se puede conseguir si se aplica la mejora todo el tiempo. (número de procesadores)
-- f: fracción de tiempo en el que no se puede aplicar la
+- $S$: incremento en velocidad que se consigue al aplicar una mejora. (paralelismo)
+- $p$: Incremento en velocidad máximo que se puede conseguir si se aplica la mejora todo el tiempo. (número de procesadores)
+- $f$: fracción de tiempo en el que no se puede aplicar la
 mejora. (fracción de t. no paralelizable)
 
 <p>
@@ -1169,6 +1171,12 @@ mejora. (fracción de t. no paralelizable)
 <p>
 ![](./img/T2/D75.png)
 </p>
+
+$\pagebreak$
+
+En la siguiente imagen, al incrementar el número de procesadores, se añade más trabajo y se incrementa el tamaño del problema ($T_S$), pero el tiempo paralelo se mantiene constante ($T_p$).
+
+$f$: fracción de ejecución paralelo frente a la no paraleli zable.
 
 <p>
 ![](./img/T2/D77.png)
