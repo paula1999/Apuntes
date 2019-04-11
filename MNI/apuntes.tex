@@ -981,7 +981,7 @@ Los datos son $N \geq 1$, $A \in \mathbb{R}^{N \times N}$, $b \in \mathbb{R}^N$.
 Sea $A^{(1)} := A$. Suponemos que $a_{kk}^{(k)} \neq 0 \; con \; k = 1,...,N$ (en caso contrario hemos terminado y no es posible llegar a un sistema triangular equivalente). Definimos recursivamente los multiplicadores:
 \[ m_{ik} := \frac{a_{ik}^{(k)}}{a_{kk}^{(k)}}, \; \; con \; \; i = k+1,...,N \]
 \[ a_{ij}^{(k+1)} := a_{ij}^{(k)} - m_{ik}a{kj}^{(k)}, \; \; con \; \; i = k+1,...,N; \; j = k,...,N \]
-\[ b_i^{(k+1)} := b_i^{(k)} - m_{ik}a_{kj}^{(k)}, \; \; con \; \; i = k+1,...,N \]
+\[ b_i^{(k+1)} := b_i^{(k)} - m_{ik}b_{k}^{(k)}, \; \; con \; \; i = k+1,...,N \]
 Por lo que obtenemos un sistema triangular superior equivalente que se resuelve por sustitución hacia atrás:
 \[ Ux = c \]
 donde $U := A^{(N)}$, $c := b^{(N)}$.
