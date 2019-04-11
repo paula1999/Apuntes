@@ -1184,6 +1184,187 @@ $f$: fracción de ejecución paralelo frente a la no paraleli zable.
 
 $\pagebreak$
 
+# Tema 3. Arquitecturas con paralelismo a nivel de thread (TLP)
+
+## Lección 7. Arquitecturas TLP.
+
+### Objetivos.
+
+- Distinguir entre cores multhread, multicores y multiprocesadores.
+- Comparar entre cores multithread de grano fino, cores multithread de grano grueso y cores con multithread simultánea.
+
+### 7.1 Clasificación y estructura de arquitecturas con TLP explícito y una instancia del SO.
+
+- **Mutiprocesador**. Ejecutan varios threads en paralelo en un computador con varios cores/procesadores (cada thread en un core/procesador distinto). Diversos niveles de empaquetamiento: dado, encapsulado, placa, chasis y sistema.
+- **Multicore o multiprocesador en un chip o CMP** (*Chip MultiProcessor*). Ejecutan varios threads en paralelo en un chip de procesamiento multicore (cada thread en un core distinto).
+- **Core multithread**. Core que modifica su arquitectura ILP para ejecutar threads concurrentemente o en paralelo.
+
+### 7.2 Multiprocesadores.
+
+Ejecutan varios threads en paralelo en un computador con varios cores/procesadores (cada thread en un core/procesador distinto).
+
+#### 7.2.1 Criterio clasigicación: sistema de memoria.
+
+- **Multiprocesador con memoria centralizada (UMA)**. Mayor latencia y poco escalable.
+- **Multiprocesador con memoria distribuida (NUMA)**. Menor latencia y escalable, pero requiere distribución de datos/código.
+
+>Insertar diap 8
+
+#### 7.2.2 Criterio de clasificación: nivel de empaquet./conexión.
+
+>D9
+
+#### 7.2.3 Multiprocesador en una placa: evolución de UMA a NUMA.
+
+- **UMA**.
+    - Controlador de memoria en chipset (*Northbrigde* chip).
+    - Red:bus (medio compartido).
+- **NUMA**.
+    - Controlador de memoria en chip del procesador.
+    - Red: enlaces (conexiones punto a punto) y conmutadores (en el chip del procesador).
+    - Ejemplos en servidores:
+        - AMD Opteron (2003): enlaces HyperTransport (2001).
+        - Intel (Nehalem) Xeon 7500 (2010): enlaces QPI (*Quick Path Interconnect*, 2008).
+
+> d10
+
+Multiprocesador en una placa: UMA con bus (Intel Xeon 7300):
+
+>D11
+
+Multiprocesador en una placa: CC-NUMA con red estática (Intel Xeon 7500):
+
+>D12
+
+
+### 7.3 Multicores.
+
+Ejecutan varios threads en paralelo en un chip de procesamiento multicore (cada thread en un core distinto).
+
+Multiprocesador en un chip o Multicore o CMP (*Chip MultiProcessor*):
+
+>D14
+
+Multicore: otras posibles estructuras:
+
+>D15
+
+
+### 7.4 Cores Multithread.
+
+Modifican su arquitectura ILP (segmentada, escalar o VLIW) para ejecutar threads concurrentemente o en paralelo.
+
+#### 7.4.1 Arquitecturas ILP.
+
+$\newline$
+Se modifica la arquitectura para el mismo nivel de instrucción para paralelizar para aprovechar el hardware de paralelización.
+
+- Etapa de captación de instrucciones (*Instruction Fetch*).
+- Etapa de decodificación de instrucciones y emisión a unidades funcionales (*Instruction Decode/Instruction Issue*).
+- Etapas de ejecución (*Execution*). Etapa de acceso a memoria (*Memory*).
+- Etapa de almacenamiento de resultados (*Write-Back*): capta el resultado del registro de arquitectura (para los programas en ensamblador).
+
+>D17
+
+- **Procesadores/cores segmentados**. Ejecutan instrucciones concurrentemente segmentando el uso de sus componentes.
+- **Procesadores/cores VLIW** (*Very Large Instruction Word*) y
+**superescalares**. Ejecutan instrucciones concurrentemente (segmentación) y en paralelo (tienen múltiples unidades funcionales y emiten múltiples
+instrucciones en paralelo a unidades funcionales).
+    - **VLIW**.
+        - Las instrucciones que se ejecutan en paralelo se captan juntas de memoria.
+        - Este conjunto de instrucciones conforman la palabra de instrucción muy larga a la que hace referencia la denominación VLIW.
+        - El hardware presupone que las instrucciones de una palabra son independientes: no tiene que encontrar instrucciones que pueden emitirse y ejecutarse en paralelo.
+    - **Superescalares**.
+        - Tiene que encontrar instrucciones que puedan emitirse y ejecutarse en paralelo (tiene hardware para extraer paralelismo a nivel de instrucción).
+
+#### 7.4.2 Modificación de la arquitectura ILP en Core Multithread (ej. SMT).
+
+- Almacenamiento: se multiplexa, se reparte o comparte entre threads, o se replica.
+    - Con SMT: repartir, compartir o replicar.
+- Hardware dentro de etapas: se multiplexa, o se reparte o comparte entre threads.
+    - Con SMT: unidades funcionales (etapa Ex) compartidas, resto etapas repartidas o compartidas; multiplexación es posible (p. ej. predicción de saltos y decodificación).
+
+#### 7.4.3 Clasificación de cores multithread.
+
+- **Temporal Multithreading** (*TMT*),
+    - Ejecutan varios threads concurrentemente en el mismo core.
+        - La conmutación entre threads la decide y controla el hardware.
+    - Emite instrucciones de un único thread en un ciclo
+- **Simultaneous MultiThreading** (*SMT*) o **multihilo simultáneo** o **horizontal multithread**.
+    - Ejecutan, en un core superescalar, varios threads en paralelo.
+    - Pueden emitir (para su ejecución) instrucciones de varios threads en un ciclo.
+
+> D20
+
+#### 7.4.4 Clasificación de cores con TMT.
+
+- **Fine-grain multithreading** (*FGMT*) o *interleaved
+multithreading**.
+    - La conmutación entre threads la decide el hardware cada ciclo (coste 0).
+        - por turno rotatorio (*round-robin*) o
+        - por eventos de cierta latencia combinado con alguna técnica de planificación (ej. thread menos recientemente ejecutado)
+            - Eventos: dependencia funcional, acceso a datos a cache L1, salto no predecible, una operación de cierta latencia (ej. div), ...
+- **Coarse-grain multithreading** (*CGMT*) o **blocked
+multithreading**.
+    - La conmutación entre threads la decide el hardware (coste de
+0 a varios ciclos).
+        - tras intervalos de tiempo prefijados (timeslice multithreading) o
+        - por eventos de cierta latencia (switch-on-event multithreading).
+
+>D21
+
+#### 7.4.5 Clasificación de cores con CGMT con conmutación por eventos.
+
+- **Estática**.
+    - Conmutación.
+        - Explícita: instrucciones explícitas para conmutación (instrucciones añadidas al repertorio).
+        - Implícita: instrucciones de carga, almacenamiento, salto.
+    - Ventaja/Inconveniente: coste cambio contexto bajo (0 o 1 ciclo) / cambios de contextos innecesarios.
+- **Dinámica**.
+    - Conmutación típicamente por fallo en la última cache dentro del chip de procesamiento (conmutación por fallo de cache), interrupción (conmutación por señal), ...
+    - Ventaja/Inconveniente: reduce cambios de contexto innecesarios / mayor sobrecarga al cambiar de contexto.
+
+#### 7.4.6 Alternativas en un core escalar segmentado.
+$\newline$
+En un core escalar se emite una instrucción cada ciclo de reloj.
+
+>D23
+
+#### 7.4.7 Alternativas en un core con emisión múltiple de instrucciones de un thread.
+$\newline$
+En un core superescalar o VLIW se emiten más de una instrucción cada ciclo de reloj; en las alternativas de abajo, de un único thread.
+
+>D24
+
+#### 7.4.8 Core multithread simultánea y multicores.
+$\newline$
+En un multicore y en un core superescalar con SMT (Simultaneous MultiThread) se pueden emitir instrucciones de distintos threads cada ciclo de reloj.
+
+>D25
+
+
+### 7.5 Hardware y arquitecturas TLP en un chip.
+$\newline$
+
+>arreglar tabla
+
+| Hardware | CGMT | FGMT | SMT | CMP |
+|--------------|-------------------|-----------------------|
+| Registros de la arquitectura | replicado (al menos PC) | replicado | replicado | replicado |
+| Almacenamiento | multiplexado | multiplexado, repartido, compartido o replicado | repartido, compartido o replicado | replicado |
+| Otro hardware de las etapas del cauce | multiplexado | Captación: repartida o compartida. Resto: multiplexadas | UF: compartidas. Resto: repartidas o compartidas | replicado |
+| Etiquetas para distinguir el thread de una instrucción | Sí | Sí | Sí | No |
+| Hardware para conmutar entre threads | Sí | Sí | No | No |
+
+
+## Lección 8. Coherencia del sistema de memoria.
+
+## Lección 9. Consistencia del sistema de memoria.
+
+## Lección 10. Sincronización.
+
+### Objetivos.
+
 # Bibliografía
 
 Ortega, M. Anguita, A. Prieto. Arquitectura de
