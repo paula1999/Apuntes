@@ -1829,8 +1829,7 @@ $\pagebreak$
 
 ### 9.1 Concepto de consistencia de memoria.
 
-- Especifica (las restricciones en) el orden en el cual las operaciones de memoria (lectura, escritura) deben parecer haberse realizado (operaciones a las mismas o distintas direcciones y emitidas por el mismo o
-distinto proceso/procesador).
+- Especifica (las restricciones en) el **orden** en el cual las **operaciones de memoria** (lectura, escritura) deben parecer haberse **realizado** (operaciones a las mismas o distintas direcciones y emitidas por el mismo o distinto proceso/procesador).
 - La coherencia sólo abarca operaciones realizadas por múltiples componentes (proceso/procesador) en una misma dirección.
 
 <p>
@@ -1841,8 +1840,8 @@ distinto proceso/procesador).
 
 - SC es el modelo de consistencia que espera el programador de las herramientas de alto nivel.
 - SC requiere que:
-    - Todas las operaciones de un único procesador (thread) parezcan ejecutarse en el orden descrito por el programa de entrada al procesador (orden del programa).
-    - Todas las operaciones de memoria parezcan ser ejecutadas una cada vez (ejecución atómica) -> serialización global.
+    - Todas las operaciones de un único procesador (thread) parezcan ejecutarse en el orden descrito por el programa de entrada al procesador (**orden del programa**).
+    - Todas las operaciones de memoria parezcan ser ejecutadas una cada vez (**ejecución atómica**) -> serialización global.
 - SC presenta el sistema de memoria a los programadores como una memoria global conectada a todos los procesadores a través un conmutador central.
 
 <p>
@@ -1853,7 +1852,14 @@ distinto proceso/procesador).
 ![](./img/T3/D88.png)
 </p>
 
+1) Si hay consistencia secuencial, esperaríamos que entraría uno de ellos, no a la vez. Si no, podrían entrar los dos a la vez.
+
+2) 1 o 0. Depende del modelo de consistencia.
+
+
 Ejemplo de consistencia secuencial:
+
+Se cumple que se ejecuta (1) antes de (2) y (a) antes que (b).
 
 <p>
 ![](./img/T3/D89.png)
@@ -1868,9 +1874,9 @@ Ejemplo de consistencia secuencial:
 ### 9.3 Modelos de consistencia relajados.
 
 - Difieren en cuanto a los requisitos para garantizar SC que relajan (los relajan para incrementar prestaciones):
-    - Orden del programa:
+    - **Orden del programa**:
         - Hay modelos que permiten que se relaje en el código ejecutado en un procesador el orden entre dos acceso a distintas direcciones (W→R, W→W, R→RW).
-    - Atomicidad (orden global):
+    - **Atomicidad (orden global)**:
         - Hay modelos que permiten que un procesador pueda ver el valor escrito por otro antes de que este valor sea visible al resto de los procesadores del sistema.
 - Los modelos relajados comprenden:
     - Los órdenes de acceso a memoria que no garantiza el sistema de memoria (tanto órdenes de un mismo procesador como atomicidad en las escrituras).
@@ -1879,7 +1885,7 @@ Ejemplo de consistencia secuencial:
 Ejemplo de modelos de consistencia hardware relajados.
 
 <p>
-![](./img/T3/D84.png)
+![](./img/T3/D94.png)
 </p>
 
 Consistencia secuencial:
@@ -1983,17 +1989,21 @@ copia = A;
     - El proceso 0 no debería imprimir hasta que no hayan acumulado sump en sum todos los procesos => barreras.
 
 ```c++
-Secuencial
+// Secuencial
 for (i=0; i<n; i++)
     sum = sum + a[i];
 printf(sum);
 
-Paralela (sum=0)
+
+// Paralela (sum=0)
 for (i=ithread; i<n; i=i+nthread)
     sump = sump + a[i];
 sum = sum + sump;   // SC, sum compart
 if (ithread == 0)
     printf(sum);
+
+// sump es compartida
+// No se imprime siempre el mismo resultado, necesitaríamos cerrojos pero aun así se imprimiría mal porque lo imprime el thread 0. Habría que poner una barrera también y ya no habría más problemas.
 ```
 
 ### 10.2 Soporte software y hardware para sincronización.
@@ -2005,12 +2015,11 @@ if (ithread == 0)
 ### 10.3 Cerrojos.
 
 - Permiten sincronizar mediante dos operaciones:
-    - Cierre del cerrojo o `lock(k)`: intenta adquirir el derecho a acceder a una sección crítica (cerrando o adquiriendo el cerrojo `k`).
-        - Si varios procesos intentan la adquisición (cierre) a la vez, sólo uno de ellos lo debe conseguir, el resto debe pasar a una etapa de espera.
-        - Todos los procesos que ejecuten `lock()` con el cerrojo cerrado
-deben quedar esperando.
-  - Apertura del cerrojo o `unlock(k)`: libera a uno de los threads que esperan el acceso a una sección crítica (éste adquiere el cerrojo).
-      - Si no hay threads en espera, permitirá que el siguiente thread que ejecute la función `lock()` adquiera el cerrojo k sin espera.
+    - **Cierre** del cerrojo o `lock(k)`: intenta **adquirir** el derecho a acceder a una sección crítica (cerrando o adquiriendo el cerrojo `k`).
+        - Si varios procesos intentan la **adquisición** (cierre) a la vez, sólo uno de ellos lo debe conseguir, el resto debe pasar a una **etapa de espera**.
+        - Todos los procesos que ejecuten `lock()` con el cerrojo cerrado deben quedar **esperando**.
+  - **Apertura** del cerrojo o `unlock(k)`: **libera** a uno de los threads que esperan el acceso a una sección crítica (éste adquiere el cerrojo).
+      - Si no hay threads en **espera**, permitirá que el siguiente thread que ejecute la función `lock()` adquiera el cerrojo k sin espera.
 
 - Cerrojos en ejemplo suma:
     - Alternativas para implementar la espera:
@@ -2056,11 +2065,11 @@ unlock(k);
 ```c++
 lock(k) {
     while (leer-asignar_1-escribir(k) == 1) {} ;
-} /* k compartida */
+} // k compartida
 
 unlock(k) {
     k = 0 ;
-} /* k compartida */
+} // k compartida
 ```
 
 - Cerrojos en OpenMP:
@@ -2080,9 +2089,9 @@ Fijan un orden FIFO en la adquisición del cerrojo (se debe añadir lo necesario
 
 ```c++
 // lock (contadores)
-contador_local_adq = contadores.adq;
+contador_local_adq = contadores.adq; //contadores.adq inicialmente es 0
 contadores.adq = (contadores.adq+1) mod max_flujos;
-while (contador_local_adq <> contadores.lib){}
+while (contador_local_adq <> contadores.lib){}  // <> es !=
 
 // unlock (contadores)
 contadores.lib = (contadores.lib + 1) mod max_flujos;
@@ -2150,10 +2159,11 @@ Text&Set(x){
 
 Se traduce en:
 
-```
+```c
 mov   reg,1
 xchg  reg,mem
 reg <-> mem
+# no hace falta poner lock
 ```
 
 ```c++
@@ -2169,7 +2179,7 @@ Fetch&Add(x,a) {
 
 Se traduce en:
 
-```
+```c
 lock xadd reg,mem
 reg <- mem |
 mem <- reg+mem
@@ -2188,7 +2198,7 @@ Compare&Swap(a,b,x){
 ```
 
 Se traduce en:
-```
+```c
 lock cmpxchg mem,reg
 if eax=mem
 then mem <- reg
@@ -2207,7 +2217,7 @@ lock (k){
 
 Se traduce en:
 
-```
+```c
 lock:     mov   eax,1
 repetir:  xchg  eax,k
           cmp   eax,1
