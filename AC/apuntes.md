@@ -1208,11 +1208,17 @@ Ejecutan varios threads en paralelo en un computador con varios cores/procesador
 - **Multiprocesador con memoria centralizada (UMA)**. Mayor latencia y poco escalable.
 - **Multiprocesador con memoria distribuida (NUMA)**. Menor latencia y escalable, pero requiere distribución de datos/código.
 
->Insertar diap 8
+<p>
+![](./img/T3/D8.png)
+</p>
 
 #### 7.2.2 Criterio de clasificación: nivel de empaquet./conexión.
+$\newline$
 
->D9
+<p>
+![](./img/T3/D9.png)
+</p>
+
 
 #### 7.2.3 Multiprocesador en una placa: evolución de UMA a NUMA.
 
@@ -1226,15 +1232,24 @@ Ejecutan varios threads en paralelo en un computador con varios cores/procesador
         - AMD Opteron (2003): enlaces HyperTransport (2001).
         - Intel (Nehalem) Xeon 7500 (2010): enlaces QPI (*Quick Path Interconnect*, 2008).
 
-> d10
+<p>
+![](./img/T3/D10.png)
+</p>
+
 
 Multiprocesador en una placa: UMA con bus (Intel Xeon 7300):
 
->D11
+<p>
+![](./img/T3/D11.png)
+</p>
+
 
 Multiprocesador en una placa: CC-NUMA con red estática (Intel Xeon 7500):
 
->D12
+<p>
+![](./img/T3/D12.png)
+</p>
+
 
 
 ### 7.3 Multicores.
@@ -1243,11 +1258,17 @@ Ejecutan varios threads en paralelo en un chip de procesamiento multicore (cada 
 
 Multiprocesador en un chip o Multicore o CMP (*Chip MultiProcessor*):
 
->D14
+<p>
+![](./img/T3/D14.png)
+</p>
+
 
 Multicore: otras posibles estructuras:
 
->D15
+<p>
+![](./img/T3/D15.png)
+</p>
+
 
 
 ### 7.4 Cores Multithread.
@@ -1264,7 +1285,10 @@ Se modifica la arquitectura para el mismo nivel de instrucción para paralelizar
 - Etapas de ejecución (*Execution*). Etapa de acceso a memoria (*Memory*).
 - Etapa de almacenamiento de resultados (*Write-Back*): capta el resultado del registro de arquitectura (para los programas en ensamblador).
 
->D17
+<p>
+![](./img/T3/D17.png)
+</p>
+
 
 - **Procesadores/cores segmentados**. Ejecutan instrucciones concurrentemente segmentando el uso de sus componentes.
 - **Procesadores/cores VLIW** (*Very Large Instruction Word*) y
@@ -1284,6 +1308,11 @@ instrucciones en paralelo a unidades funcionales).
 - Hardware dentro de etapas: se multiplexa, o se reparte o comparte entre threads.
     - Con SMT: unidades funcionales (etapa Ex) compartidas, resto etapas repartidas o compartidas; multiplexación es posible (p. ej. predicción de saltos y decodificación).
 
+<p>
+![](./img/T3/D19.png)
+</p>
+
+
 #### 7.4.3 Clasificación de cores multithread.
 
 - **Temporal Multithreading** (*TMT*),
@@ -1294,7 +1323,10 @@ instrucciones en paralelo a unidades funcionales).
     - Ejecutan, en un core superescalar, varios threads en paralelo.
     - Pueden emitir (para su ejecución) instrucciones de varios threads en un ciclo.
 
-> D20
+<p>
+![](./img/T3/D20.png)
+</p>
+
 
 #### 7.4.4 Clasificación de cores con TMT.
 
@@ -1311,7 +1343,10 @@ multithreading**.
         - tras intervalos de tiempo prefijados (timeslice multithreading) o
         - por eventos de cierta latencia (switch-on-event multithreading).
 
->D21
+<p>
+![](./img/T3/D21.png)
+</p>
+
 
 #### 7.4.5 Clasificación de cores con CGMT con conmutación por eventos.
 
@@ -1328,42 +1363,989 @@ multithreading**.
 $\newline$
 En un core escalar se emite una instrucción cada ciclo de reloj.
 
->D23
+<p>
+![](./img/T3/D23.png)
+</p>
+
 
 #### 7.4.7 Alternativas en un core con emisión múltiple de instrucciones de un thread.
 $\newline$
 En un core superescalar o VLIW se emiten más de una instrucción cada ciclo de reloj; en las alternativas de abajo, de un único thread.
 
->D24
+<p>
+![](./img/T3/D24.png)
+</p>
+
 
 #### 7.4.8 Core multithread simultánea y multicores.
 $\newline$
 En un multicore y en un core superescalar con SMT (Simultaneous MultiThread) se pueden emitir instrucciones de distintos threads cada ciclo de reloj.
 
->D25
+<p>
+![](./img/T3/D25.png)
+</p>
+
 
 
 ### 7.5 Hardware y arquitecturas TLP en un chip.
 $\newline$
 
->arreglar tabla
+<p>
+![](./img/T3/D27.png)
+</p>
 
-| Hardware | CGMT | FGMT | SMT | CMP |
-|--------------|-------------------|-----------------------|
-| Registros de la arquitectura | replicado (al menos PC) | replicado | replicado | replicado |
-| Almacenamiento | multiplexado | multiplexado, repartido, compartido o replicado | repartido, compartido o replicado | replicado |
-| Otro hardware de las etapas del cauce | multiplexado | Captación: repartida o compartida. Resto: multiplexadas | UF: compartidas. Resto: repartidas o compartidas | replicado |
-| Etiquetas para distinguir el thread de una instrucción | Sí | Sí | Sí | No |
-| Hardware para conmutar entre threads | Sí | Sí | No | No |
-
+$\pagebreak$
 
 ## Lección 8. Coherencia del sistema de memoria.
 
+### Objetivos.
+
+- Comparar los métodos de actualización de memoria principal implementados en cache.
+- Comparar las alternativas para propagar un escritura en protocolos de coherencia de cache.
+- Explicar qué debe garantizar el sistema de memoria para evitar problemas por incoherencias.
+- Describir las partes en las que se puede dividir el análisis o el diseño de protocolos de coherencia.
+- Distinguir entre protocolos basados en directorios y protocolos de espionaje (snoopy).
+- Explicar el protocolo de mantenimiento de coherencia de espionaje MSI.
+- Explicar el protocolo de mantenimiento de coherencia de espionaje MESI.
+- Explicar el protocolo de mantenimiento de coherencia MSI basado en directorios con difusión y sin difusión.
+
+Computadores que implementan en hardware mantenimiento de coherencia:
+
+<p>
+![](./img/T3/D33.png)
+</p>
+
+
+### 8.1 Sistema de memoria en multiprocesadores.
+
+- El sistema de memoria **incluye**:
+    - Caches de todos los nodos.
+    - Memoria principal.
+    - Controladores.
+    - Buffers:
+        - Buffer de escritura/almacenamiento.
+        - Buffer que combinan escrituras/almacenamientos, etc.
+    - Medio de comunicación de todos estos componentes (red de interconexión).
+- La comunicación de datos entre procesadores la realiza el sistema de memoria.
+    - La lectura de una dirección debe devolver lo último que se ha escrito (desde el punto de vista de todos los componentes del sistema).
+
+<p>
+![](./img/T3/D36.png)
+</p>
+
+
+### 8.2 Concepto de coherencia en el sistema de memoria: situaciones de incoherencia y requisitos para evitar problemas en estos casos.
+
+#### 8.2.1 Incoherencia en el sistema de memoria.
+
+$\newline$
+Si en el sistema de memoria las copias de una dirección no tienen el mismo contenido, tendremos una **incoherencia** en el sistema de memoria. Esto puede provocar problemas si los componentes del sistema se comunican a través de posiciones de memoria (escribiendo y leyendo en posiciones de memoria). No se podrá conseguir llevar a cabo satisfactoriamente la comunicación si el componente que recibe no lee a través de la dirección de memoria a la que accede lo último que se ha escrito.
+
+En la imagen de abajo a la izquierda, el procesador $P_k$ lee de la posición de memoria $D$ (1L), lo que provoca que el bloque de memoria donde se encuentra esta dirección se copie a su caché. Tras la transferencia, el contenido de la posición de memoria $D$ en la caché es 3, coincide con el contenido de la dirección en memoria principal. Si $P_k$ escribe un nuevo valor, 4, en la dirección $D$ (2E), escribirá en la copia de la dirección que tienen en su caché. Tendremos entonces una incoherencia en el sistema de memoria, ya que en la posición $D$ no tiene el mismo contenido en memoria principal y en la caché. También pueden dar problemas las situaciones de incoherencia entre caché y memoria principal para datos modificables privados de un proceso si el SO permite que los procesos migren de un procesador a otro. Supongamos que el proceso $P_k$ que acaba de modificar $D$ en su caché, emigra al procesador $P_j$. Si en $P_j$ el proceso accede a $D$, leería de memoria un contenido no actualizado.
+
+En la imagen de abajo a la derecha, dos procesos que se ejecutan en procesadores distintos, $P_k$ y $P_j$, acceden a una dirección $D$ que comparten y que además pueden modificar. Primero leen (1L y 2L) el contenido de la dirección de memoria $D$, lo que provoca los correspondientes fallos de caché y la transferencia del bloque de memoria donde se encuentra esta dirección a la caché de los dos procesadores. Uno de ellos $P_k$, escribe en $D$, pasando el contenido de $D$ en su caché a 4. Por lo que se produce una falta de coherencia en el sistema de memoria entre la caché de $P_j$ y $P_k$, además de una falta de coherencia con la memoria principal. Si un dispositivo de E/S escribe en la posición $D$, modificará la copia de memoria. Entonces ninguna de las tres copias de $D$ en el sistema tendrá el mismo contenido. La falta de coherencia entre cachés provocada al modificar un dato compartido, se hace patente si el proceso $P_j$ vuelve a leer el contenido de $D$, ya que el valor que obtiene, es el contenido no actualizado de su caché.
+
+<p>
+![](./img/T3/D38.png)
+</p>
+
+
+#### 8.2.2 Métodos de actualización de memoria principal implementados en caches.
+
+- **Escritura inmediata** (*write-through*). Cada vez que un procesador escribe en su cache escribe también en memoria principal. Cada escritura supone la utilización de la red y para transferir datos aislados, con el consiguiente desaprovechamiento del ancho de banda de la red. La situación del tráfico empeora en sistemas con múltiples procesadores, ya que puede haber varios procesadores escribiendo simultáneamente.
+
+    Como en una aplicación se escribe varias veces en un bloque (a las variables contiguas en el código del programa se les asigna posiciones consecutivas en memoria), en la misma dirección o en distintas direcciones, se incrementarían entonces las prestaciones si el bloque se transfiere por la red una vez realizadas todas las modificaciones (se disminuye el número de accesos, y cuando se accede, se aprovecha en mayor medida el ancho de banda de la red).
+
+    Con escritura inmediata se opta por no provocar incoherencia entre caché y memoria principal cuando se escribe en caché; pero no se evita la incoherencia entre cachés, o entre caché y memoria cuando escribe en memoria principal algún componente.
+
+<p>
+![](./img/T3/D39.png)
+</p>
+
+- **Posescritura** (*write-back*). Se actualiza memoria principal escribiendo todo el bloque cuando se desaloja de la caché. Cuando un procesador modifica una dirección solo se escribe en la caché del procesador; el dato no se transfiere a memoria principal, por lo que se puede escribir varias veces en un bloque sin acceder a memoria principal. La actualización de memoria se realiza posteriormente, cuando el bloque que contiene la dirección modificada se elimina de caché a fin de dejar espacio para otro bloque. Se debe mantener información en el directorio caché sobre los bloques de memoria modificados en la caché.
+
+    Se permite que aparezcan incoherencias entre caché y memoria también cuando se escribe en caché. La situación empeora con posescritura frente a escritura inmediata.
+
+<p>
+![](./img/T3/D39_.png)
+</p>
+
+
+#### 8.2.3 Alternativas para propagar una escritura en protocolos de coherencia de cache.
+
+La falta de coherencia entre cachés y los problemas debidos a la incoherencia entre memoria principal y caché se pueden solventar con hardware específico.
+
+- **Escritura con actualización** (*write-update*). Cada vez que un procesador escribe en una dirección en su cache se escribe en las copias de esa dirección en otras caches.
+
+<p>
+![](./img/T3/D40.png)
+</p>
+
+Para reducir tráfico, sobre todo si los datos están compartidos por pocos procesadores.
+
+- **Escritura con invalidación** (*write-invalidate*). Antes que un procesador modifique una dirección en su cache se invalidan las copias del bloque de la dirección en otras caches. El procesador que va a modificar una dirección, primero obtiene acceso exclusivo al bloque que la contiene. Cuando otro procesador lea la dirección, su caché falla, provocando que tenga que acceder a memoria principal, consiguiendo así el dato actualizado. El acceso exclusivo pretende asegurar que no hay otras copias del bloque en cachés de otros procesadores que se puedan leer o escribir cuando se está realizando la escritura. Invalidar es más rápido que actualizar, ya que solo se debe transferir la dirección (bloque) en la que se va a escribir, mientras que al actualizar, se deben transferir además los datos a escribir. Usando invalización solo se permite compartir un bloque de memoria mientras se lee del bloque.
+
+    Si se escribe varias veces sucesivas en un bloque sin que otro procesador lea, usando invalidación se puede reducir el acceso a la red (transferencias) frente a la política de actualización, ya que una vez invalidado un bloque, nuevas modificaciones del bloque por parte del mismo procesador no originan transferencias. Por contra, si se escribe para que a continuación otro u otros procesadores lean lo escrito, podría ser más eficiente actualizar, ya que al invalidar las copias en otras cachés cuando se escribe, las lecturas posteriores de esa dirección por otros procesadores provocan fallos de caché, lo que origina tráfico en la red.
+
+<p>
+![](./img/T3/D40_.png)
+</p>
+
+
+#### 8.2.4 Situación de incoherencia aunque se propagan las escrituras (usa difusión).
+
+- Contenido inicial de las copias de la dirección A en calabaza. P0 escribe en A un 1 y, después, P1 escribe en A un 2.
+- Se utiliza actualización para propagar las escrituras (las propagación se nota con flechas).
+- Llegan en distinto orden las escrituras debido al distinto tiempo de propagación (se está suponiendo que los Proc. están ubicados en la placa tal y como aparecen en el dibujo). En cursiva se puede ver el contenido de las copias de la dirección A tras las dos escrituras.
+    - Se da una situación de incoherencia aunque se propagan las escrituras: P0 y P3 acaban con 2 en A y P1 y P2 con 1.
+
+<p>
+![](./img/T3/D41.png)
+</p>
+
+
+#### 8.2.5 Requisitos del sistema de memoria para evitar problemas por incoherencia.
+
+- **Propagar** las escrituras en una dirección.
+    - La escritura en una dirección debe hacerse visible en un tiempo finito a otros procesadores.
+    - Componentes conectados con un bus:
+        - Los paquetes de actualización/invalidación son visibles a todos los nodos conectados al bus (controladores de cache).
+
+**Serializar** las escrituras en una dirección.
+    - Las escrituras en una dirección deben verse en el mismo orden por todos los procesadores (el sistema de memoria debe parecer que realiza en serie las operaciones de escritura en la misma dirección).
+    - Componentes conectados con un bus:
+        - El orden en que los paquetes aparecen en el bus determina el orden en que se ven por todos los nodos.
+
+<p>
+![](./img/T3/D42.png)
+</p>
+
+
+#### 8.2.6 Requisitos del sistema de memoria para evitar problemas por incoherencia: la red no es un bus.
+
+- **Propagar** escrituras en una dirección
+    - Usando difusión:
+        - Los paquetes de actualización/invalidación se envían a todas las caches.
+    - Para conseguir mayor escalabilidad:
+        - Se debería enviar paquetes de actualización/invalidación sólo a caches (nodos) con copia del bloque.
+        - Mantener en un directorio, para cada bloque, los nodos con copia del mismo.
+- **Serializar** escrituras en una dirección.
+    - El orden en el que las peticiones de escritura llegan a su home (nodo que tiene en MP la dirección) o al directorio centralizado sirve para serializar en sistemas de comunicación que garantizan el orden en las trasferencias entre dos puntos.
+
+<p>
+![](./img/T3/D43.png)
+</p>
+
+
+#### 8.2.7 Directorio de memoria principal.
+
+$\newline$
+<p>
+![](./img/T3/D44.png)
+</p>
+
+
+#### 8.2.8 Alternativas para implementar el directorio.
+
+- **Centralizado**.
+    - Compartido por todos los nodos.
+    - Contiene información de los bloques de todos los módulos de memoria.
+- **Distribuido**.
+    - Las filas se distribuyen entre los nodos.
+    - Típicamente el directorio de un nodo contiene información de los bloques de sus módulos de memoria.
+
+<p>
+![](./img/T3/D45.png)
+</p>
+
+
+#### 8.2.9 Serialización de las escrituras por el home. Usando difusión.
+
+- Contenido inicial de las copias de la dirección A en calabaza. P0 escribe en A un 1 y, después, P1 escribe en A un 2.
+- Se utiliza actualización para propagar las escrituras (las propagación se nota con flechas).
+- El orden de llegada al home es el orden real para todos.
+
+<p>
+![](./img/T3/D46.png)
+</p>
+
+- Contenido inicial de las copias de la dirección A en calabaza.
+- Se utiliza actualización para propagar las escrituras (las propagación se nota con flechas).
+
+<p>
+![](./img/T3/D47.png)
+</p>
+
+- Se utiliza actualización para propagar las escrituras (las propagación se nota con flechas).
+
+<p>
+![](./img/T3/D48.png)
+</p>
+
+
+#### 8.2.10 Serialización de las escrituras por el home. Sin difusión y con directorio distribuido.
+
+- Contenido inicial de las copias de la dirección A en calabaza. P0 escribe en A un 1 y, después, P1 escribe en A un 2.
+- Se utiliza actualización para propagar las escrituras (las propagación se nota con flechas).
+- El orden de llegada al home es el orden real para todos.
+
+<p>
+![](./img/T3/D49.png)
+</p>
+
+- Contenido inicial de las copias de la dirección A en calabaza.
+- Se utiliza actualización para propagar las escrituras (las propagación se nota con flechas).
+
+<p>
+![](./img/T3/D50.png)
+</p>
+
+- Se utiliza actualización para propagar las escrituras (las propagación se nota con flechas).
+
+<p>
+![](./img/T3/D51.png)
+</p>
+
+
+### 8.3 Protocolos de mantenimiento de coherencia: clasificación y diseño.
+
+#### 8.3.1 Clasificación de protocolos para mantener coherencia en el sistema de memoria.
+
+- Protocolos de espionaje (snoopy).
+    - Para buses, y en general sistemas con una difusión eficiente (bien porque el número de nodos es pequeño o porque la red implementa difusión).
+
+    <p>
+    ![](./img/T3/D53.png)
+    </p>
+
+- Protocolos basados en directorios.
+    - Para redes sin difusión o escalables (multietapa y estáticas).
+- Esquemas jerárquicos.
+    - Para redes jerárquicas: jerarquía de buses, jerarquía de redes escalables, redes escalables-buses.
+
+<p>
+![](./img/T3/D53_.png)
+</p>
+
+
+#### 8.3.2 Facetas de diseño lógico en protocolos para coherencia.
+
+- Política de actualización de MP:
+    - escritura inmediata, posescritura, mixta.
+- Política de coherencia entre caches:
+    - escritura con invalidación, escritura con actualización, mixta
+- Describir comportamiento:
+    - Definir posibles estados de los bloques en cache, y en memoria.
+    - Definir transferencias (indicando nodos que intervienen y orden entre ellas) a generar ante eventos:
+        - lecturas/escrituras del procesador del nodo.
+        - como consecuencia de la llegada de paquetes de otros nodos.
+    - Definir transiciones de estados para un bloque en cache, y en memoria.
+
+### 8.4 Protocolo MSI de espionaje.
+
+#### 8.4.2 Protocolo de espionaje de tres estados (MSI) – posescritura e invalidación.
+
+- **Estados** de un bloque en **caché**:
+    - **Modificado** (M): es la única copia del bloque válida en todo el sistema. La caché debe proporcionar el bloque si observa al espiar el bus que algún componente lo solicita y debe invalidarla si algún otro nodo solicita una copia exclusiva del bloque para su modificación. El procesador tiene el uso exclusivo del bloque, de forma que puede disponer de él para leer y escribir sin informar al resto del sistema. La caché debe atender a las peticiones a través del bus.
+    - **Compartido** (C,S): está válido, también válido en memoria y puede que haya copia válida en otras caches. La caché debe invalidar su copia si observa al espiar el bus que algún otro nodo solicita una copia exclusiva del bloque para su modificación.
+    - **Inválido** (I): no está físicamente o se ha invalidado por el controlador como consecuencia de la escritura en el bloque en otra caché. El procesador tiene que acceder al bloque a través de la red.
+
+Se pueden ordenar en función del grado de propiedad o disponibilidad del bloque por parte del procesador al que pertenece la caché (orden creciente): inválido, compartido y modificado.
+
+- **Estados** de un bloque en **memoria** (en realidad se evita almacenar esta información):
+    - **Válido**: puede haber copia válida en una o varias caches.
+    - **Inválido**: habrá copia válida en una cache.
+- **Transferencias** generadas por un nodo con caché (tipos de paquetes):
+    - **Petición de lectura de un bloque** (**PtLec**): por lectura con fallo de caché del procesador del nodo (**PrLec**). El controlador de la caché inicia la transacción de lectura poniendo en el bus la dirección a la que se desea acceder. El sistema de memoria (memoria principal u otra caché) proporcionará el bloque donde se encuentra la dirección solicitada.
+    - **Petición de acceso exclusivo** (**PtLecEx**): por escritura del procesador (**PrEsc**) en bloque compartido o inválido. El controlador de la caché genera el paquete que indicará la dirección en la que se desea escribir. El resto de cachés con copias válidas del bloque invalidan sus copias. También se invalida el bloque en memoria si se encuentra en estado válido. El procesador puede solicitar una confirmación de este paquete.
+    - **Petición de posescritura** (**PtPEsc**): por el reemplazo del bloque modificado (el procesador del nodo no espera respuesta). El bloque a reemplazar generado por la circuitería de reemplazo debe transferirse a memoria principal si está en estado modificado (ya que la memoria no tiene el bloque actualizado). El controlador de la caché genera la transferencia poniendo en el bus la dirección del bloque a escribir en memoria y el contenido del propio bloque. El procesador no conoce este hecho y no espera ninguna respuesta.
+    - **Respuesta con bloque** (**RpBloque**): al tener en estado modificado el bloque solicitado por una **PtLec** o **PtLecEx** recibida.
+
+<p>
+![](./img/T3/D57.png)
+</p>
+
+
+#### 8.4.3 Diagrama MSI de transiciones de estados.
+
+$\newline$
+Las líneas discontinuas son transiciones provocadas por paquetes del bus; las líneas continuas son transiciones provocadas por acciones del procesador de la caché. Las líneas de han etiquetado con el evento que provoca la transición y el paquete que generan (evento/paquete).
+
+<p>
+![](./img/T3/D58.png)
+</p>
+
+
+#### 8.4.4 Tabla de descripción de MSI.
+
+$\newline$
+
+**Fallo de lectura**: el procesador lee (PrLec) y el bloque no está en caché (estado inválido). El controlador de caché del procesador que lee difunde un paquete de petición de lectura de un bloque de memoria (PtLec); el estado del bloque en la caché después de la lectura será de compartido. La copia del bloque en otras cachés también tendrá estado compartido, y en la memoria, válido. El paquete PtLec provoca los siguientes efectos en otras cachés:
+
+- Si el bloque se encuentra en otra caché en estado modificado, deposita el bloque en el bus (respuesta RpBloque) y pasa a estado compartido. La memoria también recoge el bloque del bus pasando a estado válido.
+- Si el bloque está compartido, la memoria proporciona el bloque a la caché que lo solicita. El bloque sigue en estado compartido.
+
+>aqui mequedao
+
+#### 8.4.5 Ejemplo MSI.
+
+$\newline$
+<p>
+![](./img/T3/D60.png)
+</p>
+
+<p>
+![](./img/T3/D61.png)
+</p>
+
+<p>
+![](./img/T3/D62.png)
+</p>
+
+<p>
+![](./img/T3/D63.png)
+</p>
+
+
+### 8.5 Protocolo MESI de espionaje.
+
+#### 8.5.1 Protocolo de espionaje de cuatro estados (MESI) – posescritura e invalidación.
+
+- Estados de un bloque en cache:
+    - **Modificado** (M):es la única copia del bloque válida en todo el sistema.
+    - **Exclusivo** (E): es la única copia del bloque válida en caches, la memoria también está actualizada.
+    - **Compartido** (C,Shared): es válido, también válido en memoria y en al menos otra cache.
+    - **Inválido** (I): se ha invalidado o no está físicamente.
+- Estados de un bloque en memoria(en realidad se evita almacenar esta información):
+    - **Válido**: puede haber copia válida en una o varias caches.
+    - **Inválido**: habrá copia valida en una cache.
+
+#### 8.5.2 Diagrama MESI de transiciones de estados.
+
+$\newline$
+<p>
+![](./img/T3/D66.png)
+</p>
+
+
+#### 8.5.3 Tabla de descripción de MESI.
+
+$\newline$
+<p>
+![](./img/T3/D67.png)
+</p>
+
+### 8.6 Protocolo MSI basado en directorios con o sin difusión.
+
+#### 8.6.1 MSI con directorios (sin difusión).
+
+- Estados de un bloque en cache:
+    - Modificado (M), Compartido (C), Inválido (I).
+- Estados de un bloque en MP:
+    - Válido e inválido.
+- Transferencias (tipos de paquetes):
+    - Tipos de nodos: solicitante (S), origen (O), modificado (M), propietario (P) y compartidor (C).
+    - Petición de nodo S a O: lectura de un bloque (PtLec), lectura con acceso exclusivo (PtLecEx), petición de acceso exclusivo sin lectura (PtEx), posescritura (PtPEsc).
+    - Reenvío de petición de nodo O a nodos con copia (P, M, C): invalidación (RvInv), lectura (RvLec, RvLecEx).
+    - Respuesta de
+        - nodo P a O: respuesta con bloque (RpBloque), resp. con o sin bloque confirmando inv. (RpInv, RpBloqueInv).
+        - nodo O a S: resp. con bloque (RpBloque), resp. con o sin bloque confirmando fin inv. (RpInv, RpBloqueInv).
+
+<p>
+![](./img/T3/D69.png)
+</p>
+
+| Estado Inicial | Evento | Estado final |
+|--------|--------|---------|
+| D) Inválido | Fallo de lectura | D) Válido |
+| S) Inválido | | S) Compartido |
+| P) Modificado | | P) Compartido |
+| Acceso remoto | | |
+
+<p>
+![](./img/T3/D70.png)
+</p>
+
+<p>
+![](./img/T3/D71.png)
+</p>
+
+<p>
+![](./img/T3/D72.png)
+</p>
+
+<p>
+![](./img/T3/D73.png)
+</p>
+
+<p>
+![](./img/T3/D74.png)
+</p>
+
+
+#### 8.6.2 MSI con directorios (con difusión).
+- Estados de un bloque en cache:
+    - Modificado (M), Compartido (C), Inválido (I).
+- Estados de un bloque en MP:
+    - Válido e inválido.
+- Transferencias (tipos de paquetes):
+    - Tipos de nodos: solicitante (S), origen (O), modificado (M), propietario (P) y compartidor (C).
+    - Difusión de petición del nodo S a
+        - O y P: lectura de un bloque (PtLec), lectura con acceso exclusivo (PtLecEx), petición de acceso exclusivo sin lectura (PtEx).
+        - O: posescritura (PtPEsc).
+    - Respuesta de
+        - nodo P a O: respuesta con bloque (RpBloque), resp. con o sin bloque confirmando inv. (RpInv, RpBloqueInv).
+        - nodo O a S: resp. con bloque (RpBloque), resp. con o sin bloque confirmando fin inv. (RpInv, RpBloqueInv).
+
+<p>
+![](./img/T3/D75.png)
+</p>
+
+| Estado Inicial | Evento | Estado final |
+|--------|--------|---------|
+| D) Inválido | Fallo de lectura | D) Válido |
+| S) Inválido | | S) Compartido |
+| P) Modificado | | P) Compartido |
+| Acceso remoto | | |
+
+<p>
+![](./img/T3/D76.png)
+</p>
+
+<p>
+![](./img/T3/D77.png)
+</p>
+
+$\pagebreak$
+
 ## Lección 9. Consistencia del sistema de memoria.
+
+### Objetivos.
+
+- Explicar el concepto de consistencia.
+- Distinguir entre coherencia y consistencia.
+- Distinguir entre el modelo de consistencia secuencial y los modelos relajados.
+- Distinguir entre los diferentes modelos de consistencia relajados.
+
+### 9.1 Concepto de consistencia de memoria.
+
+- Especifica (las restricciones en) el orden en el cual las operaciones de memoria (lectura, escritura) deben parecer haberse realizado (operaciones a las mismas o distintas direcciones y emitidas por el mismo o
+distinto proceso/procesador).
+- La coherencia sólo abarca operaciones realizadas por múltiples componentes (proceso/procesador) en una misma dirección.
+
+<p>
+![](./img/T3/D84.png)
+</p>
+
+### 9.2 Consistencia secuencial (SC).
+
+- SC es el modelo de consistencia que espera el programador de las herramientas de alto nivel.
+- SC requiere que:
+    - Todas las operaciones de un único procesador (thread) parezcan ejecutarse en el orden descrito por el programa de entrada al procesador (orden del programa).
+    - Todas las operaciones de memoria parezcan ser ejecutadas una cada vez (ejecución atómica) -> serialización global.
+- SC presenta el sistema de memoria a los programadores como una memoria global conectada a todos los procesadores a través un conmutador central.
+
+<p>
+![](./img/T3/D87.png)
+</p>
+
+<p>
+![](./img/T3/D88.png)
+</p>
+
+Ejemplo de consistencia secuencial:
+
+<p>
+![](./img/T3/D89.png)
+</p>
+
+¿Qué puede ocurrir en el computador?
+
+<p>
+![](./img/T3/D90.png)
+</p>
+
+### 9.3 Modelos de consistencia relajados.
+
+- Difieren en cuanto a los requisitos para garantizar SC que relajan (los relajan para incrementar prestaciones):
+    - Orden del programa:
+        - Hay modelos que permiten que se relaje en el código ejecutado en un procesador el orden entre dos acceso a distintas direcciones (W→R, W→W, R→RW).
+    - Atomicidad (orden global):
+        - Hay modelos que permiten que un procesador pueda ver el valor escrito por otro antes de que este valor sea visible al resto de los procesadores del sistema.
+- Los modelos relajados comprenden:
+    - Los órdenes de acceso a memoria que no garantiza el sistema de memoria (tanto órdenes de un mismo procesador como atomicidad en las escrituras).
+    - Mecanismos que ofrece el hardware para garantizar un orden cuando sea necesario.
+
+Ejemplo de modelos de consistencia hardware relajados.
+
+<p>
+![](./img/T3/D84.png)
+</p>
+
+Consistencia secuencial:
+
+<p>
+![](./img/T3/D95.png)
+</p>
+
+#### 9.3.1 Modelo que relaja W->R.
+
+- Permiten que una lectura pueda adelantar a una escritura previa en el orden del programa; pero evita dependencias RAW.
+    - Lo implementan los sistemas con buffer (FIFO) de escritura para los procesadores (el buffer evita que las escrituras retarden la ejecución del código bloqueando lecturas posteriores).
+    - Generalmente permiten que el procesador pueda leer una dirección directamente del buffer (leer antes que otros procesadores una escritura propia)
+- Para garantizar un orden correcto se pueden utilizar instrucciones de serialización.
+- Hay sistemas en los que se permite que un procesador pueda leer la escritura de otro antes que el resto de procesadores (acceso no atómico).
+    - Para garantizar acceso atómico se puede utilizar instrucciones de lectura-modificación-escritura atómicas.
+
+#### 9.3.2 Modelo que relaja W->R y W->W.
+
+- Tiene buffer de escritura que permite que lecturas adelanten a escrituras en el buffer.
+- Permiten que el hardware solape escrituras a memoria a distintas direcciones, de forma que pueden llegar a la memoria principal o a caches de todos procesadores fuera del orden del programa.
+- En sistemas con este modelo se proporciona hardware para garantizar los dos órdenes. Los sistemas con Sun Sparc implementa un modelo de este tipo.
+- Este modelo no se comporta como SC en el siguiente ejemplo:
+
+```
+P1
+A=1;
+k=1;
+
+P2
+while (k=0){}
+copia=A;
+```
+
+#### 9.3.3 Modelo de ordenación débil.
+
+- Relaja W->R, W->W y R->RW.
+- Si S es una operación de sincronización (liberación o adquisición), ofrece hardware para garantizar el orden:
+    - S->WR.
+    - WR->S.
+- PowerPC implementa un modelo basado en ordenación débil.
+
+<p>
+![](./img/T3/D98.png)
+</p>
+
+<p>
+![](./img/T3/D98_.png)
+</p>
+
+#### 9.3.4 Consistencia de liberación.
+
+- Relaja W->R, W->W y R->RW.
+- Si SA es una operación de adquisición y SL de liberación,
+ofrece hardware para garantizar el orden:
+    - SA->WR y WR->SL.
+- Sistemas con Itanium implementan un modelo de consistencia de liberación.
+
+<p>
+![](./img/T3/D99.png)
+</p>
+
+$\pagebreak$
 
 ## Lección 10. Sincronización.
 
 ### Objetivos.
+
+- Explicar por qué es necesaria la sincronización en multiprocesadores.
+- Describir las primitivas para sincronización que ofrece el hardware.
+- Implementar cerrojos simples, cerrojos con etiqueta y barreras a partir de instrucciones máquina de sincronización y ordenación de accesos a memoria.
+
+### 10.1 Comunicación en multiprocesadores y necesidad de usar código de sincronización.
+
+#### 10.1.1 Comunicación uno-a-uno. Necesidad de sincronización.
+
+- Se debe garantizar que el proceso que recibe lea la
+variable compartida cuando el proceso que envía haya escrito en la variable el dato a enviar.
+- Si se reutiliza la variable para comunicación, se debe garantizar que no se envía un nuevo dato en la variable hasta que no se haya leído el anterior.
+
+```c++
+// Paralela (inicialmente K=0)
+P1
+...
+A = 1;
+K = 1;
+...
+
+P2
+...
+while (K == 0){};
+copia = A;
+...
+```
+
+#### 10.1.2 Comunicación colectiva.
+
+- Ejemplo de comunicación colectiva: suma de n números:
+    - La lectura-modificación-escritura de `sum` se debería hacer en exclusión mutua (es una sección crítica) => cerrojos.
+        - Sección crítica: Secuencia de instrucciones con una o varias direcciones compartidas (variables) que se deben acceder en exclusión mutua.
+    - El proceso 0 no debería imprimir hasta que no hayan acumulado sump en sum todos los procesos => barreras.
+
+```c++
+Secuencial
+for (i=0; i<n; i++)
+    sum = sum + a[i];
+printf(sum);
+
+Paralela (sum=0)
+for (i=ithread; i<n; i=i+nthread)
+    sump = sump + a[i];
+sum = sum + sump;   // SC, sum compart
+if (ithread == 0)
+    printf(sum);
+```
+
+### 10.2 Soporte software y hardware para sincronización.
+
+<p>
+![](./img/T3/D116.png)
+</p>
+
+### 10.3 Cerrojos.
+
+- Permiten sincronizar mediante dos operaciones:
+    - Cierre del cerrojo o `lock(k)`: intenta adquirir el derecho a acceder a una sección crítica (cerrando o adquiriendo el cerrojo `k`).
+        - Si varios procesos intentan la adquisición (cierre) a la vez, sólo uno de ellos lo debe conseguir, el resto debe pasar a una etapa de espera.
+        - Todos los procesos que ejecuten `lock()` con el cerrojo cerrado
+deben quedar esperando.
+  - Apertura del cerrojo o `unlock(k)`: libera a uno de los threads que esperan el acceso a una sección crítica (éste adquiere el cerrojo).
+      - Si no hay threads en espera, permitirá que el siguiente thread que ejecute la función `lock()` adquiera el cerrojo k sin espera.
+
+- Cerrojos en ejemplo suma:
+    - Alternativas para implementar la espera:
+        - Espera ocupada.
+        - Suspensión del proceso o thread, éste queda esperando en una cola, el procesador conmuta a otro proceso-thread.
+
+```c++
+Secuencial
+for (i=0; i<n; i++)
+    sum = sum + a[i];
+
+Paralela
+for (i=ithread; i<n; i=i+nthread)
+    sump = sump + a[i];
+lock(k);
+sum = sum + sump;   // SC, sum compart
+unlock(k);
+```
+
+- Componentes en un código para sincronización.
+    - Método de **adquisición**.
+        - Método por el que un thread trata de adquirir el derecho a pasar a utilizar unas direcciones compartidas. Ej.:
+            - Utilizando lectura-modificación-escritura atómicas: Intel x86, Intel Itanium, Sun Sparc.
+            - Utilizando LL/SC (Load Linked / Store Conditional): IBM Power/PowerPC, ARMv7, ARMv8.
+    - Método de **espera**.
+        - Método por el que un thread espera a adquirir el derecho a pasar a utilizar unas direcciones compartidas:
+            - Espera ocupada (busy-waiting).
+            - Bloqueo.
+        - Método de **liberación**.
+            - Método utilizado por un thread para liberar a uno (cerrojo) o varios (barrera) threads en espera.
+
+### 10.3.1 Cerrojos simples.
+
+- Se implementa con una variable compartida k que toma dos valores: abierto (0), cerrado (1).
+- **Apertura** del cerrojo, `unlock(k)`: abre el cerrojo escribiendo un 0 (operación **indivisible**).
+- Cierre del cerrojo, `lock(k)`: Lee el cerrojo y lo cierra escribiendo un 1.
+    - Resultado de la lectura:
+        - si el cerrojo estaba **cerrado** el thread espera hasta que otro thread ejecute `unlock(k)`,
+        - si estaba **abierto** adquiere el derecho a pasar a la sección crítica.
+    - `leer-asignar_1-escribir` en el cerrojo debe ser **indivisible (atómica)**.
+- Se debe añadir lo necesario para garantizar el acceso en exclusión mutua a k y el orden imprescindible en los accesos a memoria.
+
+```c++
+lock(k) {
+    while (leer-asignar_1-escribir(k) == 1) {} ;
+} /* k compartida */
+
+unlock(k) {
+    k = 0 ;
+} /* k compartida */
+```
+
+- Cerrojos en OpenMP:
+
+| Descripción | Función de la biblioteca OpenMP |
+|--------------|-------------------|-----------------------|
+| Iniciar (estado `unlock`) | `omp_init_lock(&k)` |
+| Destruir un cerrojo | `omp_destroy_lock(&k)` |
+| Cerrar el cerrojo `lock(k)` | `omp_set_lock(&k)` |
+| Abrir el cerrojo `unlock(k)` | `omp_unset_lock(&k)` |
+| Cierre del cerrojo pero sin bloqueo | `omp_test_lock(&k)` |
+| (devuelve 1 si estaba cerrado y 0 si está abierto) | |
+
+### 10.3.2 Cerrojos con etiqueta.
+
+Fijan un orden FIFO en la adquisición del cerrojo (se debe añadir lo necesario para garantizar el acceso en exclusión mutua al contador de adquisición y el orden imprescindible en los accesos a memoria):
+
+```c++
+// lock (contadores)
+contador_local_adq = contadores.adq;
+contadores.adq = (contadores.adq+1) mod max_flujos;
+while (contador_local_adq <> contadores.lib){}
+
+// unlock (contadores)
+contadores.lib = (contadores.lib + 1) mod max_flujos;
+```
+
+### 10.3.3 Barreras.
+
+```c++
+//Thread 0 (lo mismo para 1, 2, 3)
+main (){
+    ...
+    Barrera(g,4)
+    ...
+}
+```
+
+```c++
+Barrera (id, num_threads){
+    if (bar[id].cont == 0)
+        bar[id].bandera = 0;      // Acceso Ex. Mutua
+
+    cont_local = ++bar[id].cont;  // Accesp Ex. Mutua
+
+    if (cont_local == num_threads){
+        bar[id].cont = 0;
+        bar[id].bandera = 1;
+    }
+    else
+        espera mientras bar[id].bandera = 0; // Implementar espera. Si espera ocupada: while (bar[id].bandera == 0){}
+}
+```
+
+- Barreras sin problema de reutilización.
+
+```c++
+// Barrera sense-reversing
+Barrera(id, num_procesos) {
+    bandera_local = !(bandera_local) //se complementa bandera local
+    lock(bar[id].cerrojo);
+    cont_local = ++bar[id].cont      //cont_local es privada
+    unlock(bar[id].cerrojo);
+
+    if (cont_local == num_procesos) {
+        bar[id].cont = 0;           //se hace 0 el cont. de la barrera
+        bar[id].bandera = bandera_local; //para liberar thread en espera
+    }
+    else
+        while (bar[id].bandera != bandera_local) {}; //espera ocupada
+}
+```
+
+### 10.3.4 Apoyo hardware a primitivas software.
+
+#### 10.3.4.1 Instrucciones de lectura-modificación- escritura atómicas.
+
+```c++
+// Test&Set (x)
+Text&Set(x){
+    temp = x;
+    x = 1;
+    return (temp);
+}
+// x compartida
+```
+
+Se traduce en:
+
+```
+mov   reg,1
+xchg  reg,mem
+reg <-> mem
+```
+
+```c++
+// Fetch&Oper(x,a)
+Fetch&Add(x,a) {
+    temp = x ;
+    x = x + a ;
+
+    return (temp);
+}
+// x compartida, a local
+```
+
+Se traduce en:
+
+```
+lock xadd reg,mem
+reg <- mem |
+mem <- reg+mem
+```
+
+```c++
+// Compare&Swap(a,b,x)
+Compare&Swap(a,b,x){
+  if (a==x) {
+      temp=x;
+      x=b;
+      b=temp;
+  }
+}
+// x compartida, a yb locales
+```
+
+Se traduce en:
+```
+lock cmpxchg mem,reg
+if eax=mem
+then mem <- reg
+else eax <- mem
+```
+
+#### 10.3.4.2 Cerrojos simples con Test&Set y Fetch&Or.
+
+```c++
+// Con Test&Set (x)
+lock (k){
+  while (test&set(k) == 1){};
+}
+// k compartida
+```
+
+Se traduce en:
+
+```
+lock:     mov   eax,1
+repetir:  xchg  eax,k
+          cmp   eax,1
+          jz    repetir
+```
+
+```c++
+// Con Fetch&Oper(x,a)
+lock (k){
+  while (fetch&or (k,1) == 1){};    // true (1, cerrado)
+                                    // false (0, abierto)
+}
+// k compartida
+```
+
+#### 10.3.4.3 Cerrojos simples con Compare&Swap.
+
+```c++
+// Con Compare&Swap(a,b,x)
+lock (k){
+  b = 1
+  do                          // compare&swap(0,b,k){
+      compare&swap(0,b,k);    // if (0 == k) { b=k | k=b; }
+  while (b == 1);             }
+}
+// k compartida, b local
+```
+
+#### 10.3.4.4 Cerrojo simple en Itanium (consistencia de liberación) con Compare&Swap.
+
+```c
+// Compare&Swap
+lock:                               //lock(M[lock])
+    mov ar.ccv = 0                  // cmpxchg compara con ar.ccv
+                                    // que es un registro de propósito específico
+    mov r2 = 1                      // cmpxchg utilizará r2 para poner el cerrojo a 1
+spin:                               // se implementa espera ocupada
+    ld8 r1 = [lock];;               // carga el valor actual del cerrojo en r1
+    cmp.eq p1,p0 = r1, r2;          // si r1=r2 entonces cerrojo está a 1 y se hace p1=1
+    (p1) br.cond.spnt spin ;;       // si p1=1 se repite el ciclo; spnt indica que se usa una
+                                    // predicción estática para el salto de 'no tomar'
+    cmpxchg8.acq r1 = [lock], r2 ;; //intento de adquisición escribiendo 1
+                                    // IF [lock]=ar.ccv THEN [lock]<-r2; siempre r1<-[lock]
+    cmp.eq p1, p0 = r1, r2          // si r1!=r2 (r1=0) => cer. era 0 y se hace p1=0
+    (p1) br.cond.spnt spin ;;       // si p1=1 se ejecuta el salto
+// Consistencia
+unlock:                             //unlock(M[lock])
+    st8.rel [lock] = r0 ;;          //liberar asignando un 0, en Itanium r0 siempre es 0
+```
+
+#### 10.3.4.5 Cerrojo simple en PowerPC(consistencia débil) con LL/SC implementando Test&Set.
+
+```c
+//Test&Set
+lock:                       #lock(M[r3])
+        li      r4,1        #para cerrar el cerrojo
+bucle:  lwarx   r5,0,r3     #carga y reserva: r5<-M[r3]
+        cmpwi   r5,0        #si está cerrado (a 1)
+        bne-    bucle       #esperar en el bucle, en caso contrario
+        stwcx.  r4,0,r3     #poner a 1 (r4=1): M[r3] <- r4
+        bne-    bucle       #el thread repite si ha perdido la reserva
+        isync               #accede a datos compartidos cuando sale del bucle
+
+// Consistencia
+unlock:                     # unlock(M[r3])
+        sync                #espera hasta que terminen los accesos anteriores
+        li      r1,0
+        stw     r1,0(r3)    #abre el cerrojo
+```
+
+#### 10.3.4.6 Cerrojo simple en ARMv7 (consistencia débil) con LL/SC implementando Test&Set.
+
+```c
+// Test&Set
+lock:                       #lock(M[r1])
+        mov     r0,#1       #Para posteriormente cerrar el cerrojo asigna a r0 un 1
+bucle:  ldrex   r5,[r1]     #Lee cerrojo
+        cmp     r5,#0       #Comprueba si el cerrojo es 0 (abierto)
+        strexeq r5,r0,[r1]  #Si el cerrojo está abierto intenta escribir (un 1)
+        cmpeq   r5,#0       #Comprueba si ha tenido éxito la escritura
+        bne     bucle       #Vuelve a intentarlo si no ha tenido éxito
+        dmb                 #Para asegurar que se ha adquirido el cerrojo antes de ...
+                            #realizar los accesos a memoria que hay después del lock
+//Consistencia
+unlock:                     # unlock(M[r1])
+        dmb                 #Espera a que terminen los accesos anteriores ...
+        mov   r0, #0        #antes de abrir el cerrojo
+        str   r0, [r1]      #abre el cerrojo
+```
+
+#### 10.3.4.7 Cerrojo simple en ARMv8 (consistencia liberación) con LL/SC para Test&Set.
+
+```c
+//Test&Set
+lock:                       #lock(M[r1])
+        mov     r0,#1       #Para posteriormente cerrar el cerrojo asigna a r0 un 1
+bucle:  ldaex   r5,[r1]     #Lee cerrojo con ordenación de adquisición
+        cmp     r5,#0       #Comprueba si el cerrojo es 0 (abierto)
+        strexeq r5,r0,[r1]  #Si el cerrojo está abierto intenta escribir (un 1)
+        cmpeq   r5,#0       #Comprueba si ha tenido éxito la escritura
+        bne     bucle       #Vuelve a intentarlo si no ha tenido éxito
+//Consistencia de liberación
+unlock:                     #unlock(M[r1])
+        mov     r0,#0
+        stl     r0,[r1]     #Abre el cerrojo usando almacenamiento con liberación
+```
+
+$\newline$
+
+#### 10.3.4.8 Algoritmos eficientes con primitivas hardware.
+
+```c++
+// NO
+// Suma con fetch&add
+for (i=ithread; i<n; i=i+nthread)
+    fetch&add(sum,a[i]);
+//sum variable compartida
+```
+
+```c++
+// Suma con fetch&add
+for (i=ithread; i<n; i=i+nthread)
+    sump = sump + a[i];
+fetch&add(sum,sump);
+// sum variable compartida
+```
+
+```c++
+// Suma con compare&swap
+for (i=ithread; i<n; i=i+nthread)
+    sump = sump + a[i];
+do
+    a = sum;
+    b = a + sump;
+    compare&swap(a,b,sum);
+while (a!=b);
+// sum variable compartida
+```
 
 # Bibliografía
 
