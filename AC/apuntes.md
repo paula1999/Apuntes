@@ -1890,10 +1890,13 @@ $\pagebreak$
 ![](./img/T3/D88.png)
 </p>
 
-1) Si hay consistencia secuencial, esperaríamos que entraría uno de ellos, no a la vez. Si no, podrían entrar los dos a la vez.
+1) (Orden del programa) El programdor espera que que solo un proceso pueda entrar en la sección crítica. Para ello no se debería permitir que las lecturas puedan adelantar escrituras, se debe mandener el orden W -> R.
 
-2) 1 o 0. Depende del modelo de consistencia.
+  Si hay consistencia secuencial, esperaríamos que entraría uno de ellos, no a la vez. Si no, podrían entrar los dos a la vez. Se utiliza para obtener un acceso en exclusión muta a una sección crítca (cuando no se dispone de primitivas atómicas de lectura-modificación-escritura); se basa en que k1 y k2 no pueden ser 0 al mismo tiempo (aunque tiene un problema de interbloqueo). Para que pueda actuar correctamente, no se puede permitir en un procesador que las lecturas adelanten a escrituras.
 
+2) (Atomicidad) Los procesos comparten las variables A y B, que están inicialmente a 0. El programador espera que al finalizar la ejecución reg1 contenga 1. Supongamos que P2 lee 1 de A y entonces escribe en B, y supongoamos que P3 lee 1 de B y a continuación lee de A. La ejecución atómica de las operaciones de acceso a memoria asegura que el valor escrito en A por P1 se ve en todo el sistema (por todos los procesadores) al mismo tiempo. Entonces, puesto que P3 ve la escritura en B de P2 después de que P2 vea la escritura en A de P1, se garantiza que P3 lee en reg1 lo que P1 escribe en A.
+
+   Para garantizar un funcionamiento correcto, la escritura de una dirección debe ser vista al mismo tiempo por todos los procesos. En caso contrario, podría ocurrir que P3 viera un valor de B de 1 y un valor de A de 0.
 
 Ejemplo de consistencia secuencial:
 
@@ -1960,11 +1963,14 @@ copia=A;
 
 #### 9.3.3 Modelo de ordenación débil.
 
+- Se basa en mantener el orden entre accesos solo en los puntos de sincronización del código. Tiene en cuenta que cuando se necesita coordinar el acceso a una variable compartida (para permitir la comunicación de datos entre procesos) se añade código extra de sincronización.
 - Relaja W->R, W->W y R->RW.
-- Si S es una operación de sincronización (liberación o adquisición), ofrece hardware para garantizar el orden:
-    - S->WR.
-    - WR->S.
+- Si S es una operación de sincronización (liberación o adquisición), ofrece hardware para garantizar el **orden**:
+    - Una operación etiquetada como de sincronización se debe completar antes que las operaciones de acceso a memoria posteriores en el orden del programa, **S->WR**.
+    - Las operaciones de acceso a memoria anteriores en el orden del programa a una operación etiquetada como de sincronización, se deben completar antes que las operaciones de acceso a memoria posteriores en el orden del programa, **WR->S**.
 - PowerPC implementa un modelo basado en ordenación débil.
+
+En la siguiente imagen vemos el modelo de ordenación débil. Las lecturas y escrituras (bloques 1, 2 y 3) se deben completar antes que una operación de sincronización posterior en el orden del programa, y viceversa.
 
 <p>
 ![](./img/T3/D98.png)
@@ -1976,11 +1982,15 @@ copia=A;
 
 #### 9.3.4 Consistencia de liberación.
 
+- Tiene en cuenta adicionalmente que hay dos tipos de código utilizado en el proceso de sincronización. Por una parte se añade código que el proceso ejecuta para ganar el acceso a variables o recursos compartidos. Si hay varios procesos implicados en el acceso, este código permite que solo uno de ellos gane el acceso. Por otra parte, se añde código que permite a un proceso dar permiso a otro para que pueda acceder a las variables o recursos compartidos. Luego distingue entre dos tipos de operaciones de sincronización: adquisición y liberación.
+- El código utilizado para adquirir acceso se basa en leer una variable compartida o en una operación de lectura-modificación-escritura.
 - Relaja W->R, W->W y R->RW.
 - Si SA es una operación de adquisición y SL de liberación,
 ofrece hardware para garantizar el orden:
     - SA->WR y WR->SL.
 - Sistemas con Itanium implementan un modelo de consistencia de liberación.
+
+En la siguiente imagen vemos que la primera de las operaciones de sincronización es de adquisición y la segunda de liberación, se pueden solapar accesos de lectura y escritura de los bloques 1 y 2, y también se pueden solapar accesos de lectura y escritura de los bloques 2 y 3.
 
 <p>
 ![](./img/T3/D99.png)
@@ -2000,9 +2010,10 @@ $\pagebreak$
 
 #### 10.1.1 Comunicación uno-a-uno. Necesidad de sincronización.
 
-- Se debe garantizar que el proceso que recibe lea la
-variable compartida cuando el proceso que envía haya escrito en la variable el dato a enviar.
-- Si se reutiliza la variable para comunicación, se debe garantizar que no se envía un nuevo dato en la variable hasta que no se haya leído el anterior.
+Se debe garantizar que el proceso que recibe lea la
+variable compartida cuando el proceso que envía haya escrito en la variable el dato a enviar. Si se reutiliza la variable para comunicación, se debe garantizar que no se envía un nuevo dato en la variable hasta que no se haya leído el anterior. En definitiva, se necesita algún mecanismo que asegure que solo un proceso puede estar accediendo en un momento dado a una dirección compartida (acceso en **exclusión mútua**). Una **región** o **sección crítica** es una secuencia de instrucciones con una o varias direcciones compartidas que se deben acceder en exclusión mútua.
+
+En el siguiente código se ha utilizado para sincronizar una variable compartida `k` como bandera (*flag*). Se persigue que el proceso P2 acceda al nuevo valor de A, 1, cuando el proceso P1 haga 1 la bandera `k`.
 
 ```c++
 // Paralela (inicialmente K=0)
@@ -2020,6 +2031,8 @@ copia = A;
 ```
 
 #### 10.1.2 Comunicación colectiva.
+
+Hay que coordinar el acceso de múltiples procesos a una variable compartida, de forma que escriban uno detrás de otro (sin interferencias entre ellos) o lean cuando tengan disponibles los resultados definitivos en la memoria compartida. Puede haber uno o varios procesos que envían y/o uno o varios procesos que reciben. Se pueden combinar varios envíos en las variables antes de realizar la lectura por parte del o los procesos que reciben. No obstante, debe garantizarse que los procesos acceden a las variables compartidas in interferir unos con otros, es decir, se necesita un acceso en **exclusión mutua**. Además, debe garantizarse que no se accede al resultado hasta que todos los procesos involucrados hayan ejecutado la sección crítica.
 
 - Ejemplo de comunicación colectiva: suma de n números:
     - La lectura-modificación-escritura de `sum` se debería hacer en exclusión mutua (es una sección crítica) => cerrojos.
@@ -2086,7 +2099,7 @@ unlock(k);
         - Método por el que un thread espera a adquirir el derecho a pasar a utilizar unas direcciones compartidas:
             - Espera ocupada (busy-waiting).
             - Bloqueo.
-        - Método de **liberación**.
+    - Método de **liberación**.
             - Método utilizado por un thread para liberar a uno (cerrojo) o varios (barrera) threads en espera.
 
 ### 10.3.1 Cerrojos simples.
@@ -2146,6 +2159,14 @@ main (){
 }
 ```
 
+El siguiente algoritmo para barreras presenta problemas si los procesos reutilizan la misma barrera, por ejemplo dentro de un bucle, ya que se puede dar la siguiente situación:
+
+1. En la primera utilización de la barrera el SO reemplaza algún proceso $P_i$ que está esperando en la bandera a ser liberado.
+2. A continuación llega el último proceso a la barrera activando la variable bandera.
+3. Los procesos que están en espera, excepto $P_i$ que está suspendido, verán la bandera a 1 y saldrán del bucle de espera ocupada, abandonando la barrera.
+4. Un proceso $P_j$ llega a la segunda función que utiliza la misma barrera desactivando la bandera.
+5. $P_i$ vuelve a ejecutarse, pero encuentra la bandera cerrada por lo que se queda en bucle. $P_i$ no supera nunca la primera ejecución de la barrera, y el resto de procesos no supera la segunda ejecución, también se quedarán en el bucle de espera. Ocurre que en la segunda utilización de la barrera el contador no va a poder alcanzar un valor igual al número de procesos, ya que uno de ellos se ha quedado en la primera llamada a la barrera.
+
 ```c++
 Barrera (id, num_threads){
     if (bar[id].cont == 0)
@@ -2162,7 +2183,7 @@ Barrera (id, num_threads){
 }
 ```
 
-- Barreras sin problema de reutilización.
+- **Barreras sin problema de reutilización.** Se modifica el código para que cada vez que se reutilice la bandera, los procesos para salir esperen una condición distinta. Se va a cambiar la condición para la liberación entre usos consecutivos de la barrera. Si en la última utilización han esperado para salir a que la bandera sea 1, en la siguiente van a esperar para salir que esta sea 0, y en la siguiente 1.
 
 ```c++
 // Barrera sense-reversing
@@ -2394,6 +2415,8 @@ do
 while (a!=b);
 // sum variable compartida
 ```
+
+$\pagebreak$
 
 # Bibliografía
 
