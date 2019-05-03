@@ -1678,14 +1678,28 @@ Las líneas discontinuas son transiciones provocadas por paquetes del bus; las l
 
 #### 8.4.4 Tabla de descripción de MSI.
 
-$\newline$
+<p>
+![](./img/T3/D59.png)
+</p>
 
-**Fallo de lectura**: el procesador lee (PrLec) y el bloque no está en caché (estado inválido). El controlador de caché del procesador que lee difunde un paquete de petición de lectura de un bloque de memoria (PtLec); el estado del bloque en la caché después de la lectura será de compartido. La copia del bloque en otras cachés también tendrá estado compartido, y en la memoria, válido. El paquete PtLec provoca los siguientes efectos en otras cachés:
+- **Fallo de lectura**: el procesador lee (PrLec) y el bloque no está en caché (estado inválido). El controlador de caché del procesador que lee difunde un paquete de petición de lectura de un bloque de memoria (PtLec); el estado del bloque en la caché después de la lectura será de compartido. La copia del bloque en otras cachés también tendrá estado compartido, y en la memoria, válido. El paquete PtLec provoca los siguientes efectos en otras cachés:
 
-- Si el bloque se encuentra en otra caché en estado modificado, deposita el bloque en el bus (respuesta RpBloque) y pasa a estado compartido. La memoria también recoge el bloque del bus pasando a estado válido.
-- Si el bloque está compartido, la memoria proporciona el bloque a la caché que lo solicita. El bloque sigue en estado compartido.
+    1. Si el bloque se encuentra en otra caché en estado modificado, deposita el bloque en el bus (respuesta RpBloque) y pasa a estado compartido. La memoria también recoge el bloque del bus pasando a estado válido.
 
->aqui mequedao
+    2. Si el bloque está compartido, la memoria proporciona el bloque a la caché que lo solicita. El bloque sigue en estado compartido.
+
+- **Fallo de escritura al no estar el bloque en la caché**: el procesador escribe (PrEsc) y el bloque no está en caché. El controlador de caché del procesador que escribe difunde un paquete de petición de acceso exclusivo al bloque (PtLecEx); el estado del bloque en la caché después de la escritura se promociona a modificarlo. El paquete PtLecEx provoca los siguientes efectos:
+    1. Si la memoria tiene el bloque válido, lo deposita en el bus y pasa a estado inválido.
+    2. Si una caché tiene el bloque en estado modificado, deposita el bloque en el bus y pasa a estado inválido.
+    3. Si una caché tiene en estado compartido, pasa a estado inválido.
+- **Acierto de escritura en bloque compartido**: el procesador escribe (PrEsc) y el bloque está en caché en estado compartido. Si el bloque está en la caché en estado compartido, antes de escribir se debe obtener acceso exclusivo al bloque, para lo cual el controlador de caché difunde un paquete de petición de acceso exclusivo al bloque (PtLecEx); el estado del bloque en la caché después de la escritura se promociona modificando (el acierto de escritura en bloque compartido se trata como el fallo de escritura). El paquete PtLecEx generado provoca los siguientes efectos:
+    1. La memoria deposita el bloque en el bus, ya que lo tiene válido (el bloque depositado se puede ignorar), y pasa a estado inválido. Para evitar que la memoria deposite en este caso el bloque en el bus y reducir así el tráfico, se debe añadir un nuevo paquete al sistema para esta situación en la que el procesador escribe y el bloque está en  estado compartido. Sería un paquete de petición de acceso exclusivo, pero sin lectura (PtEx).
+    2. El bloque no puede estar en estado modificado en otra caché.
+    3. Si una caché tiene el bloque en estado compartido, pasa a estado inválido.
+- **Acierto de escritura en bloque modificado**: el procesador escribe (PrEsc) y el bloque está en caché en estado modificado. Como el nodo ya tiene la propiedad exclusiva del bloque, no se genera ningún paquete. El bloque sigue en estado modificado.
+- **Acierto de lectura**: el procesador lee (PrLec) y el bloque se encuentra actualizado en la caché. En este caso el bloque se mantiene en el mismo estado. No genera ningún paquete.
+- **Reemplazo**: fallo en el acceso del procesador a otro bloque, y la política de reemplazo selecciona este bloque para hacer sitio al nuevo. Si el bloque reemplazado se encuentra en estado modificado, el controlador de caché del procesador que escribe difunde un paquete de posescritura en memoria (PtPEsc), el estado del bloque en la caché pasa a ser de inválido (no está presente físicamente). Hay que tener en cuenta que se utiliza posescritura como política de actualización de memoria principal. Este paquete PtPEsc provoca que el bloque se transfiera a memoria pasando el estado del bloque en memoria a válido.
+
 
 #### 8.4.5 Ejemplo MSI.
 
@@ -1712,17 +1726,20 @@ $\newline$
 #### 8.5.1 Protocolo de espionaje de cuatro estados (MESI) – posescritura e invalidación.
 
 - Estados de un bloque en cache:
-    - **Modificado** (M):es la única copia del bloque válida en todo el sistema.
-    - **Exclusivo** (E): es la única copia del bloque válida en caches, la memoria también está actualizada.
-    - **Compartido** (C,Shared): es válido, también válido en memoria y en al menos otra cache.
+    - **Modificado** (M):es la única copia del bloque válida en todo el sistema, el resto de cachés y la memoria tienen una copia no actualizada. La caché debe proporcionar el bloque si observa al espiar el bus que algún componente lo solicita, y debe invalidarla si algún otro nodo solicita una copia exclusiva del bloque para su modificación.
+    - **Exclusivo** (E): es la única copia del bloque válida en caches, la memoria también está actualizada. La caché debe invalidar su copia si observa al espiar el bus que algún otro nodo solicita una copia exclusiva del bloque para su modificación.
+    - **Compartido** (C,Shared): es válido en esta caché, también válido en memoria y en al menos otra caché. La caché debe invalidar su copia si observa al espiar el bus que algún otro nodo solicita una copia exclusiva del bloque para su modificación.
     - **Inválido** (I): se ha invalidado o no está físicamente.
-- Estados de un bloque en memoria(en realidad se evita almacenar esta información):
+- Estados de un bloque en memoria (en realidad se evita almacenar esta información):
     - **Válido**: puede haber copia válida en una o varias caches.
     - **Inválido**: habrá copia valida en una cache.
 
 #### 8.5.2 Diagrama MESI de transiciones de estados.
 
 $\newline$
+
+Las líneas discontinuas son transiciones provocadas por paquetes del bus, las líneas continuas por acciones del procesador de la caché. Las líneas se han etiquetado con el evento que provoca la transición y el paquete que generan (evento/paquete).
+
 <p>
 ![](./img/T3/D66.png)
 </p>
@@ -1735,21 +1752,42 @@ $\newline$
 ![](./img/T3/D67.png)
 </p>
 
+- **Fallo de lectura**: el procesador lee una dirección del bloque (PrLec) y este no está en caché. El controlador de caché del procesador que lee difunde un paquete de petición de lectura de un bloque de memoria (PtLec). El estado del bloque en la caché después de la lectura pasará a ser compartido si hay copias del bloque en otras cachés, y pasará a estado exclusivo si no hay copias del bloque en otras cachés. El controlador de la caché que solicita el bloque, requiere conocer si el bloque solicitado se encuentra en otras cachés. Se puede añadir una línea OR cableada que informe si hay cachés con copias del bloque solicitado. La actualización de esta OR por parte de los controladores de caché se realizaría en la fase de direccionamiento. La memoria dispondrá del bloque válido al terminar el proceso. El paquete PtLec provoca los siguientes efector en otras cachés:
+    1. Si el bloque se encuentra en otra caché en estado modificado, deposita el bloque en el bus y pasa a estado compartido. La memoria también coge el bloque del bus.
+    2. Si el bloque está compartido, sigue en estado compartido. El bloque que llega a la caché del nodo que lo solicita procede de memoria.
+
+Hay implementaciones en las que, si el bloque solicitado está disponible en estado válido en alguna caché, en lugar de obtener el bloque de memoria, se proporciona por parte de alguna de estas cachés con bloque válido. Hay que añadir entonces hardware, que decida qué caché con bloque válido va a generar la respuesta con el bloque. Esta alternativa es interesante en sistemas con memoria físicamente distribuida (protocolos basados en directorios), ya que se puede proporcionar el bloque desde el nodo más cercano al que lo solicita.
+- **Fallo de escritura al no estar el bloque en caché**: el procesador escribe (PrEsc) y el bloque no está en caché. El controlador de caché del procesador que escribe difunde un paquete de petición de acceso exclusivo al bloque (PtLecEx). El estado del bloque en la caché después de la escritura será de modificado. El paquete PtLecEx provoca los siguientes efectos:
+    1. Si una caché tiene el bloque en estado modificado, bloquea la lectura de memoria y deposita el bloque en el bus. El bloque pasa en esta caché a estado inválido.
+    2. Si una caché tiene el bloque en estado compartido, pasa a estado inválido.
+- **Acierto de escritura en bloque compartido**: el procesador escribe (PrEsc) y hay una copia del bloque en su caché y en la caché de algún otro procesador. El controlador de caché del procesador que escribe difunde un paquete de petición de acceso exclusivo al bloque (PtLecEx). El estado del bloque en la caché después de la escritura será de modificado. El paquete PtLecEx provoca los siguientes efectos:
+    1. La memoria puede depositar el bloque en el bus, pero se puede ignorar (la caché que ha generado la petición PtLecEx tiene el bloque válido). Para evitar que se utilice el bus de datos innecesariamente se puede añadir al diseño otro paquete distinto que pida acceso exclusivo pero no la lectura de los datos (PtEx).
+    2. El bloque no puede estar en estado modificado en otra caché.
+    3. Si una caché tiene bloque en estado compartido, pasa a estado inválido.
+- **Acierto de escritura en bloque modificado**: el procesador escribe (PrEsc) y el bloque está en caché en estado modificado. Como no hay otro nodo con copia válida del bloque en su caché no es necesario generar un paquete. El bloque continúa en estado modificado.
+- **Acierto de lectura**: el procesador lee (PrLec) y el bloque se encuentra en la caché actualizado. El bloque se mantiene en el mismo estado. No genera ningún paquete.
+- **Reemplazo**: fallo en el acceso del procesador a otro bloque y la política de reemplazo selecciona este bloque para hacer sitio al nuevo bloque. El controlador de caché del procesador que escribe difunde un paquete de posescritura en memoria (PtPEsc) si el bloque reemplazado se encuentra en estado modificado. El bloque pasa a estado inválido (no está presente físicamente). Este paquete PtPEsc provoca que el bloque se transfiera a la memoria pasando el estado del bloque en memoria a válido (si se almacena información de estado en memoria).
+
 ### 8.6 Protocolo MSI basado en directorios con o sin difusión.
 
 #### 8.6.1 MSI con directorios (sin difusión).
 
-- Estados de un bloque en cache:
+- Estados de un bloque en **cache**:
     - Modificado (M), Compartido (C), Inválido (I).
-- Estados de un bloque en MP:
+- Estados de un bloque en **MP**:
     - Válido e inválido.
-- Transferencias (tipos de paquetes):
-    - Tipos de nodos: solicitante (S), origen (O), modificado (M), propietario (P) y compartidor (C).
-    - Petición de nodo S a O: lectura de un bloque (PtLec), lectura con acceso exclusivo (PtLecEx), petición de acceso exclusivo sin lectura (PtEx), posescritura (PtPEsc).
-    - Reenvío de petición de nodo O a nodos con copia (P, M, C): invalidación (RvInv), lectura (RvLec, RvLecEx).
-    - Respuesta de
-        - nodo P a O: respuesta con bloque (RpBloque), resp. con o sin bloque confirmando inv. (RpInv, RpBloqueInv).
-        - nodo O a S: resp. con bloque (RpBloque), resp. con o sin bloque confirmando fin inv. (RpInv, RpBloqueInv).
+- **Transferencias** (tipos de paquetes):
+    - Tipos de nodos:
+        - **Solicitante (S)**: contiene el procesador que ha emitido una petición sobre el bloque.
+        - **Origen (O)**: el bloque tiene como origen el módulo de memoria de este nodo; la entrada del directorio para el bloque se encuentra en este nodo.
+        - **Modificado (M)**: único nodo que tiene una copia del bloque en su caché en estado modificado (dirty), no hay otro nodo con copia válida en caché y la memoria principal tampoco tiene copia válida. El nodo modificado y origen pueden coincidir.
+        - **Propietario (P)**: nodo con copia válida del bloque en su caché, y que por tanto puede suministrar el bloque. Puede ser el nodo origen, modificado, exclusivo o compartidor.
+        - **Compartidor (C)**: nodo con una copia válida del bloque en caché; forma parte de un grupo que comparte el bloque (en caché).
+    - **Petición de nodo S a O**: lectura de un bloque (PtLec), lectura con acceso exclusivo (PtLecEx), petición de acceso exclusivo sin lectura (PtEx), posescritura (PtPEsc).
+    - **Reenvío de petición de nodo O a nodos con copia (P, M, C)**: invalidación (RvInv), lectura (RvLec, RvLecEx).
+    - **Respuesta** de
+        - **nodo P a O**: respuesta con bloque (RpBloque), resp. con o sin bloque confirmando inv. (RpInv, RpBloqueInv).
+        - **nodo O a S**: resp. con bloque (RpBloque), resp. con o sin bloque confirmando fin inv. (RpInv, RpBloqueInv).
 
 <p>
 ![](./img/T3/D69.png)
@@ -1784,18 +1822,18 @@ $\newline$
 
 
 #### 8.6.2 MSI con directorios (con difusión).
-- Estados de un bloque en cache:
+- Estados de un bloque en **cache**:
     - Modificado (M), Compartido (C), Inválido (I).
-- Estados de un bloque en MP:
+- Estados de un bloque en **MP**:
     - Válido e inválido.
-- Transferencias (tipos de paquetes):
-    - Tipos de nodos: solicitante (S), origen (O), modificado (M), propietario (P) y compartidor (C).
-    - Difusión de petición del nodo S a
-        - O y P: lectura de un bloque (PtLec), lectura con acceso exclusivo (PtLecEx), petición de acceso exclusivo sin lectura (PtEx).
-        - O: posescritura (PtPEsc).
-    - Respuesta de
-        - nodo P a O: respuesta con bloque (RpBloque), resp. con o sin bloque confirmando inv. (RpInv, RpBloqueInv).
-        - nodo O a S: resp. con bloque (RpBloque), resp. con o sin bloque confirmando fin inv. (RpInv, RpBloqueInv).
+- **Transferencias** (tipos de paquetes):
+    - **Tipos** de nodos: solicitante (S), origen (O), modificado (M), propietario (P) y compartidor (C).
+    - **Difusión** de petición del nodo S a
+        - **O y P**: lectura de un bloque (PtLec), lectura con acceso exclusivo (PtLecEx), petición de acceso exclusivo sin lectura (PtEx).
+        - **O**: posescritura (PtPEsc).
+    - **Respuesta** de
+        - **nodo P a O**: respuesta con bloque (RpBloque), resp. con o sin bloque confirmando inv. (RpInv, RpBloqueInv).
+        - **nodo O a S**: resp. con bloque (RpBloque), resp. con o sin bloque confirmando fin inv. (RpInv, RpBloqueInv).
 
 <p>
 ![](./img/T3/D75.png)
