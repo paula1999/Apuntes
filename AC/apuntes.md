@@ -1190,7 +1190,7 @@ $\pagebreak$
 
 ### Objetivos.
 
-- Distinguir entre cores multhread, multicores y multiprocesadores.
+- Distinguir entre cores multithread, multicores y multiprocesadores.
 - Comparar entre cores multithread de grano fino, cores multithread de grano grueso y cores con multithread simultánea.
 
 ### 7.1 Clasificación y estructura de arquitecturas con TLP explícito y una instancia del SO.
@@ -1203,7 +1203,7 @@ $\pagebreak$
 
 Ejecutan varios threads en paralelo en un computador con varios cores/procesadores (cada thread en un core/procesador distinto).
 
-#### 7.2.1 Criterio clasigicación: sistema de memoria.
+#### 7.2.1 Criterio clasificación: sistema de memoria.
 
 - **Multiprocesador con memoria centralizada (UMA)**. Mayor latencia y poco escalable.
 - **Multiprocesador con memoria distribuida (NUMA)**. Menor latencia y escalable, pero requiere distribución de datos/código.
@@ -1224,7 +1224,7 @@ $\newline$
 
 - **UMA**.
     - Controlador de memoria en chipset (*Northbrigde* chip).
-    - Red:bus (medio compartido).
+    - Red: bus (medio compartido).
 - **NUMA**.
     - Controlador de memoria en chip del procesador.
     - Red: enlaces (conexiones punto a punto) y conmutadores (en el chip del procesador).
@@ -1330,7 +1330,7 @@ instrucciones en paralelo a unidades funcionales).
 
 #### 7.4.4 Clasificación de cores con TMT.
 
-- **Fine-grain multithreading** (*FGMT*) o *interleaved
+- **Fine-grain multithreading** (*FGMT*) o **interleaved
 multithreading**.
     - La conmutación entre threads la decide el hardware cada ciclo (coste 0).
         - por turno rotatorio (*round-robin*) o
@@ -1473,6 +1473,7 @@ En la imagen de abajo a la derecha, dos procesos que se ejecutan en procesadores
 
 #### 8.2.3 Alternativas para propagar una escritura en protocolos de coherencia de cache.
 
+$\newline$
 La falta de coherencia entre cachés y los problemas debidos a la incoherencia entre memoria principal y caché se pueden solventar con hardware específico.
 
 - **Escritura con actualización** (*write-update*). Cada vez que un procesador escribe en una dirección en su cache se escribe en las copias de esa dirección en otras caches.
@@ -1511,7 +1512,7 @@ Para reducir tráfico, sobre todo si los datos están compartidos por pocos proc
     - Componentes conectados con un bus:
         - Los paquetes de actualización/invalidación son visibles a todos los nodos conectados al bus (controladores de cache).
 
-**Serializar** las escrituras en una dirección.
+- **Serializar** las escrituras en una dirección.
     - Las escrituras en una dirección deben verse en el mismo orden por todos los procesadores (el sistema de memoria debe parecer que realiza en serie las operaciones de escritura en la misma dirección).
     - Componentes conectados con un bus:
         - El orden en que los paquetes aparecen en el bus determina el orden en que se ven por todos los nodos.
